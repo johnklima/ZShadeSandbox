@@ -1,0 +1,31 @@
+# shapes.obj
+
+mtllib shapes.mtl
+
+# List of vertices:
+# Bottom left.
+v 0 0 0
+# Bottom right.
+v 5 0 0
+# Top right.
+v 5 5 0
+# Top left.
+v 0 5 0
+
+g MySquare
+usemtl defaultSquare
+# List of faces:
+f 1 2 3 4
+# Square.
+
+# Left side.
+v -2 5 0
+# Right side.
+v 7 5 0
+# Top of room.
+v 2.5 7 0
+
+g MyTriangleRoof
+usemtl defaultTriangle
+f 7 6 5
+# Triangle.

@@ -1,0 +1,19 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+PROGRESSBAR
+[OBJECTTYPE]
+ANIMATION
+[SEQUENCENAME]
+ProgressBarAnimation
+[FRAMES]
+ProgressBarAnimationFrameOne 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameTwo 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameThree 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameFour 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameFive 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameSix 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameSeven 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameEight 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameNine 800-883-700-776-0-1-150-150-N
+ProgressBarAnimationFrameTen 800-883-700-776-0-1-150-150-N

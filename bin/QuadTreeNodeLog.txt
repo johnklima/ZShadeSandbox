@@ -1,0 +1,61 @@
+********************************************************
+*Root*
+Node ID: 0
+Node Bounding Coord: 
+Coord1: 0, 0, 0
+Coord2: 128, 0, 0
+Coord3: 0, 0, 128
+Coord4: 128, 0, 128
+Node Children: 
+Child 1: 
+Coord1: 0, 0, 0
+Coord2: 128, 0, 0
+Coord3: 0, 0, 128
+Coord4: 128, 0, 128
+Child 2: 
+Coord1: 0, 0, 0
+Coord2: 128, 0, 0
+Coord3: 0, 0, 128
+Coord4: 128, 0, 128
+Child 3: 
+Coord1: 0, 0, 0
+Coord2: 128, 0, 0
+Coord3: 0, 0, 128
+Coord4: 128, 0, 128
+Child 4: 
+Coord1: 0, 0, 0
+Coord2: 128, 0, 0
+Coord3: 0, 0, 128
+Coord4: 128, 0, 128
+********************************************************
+*Leaf*
+Node ID: 1
+Node Bounding Coord: 
+Coord1: 0, 0, 0
+Coord2: 64, 0, 0
+Coord3: 0, 0, 64
+Coord4: 64, 0, 64
+********************************************************
+*Leaf*
+Node ID: 2
+Node Bounding Coord: 
+Coord1: 64, 0, 0
+Coord2: 128, 0, 0
+Coord3: 64, 0, 64
+Coord4: 128, 0, 64
+********************************************************
+*Leaf*
+Node ID: 3
+Node Bounding Coord: 
+Coord1: 0, 0, 64
+Coord2: 64, 0, 64
+Coord3: 0, 0, 128
+Coord4: 64, 0, 128
+********************************************************
+*Leaf*
+Node ID: 4
+Node Bounding Coord: 
+Coord1: 64, 0, 64
+Coord2: 128, 0, 64
+Coord3: 64, 0, 128
+Coord4: 128, 0, 128

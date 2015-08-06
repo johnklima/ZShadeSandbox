@@ -1,0 +1,13 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+HUNTER
+[OBJECTTYPE]
+FIST
+[SEQUENCENAME]
+HunterFistRight
+[FRAMES]
+hr-fist01.png 0-0-64-64-0
+hr-fist02.png 0-0-64-64-0
+hr-fist03.png 0-0-64-64-0
+hr-fist04.png 0-0-64-64-0

@@ -1,0 +1,217 @@
+$#include "AISprite.h"
+
+class Sprite
+{
+	Sprite();
+	~Sprite();
+
+	void CreateTexture(string base_path, string windowName, int screenWidth, int screenHeight);
+
+	void say1(string text);
+	void say2(string text, int font_size);
+	void say3(string text, int x, int y, int font_size);
+	void say4(string text, int r, int g, int b, int font_size);
+	void say5(string text, int x, int y, int r, int g, int b, int font_size);
+	
+	void say_stop1(string text);
+	void say_stop2(string text, int font_size);
+	void say_stop3(string text, int x, int y, int font_size);
+	void say_stop4(string text, int r, int g, int b, int font_size);
+	void say_stop5(string text, int x, int y, int r, int g, int b, int font_size);
+
+	void ClearAnimationList();
+	void AddAnimationSequence(Animation2D* sequence);
+	void SetSequence(int i);
+	void NullSequence();
+	Animation2D* CurrentSequenceExists();
+	int GetCurrentFrameIndex();
+	bool IsCurrentSequenceOnLastFrame();
+	void SetCurrentSequenceNotOnLastFrame();
+	void AddAnimation();
+	
+	void CreateWaypointSystem();
+	int WaypointSystemSize();
+	bool WaypointSystemEmpty();
+	void ClearWaypoints();
+	void RemoveWaypoint(ZShadeSandboxMath::XMMath3 waypoint);
+	void AddWaypoint(ZShadeSandboxMath::XMMath3 waypoint);
+	bool CurrentWaypoint(ZShadeSandboxMath::XMMath3& waypoint);
+	void SetNextWaypoint();
+	bool WaypointSystemFinished();
+	void SetWaypointSystemCanLoop(bool value);
+	bool WaypointSystemCanLoop() const;
+	int CurrentWaypointIndex() const;
+	
+	bool MoveSpriteUp();
+	bool MoveSpriteDown();
+	bool MoveSpriteLeft();
+	bool MoveSpriteRight();
+
+	void SetMoveSpriteUp(bool up);
+	void SetMoveSpriteDown(bool down);
+	void SetMoveSpriteLeft(bool left);
+	void SetMoveSpriteRight(bool right);
+
+	void MakeTemporarilyInvincible();
+
+	bool IsHurt();
+
+	void SetCollidedSprite(Sprite* spr);
+	Sprite* GetCollidedSprite();
+	
+	int& OldSpeed();
+	int OldSpeed();
+
+	bool& CanDisplayHardbox();
+	bool CanDisplayHardbox() const;
+	
+	int& Width();
+	int Width() const;
+	
+	int& Height();
+	int Height() const;
+	
+	int& DirectionMoved();
+	int DirectionMoved() const;
+	
+	bool& Attacking();
+	bool Attacking() const;
+	
+	bool& IsPlayer();
+	bool IsPlayer() const;
+	
+	bool& IsDisplaySprite();
+	bool IsDisplaySprite() const;
+	
+	int& ID();
+	int ID() const;
+	
+	float& X();
+	float X() const;
+	
+	float& Y();
+	float Y() const;
+	
+	int& Vision();
+	int Vision() const;
+	
+	int& Depth();
+	int Depth();
+	
+	string& BaseTextureFilename();
+	string BaseTextureFilename() const;
+	
+	int& IsHard();
+	int IsHard() const;
+	
+	string& AnimationProfileName();
+	string AnimationProfileName() const;
+	
+	int& HP();
+	int HP() const;
+	
+	int& HPMax();
+	int HPMax() const;
+	
+	int& Gold();
+	int Gold() const;
+
+	int& Strength();
+	int Strength() const;
+	
+	float& Speed();
+	float Speed() const;
+	
+	float& MaxSpeed();
+	float MaxSpeed() const;
+	
+	int& Mana();
+	int Mana() const;
+	
+	int& Defense();
+	int Defense() const;
+	
+	int& Experience();
+	int Experience() const;
+	
+	int& Level();
+	int Level() const;
+	
+	bool& IsNoHit();
+	bool IsNoHit() const;
+	
+	bool& IsTouch();
+	bool IsTouch() const;
+	
+	bool& IsTouched();
+	bool IsTouched() const;
+	
+	string& Script();
+	string Script() const;
+	
+	bool& CanTeleport();
+	bool CanTeleport() const;
+	
+	string& TeleportMapName();
+	string TeleportMapName() const;
+	
+	int& TeleportX();
+	int TeleportX() const;
+	
+	int& TeleportY();
+	int TeleportY() const;
+	
+	bool& IsBackgroundSprite();
+	bool IsBackgroundSprite() const;
+	
+	bool& IsEntitySprite();
+	bool IsEntitySprite() const;
+	
+	bool& IsInvisibleSprite();
+	bool IsInvisibleSprite() const;
+	
+	int& DefaultSequence();
+	int DefaultSequence() const;
+	
+	int& AnimationSpeed();
+	int AnimationSpeed() const;
+	
+	int& DamageAmount();
+	int DamageAmount() const;
+	
+	string& Name();
+	string Name() const;
+	
+	bool& Moving();
+	bool Moving() const;
+	
+	bool& Thinking();
+	bool Thinking() const;
+	
+	bool& Talking();
+	bool Talking() const;
+	
+	bool& IsDying();
+	bool IsDying() const;
+	
+	bool& IsHit();
+	bool IsHit() const;
+	
+	bool& Attacked();
+	bool Attacked() const;
+	
+	bool& Targeted();
+	bool Targeted() const;
+	
+	string& CollideMsg();
+	string CollideMsg() const;
+	
+	string& InventoryMessage();
+	string InventoryMessage() const;
+	
+	bool& PlatformerSprite();
+	bool PlatformerSprite() const;
+	
+	bool& AlwaysSeenByPlayer();
+	bool AlwaysSeenByPlayer() const;
+};

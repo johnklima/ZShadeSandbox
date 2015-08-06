@@ -1,0 +1,46 @@
+<TemplatePoly>
+	<Name>Wall</Name>
+	<VertexCount>4</VertexCount>
+	<Vertices>
+		<Vertex id="0">
+			<Pos>-1 1 0</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="1">
+			<Pos>1 1 0</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="2">
+			<Pos>-1 -1 0</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="3">
+			<Pos>1 -1 0</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+	</Vertices>
+	<IndexCount>6</IndexCount>
+	<Indices>
+		<Index id="0">
+			<Value>0</Value>
+		</Index>
+		<Index id="1">
+			<Value>1</Value>
+		</Index>
+		<Index id="2">
+			<Value>2</Value>
+		</Index>
+		<Index id="3">
+			<Value>3</Value>
+		</Index>
+		<Index id="4">
+			<Value>0</Value>
+		</Index>
+		<Index id="5">
+			<Value>2</Value>
+		</Index>
+	</Indices>
+	<MaterialName>Metal</MaterialName>
+	<Rotation>0 0 0</Rotation>
+	<Scale>1 1 1</Scale>
+</TemplatePoly>

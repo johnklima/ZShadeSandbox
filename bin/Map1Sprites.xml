@@ -1,0 +1,36 @@
+<Sprites>
+    <Sprite id="0">
+        <player>true</player>
+        <x>9</x>
+        <y>5</y>
+        <width>64</width>
+        <height>64</height>
+        <hbox_x>9</hbox_x>
+        <hbox_y>37</hbox_y>
+        <hbox_width>64</hbox_width>
+        <hbox_height>32</hbox_height>
+        <baseimage>player_cover.png</baseimage>
+        <hard>0</hard>
+        <nohit>0</nohit>
+        <animation>NONE</animation>
+        <default_seq>0</default_seq>
+        <anim_speed>0</anim_speed>
+        <hp>100</hp>
+        <hp_max>100</hp_max>
+        <coin>0</coin>
+        <strength>0</strength>
+        <speed>2</speed>
+        <script>NONE</script>
+        <touch>0</touch>
+        <background>0</background>
+        <entity>1</entity>
+        <invisible>0</invisible>
+        <static>1</static>
+        <name>NONE</name>
+        <collide_msg></collide_msg>
+        <teleport>0</teleport>
+        <teleport_map>NONE</teleport_map>
+        <teleport_map_x>-1</teleport_map_x>
+        <teleport_map_y>-1</teleport_map_y>
+    </Sprite>
+</Sprites>

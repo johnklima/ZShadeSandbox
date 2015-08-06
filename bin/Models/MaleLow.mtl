@@ -1,0 +1,35 @@
+#
+#
+#
+
+newmtl polySurface11 polySurface12 Mesh_initialShadingGroup
+Ns 10.0000
+d 1.0000
+Db 0.8
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.000000 0.000000 0.000000
+Kd 0.500000 0.500000 0.500000
+Ks 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Ka metalpanel.dds
+map_Kd metalpanel.dds
+map_Km detail001.dds
+map_bump metalpanelnormals.dds
+
+newmtl polySurface13 polySurface14 Mesh_initialShadingGroup
+Ns 10.0000
+d 1.0000
+Db 0.8
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.000000 0.000000 0.000000
+Kd 0.500000 0.500000 0.500000
+Ks 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Ka metalpanel.dds
+map_Kd metalpanel.dds
+map_Km detail001.dds
+map_bump metalpanelnormals.dds

@@ -1,0 +1,53 @@
+<Material>
+	<Name>Dirt</Name>
+	<EnableShadowMap>false</EnableShadowMap>
+	<EnableSSAO>false</EnableSSAO>
+	<EnableTransparency>false</EnableTransparency>
+	<EnableLighting>true</EnableLighting>
+	<DetailBrightness>1.8</DetailBrightness>
+	<AlphaToCoverage>0 0 0</AlphaToCoverage>
+	<AmbientColor>1 1 1 1</AmbientColor>
+	<DiffuseColor>1 1 1 1</DiffuseColor>
+	<SpecularColor>1 1 1 1</SpecularColor>
+	<EmissiveColor>1 1 1 1</EmissiveColor>
+	<SpecularPower>50</SpecularPower>
+	<SpecularIntensity>0.8</SpecularIntensity>
+	<Emissivity>1</Emissivity>
+	<Reflectivity>1</Reflectivity>
+	<Transmittivity>1</Transmittivity>
+	<TransmissionFilter>1 1 1</TransmissionFilter>
+	<Alpha>1</Alpha>
+	<RefractionIndex>1</RefractionIndex>
+	<NoDistTessFactor>64</NoDistTessFactor>
+	<MinTessDist>20</MinDistTess>
+	<MaxTessDist>1000</MaxTessDist>
+	<MinTessFactor>-1</MinTessFactor>
+	<MaxTessFactor>64</MaxTessFactor>
+	<EnableDistTess>true</EnableDistTess>
+	<IlluminationModel>2</IlluminationModel>
+	<DiffuseArray>
+		<Texture id="0">
+			<TexName>NONE</TexName>
+		</Texture>
+		<Texture id="1">
+			<TexName>NONE</TexName>
+		</Texture>
+		<Texture id="2">
+			<TexName>NONE</TexName>
+		</Texture>
+		<Texture id="3">
+			<TexName>NONE</TexName>
+		</Texture>
+		<Texture id="4">
+			<TexName>NONE</TexName>
+		</Texture>
+	</DiffuseArray>
+	<DiffuseTexture>dirt01.png</DiffuseTexture>
+	<AmbientTexture>NONE</AmbientTexture>
+	<SpecularTexture>NONE</SpecularTexture>
+	<EmissiveTexture>NONE</EmissiveTexture>
+	<DetailTexture>detail001.dds</DetailTexture>
+	<NormalTexture>NONE</NormalTexture>
+	<BlendTexture>NONE</BlendTexture>
+	<AlphaTexture>NONE</AlphaTexture>
+</Material>

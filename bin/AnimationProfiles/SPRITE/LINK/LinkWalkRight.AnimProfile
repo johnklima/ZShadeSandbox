@@ -1,0 +1,15 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+LINK
+[OBJECTTYPE]
+WALK
+[SEQUENCENAME]
+LinkWalkRight
+[FRAMES]
+l3_walk_01.png 0-0-64-64-0
+l3_walk_02.png 0-0-64-64-1
+l3_walk_03.png 0-0-64-64-2
+l3_walk_04.png 0-0-64-64-3
+l3_walk_05.png 0-0-64-64-4
+l3_walk_06.png 0-0-64-64-5

@@ -1,0 +1,103 @@
+#include "../ZShadeResource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_ICON	ICON		"zshade.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_TARGET	CURSOR		"cursor.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR TOOLBAR 498, 17
+BEGIN
+    BUTTON      ID_BUTTON40090
+END
+
+IDR_TOOLBAR	BITMAP		"toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU	MENU
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "Create Directory",			IDM_FILE_CD
+		MENUITEM "Open Directory",				IDM_FILE_OD
+		MENUITEM SEPARATOR
+		MENUITEM "&New World",                  IDM_FILE_NEWWORLD
+        MENUITEM "&Open World",                 IDM_FILE_OPENWORLD
+        MENUITEM "&Save World",                 IDM_FILE_SAVEWORLD
+		MENUITEM "&New Map",                    IDM_FILE_NEWMAP
+        MENUITEM "&Open Map",                   IDM_FILE_OPENMAP
+        MENUITEM "&Save Map",                   IDM_FILE_SAVEMAP
+        MENUITEM "&Close Map",                  IDM_FILE_CLOSEMAP
+        MENUITEM SEPARATOR
+		MENUITEM "Exit",						IDM_FILE_EXIT
+	END
+	POPUP "&Edit"
+    BEGIN
+        POPUP "&Mode"
+        BEGIN
+            MENUITEM "&Tile\tT",                    IDM_MODE_TILE, CHECKED
+            MENUITEM "&Sprite\tR",                  IDM_MODE_SPRITE
+            MENUITEM "Place Music\tP",              IDM_EDIT_PLACEMUSIC
+            MENUITEM "&Hardness\tH",                IDM_MODE_HARDNESS
+        END
+        POPUP "&Sprite Mode"
+        BEGIN
+            MENUITEM "&Properties",                 IDM_SPRITEMODE_PROPERTIES
+            MENUITEM "&Move",                       IDM_SPRITEMODE_MOVE
+            MENUITEM "&Delete",                     IDM_SPRITEMODE_DELETE
+            MENUITEM "&Place",                      IDM_SPRITEMODE_PLACE
+            MENUITEM "&Edit Size",                  IDM_SPRITEMODE_EDITSIZE
+            MENUITEM "None",                        IDM_SPRITEMODE_NONE, CHECKED
+        END
+        POPUP "&Tile Mode"
+        BEGIN
+            MENUITEM "&Properties",                 IDM_TILEMODE_PROPERTIES
+            MENUITEM "&Regular",                    IDM_TILEMODE_REGULAR, CHECKED
+        END
+        MENUITEM SEPARATOR
+        POPUP "&Stamp Size"
+        BEGIN
+            MENUITEM "1x1",                         IDM_TILEEDIT_1x1, CHECKED
+            MENUITEM "2x2",                         IDM_TILEEDIT_2x2
+            MENUITEM "3x3",                         IDM_TILEEDIT_3X3
+            MENUITEM "4x4",                         IDM_TILEEDIT_4X4
+            MENUITEM "5x5",                         IDM_TILEEDIT_5X5
+            MENUITEM "6x6",                         IDM_TILEEDIT_6X6
+            MENUITEM "7x7",                         IDM_TILEEDIT_7X7
+            MENUITEM "8x8",                         IDM_TILEEDIT_8X8
+            MENUITEM "9x9",                         IDM_TILEEDIT_9X9
+            MENUITEM "10x10",                       IDM_TILEEDIT_10X10
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Grid Placement",             IDM_EDIT_GRIDPLACEMENT
+        MENUITEM "&Free Placement",             IDM_EDIT_FREEPLACEMENT, CHECKED
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&TileCache\tLSHIFT+T",        IDM_WINDOW_TILECACHE
+        MENUITEM "&SpriteCache\tLSHIFT+R",      IDM_WINDOW_SPRITECACHE
+        MENUITEM "Map &Properties\tM",          IDM_WINDOW_MAPPROPERTIES
+        MENUITEM "&Update Grid Size\tG",        IDM_WINDOW_UPDATEGRIDSIZE
+    END
+	POPUP "&Help"
+    BEGIN
+        MENUITEM "About",						IDM_HELP_ABOUT
+    END
+END

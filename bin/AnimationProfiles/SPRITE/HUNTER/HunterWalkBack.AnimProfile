@@ -1,0 +1,15 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+HUNTER
+[OBJECTTYPE]
+WALK
+[SEQUENCENAME]
+HunterWalkBack
+[FRAMES]
+hb-walk01.png 0-0-64-64-0
+hb-walk02.png 0-0-64-64-1
+hb-walk03.png 0-0-64-64-2
+hb-walk04.png 0-0-64-64-3
+hb-walk05.png 0-0-64-64-4
+hb-walk06.png 0-0-64-64-5

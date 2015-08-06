@@ -1,0 +1,228 @@
+<TemplatePoly>
+	<Name>Cube</Name>
+	<VertexCount>24</VertexCount>
+	<Vertices>
+		<!-- Front Face -->
+		<Vertex id="0">
+			<Pos>-1 1 -1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="1">
+			<Pos>1 1 -1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="2">
+			<Pos>-1 -1 -1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="3">
+			<Pos>1 -1 -1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+		<!-- Back Face -->
+		<Vertex id="4">
+			<Pos>1 1 1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="5">
+			<Pos>-1 1 1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="6">
+			<Pos>1 -1 1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="7">
+			<Pos>-1 -1 1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+		<!-- Left Face -->
+		<Vertex id="8">
+			<Pos>-1 1 1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="9">
+			<Pos>-1 1 -1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="10">
+			<Pos>-1 -1 1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="11">
+			<Pos>-1 -1 -1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+		<!-- Right Face -->
+		<Vertex id="12">
+			<Pos>1 1 -1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="13">
+			<Pos>1 1 1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="14">
+			<Pos>1 -1 -1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="15">
+			<Pos>1 -1 1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+		<!-- Top Face -->
+		<Vertex id="16">
+			<Pos>-1 1 1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="17">
+			<Pos>1 1 1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="18">
+			<Pos>-1 1 -1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="19">
+			<Pos>1 1 -1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+		<!-- Bottom Face -->
+		<Vertex id="20">
+			<Pos>1 -1 1</Pos>
+			<UV>0 0</UV>
+		</Vertex>
+		<Vertex id="21">
+			<Pos>-1 -1 1</Pos>
+			<UV>1 0</UV>
+		</Vertex>
+		<Vertex id="22">
+			<Pos>1 -1 -1</Pos>
+			<UV>0 1</UV>
+		</Vertex>
+		<Vertex id="23">
+			<Pos>-1 -1 -1</Pos>
+			<UV>1 1</UV>
+		</Vertex>
+	</Vertices>
+	<IndexCount>36</IndexCount>
+	<Indices>
+		<!-- Front Face -->
+		<Index id="0">
+			<Value>0</Value>
+		</Index>
+		<Index id="1">
+			<Value>1</Value>
+		</Index>
+		<Index id="2">
+			<Value>2</Value>
+		</Index>
+		<Index id="3">
+			<Value>2</Value>
+		</Index>
+		<Index id="4">
+			<Value>1</Value>
+		</Index>
+		<Index id="5">
+			<Value>3</Value>
+		</Index>
+		<!-- Back Face -->
+		<Index id="6">
+			<Value>4</Value>
+		</Index>
+		<Index id="7">
+			<Value>5</Value>
+		</Index>
+		<Index id="8">
+			<Value>6</Value>
+		</Index>
+		<Index id="9">
+			<Value>6</Value>
+		</Index>
+		<Index id="10">
+			<Value>5</Value>
+		</Index>
+		<Index id="11">
+			<Value>7</Value>
+		</Index>
+		<!-- Left Face -->
+		<Index id="12">
+			<Value>8</Value>
+		</Index>
+		<Index id="13">
+			<Value>9</Value>
+		</Index>
+		<Index id="14">
+			<Value>10</Value>
+		</Index>
+		<Index id="15">
+			<Value>10</Value>
+		</Index>
+		<Index id="16">
+			<Value>9</Value>
+		</Index>
+		<Index id="17">
+			<Value>11</Value>
+		</Index>
+		<!-- Right Face -->
+		<Index id="18">
+			<Value>12</Value>
+		</Index>
+		<Index id="19">
+			<Value>13</Value>
+		</Index>
+		<Index id="20">
+			<Value>14</Value>
+		</Index>
+		<Index id="21">
+			<Value>14</Value>
+		</Index>
+		<Index id="22">
+			<Value>13</Value>
+		</Index>
+		<Index id="23">
+			<Value>15</Value>
+		</Index>
+		<!-- Top Face -->
+		<Index id="24">
+			<Value>16</Value>
+		</Index>
+		<Index id="25">
+			<Value>17</Value>
+		</Index>
+		<Index id="26">
+			<Value>18</Value>
+		</Index>
+		<Index id="27">
+			<Value>18</Value>
+		</Index>
+		<Index id="28">
+			<Value>17</Value>
+		</Index>
+		<Index id="29">
+			<Value>19</Value>
+		</Index>
+		<!-- Bottom Face -->
+		<Index id="30">
+			<Value>20</Value>
+		</Index>
+		<Index id="31">
+			<Value>21</Value>
+		</Index>
+		<Index id="32">
+			<Value>22</Value>
+		</Index>
+		<Index id="33">
+			<Value>22</Value>
+		</Index>
+		<Index id="34">
+			<Value>21</Value>
+		</Index>
+		<Index id="35">
+			<Value>23</Value>
+		</Index>
+	</Indices>
+	<MaterialName>Metal</MaterialName>
+	<Rotation>0 0 0</Rotation>
+	<Scale>1 1 1</Scale>
+</TemplatePoly>

@@ -1,0 +1,17 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+LINK
+[OBJECTTYPE]
+WALK
+[SEQUENCENAME]
+LinkWalkBack
+[FRAMES]
+l4_walk_01.png 0-0-64-64-0
+l4_walk_02.png 0-0-64-64-1
+l4_walk_03.png 0-0-64-64-2
+l4_walk_04.png 0-0-64-64-3
+l4_walk_05.png 0-0-64-64-4
+l4_walk_06.png 0-0-64-64-5
+l4_walk_07.png 0-0-64-64-6
+l4_walk_08.png 0-0-64-64-7

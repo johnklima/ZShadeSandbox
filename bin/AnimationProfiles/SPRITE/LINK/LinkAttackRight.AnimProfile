@@ -1,0 +1,14 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+LINK
+[OBJECTTYPE]
+ATTACK
+[SEQUENCENAME]
+LinkAttackRight
+[FRAMES]
+l3_sword_1.png 0-0-64-64-0
+l3_sword_2.png 0-0-64-64-1
+l3_sword_3.png 0-0-64-64-2
+l3_sword_4.png 0-0-64-64-3
+l3_sword_5.png 0-0-64-64-4

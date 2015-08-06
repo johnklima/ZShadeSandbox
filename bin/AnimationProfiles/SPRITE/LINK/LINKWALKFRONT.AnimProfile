@@ -1,0 +1,17 @@
+[ANIMATIONTYPE]
+SPRITE
+[PROFILENAME]
+LINK
+[OBJECTTYPE]
+WALK
+[SEQUENCENAME]
+LinkWalkFront
+[FRAMES]
+l1_walk_01.png 0-0-64-64-0
+l1_walk_02.png 0-0-64-64-1
+l1_walk_03.png 0-0-64-64-2
+l1_walk_04.png 0-0-64-64-3
+l1_walk_05.png 0-0-64-64-4
+l1_walk_06.png 0-0-64-64-5
+l1_walk_07.png 0-0-64-64-6
+l1_walk_08.png 0-0-64-64-7

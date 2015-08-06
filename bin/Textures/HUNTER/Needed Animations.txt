@@ -1,0 +1,13 @@
+For the hunter animations I need:
+
+Idle - Front, Back, Left, Right
+Walk - Front, Back, Left, Right
+Fist attack - Front, Back, Left, Right
+Death - Front, Back, Left, Right
+Crouch - Front, Back, Left, Right
+
+This will be about 104 frames
+This includes only about 6 frames per direction
+Crouch has 2 frames per direction
+
+Do not need crouch
