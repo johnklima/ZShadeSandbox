@@ -1,0 +1,1180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{22147FA6-F685-4779-B2B2-EBF930CED8CE}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>ZShadeSandbox</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2016.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\bin\lib;C:\Program Files\Autodesk\FBX\FBX SDK\2016.0\lib\vs2013\x86\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\Framework;$(ProjectDir)\Framework\AI;$(ProjectDir)\Framework\AI\LuaBehaviorTree;$(ProjectDir)\Framework\Animation2D;$(ProjectDir)\Framework\Animation3D;$(ProjectDir)\Framework\Audio;$(ProjectDir)\Framework\Camera;$(ProjectDir)\Framework\Game;$(ProjectDir)\Framework\Game\Base;$(ProjectDir)\Framework\Game\Environment;$(ProjectDir)\Framework\Game\Environment\Environment2D;$(ProjectDir)\Framework\Game\Environment\Environment3D;$(ProjectDir)\Framework\Game\Persistance;$(ProjectDir)\Framework\Game\Systems;$(ProjectDir)\Framework\General;$(ProjectDir)\Framework\General\DataTypes;$(ProjectDir)\Framework\General\Memory;$(ProjectDir)\Framework\General\Parsers;$(ProjectDir)\Framework\General\Performance;$(ProjectDir)\Framework\Graphics;$(ProjectDir)\Framework\Graphics\Base;$(ProjectDir)\Framework\Graphics\D3D;$(ProjectDir)\Framework\Graphics\DataTypes;$(ProjectDir)\Framework\Graphics\DataTypes\DataTypeTrees;$(ProjectDir)\Framework\Graphics\DataTypes\DataTypeTrees\BSP;$(ProjectDir)\Framework\Graphics\DataTypes\DataTypeTrees\BTT;$(ProjectDir)\Framework\Graphics\Environment2D;$(ProjectDir)\Framework\Graphics\Environment2D\Platformer;$(ProjectDir)\Framework\Graphics\Environment2D\Topdown;$(ProjectDir)\Framework\Graphics\Environment3D;$(ProjectDir)\Framework\Graphics\Landscape;$(ProjectDir)\Framework\Graphics\Lighting;$(ProjectDir)\Framework\Graphics\Lighting\DeferredShading;$(ProjectDir)\Framework\Graphics\Mesh;$(ProjectDir)\Framework\Graphics\Mesh\CustomMesh;$(ProjectDir)\Framework\Graphics\Mesh\DAEMesh;$(ProjectDir)\Framework\Graphics\Mesh\FBXMesh;$(ProjectDir)\Framework\Graphics\Mesh\OBJMesh;$(ProjectDir)\Framework\Graphics\Ocean;$(ProjectDir)\Framework\Graphics\ParticleSystem;$(ProjectDir)\Framework\Graphics\PostProcessing;$(ProjectDir)\Framework\Graphics\Sky;$(ProjectDir)\Framework\Graphics\Sun;$(ProjectDir)\Framework\Graphics\Terrain;$(ProjectDir)\Framework\Graphics\Vegitation;$(ProjectDir)\Framework\Graphics\Vegitation\Grass;$(ProjectDir)\Framework\Graphics\Vegitation\Tree;$(ProjectDir)\Framework\Graphics\Volume;$(ProjectDir)\Framework\Graphics\Water;$(ProjectDir)\Framework\Math;$(ProjectDir)\Framework\Math\Geometry;$(ProjectDir)\Framework\Physics;$(ProjectDir)\Framework\Physics\Collision;$(ProjectDir)\Framework\Physics\QuickHull;$(ProjectDir)\Framework\Scripting;$(ProjectDir)\Framework\Shaders;$(ProjectDir)\Framework\Shaders\Basic;$(ProjectDir)\Framework\Shaders\BasicTessellation;$(ProjectDir)\Framework\Shaders\Environment;$(ProjectDir)\Framework\Shaders\Environment\Lighting;$(ProjectDir)\Framework\Shaders\Environment\Lighting\DeferredShading;$(ProjectDir)\Framework\Shaders\Environment\Lighting\GBuffer;$(ProjectDir)\Framework\Shaders\Mesh;$(ProjectDir)\Framework\Shaders\Mesh\OBJMesh;$(ProjectDir)\Framework\Shaders\Ocean;$(ProjectDir)\Framework\Shaders\PostProcess;$(ProjectDir)\Framework\Shaders\Sky;$(ProjectDir)\Framework\Shaders\Sun;$(ProjectDir)\Framework\Shaders\Terrain;$(ProjectDir)\Framework\Shaders\Vegitation;$(ProjectDir)\Framework\Shaders\Vegitation\Grass;$(ProjectDir)\Framework\Shaders\Vegitation\Tree;$(ProjectDir)\Framework\Shaders\Water;$(ProjectDir)\Framework\Third Party;$(ProjectDir)\Framework\Third Party\DXTex;$(ProjectDir)\Framework\Third Party\lua;$(ProjectDir)\Framework\Third Party\tolua;$(ProjectDir)\Framework\WinBase;$(ProjectDir)\Framework\Editor;$(ProjectDir)\Framework\Editor\2D;$(ProjectDir)\Framework\Editor\3D;$(ProjectDir)\Framework\Physics\Physics2D;$(ProjectDir)\Framework\Physics\Physics3D</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <EmbedManagedResourceFile>$(ProjectDir)\bin\cursor.cur;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Framework\AI\AISprite.cpp" />
+    <ClCompile Include="Framework\AI\AISteeringForce.cpp" />
+    <ClCompile Include="Framework\AI\LuaBehaviorTree\LuaDelegate.cpp" />
+    <ClCompile Include="Framework\AI\LuaBehaviorTree\LuaTask.cpp" />
+    <ClCompile Include="Framework\AI\WaypointSystem.cpp" />
+    <ClCompile Include="Framework\Animation2D\Animation2D.cpp" />
+    <ClCompile Include="Framework\Animation2D\AnimationFrame2D.cpp" />
+    <ClCompile Include="Framework\Animation2D\AnimationProfile2D.cpp" />
+    <ClCompile Include="Framework\Animation2D\ReadAnimationProfile2D.cpp" />
+    <ClCompile Include="Framework\Animation3D\AnimationFrame3D.cpp" />
+    <ClCompile Include="Framework\Animation3D\TextureAnimation3D.cpp" />
+    <ClCompile Include="Framework\Audio\AudioSystem.cpp" />
+    <ClCompile Include="Framework\Audio\MusicSystem.cpp" />
+    <ClCompile Include="Framework\Audio\Sound.cpp" />
+    <ClCompile Include="Framework\Audio\SoundSystem.cpp" />
+    <ClCompile Include="Framework\Audio\wave.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Camera\Camera.cpp" />
+    <ClCompile Include="Framework\Camera\LightCamera.cpp" />
+    <ClCompile Include="Framework\Camera\ProjectedCamera.cpp" />
+    <ClCompile Include="Framework\Editor\2D\EditorHelper2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\2D\InventoryEditorSystem2D.cpp" />
+    <ClCompile Include="Framework\Editor\2D\MapEditorSystem2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\HUDEditorSystem.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\MenuEditorSystem.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Base\CreateGameDirectory.cpp" />
+    <ClCompile Include="Framework\Game\Base\GameState.cpp" />
+    <ClCompile Include="Framework\Game\Base\HUD.cpp" />
+    <ClCompile Include="Framework\Game\Base\Menu.cpp" />
+    <ClCompile Include="Framework\Game\DXGameWindow.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment2D\Environment2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment2D\Environment2DMapHelper.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\BSPEnvironment.cpp" />
+    <ClCompile Include="Framework\Game\Environment\Environment3D\Environment3D.cpp" />
+    <ClCompile Include="Framework\Game\Environment\Environment3D\IndoorEnvironment.cpp" />
+    <ClCompile Include="Framework\Game\Environment\Environment3D\ModelEnvironment.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\OceanEnvironment.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\OutdoorEnvironment.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\TerrainEnvironment.cpp" />
+    <ClCompile Include="Framework\Game\Environment\Environment3D\TessellationEnvironment.cpp" />
+    <ClCompile Include="Framework\Game\Environment\Environment3D\VolumeEnvironment.cpp" />
+    <ClCompile Include="Framework\Game\Environment\EnvironmentHUDHelper.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\EnvironmentMenuHelper.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLLoader.cpp" />
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLSaver.cpp" />
+    <ClCompile Include="Framework\Game\Systems\MenuSystem.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\ZShadeFrontEnd.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\General\CGlobal.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\General\DataTypes\BetterString.cpp" />
+    <ClCompile Include="Framework\General\DataTypes\BinarySearch.cpp" />
+    <ClCompile Include="Framework\General\LuaKeyMapper.cpp" />
+    <ClCompile Include="Framework\General\Memory\MemoryMgr.cpp" />
+    <ClCompile Include="Framework\General\Parsers\FileParser.cpp" />
+    <ClCompile Include="Framework\General\Parsers\InputXMLParser.cpp" />
+    <ClCompile Include="Framework\General\Parsers\XMLParser.cpp" />
+    <ClCompile Include="Framework\General\Parsers\ZShadeINIParser.cpp" />
+    <ClCompile Include="Framework\General\Parsers\ZShadeINIWriter.cpp" />
+    <ClCompile Include="Framework\General\Performance\DefaultInputController3D.cpp" />
+    <ClCompile Include="Framework\General\Performance\FPSCounter.cpp" />
+    <ClCompile Include="Framework\General\Performance\Input.cpp" />
+    <ClCompile Include="Framework\General\Performance\InputController.cpp" />
+    <ClCompile Include="Framework\General\Performance\SleepTimer.cpp" />
+    <ClCompile Include="Framework\General\Performance\Timer.cpp" />
+    <ClCompile Include="Framework\General\ZShadeMessageCenter.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\Button.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\DCRenderTexture.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\DefaultMaterials.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\DepthStencilBuffer.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\FogData.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\GDI.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\GDIFont.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\Image.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\MaterialManager.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\RenderTarget2D.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\ShadowMapTarget.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\StagingBuffer.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\StructuredBuffer.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\Text.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\Texture.cpp" />
+    <ClCompile Include="Framework\Graphics\Base\TextureManager.cpp" />
+    <ClCompile Include="Framework\Graphics\D3D\D3D.cpp" />
+    <ClCompile Include="Framework\Graphics\D3D\GBuffer.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSP.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPArrayData.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPolygon.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortal.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortalGenerator.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPVSGenerator.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPRenderer.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BTT\BTT.cpp" />
+    <ClCompile Include="Framework\Graphics\DataTypes\Triangle.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerBackground.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerMap.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerTile.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerWorld.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\PlayerInventory2D.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment2D\Sprite.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownMap.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownTile.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownWorld.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment3D\Entity\Entity3D.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment3D\Entity\Entity3DController.cpp" />
+    <ClCompile Include="Framework\Graphics\Environment3D\Map3D.cpp" />
+    <ClCompile Include="Framework\Graphics\Landscape\InfinitePlane.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\AmbientLight.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\CapsuleLight.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\DeferredShading\DeferredShaderManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\DirectionalLight.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\Light.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\LightManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\PointLight.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\ShaderMaterial.cpp" />
+    <ClCompile Include="Framework\Graphics\Lighting\SpotLight.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CircleMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CubeMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CustomMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CylindricalMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\GeosphereMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\GridMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\MeshUtil.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\PlaneMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\QuadMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\SkydomeMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\SphereMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\TriangleMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXHelper.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXLoader.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXSkinnedMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXVertex.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\MeshAttributes.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\OBJMesh\OBJMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\PolygonMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Mesh\Vertex.cpp" />
+    <ClCompile Include="Framework\Graphics\Ocean\CSFFT\fft_512x512_c2c.cpp" />
+    <ClCompile Include="Framework\Graphics\Ocean\OceanPatchTree.cpp" />
+    <ClCompile Include="Framework\Graphics\Ocean\OceanSimulator.cpp" />
+    <ClCompile Include="Framework\Graphics\Ocean\OceanSurface.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\ParticleSystem\Particle.cpp" />
+    <ClCompile Include="Framework\Graphics\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="Framework\Graphics\ParticleSystem\ParticleTrajectoryTest.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\Bloom.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\Bokeh.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\DepthOfField.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\HDR.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\LensFlare.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\MotionBlur.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcess.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcessColor.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcessManager.cpp" />
+    <ClCompile Include="Framework\Graphics\PostProcessing\VolumetricLightRays.cpp" />
+    <ClCompile Include="Framework\Graphics\Sky\Sky.cpp" />
+    <ClCompile Include="Framework\Graphics\Sky\SkyPlane.cpp" />
+    <ClCompile Include="Framework\Graphics\Sun\Sun.cpp" />
+    <ClCompile Include="Framework\Graphics\Sun\SunQuad.cpp" />
+    <ClCompile Include="Framework\Graphics\Sun\SunRenderer.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\HeightErosion.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\Heightmap.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\HeightmapContainer.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\HeightmapEditorHelper.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\ProceduralAdditionHelper.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\ProceduralGenerator.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\QNode.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTree.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTreeMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTreeRenderer.cpp" />
+    <ClCompile Include="Framework\Graphics\Terrain\WaterErosion.cpp" />
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\Grass.cpp" />
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\GrassField.cpp" />
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\GrassFieldMesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Volume\Volume.cpp" />
+    <ClCompile Include="Framework\Graphics\Water\LakeBed.cpp" />
+    <ClCompile Include="Framework\Graphics\Water\Water.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\AABB.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\BoundingBox.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\BoxPrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\CirclePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\ConePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\LinePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\PlanePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\Polygon.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\SpherePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Geometry\TrianglePrimitive.cpp" />
+    <ClCompile Include="Framework\Math\Ray.cpp" />
+    <ClCompile Include="Framework\Math\Scalar.cpp" />
+    <ClCompile Include="Framework\Math\XMMath.cpp" />
+    <ClCompile Include="Framework\Math\XMMath2.cpp" />
+    <ClCompile Include="Framework\Math\XMMath3.cpp" />
+    <ClCompile Include="Framework\Math\XMMath4.cpp" />
+    <ClCompile Include="Framework\Math\XMMatrix.cpp" />
+    <ClCompile Include="Framework\Math\ZMath.cpp" />
+    <ClCompile Include="Framework\Physics\Collision\ContactSolver.cpp" />
+    <ClCompile Include="Framework\Physics\Collision\GJK.cpp" />
+    <ClCompile Include="Framework\Physics\Collision\PointColliderController.cpp" />
+    <ClCompile Include="Framework\Physics\Collision\SAT.cpp" />
+    <ClCompile Include="Framework\Physics\Collision\ShapeContact.cpp" />
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBody2D.cpp" />
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.cpp" />
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsWorld2D.cpp" />
+    <ClCompile Include="Framework\Physics\Physics2D\SurfaceDefinition.cpp" />
+    <ClCompile Include="Framework\Physics\Physics3D\PhysicsBody3D.cpp" />
+    <ClCompile Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.cpp" />
+    <ClCompile Include="Framework\Physics\QuickHull\FaceList.cpp" />
+    <ClCompile Include="Framework\Physics\QuickHull\HalfEdge.cpp" />
+    <ClCompile Include="Framework\Physics\QuickHull\HullFace.cpp" />
+    <ClCompile Include="Framework\Physics\QuickHull\QuickHull.cpp" />
+    <ClCompile Include="Framework\Physics\QuickHull\VertexList.cpp" />
+    <ClCompile Include="Framework\Scripting\Script.cpp" />
+    <ClCompile Include="Framework\Scripting\ScriptBase.cpp" />
+    <ClCompile Include="Framework\Scripting\Scripting.cpp" />
+    <ClCompile Include="Framework\Scripting\tolua_Funcs.cpp" />
+    <ClCompile Include="Framework\Scripting\tolua_Sprite.cpp" />
+    <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialLightTessellationShader.cpp" />
+    <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialTessellationShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\CSDesaturation.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\FontShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\MaterialLightShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\MaterialShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\Shader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\ShaderCompiler.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\Shaders.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\TextureShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\BlurShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferredShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBufferShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBufferShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\ShadowMapBuildShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellationShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Ocean\OceanSurfaceShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Sky\SkyPlaneShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Sky\SkyShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Sun\SunShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadSSAOShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Vegitation\Grass\GrassFieldShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Water\LakeBedShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Water\WaterShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\BinaryReader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\CommonStates.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DDSTextureLoader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC4BC5.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC6HBC7.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BCDirectCompute.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexCompress.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexCompressGPU.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexConvert.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexD3D11.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexDDS.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexFlipRotate.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexImage.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexMipmaps.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexMisc.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexNormalMaps.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexPMAlpha.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexResize.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexTGA.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexUtil.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexWIC.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lapi.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lauxlib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lbaselib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lbitlib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lcode.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lcorolib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lctype.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldblib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldebug.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldo.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldump.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lfunc.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lgc.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\linit.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\liolib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\llex.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lmathlib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lmem.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\loadlib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lobject.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lopcodes.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\loslib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lparser.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstate.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstring.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstrlib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltable.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltablib.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltm.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lundump.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lvm.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lzio.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\pch.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\PrimitiveBatch.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\ScreenGrab.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\SimpleMath.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tinyxml2.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\toluabind.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_event.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_is.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_map.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_push.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_to.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\VertexTypes.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\WICTextureLoader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\WinBase\Window.cpp" />
+    <ClCompile Include="FrontEnd.cpp" />
+    <ClCompile Include="ZShadeSandboxEditor2D.cpp" />
+    <ClCompile Include="ZShadeSandboxEditor3D.cpp" />
+    <ClCompile Include="ZShadeSandboxGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Framework\afxHeader.h" />
+    <ClInclude Include="Framework\AI\AISprite.h" />
+    <ClInclude Include="Framework\AI\AISteeringForce.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Behavior.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\BehaviorException.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\BehaviorTree.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Component.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ConditionNode.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ContinueDecorator.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Decorator.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\DynamicSelector.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Enumerator.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LoopDecorator.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LuaDelegate.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LuaTask.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Node.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ParallelSequence.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\PrioritySelector.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Selector.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Sequence.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Status.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\TaskNode.h" />
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\WaitDecorator.h" />
+    <ClInclude Include="Framework\AI\WaypointSystem.h" />
+    <ClInclude Include="Framework\Animation2D\Animation2D.h" />
+    <ClInclude Include="Framework\Animation2D\AnimationFrame2D.h" />
+    <ClInclude Include="Framework\Animation2D\AnimationProfile2D.h" />
+    <ClInclude Include="Framework\Animation2D\ReadAnimationProfile2D.h" />
+    <ClInclude Include="Framework\Animation3D\AnimationFrame3D.h" />
+    <ClInclude Include="Framework\Animation3D\TextureAnimation3D.h" />
+    <ClInclude Include="Framework\Audio\AudioSystem.h" />
+    <ClInclude Include="Framework\Audio\MusicSystem.h" />
+    <ClInclude Include="Framework\Audio\Sound.h" />
+    <ClInclude Include="Framework\Audio\SoundSystem.h" />
+    <ClInclude Include="Framework\Audio\wave.h" />
+    <ClInclude Include="Framework\Camera\Camera.h" />
+    <ClInclude Include="Framework\Camera\LightCamera.h" />
+    <ClInclude Include="Framework\Camera\ProjectedCamera.h" />
+    <ClInclude Include="Framework\Editor\2D\EditorHelper2D.h" />
+    <ClInclude Include="Framework\Editor\2D\InventoryEditorSystem2D.h" />
+    <ClInclude Include="Framework\Editor\2D\MapEditorSystem2D.h" />
+    <ClInclude Include="Framework\Editor\HUDEditorSystem.h" />
+    <ClInclude Include="Framework\Editor\MenuEditorSystem.h" />
+    <ClInclude Include="Framework\Game\Base\CreateGameDirectory.h" />
+    <ClInclude Include="Framework\Game\Base\GameDirectory.h" />
+    <ClInclude Include="Framework\Game\Base\GameState.h" />
+    <ClInclude Include="Framework\Game\Base\HUD.h" />
+    <ClInclude Include="Framework\Game\Base\Menu.h" />
+    <ClInclude Include="Framework\Game\DXGameWindow.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment2D\Environment2D.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment2D\Environment2DMapHelper.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\BSPEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\Environment3D.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\IndoorEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\ModelEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\OceanEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\OutdoorEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\TerrainEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\TessellationEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\Environment3D\VolumeEnvironment.h" />
+    <ClInclude Include="Framework\Game\Environment\EnvironmentHUDHelper.h" />
+    <ClInclude Include="Framework\Game\Environment\EnvironmentMenuHelper.h" />
+    <ClInclude Include="Framework\Game\Persistance\ZShadeXMLLoader.h" />
+    <ClInclude Include="Framework\Game\Persistance\ZShadeXMLSaver.h" />
+    <ClInclude Include="Framework\Game\Systems\MenuSystem.h" />
+    <ClInclude Include="Framework\Game\ZShadeFrontEnd.h" />
+    <ClInclude Include="Framework\General\CGlobal.h" />
+    <ClInclude Include="Framework\General\Convert.h" />
+    <ClInclude Include="Framework\General\DataTypes\BetterString.h" />
+    <ClInclude Include="Framework\General\DataTypes\BinarySearch.h" />
+    <ClInclude Include="Framework\General\DataTypes\DLList.h" />
+    <ClInclude Include="Framework\General\DataTypes\GrowableArray.h" />
+    <ClInclude Include="Framework\General\DataTypes\HalfEdge.h" />
+    <ClInclude Include="Framework\General\DataTypes\InsersionSort.h" />
+    <ClInclude Include="Framework\General\DataTypes\LNode.h" />
+    <ClInclude Include="Framework\General\DataTypes\SLList.h" />
+    <ClInclude Include="Framework\General\DataTypes\StackMap.h" />
+    <ClInclude Include="Framework\General\DataTypes\ZShadeMap.h" />
+    <ClInclude Include="Framework\General\EngineOptions.h" />
+    <ClInclude Include="Framework\General\Exceptions.h" />
+    <ClInclude Include="Framework\General\GlobalTokens.h" />
+    <ClInclude Include="Framework\General\ISOHelper.h" />
+    <ClInclude Include="Framework\General\LuaKeyMapper.h" />
+    <ClInclude Include="Framework\General\Memory\MemoryMgr.h" />
+    <ClInclude Include="Framework\General\Parsers\FileParser.h" />
+    <ClInclude Include="Framework\General\Parsers\InputXMLParser.h" />
+    <ClInclude Include="Framework\General\Parsers\XMLParser.h" />
+    <ClInclude Include="Framework\General\Parsers\ZShadeINIParser.h" />
+    <ClInclude Include="Framework\General\Parsers\ZShadeINIWriter.h" />
+    <ClInclude Include="Framework\General\Performance\DefaultInputController3D.h" />
+    <ClInclude Include="Framework\General\Performance\FPSCounter.h" />
+    <ClInclude Include="Framework\General\Performance\Input.h" />
+    <ClInclude Include="Framework\General\Performance\InputController.h" />
+    <ClInclude Include="Framework\General\Performance\SleepTimer.h" />
+    <ClInclude Include="Framework\General\Performance\Timer.h" />
+    <ClInclude Include="Framework\General\ZException.h" />
+    <ClInclude Include="Framework\General\ZShadeMessageCenter.h" />
+    <ClInclude Include="Framework\Graphics\Base\Button.h" />
+    <ClInclude Include="Framework\Graphics\Base\ConstantBuffer.h" />
+    <ClInclude Include="Framework\Graphics\Base\DCRenderTexture.h" />
+    <ClInclude Include="Framework\Graphics\Base\DefaultMaterials.h" />
+    <ClInclude Include="Framework\Graphics\Base\DepthStencilBuffer.h" />
+    <ClInclude Include="Framework\Graphics\Base\FogData.h" />
+    <ClInclude Include="Framework\Graphics\Base\GDI.h" />
+    <ClInclude Include="Framework\Graphics\Base\GDIFont.h" />
+    <ClInclude Include="Framework\Graphics\Base\Image.h" />
+    <ClInclude Include="Framework\Graphics\Base\InterfacePointers.h" />
+    <ClInclude Include="Framework\Graphics\Base\MaterialManager.h" />
+    <ClInclude Include="Framework\Graphics\Base\RenderTarget2D.h" />
+    <ClInclude Include="Framework\Graphics\Base\RGBColor.h" />
+    <ClInclude Include="Framework\Graphics\Base\ShadowMapTarget.h" />
+    <ClInclude Include="Framework\Graphics\Base\StagingBuffer.h" />
+    <ClInclude Include="Framework\Graphics\Base\StructuredBuffer.h" />
+    <ClInclude Include="Framework\Graphics\Base\Text.h" />
+    <ClInclude Include="Framework\Graphics\Base\Texture.h" />
+    <ClInclude Include="Framework\Graphics\Base\TextureManager.h" />
+    <ClInclude Include="Framework\Graphics\D3D\D3D.h" />
+    <ClInclude Include="Framework\Graphics\D3D\D3DIncludes.h" />
+    <ClInclude Include="Framework\Graphics\D3D\GBuffer.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSP.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPArrayData.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPLeaf.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPMesh.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPNode.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPParameters.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPlane.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPolygon.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortal.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortalGenerator.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPVSGenerator.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPRenderer.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BTT\BTT.h" />
+    <ClInclude Include="Framework\Graphics\DataTypes\Triangle.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerBackground.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerMap.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerTile.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerWorld.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\PlayerInventory2D.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Sprite.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownMap.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownTile.h" />
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownWorld.h" />
+    <ClInclude Include="Framework\Graphics\Environment3D\Entity\Entity3D.h" />
+    <ClInclude Include="Framework\Graphics\Environment3D\Entity\Entity3DController.h" />
+    <ClInclude Include="Framework\Graphics\Environment3D\Map3D.h" />
+    <ClInclude Include="Framework\Graphics\Landscape\InfinitePlane.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\AmbientLight.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\CapsuleLight.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\DeferredShading\DeferredShaderManager.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\DirectionalLight.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\Light.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\LightManager.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\LightShadingBuffers.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\PointLight.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\ShaderMaterial.h" />
+    <ClInclude Include="Framework\Graphics\Lighting\SpotLight.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CircleMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CubeMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CustomMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CustomMeshParameters.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CylindricalMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\GeosphereMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\GridMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\MeshUtil.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\PlaneMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\QuadMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\SkydomeMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\SphereMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\TriangleMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXHelper.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXInclude.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXLoader.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXSkinnedMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXVertex.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\MeshAttributes.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\MeshRenderParameters.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\MeshRenderType.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\OBJMesh\OBJMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\PolygonMesh.h" />
+    <ClInclude Include="Framework\Graphics\Mesh\Vertex.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\CSFFT\fft_512x512.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\OceanParameters.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\OceanPatch.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\OceanPatchTree.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\OceanSimulator.h" />
+    <ClInclude Include="Framework\Graphics\Ocean\OceanSurface.h" />
+    <ClInclude Include="Framework\Graphics\ParticleSystem\Particle.h" />
+    <ClInclude Include="Framework\Graphics\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="Framework\Graphics\ParticleSystem\ParticleTrajectoryTest.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\Bloom.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\Bokeh.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\DepthOfField.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\HDR.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\LensFlare.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\MotionBlur.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcess.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessColor.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessManager.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessTypes.h" />
+    <ClInclude Include="Framework\Graphics\PostProcessing\VolumetricLightRays.h" />
+    <ClInclude Include="Framework\Graphics\Sky\Sky.h" />
+    <ClInclude Include="Framework\Graphics\Sky\SkyPlane.h" />
+    <ClInclude Include="Framework\Graphics\Sky\SkyPlaneParameters.h" />
+    <ClInclude Include="Framework\Graphics\Sun\Sun.h" />
+    <ClInclude Include="Framework\Graphics\Sun\SunParameters.h" />
+    <ClInclude Include="Framework\Graphics\Sun\SunQuad.h" />
+    <ClInclude Include="Framework\Graphics\Sun\SunRenderer.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\HeightErosion.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\Heightmap.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapContainer.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapData.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapEditorHelper.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralAdditionHelper.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralGenerator.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralParameters.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QMeshNode.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QNode.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QNodeType.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTree.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTreeMesh.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTreeRenderer.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\TerrainParameters.h" />
+    <ClInclude Include="Framework\Graphics\Terrain\WaterErosion.h" />
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\Grass.h" />
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\GrassField.h" />
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\GrassFieldMesh.h" />
+    <ClInclude Include="Framework\Graphics\Volume\Volume.h" />
+    <ClInclude Include="Framework\Graphics\Water\LakeBed.h" />
+    <ClInclude Include="Framework\Graphics\Water\Water.h" />
+    <ClInclude Include="Framework\Graphics\Water\WaterParameters.h" />
+    <ClInclude Include="Framework\Math\Geometry\AABB.h" />
+    <ClInclude Include="Framework\Math\Geometry\BoundingBox.h" />
+    <ClInclude Include="Framework\Math\Geometry\BoxPrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\CirclePrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\ConePrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\LinePrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\PlanePrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\Polygon.h" />
+    <ClInclude Include="Framework\Math\Geometry\SpherePrimitive.h" />
+    <ClInclude Include="Framework\Math\Geometry\TrianglePrimitive.h" />
+    <ClInclude Include="Framework\Math\Ray.h" />
+    <ClInclude Include="Framework\Math\Scalar.h" />
+    <ClInclude Include="Framework\Math\Vec.h" />
+    <ClInclude Include="Framework\Math\XMMath.h" />
+    <ClInclude Include="Framework\Math\XMMath2.h" />
+    <ClInclude Include="Framework\Math\XMMath3.h" />
+    <ClInclude Include="Framework\Math\XMMath4.h" />
+    <ClInclude Include="Framework\Math\XMMatrix.h" />
+    <ClInclude Include="Framework\Math\ZMath.h" />
+    <ClInclude Include="Framework\Physics\Collision\ContactManifold.h" />
+    <ClInclude Include="Framework\Physics\Collision\ContactSolver.h" />
+    <ClInclude Include="Framework\Physics\Collision\ContactStats.h" />
+    <ClInclude Include="Framework\Physics\Collision\GJK.h" />
+    <ClInclude Include="Framework\Physics\Collision\PointColliderController.h" />
+    <ClInclude Include="Framework\Physics\Collision\SAT.h" />
+    <ClInclude Include="Framework\Physics\Collision\ShapeContact.h" />
+    <ClInclude Include="Framework\Physics\Forces.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\BodySurface.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsBody2D.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsWorld2D.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\SurfaceDefinition.h" />
+    <ClInclude Include="Framework\Physics\Physics2D\SurfaceType.h" />
+    <ClInclude Include="Framework\Physics\Physics3D\PhysicsBody3D.h" />
+    <ClInclude Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.h" />
+    <ClInclude Include="Framework\Physics\PhysicsType.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\FaceList.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\HalfEdge.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\HullException.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\HullFace.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\HullVertex.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\QuickHull.h" />
+    <ClInclude Include="Framework\Physics\QuickHull\VertexList.h" />
+    <ClInclude Include="Framework\Scripting\Script.h" />
+    <ClInclude Include="Framework\Scripting\ScriptBase.h" />
+    <ClInclude Include="Framework\Scripting\Scripting.h" />
+    <ClInclude Include="Framework\Scripting\tolua_Common.h" />
+    <ClInclude Include="Framework\Scripting\tolua_Funcs.h" />
+    <ClInclude Include="Framework\Scripting\tolua_Sprite.h" />
+    <ClInclude Include="Framework\Shaders\BasicTessellation\MaterialLightTessellationShader.h" />
+    <ClInclude Include="Framework\Shaders\BasicTessellation\MaterialTessellationShader.h" />
+    <ClInclude Include="Framework\Shaders\Basic\CSDesaturation.h" />
+    <ClInclude Include="Framework\Shaders\Basic\FontShader.h" />
+    <ClInclude Include="Framework\Shaders\Basic\MaterialLightShader.h" />
+    <ClInclude Include="Framework\Shaders\Basic\MaterialShader.h" />
+    <ClInclude Include="Framework\Shaders\Basic\Shader.h" />
+    <ClInclude Include="Framework\Shaders\Basic\ShaderCompiler.h" />
+    <ClInclude Include="Framework\Shaders\Basic\Shaders.h" />
+    <ClInclude Include="Framework\Shaders\Basic\ShaderStruct.h" />
+    <ClInclude Include="Framework\Shaders\Basic\TextureShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\BlurShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferredShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBufferShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBufferShader.h" />
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\ShadowMapBuildShader.h" />
+    <ClInclude Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshShader.h" />
+    <ClInclude Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellationShader.h" />
+    <ClInclude Include="Framework\Shaders\Ocean\OceanSurfaceShader.h" />
+    <ClInclude Include="Framework\Shaders\Sky\SkyPlaneShader.h" />
+    <ClInclude Include="Framework\Shaders\Sky\SkyShader.h" />
+    <ClInclude Include="Framework\Shaders\Sun\SunShader.h" />
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadShader.h" />
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowShader.h" />
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadSSAOShader.h" />
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationTriShader.h" />
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowShader.h" />
+    <ClInclude Include="Framework\Shaders\Vegitation\Grass\GrassFieldShader.h" />
+    <ClInclude Include="Framework\Shaders\Water\LakeBedShader.h" />
+    <ClInclude Include="Framework\Shaders\Water\WaterShader.h" />
+    <ClInclude Include="Framework\Third Party\AlignedNew.h" />
+    <ClInclude Include="Framework\Third Party\Audio.h" />
+    <ClInclude Include="Framework\Third Party\BinaryReader.h" />
+    <ClInclude Include="Framework\Third Party\CommonStates.h" />
+    <ClInclude Include="Framework\Third Party\d3dx11effect.h" />
+    <ClInclude Include="Framework\Third Party\dds.h" />
+    <ClInclude Include="Framework\Third Party\DDSTextureLoader.h" />
+    <ClInclude Include="Framework\Third Party\DemandCreate.h" />
+    <ClInclude Include="Framework\Third Party\DirectXHelpers.h" />
+    <ClInclude Include="Framework\Third Party\dmusicf.h" />
+    <ClInclude Include="Framework\Third Party\dmusici.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\BC.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\BCDirectCompute.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\DDS.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\DirectXTex.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\DirectXTexP.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\Filters.h" />
+    <ClInclude Include="Framework\Third Party\DXTex\scoped.h" />
+    <ClInclude Include="Framework\Third Party\Effects.h" />
+    <ClInclude Include="Framework\Third Party\GamePad.h" />
+    <ClInclude Include="Framework\Third Party\GeometricPrimitive.h" />
+    <ClInclude Include="Framework\Third Party\lua\lapi.h" />
+    <ClInclude Include="Framework\Third Party\lua\lauxlib.h" />
+    <ClInclude Include="Framework\Third Party\lua\lcode.h" />
+    <ClInclude Include="Framework\Third Party\lua\lctype.h" />
+    <ClInclude Include="Framework\Third Party\lua\ldebug.h" />
+    <ClInclude Include="Framework\Third Party\lua\ldo.h" />
+    <ClInclude Include="Framework\Third Party\lua\lfunc.h" />
+    <ClInclude Include="Framework\Third Party\lua\lgc.h" />
+    <ClInclude Include="Framework\Third Party\lua\llex.h" />
+    <ClInclude Include="Framework\Third Party\lua\llimits.h" />
+    <ClInclude Include="Framework\Third Party\lua\lmem.h" />
+    <ClInclude Include="Framework\Third Party\lua\lobject.h" />
+    <ClInclude Include="Framework\Third Party\lua\lopcodes.h" />
+    <ClInclude Include="Framework\Third Party\lua\lparser.h" />
+    <ClInclude Include="Framework\Third Party\lua\lstate.h" />
+    <ClInclude Include="Framework\Third Party\lua\lstring.h" />
+    <ClInclude Include="Framework\Third Party\lua\ltable.h" />
+    <ClInclude Include="Framework\Third Party\lua\ltm.h" />
+    <ClInclude Include="Framework\Third Party\lua\lua.h" />
+    <ClInclude Include="Framework\Third Party\lua\lua.hpp" />
+    <ClInclude Include="Framework\Third Party\lua\luaconf.h" />
+    <ClInclude Include="Framework\Third Party\lua\LuaEnum.h" />
+    <ClInclude Include="Framework\Third Party\lua\lualib.h" />
+    <ClInclude Include="Framework\Third Party\lua\luawrapper.hpp" />
+    <ClInclude Include="Framework\Third Party\lua\luawrapperutil.hpp" />
+    <ClInclude Include="Framework\Third Party\lua\lundump.h" />
+    <ClInclude Include="Framework\Third Party\lua\lvm.h" />
+    <ClInclude Include="Framework\Third Party\lua\lzio.h" />
+    <ClInclude Include="Framework\Third Party\Model.h" />
+    <ClInclude Include="Framework\Third Party\pch.h" />
+    <ClInclude Include="Framework\Third Party\PlatformHelpers.h" />
+    <ClInclude Include="Framework\Third Party\PrimitiveBatch.h" />
+    <ClInclude Include="Framework\Third Party\ScreenGrab.h" />
+    <ClInclude Include="Framework\Third Party\SharedResourcePool.h" />
+    <ClInclude Include="Framework\Third Party\SimpleMath.h" />
+    <ClInclude Include="Framework\Third Party\tinyxml2.h" />
+    <ClInclude Include="Framework\Third Party\tolua\tolua.h" />
+    <ClInclude Include="Framework\Third Party\tolua\tolua_event.h" />
+    <ClInclude Include="Framework\Third Party\VertexTypes.h" />
+    <ClInclude Include="Framework\Third Party\WICTextureLoader.h" />
+    <ClInclude Include="Framework\WinBase\Window.h" />
+    <ClInclude Include="FrontEnd.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ZShadeResource.h" />
+    <ClInclude Include="ZShadeSandboxEditor2D.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ZShadeSandboxEditor3D.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ZShadeSandboxGame.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Scripting\Sprite.pkg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Framework\Third Party\DXTex\DirectXTex.inl" />
+    <None Include="Framework\Third Party\SimpleMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\QuadMaterialLightTessellation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\QuadMaterialTessellation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\TriMaterialLightTessellation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\TriMaterialTessellation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\CSDesaturation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\MaterialLightShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\MaterialShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\Sprite.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\Texture.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\AtmosphericFog.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Blur.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\ClearGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferred.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\LakeBedGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\UnpackGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\WaterGBuffer.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\Lighting.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\LightingHelper.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\ShadowMap.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMesh.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellation.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\fft_512x512_c2c.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSimulatorCS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSimulatorVSPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceDS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceHS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfacePS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessColorPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessHDR.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sky\Sky.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sky\SkyPlane.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sun\Sun.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuad.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowHS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriDS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriHS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowHS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Vegitation\Grass\GrassField.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\LakeBed.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\RefractionCaustics.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\Water.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrontEnd.resx">
+      <DependentUpon>FrontEnd.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxEditor2D.resx">
+      <DependentUpon>ZShadeSandboxEditor2D.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxEditor3D.resx">
+      <DependentUpon>ZShadeSandboxEditor3D.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxGame.resx">
+      <DependentUpon>ZShadeSandboxGame.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="bin\ZShadeSandbox.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

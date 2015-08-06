@@ -1,0 +1,2576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{44a35373-b65b-44a7-93e1-b8bac6cc550d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\AI">
+      <UniqueIdentifier>{2391dff4-aea8-4520-8a7d-b22491251ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\AI\LuaBehaviorTree">
+      <UniqueIdentifier>{c9a253db-925f-43c2-bcee-7f6a58abadc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Animation2D">
+      <UniqueIdentifier>{c4265eb0-d7ab-49cb-8b1b-7318b4295965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Animation3D">
+      <UniqueIdentifier>{59d3aaf2-2bad-4e36-bb1a-908767626428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Audio">
+      <UniqueIdentifier>{3465161d-e943-456e-82b1-1f00fe66fb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Camera">
+      <UniqueIdentifier>{6802b6d7-b1f0-4d74-8095-389f0a7e6452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game">
+      <UniqueIdentifier>{da259f58-3abf-40f7-b8ab-a58f26eb4df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\General">
+      <UniqueIdentifier>{9e74f68c-e343-44f9-8888-ac65c9f12ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics">
+      <UniqueIdentifier>{a02e9bc7-f1ae-42e3-b7c4-7f060a73f0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Math">
+      <UniqueIdentifier>{c20eba89-bb40-4bf8-a5bc-f4e5dac768d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Physics">
+      <UniqueIdentifier>{802d2a3a-f25c-42a8-b028-f88666eb07cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Scripting">
+      <UniqueIdentifier>{9dbf0fea-a48e-4688-ab7e-07d5c82a4eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders">
+      <UniqueIdentifier>{300054f2-6bd4-46dd-bccc-d7b1b99d65f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Third Party">
+      <UniqueIdentifier>{3f7da5ad-e068-4680-b36e-d975db00ffe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\WinBase">
+      <UniqueIdentifier>{bde1395a-788b-4d5e-8940-ef0e696f6535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Base">
+      <UniqueIdentifier>{f53900e5-e25f-469c-a027-64835c26bf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Environment">
+      <UniqueIdentifier>{90231592-6e99-4683-ab2a-e0924c85c06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Systems">
+      <UniqueIdentifier>{4e4bd98d-0bb3-4802-8066-a2b53d4b0822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Persistance">
+      <UniqueIdentifier>{6e5e490e-ac15-4f71-9e36-191af2d9668e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\General\DataTypes">
+      <UniqueIdentifier>{b5d49e14-89ef-4687-ab19-b2263fe061e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\General\Memory">
+      <UniqueIdentifier>{4f5a7511-5e36-47ef-bd4c-4e52c2aeb205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\General\Parsers">
+      <UniqueIdentifier>{ded2e300-95ba-4d66-a408-cc79ecdec5b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\General\Performance">
+      <UniqueIdentifier>{d1def4ac-7d12-4cc1-95d1-b0461463b3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Base">
+      <UniqueIdentifier>{8cf5c8d6-b19c-42da-8b04-a55263d1fe54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\D3D">
+      <UniqueIdentifier>{bae015ec-3f1e-4883-bdf5-c30732d8c69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\DataTypes">
+      <UniqueIdentifier>{58b78f69-013b-4489-b767-b8ac14137053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment2D">
+      <UniqueIdentifier>{6b46b5c2-4bcd-4946-a582-e63299873d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment3D">
+      <UniqueIdentifier>{03a4eccc-9a18-491d-ad59-c9ec33e08664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Landscape">
+      <UniqueIdentifier>{9c71df3c-16eb-4440-bf93-3684ecc1c4bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Lighting">
+      <UniqueIdentifier>{28c51b17-44dc-4025-99c9-3dd5928b86dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Mesh">
+      <UniqueIdentifier>{6c229c62-f1a7-4f40-9f2f-2eb8b6bd9767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Ocean">
+      <UniqueIdentifier>{41f0f359-5ede-4000-985f-57d873788bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\ParticleSystem">
+      <UniqueIdentifier>{5573969c-f4cb-4a00-96cf-4c7096faabb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\PostProcessing">
+      <UniqueIdentifier>{1062bd9d-7005-4a17-9157-270b55318101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Sky">
+      <UniqueIdentifier>{87562bed-97fd-47f0-841c-10437ed453ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Sun">
+      <UniqueIdentifier>{753aa309-d652-4874-9e64-3f538afe5a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Terrain">
+      <UniqueIdentifier>{787f58a5-8596-4287-802a-7f15a79425d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Vegitation">
+      <UniqueIdentifier>{231bc24b-5212-49f2-9b00-1112f16ee824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Volume">
+      <UniqueIdentifier>{cfd44966-b332-4de1-8116-3e6667bf4e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Water">
+      <UniqueIdentifier>{483a49cc-4a8c-400d-8aad-bc100ce8c5e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\DataTypes\DataTypeTrees">
+      <UniqueIdentifier>{5115d400-b110-4072-a373-f9d3ef1b42a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP">
+      <UniqueIdentifier>{15dd0ec4-7b9e-4034-8024-4da8ad0f73b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\DataTypes\DataTypeTrees\BTT">
+      <UniqueIdentifier>{3e2c4779-cbff-47a6-bea3-74a784677a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment2D\Topdown">
+      <UniqueIdentifier>{619f302a-a9cf-4915-9573-91bac757c042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment2D\Platformer">
+      <UniqueIdentifier>{8e0f255e-6ac1-4686-ba41-1b0cbd100daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Lighting\DeferredShading">
+      <UniqueIdentifier>{e82f9823-a282-40e0-b039-2505441555b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Mesh\CustomMesh">
+      <UniqueIdentifier>{2571a83a-8d9c-48f4-ba68-bd5b69ebcd4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Mesh\DAEMesh">
+      <UniqueIdentifier>{425bb620-730f-4f2d-984c-8daf78100f40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Mesh\FBXMesh">
+      <UniqueIdentifier>{9aa052a9-932a-40a4-bfd0-410feff137a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Mesh\OBJMesh">
+      <UniqueIdentifier>{691343cb-e4ed-4cc9-baa0-e89d6d6acae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Vegitation\Grass">
+      <UniqueIdentifier>{042be734-6c43-467a-9b48-1ac7d27d595c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Vegitation\Tree">
+      <UniqueIdentifier>{5a4f5c40-3044-4600-89d4-148774b36dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Math\Geometry">
+      <UniqueIdentifier>{7d142d05-b20a-4ee3-b97e-8cf878210cb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Physics\Collision">
+      <UniqueIdentifier>{ecd5c9d4-32be-4fba-9101-397361776f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Physics\QuickHull">
+      <UniqueIdentifier>{5f4f6b4c-cf22-4de6-9e1b-f9c3be140f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Third Party\DXTex">
+      <UniqueIdentifier>{e2e4839b-0d83-4d41-9aab-3d1c9f951382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Third Party\lua">
+      <UniqueIdentifier>{413b15d2-7ca7-41b7-acdf-7e0bb98f5219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Third Party\tolua">
+      <UniqueIdentifier>{a522aeca-2b13-43b5-8808-893b48bada02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Basic">
+      <UniqueIdentifier>{afa489df-ab20-4c39-b2ea-2560c79cc47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\BasicTessellation">
+      <UniqueIdentifier>{f84679f6-a726-424f-b5ac-104afc397a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Environment">
+      <UniqueIdentifier>{f9ffebf2-5c84-42bd-b76e-3fd9b16b385c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Mesh">
+      <UniqueIdentifier>{debb9a9a-624a-4c3f-b784-a48fd4dc28ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Ocean">
+      <UniqueIdentifier>{3be161f9-f96b-4624-b780-692ebf2d0c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\PostProcess">
+      <UniqueIdentifier>{fb730e0a-53a7-4b57-a679-47ae90935b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Sky">
+      <UniqueIdentifier>{48772599-2918-434b-a4c1-82f9fe29c871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Sun">
+      <UniqueIdentifier>{a3ea6bfa-2833-4ac2-846d-d61cef39a643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Terrain">
+      <UniqueIdentifier>{3c132f6c-6f0b-4afe-8a7b-5919b3941fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Vegitation">
+      <UniqueIdentifier>{3e164a57-904d-4dd0-af99-2b6fe0c0c417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Water">
+      <UniqueIdentifier>{ad5e5bb1-a749-4a91-b29d-2a8bbe3a1109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Vegitation\Grass">
+      <UniqueIdentifier>{adcc654f-efc8-427f-80cf-e75232f88ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Vegitation\Tree">
+      <UniqueIdentifier>{a999da63-50f6-41c2-849d-60f7dfdadc16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Mesh\OBJMesh">
+      <UniqueIdentifier>{40a631d3-f669-4505-a02a-0a4f6eb98eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Environment\Lighting">
+      <UniqueIdentifier>{f0cb1e62-1ef7-4f39-87a0-9ac47c51a650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Environment\Lighting\DeferredShading">
+      <UniqueIdentifier>{24c731fb-0f10-49af-9a96-f8013e8860db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders\Environment\Lighting\GBuffer">
+      <UniqueIdentifier>{d1008828-4efb-43ad-b798-b91357fed67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Environment\Environment2D">
+      <UniqueIdentifier>{dbfc16e7-97ef-4437-8e60-a7c75daf9c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Environment\Environment3D">
+      <UniqueIdentifier>{bd7f7c77-d385-4f0c-b322-a80b47058c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Editor">
+      <UniqueIdentifier>{26f4452c-2d5a-48f6-9265-5e53639af540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment3D\Entity">
+      <UniqueIdentifier>{58fa20e4-46c9-4a94-b2ee-e4f6bdd7f860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Environment3D\Weapon">
+      <UniqueIdentifier>{47910442-a6f0-44a6-9f6e-53994320d3b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Editor\2D">
+      <UniqueIdentifier>{79a7190f-f17b-4a66-adf5-7e1f4cd3b4dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Editor\3D">
+      <UniqueIdentifier>{3622826f-71f7-44a7-a9a8-9f8c5a4c440d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Ocean\CSFFT">
+      <UniqueIdentifier>{5a48428f-1103-4333-ac3a-ac306e5a9ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Physics\Physics2D">
+      <UniqueIdentifier>{3397b8b3-9321-493b-b7c3-de9440526763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Physics\Physics3D">
+      <UniqueIdentifier>{8d0abeac-7a78-4c04-97bf-35745f3ca9a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FrontEnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AI\LuaBehaviorTree\LuaDelegate.cpp">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AI\LuaBehaviorTree\LuaTask.cpp">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AI\AISprite.cpp">
+      <Filter>Framework\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation2D\Animation2D.cpp">
+      <Filter>Framework\Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation2D\AnimationFrame2D.cpp">
+      <Filter>Framework\Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation2D\AnimationProfile2D.cpp">
+      <Filter>Framework\Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation2D\ReadAnimationProfile2D.cpp">
+      <Filter>Framework\Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation3D\AnimationFrame3D.cpp">
+      <Filter>Framework\Animation3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation3D\TextureAnimation3D.cpp">
+      <Filter>Framework\Animation3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\AudioSystem.cpp">
+      <Filter>Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\MusicSystem.cpp">
+      <Filter>Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sound.cpp">
+      <Filter>Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\SoundSystem.cpp">
+      <Filter>Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\wave.c">
+      <Filter>Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Camera\Camera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Camera\LightCamera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Camera\ProjectedCamera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Systems\MenuSystem.cpp">
+      <Filter>Framework\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Base\CreateGameDirectory.cpp">
+      <Filter>Framework\Game\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Base\GameState.cpp">
+      <Filter>Framework\Game\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Base\HUD.cpp">
+      <Filter>Framework\Game\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Base\Menu.cpp">
+      <Filter>Framework\Game\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\FPSCounter.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\Input.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\SleepTimer.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\Timer.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\CGlobal.cpp">
+      <Filter>Framework\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\LuaKeyMapper.cpp">
+      <Filter>Framework\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\ZShadeMessageCenter.cpp">
+      <Filter>Framework\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Parsers\FileParser.cpp">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Parsers\ZShadeINIParser.cpp">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Parsers\ZShadeINIWriter.cpp">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Memory\MemoryMgr.cpp">
+      <Filter>Framework\General\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\DataTypes\BetterString.cpp">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\DataTypes\BinarySearch.cpp">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\Button.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\DCRenderTexture.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\DefaultMaterials.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\DepthStencilBuffer.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\FogData.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\GDI.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\GDIFont.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\Image.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\MaterialManager.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\RenderTarget2D.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\ShadowMapTarget.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\StagingBuffer.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\StructuredBuffer.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\Text.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\Texture.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Base\TextureManager.cpp">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\D3D\D3D.cpp">
+      <Filter>Framework\Graphics\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\D3D\GBuffer.cpp">
+      <Filter>Framework\Graphics\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BTT\BTT.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BTT</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\Triangle.cpp">
+      <Filter>Framework\Graphics\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerBackground.cpp">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerMap.cpp">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerTile.cpp">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Platformer\PlatformerWorld.cpp">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment3D\Map3D.cpp">
+      <Filter>Framework\Graphics\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Landscape\InfinitePlane.cpp">
+      <Filter>Framework\Graphics\Landscape</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\DeferredShading\DeferredShaderManager.cpp">
+      <Filter>Framework\Graphics\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\AmbientLight.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\CapsuleLight.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\DirectionalLight.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\Light.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\LightManager.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\PointLight.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\ShaderMaterial.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Lighting\SpotLight.cpp">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\MeshAttributes.cpp">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\Vertex.cpp">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\OBJMesh\OBJMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\OBJMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CircleMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CubeMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CustomMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\CylindricalMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\GeosphereMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\GridMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\MeshUtil.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\PlaneMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\QuadMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\SkydomeMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\SphereMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\CustomMesh\TriangleMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\ParticleSystem\Particle.cpp">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\ParticleSystem\ParticleSystem.cpp">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\ParticleSystem\ParticleTrajectoryTest.cpp">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\Bloom.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\Bokeh.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\DepthOfField.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\HDR.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\LensFlare.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\MotionBlur.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcess.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcessColor.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\PostProcessManager.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\PostProcessing\VolumetricLightRays.cpp">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sky\Sky.cpp">
+      <Filter>Framework\Graphics\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sky\SkyPlane.cpp">
+      <Filter>Framework\Graphics\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sun\Sun.cpp">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sun\SunQuad.cpp">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sun\SunRenderer.cpp">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\Grass.cpp">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\GrassField.cpp">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Vegitation\Grass\GrassFieldMesh.cpp">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Volume\Volume.cpp">
+      <Filter>Framework\Graphics\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Water\LakeBed.cpp">
+      <Filter>Framework\Graphics\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Water\Water.cpp">
+      <Filter>Framework\Graphics\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\AABB.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\BoundingBox.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\BoxPrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\CirclePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\ConePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\LinePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\PlanePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\Polygon.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\SpherePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Geometry\TrianglePrimitive.cpp">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Ray.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\Scalar.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\XMMath.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\XMMath2.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\XMMath3.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\XMMath4.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\XMMatrix.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Math\ZMath.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\QuickHull\FaceList.cpp">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\QuickHull\HalfEdge.cpp">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\QuickHull\HullFace.cpp">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\QuickHull\QuickHull.cpp">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\QuickHull\VertexList.cpp">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Collision\ContactSolver.cpp">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Collision\GJK.cpp">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Collision\PointColliderController.cpp">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Collision\SAT.cpp">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Collision\ShapeContact.cpp">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\Script.cpp">
+      <Filter>Framework\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\ScriptBase.cpp">
+      <Filter>Framework\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\Scripting.cpp">
+      <Filter>Framework\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\tolua_Funcs.cpp">
+      <Filter>Framework\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\tolua_Sprite.cpp">
+      <Filter>Framework\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\CSDesaturation.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\FontShader.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\MaterialLightShader.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\MaterialShader.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\Shader.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\ShaderCompiler.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\Shaders.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\TextureShader.cpp">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialLightTessellationShader.cpp">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialTessellationShader.cpp">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBufferShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBufferShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferredShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\Lighting\ShadowMapBuildShader.cpp">
+      <Filter>Framework\Shaders\Environment\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Environment\BlurShader.cpp">
+      <Filter>Framework\Shaders\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshShader.cpp">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellationShader.cpp">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Sky\SkyPlaneShader.cpp">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Sky\SkyShader.cpp">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Sun\SunShader.cpp">
+      <Filter>Framework\Shaders\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShader.cpp">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowShader.cpp">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadSSAOShader.cpp">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShader.cpp">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowShader.cpp">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Vegitation\Grass\GrassFieldShader.cpp">
+      <Filter>Framework\Shaders\Vegitation\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Water\LakeBedShader.cpp">
+      <Filter>Framework\Shaders\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Water\WaterShader.cpp">
+      <Filter>Framework\Shaders\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\WinBase\Window.cpp">
+      <Filter>Framework\WinBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_event.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_is.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_map.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_push.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\tolua_to.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tolua\toluabind.c">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lapi.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lauxlib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lbaselib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lbitlib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lcode.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lcorolib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lctype.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldblib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldebug.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldo.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ldump.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lfunc.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lgc.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\linit.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\liolib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\llex.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lmathlib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lmem.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\loadlib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lobject.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lopcodes.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\loslib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lparser.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstate.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstring.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lstrlib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltable.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltablib.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\ltm.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lundump.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lvm.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\lua\lzio.c">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC4BC5.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BC6HBC7.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\BCDirectCompute.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexCompress.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexCompressGPU.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexConvert.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexD3D11.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexDDS.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexFlipRotate.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexImage.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexMipmaps.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexMisc.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexNormalMaps.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexPMAlpha.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexResize.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexTGA.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexUtil.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DXTex\DirectXTexWIC.cpp">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\BinaryReader.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\CommonStates.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\DDSTextureLoader.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\pch.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\PrimitiveBatch.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\ScreenGrab.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\SimpleMath.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\tinyxml2.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\VertexTypes.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Third Party\WICTextureLoader.cpp">
+      <Filter>Framework\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\ZShadeFrontEnd.cpp">
+      <Filter>Framework\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ZShadeSandboxGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment.cpp">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\DXGameWindow.cpp">
+      <Filter>Framework\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\Environment3D.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\TerrainEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ZShadeSandboxEditor3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZShadeSandboxEditor2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\IndoorEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\ModelEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\OceanEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\OutdoorEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\TessellationEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\VolumeEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\HUDEditorSystem.cpp">
+      <Filter>Framework\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\MenuEditorSystem.cpp">
+      <Filter>Framework\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\EnvironmentHUDHelper.cpp">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\EnvironmentMenuHelper.cpp">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\InputController.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Parsers\InputXMLParser.cpp">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Parsers\XMLParser.cpp">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment3D\Entity\Entity3D.cpp">
+      <Filter>Framework\Graphics\Environment3D\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment3D\Entity\Entity3DController.cpp">
+      <Filter>Framework\Graphics\Environment3D\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXHelper.cpp">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXLoader.cpp">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXSkinnedMesh.cpp">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\FBXMesh\FBXVertex.cpp">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\BSPEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Mesh\PolygonMesh.cpp">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSP.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPMesh.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPolygon.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortal.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortalGenerator.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPRenderer.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPVSGenerator.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPArrayData.cpp">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\HeightErosion.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\Heightmap.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\HeightmapContainer.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\HeightmapEditorHelper.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\ProceduralAdditionHelper.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\ProceduralGenerator.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\QNode.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTree.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTreeMesh.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\QuadTreeRenderer.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Terrain\WaterErosion.cpp">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Ocean\OceanSimulator.cpp">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Ocean\OceanSurface.cpp">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Ocean\CSFFT\fft_512x512_c2c.cpp">
+      <Filter>Framework\Graphics\Ocean\CSFFT</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Ocean\OceanPatchTree.cpp">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Ocean\OceanSurfaceShader.cpp">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\2D\EditorHelper2D.cpp">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\2D\MapEditorSystem2D.cpp">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment2D\Environment2D.cpp">
+      <Filter>Framework\Game\Environment\Environment2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment2D\Environment2DMapHelper.cpp">
+      <Filter>Framework\Game\Environment\Environment2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLLoader.cpp">
+      <Filter>Framework\Game\Persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLSaver.cpp">
+      <Filter>Framework\Game\Persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownMap.cpp">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownTile.cpp">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Topdown\TopdownWorld.cpp">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\Sprite.cpp">
+      <Filter>Framework\Graphics\Environment2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\General\Performance\DefaultInputController3D.cpp">
+      <Filter>Framework\General\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Environment2D\PlayerInventory2D.cpp">
+      <Filter>Framework\Graphics\Environment2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Editor\2D\InventoryEditorSystem2D.cpp">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AI\AISteeringForce.cpp">
+      <Filter>Framework\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AI\WaypointSystem.cpp">
+      <Filter>Framework\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBody2D.cpp">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.cpp">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsWorld2D.cpp">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\SurfaceDefinition.cpp">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics3D\PhysicsBody3D.cpp">
+      <Filter>Framework\Physics\Physics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.cpp">
+      <Filter>Framework\Physics\Physics3D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrontEnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZShadeResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\afxHeader.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Behavior.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\BehaviorException.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\BehaviorTree.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Component.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ConditionNode.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ContinueDecorator.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Decorator.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\DynamicSelector.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Enumerator.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LoopDecorator.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LuaDelegate.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\LuaTask.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Node.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\ParallelSequence.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\PrioritySelector.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Selector.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Sequence.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\Status.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\TaskNode.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\LuaBehaviorTree\WaitDecorator.h">
+      <Filter>Framework\AI\LuaBehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\AISprite.h">
+      <Filter>Framework\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation2D\Animation2D.h">
+      <Filter>Framework\Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation2D\AnimationFrame2D.h">
+      <Filter>Framework\Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation2D\AnimationProfile2D.h">
+      <Filter>Framework\Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation2D\ReadAnimationProfile2D.h">
+      <Filter>Framework\Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation3D\AnimationFrame3D.h">
+      <Filter>Framework\Animation3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation3D\TextureAnimation3D.h">
+      <Filter>Framework\Animation3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioSystem.h">
+      <Filter>Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\MusicSystem.h">
+      <Filter>Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sound.h">
+      <Filter>Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\SoundSystem.h">
+      <Filter>Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\wave.h">
+      <Filter>Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Camera\Camera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Camera\LightCamera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Camera\ProjectedCamera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Systems\MenuSystem.h">
+      <Filter>Framework\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Base\CreateGameDirectory.h">
+      <Filter>Framework\Game\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Base\GameDirectory.h">
+      <Filter>Framework\Game\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Base\GameState.h">
+      <Filter>Framework\Game\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Base\HUD.h">
+      <Filter>Framework\Game\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Base\Menu.h">
+      <Filter>Framework\Game\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\FPSCounter.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\Input.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\SleepTimer.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\Timer.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\CGlobal.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Convert.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\EngineOptions.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Exceptions.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\GlobalTokens.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\ISOHelper.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\LuaKeyMapper.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\ZException.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\ZShadeMessageCenter.h">
+      <Filter>Framework\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Parsers\FileParser.h">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Parsers\ZShadeINIParser.h">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Parsers\ZShadeINIWriter.h">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Memory\MemoryMgr.h">
+      <Filter>Framework\General\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\BetterString.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\BinarySearch.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\DLList.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\GrowableArray.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\HalfEdge.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\InsersionSort.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\LNode.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\SLList.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\StackMap.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\DataTypes\ZShadeMap.h">
+      <Filter>Framework\General\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\Button.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\ConstantBuffer.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\DCRenderTexture.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\DefaultMaterials.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\DepthStencilBuffer.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\FogData.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\GDI.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\GDIFont.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\Image.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\InterfacePointers.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\MaterialManager.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\RenderTarget2D.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\RGBColor.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\ShadowMapTarget.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\StagingBuffer.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\StructuredBuffer.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\Text.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\Texture.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Base\TextureManager.h">
+      <Filter>Framework\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\D3D\D3D.h">
+      <Filter>Framework\Graphics\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\D3D\D3DIncludes.h">
+      <Filter>Framework\Graphics\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\D3D\GBuffer.h">
+      <Filter>Framework\Graphics\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BTT\BTT.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BTT</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\Triangle.h">
+      <Filter>Framework\Graphics\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerBackground.h">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerMap.h">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerTile.h">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Platformer\PlatformerWorld.h">
+      <Filter>Framework\Graphics\Environment2D\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment3D\Map3D.h">
+      <Filter>Framework\Graphics\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Landscape\InfinitePlane.h">
+      <Filter>Framework\Graphics\Landscape</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\DeferredShading\DeferredShaderManager.h">
+      <Filter>Framework\Graphics\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\AmbientLight.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\CapsuleLight.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\DirectionalLight.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\Light.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\LightManager.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\LightShadingBuffers.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\PointLight.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\ShaderMaterial.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Lighting\SpotLight.h">
+      <Filter>Framework\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\MeshAttributes.h">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\MeshRenderParameters.h">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\MeshRenderType.h">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\Vertex.h">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\OBJMesh\OBJMesh.h">
+      <Filter>Framework\Graphics\Mesh\OBJMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CircleMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CubeMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CustomMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CustomMeshParameters.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\CylindricalMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\GeosphereMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\GridMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\MeshUtil.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\PlaneMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\QuadMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\SkydomeMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\SphereMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\CustomMesh\TriangleMesh.h">
+      <Filter>Framework\Graphics\Mesh\CustomMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\ParticleSystem\Particle.h">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\ParticleSystem\ParticleSystem.h">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\ParticleSystem\ParticleTrajectoryTest.h">
+      <Filter>Framework\Graphics\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\Bloom.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\Bokeh.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\DepthOfField.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\HDR.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\LensFlare.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\MotionBlur.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcess.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessColor.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessManager.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\PostProcessTypes.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\PostProcessing\VolumetricLightRays.h">
+      <Filter>Framework\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sky\Sky.h">
+      <Filter>Framework\Graphics\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sky\SkyPlane.h">
+      <Filter>Framework\Graphics\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sky\SkyPlaneParameters.h">
+      <Filter>Framework\Graphics\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sun\Sun.h">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sun\SunParameters.h">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sun\SunQuad.h">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sun\SunRenderer.h">
+      <Filter>Framework\Graphics\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\Grass.h">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\GrassField.h">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Vegitation\Grass\GrassFieldMesh.h">
+      <Filter>Framework\Graphics\Vegitation\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Volume\Volume.h">
+      <Filter>Framework\Graphics\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Water\LakeBed.h">
+      <Filter>Framework\Graphics\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Water\Water.h">
+      <Filter>Framework\Graphics\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Water\WaterParameters.h">
+      <Filter>Framework\Graphics\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\AABB.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\BoundingBox.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\BoxPrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\CirclePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\ConePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\LinePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\PlanePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\Polygon.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\SpherePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Geometry\TrianglePrimitive.h">
+      <Filter>Framework\Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Ray.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Scalar.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\Vec.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\XMMath.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\XMMath2.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\XMMath3.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\XMMath4.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\XMMatrix.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\ZMath.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\FaceList.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\HalfEdge.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\HullException.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\HullFace.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\HullVertex.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\QuickHull.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\QuickHull\VertexList.h">
+      <Filter>Framework\Physics\QuickHull</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\ContactManifold.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\ContactSolver.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\ContactStats.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\GJK.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\PointColliderController.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\SAT.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Collision\ShapeContact.h">
+      <Filter>Framework\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\Script.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\ScriptBase.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\Scripting.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\tolua_Common.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\tolua_Funcs.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scripting\tolua_Sprite.h">
+      <Filter>Framework\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\CSDesaturation.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\FontShader.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\MaterialLightShader.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\MaterialShader.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\Shader.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\ShaderCompiler.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\Shaders.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\ShaderStruct.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Basic\TextureShader.h">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\BasicTessellation\MaterialLightTessellationShader.h">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\BasicTessellation\MaterialTessellationShader.h">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBufferShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBufferShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferredShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\Lighting\ShadowMapBuildShader.h">
+      <Filter>Framework\Shaders\Environment\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Environment\BlurShader.h">
+      <Filter>Framework\Shaders\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshShader.h">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellationShader.h">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Sky\SkyPlaneShader.h">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Sky\SkyShader.h">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Sun\SunShader.h">
+      <Filter>Framework\Shaders\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadShader.h">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowShader.h">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationQuadSSAOShader.h">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationTriShader.h">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowShader.h">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Vegitation\Grass\GrassFieldShader.h">
+      <Filter>Framework\Shaders\Vegitation\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Water\LakeBedShader.h">
+      <Filter>Framework\Shaders\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Water\WaterShader.h">
+      <Filter>Framework\Shaders\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\WinBase\Window.h">
+      <Filter>Framework\WinBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\tolua\tolua.h">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\tolua\tolua_event.h">
+      <Filter>Framework\Third Party\tolua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lapi.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lauxlib.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lcode.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lctype.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\ldebug.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\ldo.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lfunc.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lgc.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\llex.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\llimits.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lmem.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lobject.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lopcodes.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lparser.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lstate.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lstring.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\ltable.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\ltm.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lua.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lua.hpp">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\luaconf.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\LuaEnum.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lualib.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\luawrapper.hpp">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\luawrapperutil.hpp">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lundump.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lvm.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\lua\lzio.h">
+      <Filter>Framework\Third Party\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\BC.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\BCDirectCompute.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\DDS.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\DirectXTex.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\DirectXTexP.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\Filters.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DXTex\scoped.h">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\AlignedNew.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\Audio.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\BinaryReader.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\CommonStates.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\d3dx11effect.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\dds.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DDSTextureLoader.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DemandCreate.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\DirectXHelpers.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\dmusicf.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\dmusici.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\Effects.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\GamePad.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\GeometricPrimitive.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\Model.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\pch.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\PlatformHelpers.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\PrimitiveBatch.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\ScreenGrab.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\SharedResourcePool.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\SimpleMath.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\tinyxml2.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\VertexTypes.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Third Party\WICTextureLoader.h">
+      <Filter>Framework\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\ZShadeFrontEnd.h">
+      <Filter>Framework\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ZShadeSandboxGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment.h">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\DXGameWindow.h">
+      <Filter>Framework\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\Environment3D.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\TerrainEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ZShadeSandboxEditor3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZShadeSandboxEditor2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\IndoorEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\ModelEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\OceanEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\OutdoorEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\TessellationEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\VolumeEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Editor\HUDEditorSystem.h">
+      <Filter>Framework\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Editor\MenuEditorSystem.h">
+      <Filter>Framework\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\EnvironmentHUDHelper.h">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\EnvironmentMenuHelper.h">
+      <Filter>Framework\Game\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\InputController.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Parsers\InputXMLParser.h">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Parsers\XMLParser.h">
+      <Filter>Framework\General\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment3D\Entity\Entity3D.h">
+      <Filter>Framework\Graphics\Environment3D\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment3D\Entity\Entity3DController.h">
+      <Filter>Framework\Graphics\Environment3D\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXHelper.h">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXLoader.h">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXSkinnedMesh.h">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXVertex.h">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\FBXMesh\FBXInclude.h">
+      <Filter>Framework\Graphics\Mesh\FBXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\BSPEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Mesh\PolygonMesh.h">
+      <Filter>Framework\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSP.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPLeaf.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPMesh.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPNode.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPParameters.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPlane.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPolygon.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortal.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPortalGenerator.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPRenderer.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPPVSGenerator.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\DataTypes\DataTypeTrees\BSP\BSPArrayData.h">
+      <Filter>Framework\Graphics\DataTypes\DataTypeTrees\BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\HeightErosion.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\Heightmap.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapContainer.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapData.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\HeightmapEditorHelper.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralAdditionHelper.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralGenerator.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\ProceduralParameters.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QMeshNode.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QNode.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QNodeType.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTree.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTreeMesh.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\QuadTreeRenderer.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\TerrainParameters.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Terrain\WaterErosion.h">
+      <Filter>Framework\Graphics\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\OceanParameters.h">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\OceanSimulator.h">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\OceanSurface.h">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\CSFFT\fft_512x512.h">
+      <Filter>Framework\Graphics\Ocean\CSFFT</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\OceanPatch.h">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Ocean\OceanPatchTree.h">
+      <Filter>Framework\Graphics\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Shaders\Ocean\OceanSurfaceShader.h">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Editor\2D\EditorHelper2D.h">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Editor\2D\MapEditorSystem2D.h">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment2D\Environment2D.h">
+      <Filter>Framework\Game\Environment\Environment2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment2D\Environment2DMapHelper.h">
+      <Filter>Framework\Game\Environment\Environment2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Persistance\ZShadeXMLLoader.h">
+      <Filter>Framework\Game\Persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Persistance\ZShadeXMLSaver.h">
+      <Filter>Framework\Game\Persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownMap.h">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownTile.h">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Topdown\TopdownWorld.h">
+      <Filter>Framework\Graphics\Environment2D\Topdown</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\Sprite.h">
+      <Filter>Framework\Graphics\Environment2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\General\Performance\DefaultInputController3D.h">
+      <Filter>Framework\General\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Environment2D\PlayerInventory2D.h">
+      <Filter>Framework\Graphics\Environment2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Editor\2D\InventoryEditorSystem2D.h">
+      <Filter>Framework\Editor\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\AISteeringForce.h">
+      <Filter>Framework\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AI\WaypointSystem.h">
+      <Filter>Framework\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\BodySurface.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsBody2D.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\PhysicsWorld2D.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\SurfaceDefinition.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics2D\SurfaceType.h">
+      <Filter>Framework\Physics\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Forces.h">
+      <Filter>Framework\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\PhysicsType.h">
+      <Filter>Framework\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics3D\PhysicsBody3D.h">
+      <Filter>Framework\Physics\Physics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.h">
+      <Filter>Framework\Physics\Physics3D</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Scripting\Sprite.pkg">
+      <Filter>Framework\Scripting</Filter>
+    </None>
+    <None Include="Framework\Third Party\DXTex\DirectXTex.inl">
+      <Filter>Framework\Third Party\DXTex</Filter>
+    </None>
+    <None Include="Framework\Third Party\SimpleMath.inl">
+      <Filter>Framework\Third Party</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Framework\Shaders\Basic\CSDesaturation.hlsl">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\MaterialLightShader.hlsl">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\MaterialShader.hlsl">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\Sprite.hlsl">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Basic\Texture.hlsl">
+      <Filter>Framework\Shaders\Basic</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\QuadMaterialLightTessellation.hlsl">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\QuadMaterialTessellation.hlsl">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\TriMaterialLightTessellation.hlsl">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\BasicTessellation\TriMaterialTessellation.hlsl">
+      <Filter>Framework\Shaders\BasicTessellation</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\ClearGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\DebugGBufferDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\LakeBedGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\MaterialGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\OBJGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\UnpackGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\GBuffer\WaterGBuffer.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\GBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DeferredShader.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\DirectionalLightDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\PointLightDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\SpotLightDeferred.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting\DeferredShading</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\Lighting.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\LightingHelper.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Lighting\ShadowMap.hlsl">
+      <Filter>Framework\Shaders\Environment\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\AtmosphericFog.hlsl">
+      <Filter>Framework\Shaders\Environment</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Environment\Blur.hlsl">
+      <Filter>Framework\Shaders\Environment</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMesh.hlsl">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Mesh\OBJMesh\OBJMeshTessellation.hlsl">
+      <Filter>Framework\Shaders\Mesh\OBJMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessColorPS.hlsl">
+      <Filter>Framework\Shaders\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessHDR.hlsl">
+      <Filter>Framework\Shaders\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessVS.hlsl">
+      <Filter>Framework\Shaders\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sky\Sky.hlsl">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sky\SkyPlane.hlsl">
+      <Filter>Framework\Shaders\Sky</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Sun\Sun.hlsl">
+      <Filter>Framework\Shaders\Sun</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuad.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationQuadShadowHS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriDS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriHS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriPS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriShadowHS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Terrain\TerrainTessellationTriVS.hlsl">
+      <Filter>Framework\Shaders\Terrain</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Vegitation\Grass\GrassField.hlsl">
+      <Filter>Framework\Shaders\Vegitation\Grass</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\LakeBed.hlsl">
+      <Filter>Framework\Shaders\Water</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\RefractionCaustics.hlsl">
+      <Filter>Framework\Shaders\Water</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Water\Water.hlsl">
+      <Filter>Framework\Shaders\Water</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\fft_512x512_c2c.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSimulatorCS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSimulatorVSPS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceDS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceHS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfaceVS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\Ocean\OceanSurfacePS.hlsl">
+      <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrontEnd.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxEditor2D.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxEditor3D.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZShadeSandboxGame.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="bin\ZShadeSandbox.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
