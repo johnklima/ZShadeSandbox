@@ -2,7 +2,7 @@ ZShadeSandbox
 
 This engine is designed for 2D RPG games for platform and topdown maps as well as 3D RPG games that take place outdoors.
 
-Must have windows 8 or 8.1 with Visual Studio 2013 to run the engine.
+Must have windows 8, 8.1 or 10 with Visual Studio 2013 to run the engine.
 
 
 Dependencies
