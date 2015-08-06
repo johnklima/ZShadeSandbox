@@ -407,26 +407,26 @@ void OutdoorEnvironment::Update()
 	float dt = fFrameTime;
 	
 	//Other update info
-	if (GetAsyncKeyState( '1' ) & 0x8000 )
+	if (GetAsyncKeyState( '7' ) & 0x8000 )
 	{
 		while(1) { Sleep(300); break; }
 		bToggleWater = !bToggleWater;
 	}
-	if (GetAsyncKeyState( '2' ) & 0x8000 )
+	if (GetAsyncKeyState( '8' ) & 0x8000 )
 	{
 		while(1) { Sleep(300); break; }
 		bRenderOcean = !bRenderOcean;
 	}
-	if (GetAsyncKeyState( '3' ) & 0x8000 )
+	if (GetAsyncKeyState( '9' ) & 0x8000 )
 	{
 		while(1) { Sleep(300); break; }
 		bToggleTerrain = !bToggleTerrain;
 	}
-	if (GetAsyncKeyState( '6' ) & 0x8000 )
-	{
-		while(1) { Sleep(300); break; }
-		bWaterFog = !bWaterFog;
-	}
+	//if (GetAsyncKeyState( '6' ) & 0x8000 )
+	//{
+	//	while(1) { Sleep(300); break; }
+	//	bWaterFog = !bWaterFog;
+	//}
 
 	if (keyboard->IsKeyDown(Keyboard::Key::P))
 	{
@@ -442,14 +442,16 @@ void OutdoorEnvironment::Update()
 	if (keyboard->IsKeyDown(Keyboard::Key::V))
 	{
 		while (1) { Sleep(30); break; }
-		fHeightScale += 1.0f;
+		fHeightScale *= 1.1f;
+		m_pQuadTreeMesh->HeightScale() = fHeightScale;
+		m_pQuadTreeMesh->ComputeBounds();
 	}
 	if (keyboard->IsKeyDown(Keyboard::Key::B))
 	{
 		while (1) { Sleep(30); break; }
-		fHeightScale -= 1.0f;
-		if (fHeightScale <= 0.0f)
-			fHeightScale += 1.0f;
+		fHeightScale *= 0.9f;
+		m_pQuadTreeMesh->HeightScale() = fHeightScale;
+		m_pQuadTreeMesh->ComputeBounds();
 	}
 
 	if (keyboard->RisingEdge(Keyboard::Key::G))
@@ -573,7 +575,7 @@ void OutdoorEnvironment::Update()
 		m_ToggleSky = false;
 	}*/
 
-	XMFLOAT3 SpotLightPos = mSpotLight1->Position();
+	/*XMFLOAT3 SpotLightPos = mSpotLight1->Position();
 	XMFLOAT3 PointLightPos = mPointLight->Position();
 	XMFLOAT3 CapsuleLightPos = mCapsuleLight->Position();
 	XMFLOAT3 eye = m_CameraSystem->Position();
@@ -633,7 +635,7 @@ void OutdoorEnvironment::Update()
 		//while (1) { Sleep(200); break; }
 		mDirLight1->Direction().y -= 0.01f;
 		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x, DirLightPos.y - 0.01f, DirLightPos.z));
-	}
+	}*/
 	
 	// Move the light with mouse point in 3D
 	/*if (mPickingRay != NULL)
