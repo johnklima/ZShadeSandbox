@@ -79,11 +79,19 @@ public:
 	// The physics world will calculate this force to apply to the sprite
 	void CalculateSteeringForce();
 	
+	AISprite* Clone(GameDirectory2D* gd);
+	AISprite* Clone(GameDirectory2D* gd, float x, float y);
+	void CloneMe(GameDirectory2D* gd, float x, float y, int w, int h);
+	
 public:
 	
 	void SetTargetSprite(AISprite* ts) { m_TargetSprite = ts; }
 	AISprite* GetTargetSprite() { return m_TargetSprite; }
 	
+	// Steering force functions that can be used in lua scripting to make the sprite do something
+	// Basically the sprite can do something it just needs to know how, for example
+	//   If this sprite should pursue another sprite it should locate a sprite within the extent of the search radius
+	//   and pursue the nearest sprite
 	void SetWanderingRadius(float value);
 	void SetWanderingDistance(float value);
 	void SetWanderingJitter(float value);
@@ -93,7 +101,7 @@ public:
 	void SetWeightSeek(float value);
 	void SetWeightFlee(float value);
 	void SetWeightArrive(float value);
-	void SetWeightObstacleAvoidance(float value);
+	void SetWeightSpriteAvoidance(float value);
 	void SetWeightSeparation(float value);
 	void SetWeightAlignment(float value);
 	void SetWeightCohesion(float value);
@@ -121,14 +129,17 @@ public:
 	void SetWaypointSystem(ZShadeSandboxAI::WaypointSystem* waypoints);
 	void SetEvader(AISprite* sprite);
 	void SetPursuer(AISprite* sprite);
-	void SetTarget(AISprite* sprite);
+	void SetHideTarget(AISprite* sprite);
 	void SetSpriteA(AISprite* sprite);
 	void SetSpriteB(AISprite* sprite);
 	void SetLeader(AISprite* sprite);
 	void SetLeaderOffset(ZShadeSandboxMath::XMMath3 point);
 	void SetTargetPoint(ZShadeSandboxMath::XMMath3 point);
-	void SetTargetDecelerationType(EDeceleration::Type type);
+	void SetTargetDecelerationType(int type);
 	
+	// Need to clone the wandering target
+	void SetWanderTarget(ZShadeSandboxMath::XMMath3 point) { mSteeringForce->WanderTarget() = point; }
+	ZShadeSandboxMath::XMMath3 WanderTarget() const { return mSteeringForce->WanderTarget(); }
 	
 	float WanderingRadius() const { return mSteeringForce->WanderingRadius(); }
 	float WanderingDistance() const { return mSteeringForce->WanderingDistance(); }
@@ -139,7 +150,7 @@ public:
 	float WeightSeek() const { return mSteeringForce->WeightSeek(); }
 	float WeightFlee() const { return mSteeringForce->WeightFlee(); }
 	float WeightArrive() const { return mSteeringForce->WeightArrive(); }
-	float WeightObstacleAvoidance() const { return mSteeringForce->WeightObstacleAvoidance(); }
+	float WeightSpriteAvoidance() const { return mSteeringForce->WeightSpriteAvoidance(); }
 	float WeightSeparation() const { return mSteeringForce->WeightSeparation(); }
 	float WeightAlignment() const { return mSteeringForce->WeightAlignment(); }
 	float WeightCohesion() const { return mSteeringForce->WeightCohesion(); }
@@ -167,13 +178,19 @@ public:
 	ZShadeSandboxAI::WaypointSystem* WaypointSystem() const { return mSteeringForce->WaypointSystem(); }
 	AISprite* Evader() const { return mSteeringForce->Evader(); }
 	AISprite* Pursuer() const { return mSteeringForce->Pursuer(); }
-	AISprite* Target() const { return mSteeringForce->Target(); }
+	AISprite* HideTarget() const { return mSteeringForce->Target(); }
 	AISprite* SpriteA() const { return mSteeringForce->SpriteA(); }
 	AISprite* SpriteB() const { return mSteeringForce->SpriteB(); }
 	AISprite* Leader() const { return mSteeringForce->Leader(); }
 	ZShadeSandboxMath::XMMath3 LeaderOffset() const { return mSteeringForce->LeaderOffset(); }
+	float LeaderOffsetX() const { return mSteeringForce->LeaderOffset().x; }
+	float LeaderOffsetY() const { return mSteeringForce->LeaderOffset().y; }
+	float LeaderOffsetZ() const { return mSteeringForce->LeaderOffset().z; }
 	ZShadeSandboxMath::XMMath3 TargetPoint() const { return mSteeringForce->TargetPoint(); }
-	EDeceleration::Type TargetDecelerationType() const { return mSteeringForce->TargetDecelerationType(); }
+	float TargetPointX() const { return mSteeringForce->TargetPoint().x; }
+	float TargetPointY() const { return mSteeringForce->TargetPoint().y; }
+	float TargetPointZ() const { return mSteeringForce->TargetPoint().z; }
+	int TargetDecelerationType() const;
 	
 	void CreateWaypointSystem();
 	int WaypointSystemSize();
@@ -181,32 +198,46 @@ public:
 	void ClearWaypoints();
 	void RemoveWaypoint(ZShadeSandboxMath::XMMath3 waypoint);
 	void AddWaypoint(ZShadeSandboxMath::XMMath3 waypoint);
-	bool CurrentWaypoint(ZShadeSandboxMath::XMMath3& waypoint);
+	float CurrentWaypointX();
+	float CurrentWaypointY();
+	float CurrentWaypointZ();
 	void SetNextWaypoint();
 	bool WaypointSystemFinished();
 	void SetWaypointSystemCanLoop(bool value);
 	bool WaypointSystemCanLoop() const;
 	int CurrentWaypointIndex() const;
 	
-	// Need some perception
-	// Make the sprite run a sweep for any other sprite that is nearby
-	// Make the sprite always target the nearest sprite
+	float& MinimumAttackDistance() { return fMinimumAttackDistance; }
+	float MinimumAttackDistance() const { return fMinimumAttackDistance; }
 	
-	// If a sprite is in range of my bounding radius then I will pursue it
-	// If I am pursued then then I need to evade
-	void TargetClosestSprite();
+	bool WithinAttackDistance(int spriteID);
+	bool WithinAttackDistance(AISprite* sprite);
 	
+	void TagNearestSpritesInMap();
+	
+	// This will help the sprite to find the id of the absolute closest sprite in the map
+	int FindNearestSpriteIDInMap();
+	
+	// Adds all sprites within range of this sprite to a collection
+	void AddAllNearestSpriteIDsToCollection();
+	
+	// This will return the amount of sprites that are within range of this sprite
+	int AmountOfSpritesInRange();
+	
+	// This will return an id from a collection of all nearest sprites in the map
+	int FindNearestSpriteIDInCollection(int i);
 	
 private:
 	
-	// Steering force functions that can be used in lua scripting to make the sprite do something
-	// Basically the sprite can do something it just needs to know how, for example
-	//   If this sprite should pursue another sprite it should locate a sprite within the extent of the search radius
-	//   and pursue the nearest sprite
+	std::vector<int> mNearestSpritesID;
+	
+	// The minimum amount of distance required before a sprite can attack
+	float fMinimumAttackDistance;
 	
 	AISteeringForce* mSteeringForce;
 	string m_default_behavior;
 	vector<BEHAVIOR_INFO*> m_behaviors;
+	bool m_ran_main;
 	bool m_run_behavior;
 	bool m_run_behavior_default;
 	string m_behavior_name;//Current behaviour to update

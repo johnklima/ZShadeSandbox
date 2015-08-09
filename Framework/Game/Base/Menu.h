@@ -5,13 +5,19 @@
 #define __MENU_H
 //================================================================================================================
 //================================================================================================================
+
+//
 //Includes
+//
+
 #include <string>
 #include <vector>
 #include "Image.h"
 #include "Button.h"
 #include "Text.h"
 using namespace std;
+class Menu;
+
 //================================================================================================================
 //================================================================================================================
 namespace ZShadeSandboxEnvironment {
@@ -53,6 +59,7 @@ public:
 	bool TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y);
 	void MoveButton(ZShadeSandboxGraphics::Button*& button, int x, int y);
 	void MoveText(ZShadeSandboxGraphics::Text*& text, int x, int y);
+	void AddMenuNameToButton(string menu_name, int buttonID);
 	
 	void UpdateButtonMouseUp(WPARAM btnState, int x, int y);
 	void UpdateButtonMouseDown(WPARAM btnState, int x, int y);
@@ -70,8 +77,8 @@ public:
 	int Width() const { return m_menu_width; }
 	int& Height() { return m_menu_height; }
 	int Height() const { return m_menu_height; }
-	string& LinkMenuName() { return m_link_menu_name; }
-	string LinkMenuName() const { return m_link_menu_name; }
+	//string& LinkMenuName() { return m_link_menu_name; }
+	//string LinkMenuName() const { return m_link_menu_name; }
 	string& MenuName() { return m_menu_name; }
 	string MenuName() const { return m_menu_name; }
 	EMenuType::Type& GetMenuType() { return m_menu_type; }
@@ -83,18 +90,16 @@ private:
 	
 	int m_menu_width;
 	int m_menu_height;
-
+	
 	EMenuType::Type m_menu_type;
 	string m_menu_name;
-	string m_link_menu_name;
+	//string m_link_menu_name;
 	
 	int mButtonID;
 	int mTextID;
-
-	ZShadeSandboxGraphics::Image* m_background;
 	
+	ZShadeSandboxGraphics::Image* m_background;
 	vector<ZShadeSandboxGraphics::Button*> m_menu_buttons;
-
 	vector<ZShadeSandboxGraphics::Text*> m_menu_text;
 };
 }

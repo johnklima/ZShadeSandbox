@@ -28,7 +28,7 @@ AISteeringForce::AISteeringForce(AISprite* sprite)
 	mLeaderOffset = ZShadeSandboxMath::XMMath3(0, 0, 0);
 	mTargetPoint = ZShadeSandboxMath::XMMath3(0, 0, 0);
 	mTargetDecelerationType = EDeceleration::Type::eFast;
-	fWeightObstacleAvoidance = 1;
+	fWeightSpriteAvoidance = 1;
 	fWeightSeparation = 1;
 	fWeightAlignment = 1;
 	fWeightWander = 1;
@@ -158,8 +158,13 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Wander()
 {
 	// Create the impression of a random walk through the environment
 	
-	m_wanderTarget.x += (ZShadeSandboxMath::ZMath::RandF<float>(1, -1) * fWanderingJitter);
-	m_wanderTarget.y += (ZShadeSandboxMath::ZMath::RandF<float>(1, -1) * fWanderingJitter);
+	ZShadeSandboxMath::ZMath::RandomSeed();
+
+	float rval1 = ZShadeSandboxMath::ZMath::RandF<float>(-1, 1);
+	float rval2 = ZShadeSandboxMath::ZMath::RandF<float>(-1, 1);
+
+	m_wanderTarget.x += (rval1 * fWanderingJitter);
+	m_wanderTarget.y += (rval2 * fWanderingJitter);
 	
 	// Re-project this new vector back into a unit circle
 	m_wanderTarget.Normalize();
@@ -182,6 +187,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::AvoidSprite(std::vector<AISprite*> &
 	
 	// Tag all obstacles within range of the box for processing
 	// mSprite->World()->TagObstaclesWithinViewRange(mSprite, fDbBoxLength);
+	mSprite->TagNearestSpritesInMap();
 	
 	AISprite* closestIntersectingSprite = 0;
 	
@@ -524,7 +530,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::CalculateForce()
 	{
 		if (sprites.size() == 0) return steeringForce;
 		
-		force = AvoidSprite(sprites) * fWeightObstacleAvoidance / fSpriteAvoidance;
+		force = AvoidSprite(sprites) * fWeightSpriteAvoidance / fSpriteAvoidance;
 		
 		if (!AccumulateForce(steeringForce, force))
 		{
@@ -573,14 +579,15 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::CalculateForce()
 		}
 	}
 	
-	if (bWander && ZShadeSandboxMath::ZMath::RandF(0, 1) > fWander)
+	float rval = ZShadeSandboxMath::ZMath::RandF(0, 1);
+	if (bWander)// && rval > fWander)
 	{
-		force = Wander() * fWeightWander / fWander;
+		steeringForce = Wander() * fWeightWander / fWander;
 		
-		if (!AccumulateForce(steeringForce, force))
-		{
-			return steeringForce;
-		}
+		//if (!AccumulateForce(steeringForce, force))
+		//{
+		//	return steeringForce;
+		//}
 	}
 	
 	if (bFollowPath && ZShadeSandboxMath::ZMath::RandF(0, 1) > fFollowPath)
@@ -722,6 +729,8 @@ bool AISteeringForce::AccumulateForce(ZShadeSandboxMath::XMMath3 &runningTotal, 
 template <class T, class conT>
 void AISteeringForce::TagNeighbours(T* entity, conT& ContainerOfEntities, float radius)
 {
+	ZShadeSandboxMath::XMMath3 entityPosition(entity->TopLeftPosition().x, entity->TopLeftPosition().y, entity->TopLeftPosition().z);
+	
 	// Iterate through all entities checking for range
 	for (typename conT::iterator curEntity = ContainerOfEntities.begin();
 		 curEntity != ContainerOfEntities.end();
@@ -731,7 +740,6 @@ void AISteeringForce::TagNeighbours(T* entity, conT& ContainerOfEntities, float 
 		(*curEntity)->UnTag();
 		
 		ZShadeSandboxMath::XMMath3 curEntityPosition((*curEntity)->TopLeftPosition().x, (*curEntity)->TopLeftPosition().y, (*curEntity)->TopLeftPosition().z);
-		ZShadeSandboxMath::XMMath3 entityPosition(entity->TopLeftPosition().x, entity->TopLeftPosition().y, entity->TopLeftPosition().z);
 		
 		ZShadeSandboxMath::XMMath3 to = curEntityPosition - entityPosition;
 		

@@ -5,7 +5,6 @@ using ZShadeSandboxAI::WaypointSystem;
 WaypointSystem::WaypointSystem()
 :	bCanLoop(false)
 ,	iCurrentWaypointIndex(0)
-,	mCurrentWaypoint(ZShadeSandboxMath::XMMath3(0, 0, 0))
 {
 }
 //==================================================================================================================================
@@ -97,5 +96,24 @@ bool WaypointSystem::Finished()
 {
 	// We are done traversing the waypoints if we are at the last waypoint and there is no looping
 	return (!bCanLoop && iCurrentWaypointIndex == mWaypoints.size() - 1);
+}
+//==================================================================================================================================
+WaypointSystem* WaypointSystem::Clone()
+{
+	std::vector<ZShadeSandboxMath::XMMath3> waypoints = GetWaypoints();
+	bool canLoop = CanLoop();
+	int currentWaypointIndex = CurrentWaypointIndex();
+	
+	WaypointSystem* ws = new WaypointSystem();
+	
+	for (auto it = waypoints.begin(); it != waypoints.end(); ++it)
+	{
+		ws->AddWaypoint((*it));
+	}
+	
+	ws->CurrentWaypointIndex() = currentWaypointIndex;
+	ws->CanLoop() = canLoop;
+	
+	return ws;
 }
 //==================================================================================================================================

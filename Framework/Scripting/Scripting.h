@@ -54,6 +54,9 @@ public:
 	
 	static Script* GetScript(string name);
 	
+	// This will run the main.lua script
+	static void RunMain();
+	
 	// static accessors
 public:
 	

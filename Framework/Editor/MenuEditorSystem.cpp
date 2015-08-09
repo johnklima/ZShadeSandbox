@@ -33,6 +33,8 @@ MenuEditorSystem::MenuEditorSystem(ZShadeSandboxEnvironment::Environment* env)
 	m_cloneDisplaySpriteCover = 0;
 	m_MovingButtonSprite = 0;
 	m_MovingTextSprite = 0;
+	m_selectModeButtonID = -1;
+	m_selectModeTextID = -1;
 	m_originalButtonID = -1;
 	m_originalTextID = -1;
 	m_button_cache_selection_changed = false;
@@ -44,6 +46,9 @@ MenuEditorSystem::MenuEditorSystem(ZShadeSandboxEnvironment::Environment* env)
 	m_selected_button_cover = false;
 	m_selected_text_cover = false;
 	m_display_button_box_created = false;
+	m_display_selected_button_box = false;
+	m_display_selected_text_box = false;
+	m_select_sprite_box = 0;
 	m_button_with_box = 0;
 	m_text_with_box = 0;
 	m_sprite_box = 0;
@@ -379,6 +384,16 @@ void MenuEditorSystem::Render(Camera* camera)
 		m_D3DSystem->TurnOffAlphaBlending();
 	}
 	
+	// Render a box around the selected button or text from Select mode
+	if (m_display_selected_button_box || m_display_selected_text_box)
+	{
+		m_D3DSystem->TurnOnAlphaBlending();
+		{
+			if (m_select_sprite_box != 0) m_select_sprite_box->Render(camera, 0);
+		}
+		m_D3DSystem->TurnOffAlphaBlending();
+	}
+	
 	if (gridMode == GM_Snap)
 	{
 		m_D3DSystem->TurnOnAlphaBlending();
@@ -650,6 +665,67 @@ void MenuEditorSystem::HighlightButton(float x, float y)
 	}
 }
 //================================================================================================================
+void MenuEditorSystem::AddMenuNameToButton(string menu_name)
+{
+	if (m_MenuCreated && editType == ET_Button && action == A_Select)
+	{
+		m_Updated = true;
+		EnvironmentMenuHelper::AddMenuNameToButton(menu_name, m_selectModeButtonID);
+	}
+}
+//================================================================================================================
+void MenuEditorSystem::SelectModeButtonClicked(float x, float y)
+{
+	if (m_MenuCreated && editType == ET_Button && action == A_Select)
+	{
+		m_display_selected_button_box = false;
+		m_select_sprite_box = 0;
+
+		if (!EnvironmentMenuHelper::GetButtonID(m_selectModeButtonID, x, y))
+		{
+			m_selectModeButtonID = -1;
+		}
+		else
+		{
+			bWasClicked = true;
+		}
+
+		// Create a selected sprite box around the button that was selected
+		EnvironmentMenuHelper::HighlightButton(m_button_with_box, m_select_sprite_box, m_display_button_box_created, x, y);
+	}
+	else
+	{
+		m_selectModeButtonID = -1;
+		m_display_selected_button_box = false;
+	}
+}
+//================================================================================================================
+void MenuEditorSystem::SelectModeTextClicked(float x, float y)
+{
+	if (m_MenuCreated && editType == ET_Text && action == A_Select)
+	{
+		m_display_text_box_created = false;
+		m_select_sprite_box = 0;
+		
+		if (!EnvironmentMenuHelper::GetTextID(m_selectModeTextID, x, y))
+		{
+			m_selectModeTextID = -1;
+		}
+		else
+		{
+			bWasClicked = true;
+		}
+		
+		// Create a selected sprite box around the text that was selected
+		EnvironmentMenuHelper::HighlightText(m_text_with_box, m_select_sprite_box, m_display_text_box_created, x, y);
+	}
+	else
+	{
+		m_selectModeTextID = -1;
+		m_display_text_box_created = false;
+	}
+}
+//================================================================================================================
 void MenuEditorSystem::MoveText(float x, float y)
 {
 	if (m_MenuCreated && (m_moving_text || m_cloning_text) && editType == ET_Text && (action == A_Move || action == A_Clone))
@@ -867,9 +943,9 @@ void MenuEditorSystem::SwitchToEditTypeText()
 	editType = ET_Text;
 }
 //================================================================================================================
-void MenuEditorSystem::SwitchToActionNone()
+void MenuEditorSystem::SwitchToActionSelect()
 {
-	action = A_None;
+	action = A_Select;
 }
 //================================================================================================================
 void MenuEditorSystem::SwitchToActionMove()

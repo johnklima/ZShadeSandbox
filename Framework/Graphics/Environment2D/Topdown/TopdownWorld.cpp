@@ -124,6 +124,8 @@ void TopdownWorld::LoadSpritesMain()
 void TopdownWorld::SetMapToRender(string p_map_to_render)
 {
 	m_map_to_render = p_map_to_render;
+
+	InitPhysicsWorld();
 }
 //=================================================================================================================
 void TopdownWorld::NewMap(string map_name, GameDirectory2D* gd, Map2DType mt, bool InEditor)
@@ -193,6 +195,13 @@ TopdownMap* TopdownWorld::GetMap(string mapName)
 	return m_world_maps[mapName];
 }
 //=================================================================================================================
+void TopdownWorld::InitPhysicsWorld()
+{
+	// Initialize the physics world for the map
+	m_physicsWorld.reset(new PhysicsWorld2D(m_D3DSystem, GetMap(m_map_to_render)));
+	m_physicsWorld->BuildTileBodies();
+}
+//=================================================================================================================
 void TopdownWorld::Update(float dt, Keyboard* keyboard)
 {
 	map<string, TopdownMap*>::iterator iter = m_world_maps.find(m_map_to_render);
@@ -200,6 +209,11 @@ void TopdownWorld::Update(float dt, Keyboard* keyboard)
 	{
 		if (m_physicsWorld.get() != NULL)
 		{
+			m_physicsWorld->Update(dt, keyboard);
+		}
+		else
+		{
+			InitPhysicsWorld();
 			m_physicsWorld->Update(dt, keyboard);
 		}
 	}

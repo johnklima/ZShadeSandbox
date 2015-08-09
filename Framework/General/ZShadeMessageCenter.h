@@ -66,22 +66,7 @@ static button_result BUTTON_RESULT;
 
 class ZShadeMessageCenter
 {
-	// Singleton intance method
-	//static ZShadeMessageCenter * s_pSingleInstance;
 public:
-	/*************************************************************************/
-	/* --- This is the signlton class instance methods --- */
-	/*************************************************************************/
-	
-	/*ZShadeMessageCenter()
-	{
-		if( s_pSingleInstance )	
-			GetClassInstance();
-		else	
-			s_pSingleInstance = new ZShadeMessageCenter();
-	}
-	
-	ZShadeMessageCenter * GetClassInstance() { return s_pSingleInstance; }*/
 	
 	static void Assert(bool condition, LPCSTR text);
 	

@@ -2,7 +2,7 @@
 // afxHeader.h
 // 
 // Header file that defines some stuff that everything needs
-// This header was created so that the engine will be able to run in windows 7 or 8
+// This header was created so that the engine will be able to run in windows 7, 8 or 10
 //==================================================================================================================================
 // History
 //
@@ -36,6 +36,8 @@
 #define _WIN32_WINNT 0x0602
 #elif WINVER == 0x0603 // Windows 8.1
 #define _WIN32_WINNT 0x0603
+#elif WINVER == 0x0A00 // Windows 10
+#define _WIN32_WINNT 0x0A00
 #endif
 
 #pragma pack(pop) // Back to previous packing mode

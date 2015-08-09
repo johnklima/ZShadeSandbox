@@ -31,6 +31,8 @@ public:
 	TopdownWorld(D3D* d3d);
 	~TopdownWorld();
 
+	void InitPhysicsWorld();
+
 	void NewMap(string map_name, GameDirectory2D* gd, Map2DType mt, bool InEditor);
 	void LoadMap(string& map_name, string filename, GameDirectory2D* gd, bool InEditor);
 	void RemoveMap(string activeMapName);

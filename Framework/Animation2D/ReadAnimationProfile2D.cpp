@@ -250,6 +250,8 @@ bool ReadAnimationProfile2D::LoadSequence(string base_sprite_path)
 		sequence->AddAnimationFrame(frameName, path, base_sprite_path, box.x, box.y, box.w, box.h, dir);
 	}
 
+	sequence->LoadFrameTextures();
+
 	m_pAnimation = sequence;
 
 	return true;

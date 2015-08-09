@@ -77,6 +77,7 @@ public:
 		bool pressedDownKey
 	);
 	static void HighlightImage(ZShadeSandboxGraphics::Image*& imageWithBox, Sprite*& highlightBox, bool& boxCreated, int x, int y);
+	static bool GetImageID(int& imageID, int x, int y);
 	
 	//
 	// Text Updating
@@ -94,6 +95,7 @@ public:
 	static void DeleteText(ZShadeSandboxGraphics::Text* text);
 	static void DeleteText(int id);
 	static void HighlightText(ZShadeSandboxGraphics::Text*& textWithBox, Sprite*& highlightBox, bool& boxCreated, int x, int y);
+	static bool GetTextID(int& textID, int x, int y);
 };
 //================================================================================================================
 //================================================================================================================

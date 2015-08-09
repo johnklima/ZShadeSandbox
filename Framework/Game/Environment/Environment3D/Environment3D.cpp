@@ -612,13 +612,13 @@ void Environment3D::UpdateMaster()
 	}
 	if (keyboard->IsKeyDown(Keyboard::Key::Right))
 	{
-		mDirLight1->Direction().x -= 0.01f;
+		mDirLight1->Direction().z -= 0.01f;
 		mDirLight1->UpdateMeshPosition(XMFLOAT3(Dir1LightPos.x, Dir1LightPos.y, Dir1LightPos.z - 0.01f));
 
-		mDirLight2->Direction().x -= 0.01f;
+		mDirLight2->Direction().z -= 0.01f;
 		mDirLight2->UpdateMeshPosition(XMFLOAT3(Dir2LightPos.x, Dir2LightPos.y, Dir2LightPos.z - 0.01f));
 
-		mDirLight3->Direction().x -= 0.01f;
+		mDirLight3->Direction().z -= 0.01f;
 		mDirLight3->UpdateMeshPosition(XMFLOAT3(Dir3LightPos.x, Dir3LightPos.y, Dir3LightPos.z - 0.01f));
 
 		if (mPointLight != NULL) mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x, PointLightPos.y, PointLightPos.z - 0.01f));

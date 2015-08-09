@@ -1,10 +1,9 @@
 #include "Menu.h"
 #include "Convert.h"
-//#include "Commands.h"
-using ZShadeSandboxEnvironment::Menu;
+#include "EnvironmentMenuHelper.h"
 //================================================================================================================
 //================================================================================================================
-Menu::Menu(D3D* d3d)
+ZShadeSandboxEnvironment::Menu::Menu(D3D* d3d)
 :	mD3D(d3d)
 ,	m_background(NULL)
 ,	mButtonID(0)
@@ -12,11 +11,11 @@ Menu::Menu(D3D* d3d)
 {
 }
 //================================================================================================================
-Menu::~Menu()
+ZShadeSandboxEnvironment::Menu::~Menu()
 {
 }
 //================================================================================================================
-void Menu::RemoveButton(ZShadeSandboxGraphics::Button* b)
+void ZShadeSandboxEnvironment::Menu::RemoveButton(ZShadeSandboxGraphics::Button* b)
 {
 	ZShadeSandboxGraphics::Button* button = 0;
 	auto current = m_menu_buttons.begin();
@@ -43,7 +42,7 @@ void Menu::RemoveButton(ZShadeSandboxGraphics::Button* b)
 	}
 }
 //================================================================================================================
-void Menu::RemoveText(ZShadeSandboxGraphics::Text* t)
+void ZShadeSandboxEnvironment::Menu::RemoveText(ZShadeSandboxGraphics::Text* t)
 {
 	ZShadeSandboxGraphics::Text* text = 0;
 	auto current = m_menu_text.begin();
@@ -70,7 +69,7 @@ void Menu::RemoveText(ZShadeSandboxGraphics::Text* t)
 	}
 }
 //================================================================================================================
-void Menu::RemoveButton(int id)
+void ZShadeSandboxEnvironment::Menu::RemoveButton(int id)
 {
 	ZShadeSandboxGraphics::Button* button = 0;
 	auto current = m_menu_buttons.begin();
@@ -97,7 +96,7 @@ void Menu::RemoveButton(int id)
 	}
 }
 //================================================================================================================
-void Menu::RemoveText(int id)
+void ZShadeSandboxEnvironment::Menu::RemoveText(int id)
 {
 	ZShadeSandboxGraphics::Text* text = 0;
 	auto current = m_menu_text.begin();
@@ -124,7 +123,24 @@ void Menu::RemoveText(int id)
 	}
 }
 //================================================================================================================
-bool Menu::ButtonClicked(ZShadeSandboxGraphics::Button*& button, int x, int y)
+void ZShadeSandboxEnvironment::Menu::AddMenuNameToButton(string menu_name, int buttonID)
+{
+	for (int i = 0; i < m_menu_buttons.size(); i++)
+	{
+		ZShadeSandboxGraphics::Button* b = m_menu_buttons[i];
+		
+		if (b == 0) continue;
+		
+		if (b->ID() == buttonID)
+		{
+			b->Tag() = menu_name;
+			
+			break;
+		}
+	}
+}
+//================================================================================================================
+bool ZShadeSandboxEnvironment::Menu::ButtonClicked(ZShadeSandboxGraphics::Button*& button, int x, int y)
 {
 	for (int i = 0; i < m_menu_buttons.size(); i++)
 	{
@@ -146,7 +162,7 @@ bool Menu::ButtonClicked(ZShadeSandboxGraphics::Button*& button, int x, int y)
 	return false;
 }
 //================================================================================================================
-bool Menu::TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y)
+bool ZShadeSandboxEnvironment::Menu::TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y)
 {
 	for (int i = 0; i < m_menu_text.size(); i++)
 	{
@@ -167,7 +183,7 @@ bool Menu::TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y)
 	return false;
 }
 //================================================================================================================
-void Menu::MoveButton(ZShadeSandboxGraphics::Button*& button, int x, int y)
+void ZShadeSandboxEnvironment::Menu::MoveButton(ZShadeSandboxGraphics::Button*& button, int x, int y)
 {
 	for (int i = 0; i < m_menu_buttons.size(); i++)
 	{
@@ -184,7 +200,7 @@ void Menu::MoveButton(ZShadeSandboxGraphics::Button*& button, int x, int y)
 	}
 }
 //================================================================================================================
-void Menu::MoveText(ZShadeSandboxGraphics::Text*& text, int x, int y)
+void ZShadeSandboxEnvironment::Menu::MoveText(ZShadeSandboxGraphics::Text*& text, int x, int y)
 {
 	for (int i = 0; i < m_menu_text.size(); i++)
 	{
@@ -200,12 +216,12 @@ void Menu::MoveText(ZShadeSandboxGraphics::Text*& text, int x, int y)
 	}
 }
 //================================================================================================================
-void Menu::AddBackground(ZShadeSandboxGraphics::Image* image)
+void ZShadeSandboxEnvironment::Menu::AddBackground(ZShadeSandboxGraphics::Image* image)
 {
 	m_background = image;
 }
 //================================================================================================================
-void Menu::AddButton(
+void ZShadeSandboxEnvironment::Menu::AddButton(
 	string base_path
 ,	string normalImageName
 ,	string pushedImageName
@@ -237,7 +253,7 @@ void Menu::AddButton(
 	AddButton(newButton);
 }
 //================================================================================================================
-void Menu::AddText(string text, int x, int y)
+void ZShadeSandboxEnvironment::Menu::AddText(string text, int x, int y)
 {
 	ZShadeSandboxGraphics::Text* newText = new ZShadeSandboxGraphics::Text();
 	newText->SetD3D(mD3D);
@@ -252,21 +268,21 @@ void Menu::AddText(string text, int x, int y)
 	AddText(newText);
 }
 //================================================================================================================
-void Menu::AddButton(ZShadeSandboxGraphics::Button* button)
+void ZShadeSandboxEnvironment::Menu::AddButton(ZShadeSandboxGraphics::Button* button)
 {
 	button->ID() = mButtonID;
 	m_menu_buttons.push_back( button );
 	mButtonID++;
 }
 //================================================================================================================
-void Menu::AddText(ZShadeSandboxGraphics::Text* text)
+void ZShadeSandboxEnvironment::Menu::AddText(ZShadeSandboxGraphics::Text* text)
 {
 	text->ID() = mTextID;
 	m_menu_text.push_back( text );
 	mTextID++;
 }
 //================================================================================================================
-void Menu::UpdateButtonMouseUp(WPARAM btnState, int x, int y)
+void ZShadeSandboxEnvironment::Menu::UpdateButtonMouseUp(WPARAM btnState, int x, int y)
 {
 	if ((btnState & MK_LBUTTON) != 0)
 	{
@@ -281,32 +297,35 @@ void Menu::UpdateButtonMouseUp(WPARAM btnState, int x, int y)
 				if (button->WasLastStateUP())
 				{
 					button->ResetUPState();
-					//Need to have the buttons do something
-					//Should make this happen from a .lua script
-
-					//Need to assign a .lua script to each button
-					//Create something like a LuaButton that is a struct with
-					//  a button and a .lua file
-					switch (button->ScriptType())
-					{
-						case ZShadeSandboxGraphics::EScriptType::eStart:
-						case ZShadeSandboxGraphics::EScriptType::eContinue:
-						case ZShadeSandboxGraphics::EScriptType::eOptions:
-						case ZShadeSandboxGraphics::EScriptType::eExit:
-						{
-							if (button->GetScript() != NULL)
-								button->GetScript()->Main();
-						}
-						break;
-						default: break;
-					}
+					
+					//// If this button has a menu tag then switch to that menu
+					//if (button->Tag() != "NONE" && button->Tag() != "")
+					//{
+					//	EnvironmentMenuHelper::SetActiveRenderedMenu(button->Tag());
+					//}
+					//
+					////Need to have the buttons do something
+					////Should make this happen from a .lua script
+					//switch (button->ScriptType())
+					//{
+					//	case ZShadeSandboxGraphics::EScriptType::eStart:
+					//	case ZShadeSandboxGraphics::EScriptType::eContinue:
+					//	case ZShadeSandboxGraphics::EScriptType::eOptions:
+					//	case ZShadeSandboxGraphics::EScriptType::eExit:
+					//	{
+					//		if (button->GetScript() != NULL)
+					//			button->GetScript()->Main();
+					//	}
+					//	break;
+					//	default: break;
+					//}
 				}
 			}
 		}
 	}
 }
 //================================================================================================================
-void Menu::UpdateButtonMouseDown(WPARAM btnState, int x, int y)
+void ZShadeSandboxEnvironment::Menu::UpdateButtonMouseDown(WPARAM btnState, int x, int y)
 {
 	if ((btnState & MK_LBUTTON) != 0)
 	{
@@ -317,12 +336,39 @@ void Menu::UpdateButtonMouseDown(WPARAM btnState, int x, int y)
 			if (button != NULL)
 			{
 				button->UpdateButtonMouseDown(btnState, x, y);
+
+				if (ButtonClicked(button, x, y))
+				{
+					// If this button has a menu tag then switch to that menu
+					if (button->Tag() != "NONE" && button->Tag() != "")
+					{
+						EnvironmentMenuHelper::SetActiveRenderedMenu(button->Tag());
+					}
+
+					//Need to have the buttons do something
+					//Should make this happen from a .lua script
+					switch (button->ScriptType())
+					{
+						case ZShadeSandboxGraphics::EScriptType::eStart:
+						case ZShadeSandboxGraphics::EScriptType::eContinue:
+						case ZShadeSandboxGraphics::EScriptType::eOptions:
+						case ZShadeSandboxGraphics::EScriptType::eExit:
+						{
+							if (button->GetScript() != NULL)
+							{
+								button->GetScript()->Main();
+							}
+						}
+						break;
+						default: break;
+					}
+				}
 			}
 		}
 	}
 }
 //================================================================================================================
-void Menu::UpdateButtonMouseOn(WPARAM btnState, int x, int y)
+void ZShadeSandboxEnvironment::Menu::UpdateButtonMouseOn(WPARAM btnState, int x, int y)
 {
 	for (int i = 0; i < m_menu_buttons.size(); i++)
 	{
@@ -335,13 +381,13 @@ void Menu::UpdateButtonMouseOn(WPARAM btnState, int x, int y)
 	}
 }
 //================================================================================================================
-void Menu::UpdateButtonMouseMove(WPARAM btnState, int x, int y)
+void ZShadeSandboxEnvironment::Menu::UpdateButtonMouseMove(WPARAM btnState, int x, int y)
 {
 	// Move the selected item
 
 }
 //================================================================================================================
-bool Menu::Render(Camera* camera, int blendAmount)
+bool ZShadeSandboxEnvironment::Menu::Render(Camera* camera, int blendAmount)
 {
 	//Render the background sprite
 	if (m_background != NULL)

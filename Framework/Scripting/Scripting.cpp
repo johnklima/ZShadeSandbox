@@ -38,6 +38,12 @@ Scripting* Scripting::Instance()
 	return instance;
 }
 //==================================================================================================================================
+void Scripting::RunMain()
+{
+	// Call the main entry point
+	m_scripts["main"]->Main();
+}
+//==================================================================================================================================
 void Scripting::Initialize()
 {
 	try
@@ -71,9 +77,6 @@ void Scripting::Initialize()
 		
 		// Make Various other functions accessible from LUA
 		tolua_Funcs_open();
-		
-		// Call the main entry point
-		m_scripts["main"]->Main();
 	}
 	catch (std::exception const &e)
 	{

@@ -14,6 +14,44 @@ EnvironmentHUDHelper::~EnvironmentHUDHelper()
 {
 }
 //================================================================================================================
+bool EnvironmentHUDHelper::GetImageID(int& imageID, int x, int y)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return false;
+	
+	if (env2D->GetHUDSystem() == 0) return false;
+	
+	ZShadeSandboxGraphics::Image* p_clicked_image;
+	bool clicked = env2D->GetHUDSystem()->ImageClicked(p_clicked_image, x, y);
+	if (clicked)
+	{
+		imageID = p_clicked_image->ID();
+	}
+
+	return clicked;
+}
+//================================================================================================================
+bool EnvironmentHUDHelper::GetTextID(int& textID, int x, int y)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return false;
+	
+	if (env2D->GetHUDSystem() == 0) return false;
+	
+	ZShadeSandboxGraphics::Text* p_clicked_text;
+	bool clicked = env2D->GetHUDSystem()->TextClicked(p_clicked_text, x, y);
+	if (clicked)
+	{
+		textID = p_clicked_text->ID();
+	}
+
+	return clicked;
+}
+//================================================================================================================
 void EnvironmentHUDHelper::CreateHUD(string hud_name)
 {
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();

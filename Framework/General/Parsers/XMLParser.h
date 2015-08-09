@@ -32,6 +32,7 @@ public:
 	~XMLParser();
 	
 	XMLElement* Element() { return mRootElement; }
+	XMLNode* ElementNode() { return mRootNode; }
 	tinyxml2::XMLDocument* Document() { return mDocument; }
 
 	//
@@ -105,6 +106,7 @@ class ArrayElementXMLSaver
 {
 public:
 
+	ArrayElementXMLSaver(tinyxml2::XMLDocument* document, XMLNode* rootNode);
 	ArrayElementXMLSaver(tinyxml2::XMLDocument* document, XMLElement* rootElement);
 	~ArrayElementXMLSaver();
 
@@ -136,10 +138,13 @@ public:
 
 private:
 
+	bool bHasArrayElement;
+	bool bUseRootNode;
 	tinyxml2::XMLDocument* mDocument;
 	XMLElement* mRootElement;
 	XMLElement* mArrayElement;
 	XMLElement* mValueElement;
+	XMLNode* mRootNode;
 };
 //================================================================================================================
 //================================================================================================================

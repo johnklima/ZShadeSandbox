@@ -24,6 +24,7 @@ Button::Button(D3D* d3d
 ,	mDisableHighlight(disableHighlight)
 ,	mD3D(d3d)
 ,	mUP(false)
+,	sTag("NONE")
 {
 	mScript = NULL;
 	mScriptType = EScriptType::eNone;
@@ -93,6 +94,7 @@ Button::Button(D3D* d3d
 ,	mDisableHighlight(disableHighlight)
 ,	mD3D(d3d)
 ,	mUP(false)
+,	sTag("NONE")
 {
 	mScript = NULL;
 	mScriptType = EScriptType::eNone;

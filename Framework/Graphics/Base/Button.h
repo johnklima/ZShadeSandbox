@@ -135,6 +135,8 @@ namespace ZShadeSandboxGraphics {
 		Script* GetScript() const	{ return mScript; }
 		int& ID()					{ return mID; }
 		int ID() const				{ return mID; }
+		string& Tag()				{ return sTag; }
+		string Tag() const			{ return sTag; }
 		
 	private:
 		
@@ -143,6 +145,8 @@ namespace ZShadeSandboxGraphics {
 		int				  mScriptType;
 		int				  mID;
 		Script*           mScript;
+		
+		string			  sTag;
 		
 		D3D* m_d3d;
 		string m_windowName;

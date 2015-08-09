@@ -32,7 +32,7 @@ class MenuEditorSystem
 	// Actions to take for a button or text item
 	typedef enum
 	{
-		A_None = 0,
+		A_Select = 0,
 		A_Move = 1,
 		A_Delete = 2,
 		A_Place = 3,
@@ -67,6 +67,7 @@ public:
 	void AddButton();
 	void AddText();
 	void AddMenuBackground();
+	void AddMenuNameToButton(string menu_name);
 	void MoveButton(float x, float y);
 	bool MoveButtonStart();
 	void MoveButtonEnd();
@@ -92,6 +93,8 @@ public:
 	void DeleteText();
 	void HighlightText(float x, float y);
 	void UpdateDisplaySprite(float x, float y);
+	void SelectModeButtonClicked(float x, float y);
+	void SelectModeTextClicked(float x, float y);
 	
 	// Update the text in the title bar
 	string UpdateTitleBarText();
@@ -105,7 +108,7 @@ public:
 	void SwitchToEditTypeNone();
 	void SwitchToEditTypeButton();
 	void SwitchToEditTypeText();
-	void SwitchToActionNone();
+	void SwitchToActionSelect();
 	void SwitchToActionMove();
 	void SwitchToActionDelete();
 	void SwitchToActionPlace();
@@ -132,7 +135,10 @@ public:
 
 	string& ActiveMenuName() { return m_ActiveMenuName; }
 	string ActiveMenuName() const { return m_ActiveMenuName; }
-
+	
+	bool& WasButtonOrTextClicked() { return bWasClicked; }
+	bool WasButtonOrTextClicked() const { return bWasClicked; }
+	
 private:
 	
 	Environment2D* m_Env2D;
@@ -148,7 +154,9 @@ private:
 	Sprite* m_StampNormal;
 	// The stamp tool that shows when the left mouse button is clicked
 	Sprite* m_StampHighlight;
-
+	
+	int m_selectModeButtonID;
+	int m_selectModeTextID;
 	int m_originalButtonID;
 	int m_originalTextID;
 	bool m_button_cache_selection_changed;
@@ -159,11 +167,14 @@ private:
 	bool m_cloning_text;
 	bool m_selected_button_cover;
 	bool m_selected_text_cover;
+	bool m_display_selected_button_box;
+	bool m_display_selected_text_box;
 	bool m_display_button_box_created;
 	bool m_display_text_box_created;
 	ZShadeSandboxGraphics::Button* m_button_with_box;
 	ZShadeSandboxGraphics::Text* m_text_with_box;
 	Sprite* m_sprite_box; //outline box for a sprite in sprite edit mode
+	Sprite* m_select_sprite_box;
 	//AISprite* m_spriteBeforeMove;
 	ZShadeSandboxGraphics::Button* m_MovingButtonSprite;
 	ZShadeSandboxGraphics::Button* m_SelectedButtonSprite;
@@ -173,6 +184,9 @@ private:
 	Sprite* m_displaySpriteCover;// Display cover for a button image
 	Sprite* m_cloneDisplaySpriteCover;
 	ZShadeSandboxGraphics::Text* m_cloneDisplayTextSprite;
+	
+	// This flag is to update the attributes of a button/text in select mode
+	bool bWasClicked;
 	
 	string m_ActiveMenuName;
 	string m_BackgroundImageName;

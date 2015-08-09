@@ -20,7 +20,7 @@ bool ZShadeXMLLoader::LoadTemplatePolyXML(string filename, ZShadeSandboxMath::Po
 
 	ArrayElementXMLParser vertexParser(xmlParser.Element());
 	vertexParser.ReadArrayElement("Vertices", "Vertex");
-	while (vertexParser.ArrayElementNotNull("Vertex"))
+	do
 	{
 		string eName = vertexParser.ReadArrayElementValue();
 		string eIDAtt = vertexParser.ReadArrayElementAttribute("id");
@@ -34,7 +34,7 @@ bool ZShadeXMLLoader::LoadTemplatePolyXML(string filename, ZShadeSandboxMath::Po
 
 		vertices[id].position = position;
 		vertices[id].texture = uv;
-	}
+	} while (vertexParser.ArrayElementNotNull("Vertex"));
 
 	const char* index_count_str = xmlParser.ReadElement("IndexCount");
 	int index_count = ZShadeSandboxGlobal::Convert::ConvertStringToT<int>(index_count_str);
@@ -42,7 +42,7 @@ bool ZShadeXMLLoader::LoadTemplatePolyXML(string filename, ZShadeSandboxMath::Po
 
 	ArrayElementXMLParser indexParser(xmlParser.Element());
 	indexParser.ReadArrayElement("Indices", "Index");
-	while (indexParser.ArrayElementNotNull("Index"))
+	do
 	{
 		string eName = indexParser.ReadArrayElementValue();
 		string eIDAtt = indexParser.ReadArrayElementAttribute("id");
@@ -52,7 +52,7 @@ bool ZShadeXMLLoader::LoadTemplatePolyXML(string filename, ZShadeSandboxMath::Po
 		UINT index_value = ZShadeSandboxGlobal::Convert::ConvertStringToT<UINT>(value);
 		
 		indices[id] = index_value;
-	}
+	} while (indexParser.ArrayElementNotNull("Index"));
 
 	const char* material_name_str = xmlParser.ReadElement("MaterialName");
 
@@ -117,7 +117,7 @@ bool ZShadeXMLLoader::LoadMaterialXML(string basePath, string filename, D3D* d3d
 	vector<string> diffuseArrayTextureNames;
 	ArrayElementXMLParser diffuseArrayParser(xmlParser.Element());
 	diffuseArrayParser.ReadArrayElement("DiffuseArray", "Texture");
-	while (diffuseArrayParser.ArrayElementNotNull("Texture"))
+	do
 	{
 		string eName = diffuseArrayParser.ReadArrayElementValue();
 		string eIDAtt = diffuseArrayParser.ReadArrayElementAttribute("id");
@@ -125,7 +125,7 @@ bool ZShadeXMLLoader::LoadMaterialXML(string basePath, string filename, D3D* d3d
 		const char* tex_name_str = diffuseArrayParser.ReadArrayChildElement("TexName");
 		
 		diffuseArrayTextureNames.push_back(string(tex_name_str));
-	}
+	} while (diffuseArrayParser.ArrayElementNotNull("Texture"));
 	
 	const char* diffuse_texture_str = xmlParser.ReadElement("DiffuseTexture");
 	const char* ambient_texture_str = xmlParser.ReadElement("AmbientTexture");
@@ -312,7 +312,7 @@ bool ZShadeXMLLoader::LoadInventoryXML(string filename, GameDirectory2D* gd, Eng
 	
 	ArrayElementXMLParser regularItemsParser(xmlParser.Element());
 	regularItemsParser.ReadArrayElement("RegularItems", "Item");
-	while (regularItemsParser.ArrayElementNotNull("Item"))
+	do
 	{
 		string eName = regularItemsParser.ReadArrayElementValue();
 		string eIDAtt = regularItemsParser.ReadArrayElementAttribute("id");
@@ -321,11 +321,11 @@ bool ZShadeXMLLoader::LoadInventoryXML(string filename, GameDirectory2D* gd, Eng
 		const char* inventory_message_str = regularItemsParser.ReadArrayChildElement("Message");
 		
 		inventory->AddItemRegular(gd->m_sprites_path, eImageNameAtt, string(inventory_message_str));
-	}
+	} while (regularItemsParser.ArrayElementNotNull("Item"));
 	
 	ArrayElementXMLParser magicItemsParser(xmlParser.Element());
 	magicItemsParser.ReadArrayElement("MagicItems", "Item");
-	while (magicItemsParser.ArrayElementNotNull("Item"))
+	do
 	{
 		string eName = magicItemsParser.ReadArrayElementValue();
 		string eIDAtt = magicItemsParser.ReadArrayElementAttribute("id");
@@ -334,7 +334,7 @@ bool ZShadeXMLLoader::LoadInventoryXML(string filename, GameDirectory2D* gd, Eng
 		const char* inventory_message_str = magicItemsParser.ReadArrayChildElement("Message");
 		
 		inventory->AddItemMagic(gd->m_sprites_path, eImageNameAtt, string(inventory_message_str));
-	}
+	} while (magicItemsParser.ArrayElementNotNull("Item"));
 	
 	inventory->PositionItemsOnGrid();
 	
@@ -380,7 +380,7 @@ bool ZShadeXMLLoader::LoadMenuXML(string menufilename, GameDirectory2D* gd, Engi
 	
 	ArrayElementXMLParser buttonsParser(xmlParser.Element());
 	buttonsParser.ReadArrayElement("Buttons", "Button");
-	while (buttonsParser.ArrayElementNotNull("Button"))
+	do
 	{
 		string eName = buttonsParser.ReadArrayElementValue();
 		string eIDAtt = buttonsParser.ReadArrayElementAttribute("id");
@@ -395,6 +395,7 @@ bool ZShadeXMLLoader::LoadMenuXML(string menufilename, GameDirectory2D* gd, Engi
 		const char* highlighted_image_str = buttonsParser.ReadArrayChildElement("highlighted_image");
 		const char* disabled_image_str = buttonsParser.ReadArrayChildElement("disabled_image");
 		const char* script_type_str = buttonsParser.ReadArrayChildElement("script_type");
+		const char* tag_str = buttonsParser.ReadArrayChildElement("tag");
 		
 		if (strcmp(script_type_str, "start") == 0) st = ZShadeSandboxGraphics::EScriptType::eStart;
 		if (strcmp(script_type_str, "resume") == 0) st = ZShadeSandboxGraphics::EScriptType::eResume;
@@ -421,6 +422,7 @@ bool ZShadeXMLLoader::LoadMenuXML(string menufilename, GameDirectory2D* gd, Engi
 		);
 		
 		b->ScriptType() = st;
+		b->Tag() = string(tag_str);
 
 		switch (st)
 		{
@@ -432,11 +434,11 @@ bool ZShadeXMLLoader::LoadMenuXML(string menufilename, GameDirectory2D* gd, Engi
 		}
 		
 		m->AddButton(b);
-	}
+	} while (buttonsParser.ArrayElementNotNull("Button"));
 	
 	ArrayElementXMLParser textsParser(xmlParser.Element());
 	textsParser.ReadArrayElement("Texts", "Text");
-	while (textsParser.ArrayElementNotNull("Text"))
+	do
 	{
 		string eName = textsParser.ReadArrayElementValue();
 		string eIDAtt = textsParser.ReadArrayElementAttribute("id");
@@ -465,7 +467,7 @@ bool ZShadeXMLLoader::LoadMenuXML(string menufilename, GameDirectory2D* gd, Engi
 		t->TextColor() = XMFLOAT4(color.x, color.y, color.z, 1);
 		
 		m->AddText(t);
-	}
+	} while (textsParser.ArrayElementNotNull("Text"));
 	
 	return true;
 }
@@ -810,7 +812,7 @@ bool ZShadeXMLLoader::LoadWorldXML(string worldname, STopdownWorld*& sworld)
 	
 	ArrayElementXMLParser worldMapParser(xmlParser.Element());
 	worldMapParser.ReadArrayElement("Maps", "Map");
-	while (worldMapParser.ArrayElementNotNull("Map"))
+	do
 	{
 		string eName = worldMapParser.ReadArrayElementValue();
 		string eIDAtt = worldMapParser.ReadArrayElementAttribute("id");
@@ -818,7 +820,7 @@ bool ZShadeXMLLoader::LoadWorldXML(string worldname, STopdownWorld*& sworld)
 		const char* map_name_str = worldMapParser.ReadArrayChildElement("map_name");
 		
 		sworld->m_mapNames.push_back(map_name_str);
-	}
+	} while (worldMapParser.ArrayElementNotNull("Map"));
 	
 	return true;
 }
@@ -835,7 +837,7 @@ bool ZShadeXMLLoader::LoadWorldXML(string worldname, SPlatformerWorld*& sworld)
 	
 	ArrayElementXMLParser worldMapParser(xmlParser.Element());
 	worldMapParser.ReadArrayElement("Maps", "Map");
-	while (worldMapParser.ArrayElementNotNull("Map"))
+	do
 	{
 		string eName = worldMapParser.ReadArrayElementValue();
 		string eIDAtt = worldMapParser.ReadArrayElementAttribute("id");
@@ -843,7 +845,7 @@ bool ZShadeXMLLoader::LoadWorldXML(string worldname, SPlatformerWorld*& sworld)
 		const char* map_name_str = worldMapParser.ReadArrayChildElement("map_name");
 		
 		sworld->m_mapNames.push_back(map_name_str);
-	}
+	} while (worldMapParser.ArrayElementNotNull("Map"));
 
 	return true;
 }
@@ -868,7 +870,7 @@ bool ZShadeXMLLoader::LoadHUDXML(string filename, GameDirectory2D* gd, EngineOpt
 	
 	ArrayElementXMLParser imagesParser(xmlParser.Element());
 	imagesParser.ReadArrayElement("Images", "Image");
-	while (imagesParser.ArrayElementNotNull("Image"))
+	do
 	{
 		string eName = imagesParser.ReadArrayElementValue();
 		string eIDAtt = imagesParser.ReadArrayElementAttribute("id");
@@ -890,11 +892,11 @@ bool ZShadeXMLLoader::LoadHUDXML(string filename, GameDirectory2D* gd, EngineOpt
 		);
 
 		hs->AddImage(im);
-	}
+	} while (imagesParser.ArrayElementNotNull("Image"));
 	
 	ArrayElementXMLParser textsParser(xmlParser.Element());
 	textsParser.ReadArrayElement("Texts", "Text");
-	while (textsParser.ArrayElementNotNull("Text"))
+	do
 	{
 		string eName = textsParser.ReadArrayElementValue();
 		string eIDAtt = textsParser.ReadArrayElementAttribute("id");
@@ -923,7 +925,7 @@ bool ZShadeXMLLoader::LoadHUDXML(string filename, GameDirectory2D* gd, EngineOpt
 		t->TextColor() = XMFLOAT4(color.x, color.y, color.z, 1);
 		
 		hs->AddText(t);
-	}
+	} while (textsParser.ArrayElementNotNull("Text"));
 	
 	return true;
 }
@@ -956,9 +958,13 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 	xmlParser.ReadAttribute("Fow", "flashlight", fow_flashlight);
 	
 	MapLoadData mld;
+
+	mld.mapVision = atoi(vision_str);
+	mld.mapMusicName = string(music_str);
+
 	ArrayElementXMLParser tilesParser(xmlParser.Element());
 	tilesParser.ReadArrayElement("Tiles", "Tile");
-	while (tilesParser.ArrayElementNotNull("Tile"))
+	do
 	{
 		string eName = tilesParser.ReadArrayElementValue();
 		string eIDAtt = tilesParser.ReadArrayElementAttribute("id");
@@ -980,7 +986,7 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 		mld.animProfileNames.push_back(string(animation_str));
 		mld.animSpeeds.push_back(anim_speed);
 		mld.hards.push_back(hard);
-	}
+	} while (tilesParser.ArrayElementNotNull("Tile"));
 	
 	Map2DType mt;
 	if (BetterString(map_type_str) == "Regular")
@@ -994,19 +1000,19 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 
 	map->InEditor() = inEditor;
 
-	map->Initialize(row_size);
+	map->Initialize(row_size, mld);
 	
 	// Set the FOW data
 	map->FOW() = fow_enabled;
 	map->FOWRadius() = fow_radius;
 	map->FOWFlashlight() = fow_flashlight;
 	
-	BetterString str(gd->m_xml_sprites_path);
-	str += "\\";
-	str += xml_sprite_str;
+	//BetterString str(gd->m_xml_sprites_path);
+	//str += "\\";
+	//str += xml_sprite_str;
 
 	//Load the sprites onto the map
-	LoadSpritesXML(str, gd, d3d, map);
+	LoadSpritesXML(xml_sprite_str, gd, d3d, map);
 	
 	return true;
 }
@@ -1031,7 +1037,7 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 	PlatformerMapLoadData pmld;
 	ArrayElementXMLParser tilesParser(xmlParser.Element());
 	tilesParser.ReadArrayElement("Tiles", "Tile");
-	while (tilesParser.ArrayElementNotNull("Tile"))
+	do
 	{
 		string eName = tilesParser.ReadArrayElementValue();
 		string eIDAtt = tilesParser.ReadArrayElementAttribute("id");
@@ -1059,7 +1065,7 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 		pmld.invisibles.push_back(invisible);
 		pmld.physicsTypes.push_back(string(physics_type_str));
 		pmld.surfaceTypes.push_back(string(surface_type_str));
-	}
+	} while (tilesParser.ArrayElementNotNull("Tile"));
 	
 	map = new PlatformerMap(d3d, gd);
 	if (!map) return false;
@@ -1068,12 +1074,12 @@ bool ZShadeXMLLoader::LoadMapXML(string& mapname, string filename, GameDirectory
 	map->MusicName() = string(xml_music_str);
 	map->Initialize(map_width, map_height, pmld);
 
-	BetterString str(gd->m_xml_sprites_path);
-	str += "\\";
-	str += xml_sprite_str;
+	//BetterString str(gd->m_xml_sprites_path);
+	//str += "\\";
+	//str += xml_sprite_str;
 
 	//Load the sprites onto the map
-	LoadSpritesXML(str.toString(), gd, d3d, map);
+	LoadSpritesXML(xml_sprite_str, gd, d3d, map);
 	
 	return true;
 }

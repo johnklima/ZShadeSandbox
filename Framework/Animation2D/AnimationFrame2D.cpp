@@ -1,4 +1,5 @@
 #include "AnimationFrame2D.h"
+#include "MaterialManager.h"
 //-----------------------------------------------------------------------------------------------------------------
 AnimationFrame2D::AnimationFrame2D(D3D* d3d)
 :	m_FrameTexture(NULL),
@@ -80,6 +81,9 @@ int AnimationFrame2D::GetDirection()
 //-----------------------------------------------------------------------------------------------------------------
 void AnimationFrame2D::LoadFrameTexture()
 {
+	MaterialManager::Instance()->AddTransparentDiffuse(m_D3DSystem, mFrameBasePath,
+		mFramePath, mFramePath, mFramePath, m_D3DSystem->GetEngineOptions()->m_TransparencyKey);
+
 	ZShadeSandboxMesh::MeshParameters mp;
 	mp.useCustomShader = false;
 	mp.vertexType = ZShadeSandboxMesh::EVertexType::VT_NormalTex;
@@ -91,6 +95,7 @@ void AnimationFrame2D::LoadFrameTexture()
 	mp.scale = XMFLOAT3(1, 1, 1);
 	mp.in2D = true;
 	mp.shader = 0;
+	mp.material = MaterialManager::Instance()->GetMaterial(mFramePath);
 	m_FrameTexture = new ZShadeSandboxMesh::QuadMesh(m_D3DSystem, mp, width, height, true);
 }
 //-----------------------------------------------------------------------------------------------------------------

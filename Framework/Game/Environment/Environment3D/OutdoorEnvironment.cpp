@@ -441,6 +441,8 @@ void OutdoorEnvironment::Update()
 	
 	if (keyboard->IsKeyDown(Keyboard::Key::V))
 	{
+		//while (1) { Sleep(30); break; }
+		//fHeightScale += 1.0f;
 		while (1) { Sleep(30); break; }
 		fHeightScale *= 1.1f;
 		m_pQuadTreeMesh->HeightScale() = fHeightScale;
@@ -448,6 +450,9 @@ void OutdoorEnvironment::Update()
 	}
 	if (keyboard->IsKeyDown(Keyboard::Key::B))
 	{
+		//fHeightScale -= 1.0f;
+		//if (fHeightScale <= 0.0f)
+		//	fHeightScale += 1.0f;
 		while (1) { Sleep(30); break; }
 		fHeightScale *= 0.9f;
 		m_pQuadTreeMesh->HeightScale() = fHeightScale;

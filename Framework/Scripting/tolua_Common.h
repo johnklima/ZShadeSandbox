@@ -24,6 +24,11 @@ static void tolua_push_sprite(lua_State* L, AISprite* spr)
 	tolua_pushusertype(L, (void*)spr, "Sprite");
 }
 //==================================================================================================================================
+static AISprite* tolua_get_sprite(lua_State* L, int idx)
+{
+	return (AISprite*)tolua_tousertype(L, idx, 0);
+}
+//==================================================================================================================================
 static bool tolua_ArgSafe_string(lua_State* L, int idx, string errFuncName)
 {
 #ifndef TOLUA_RELEASE

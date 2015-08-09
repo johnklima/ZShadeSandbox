@@ -199,6 +199,42 @@ static AISprite* tolua_Sprite_Safe_bool(lua_State* L, string errFuncName)
 	return 0;
 }
 //==================================================================================================================================
+static AISprite* tolua_Sprite_Safe_sprite(lua_State* L, string errFuncName)
+{
+#ifndef TOLUA_RELEASE
+	tolua_Error tolua_err;
+
+	if (!tolua_isusertype(L, 1, "Sprite", 0, &tolua_err) || !((AISprite*)tolua_tousertype(L, 2, &tolua_err)))
+	{
+		BetterString str = "#ferror in function '";
+		str += errFuncName;
+		str += "'.";
+		
+		tolua_error(L, str.toString().c_str(), &tolua_err);
+		return 0;
+	}
+	else
+#endif
+	{
+		AISprite* self = (AISprite*)tolua_tousertype(L, 1, 0);
+
+#ifndef TOLUA_RELEASE
+		if (!self)
+		{
+			BetterString str = "#invalid 'self' in function '";
+			str += errFuncName;
+			str += "'.";
+			
+			tolua_error(L, str.toString().c_str(), NULL);
+			return 0;
+		}
+#endif
+		{
+			return self;
+		}
+	}
+}
+//==================================================================================================================================
 // method: new of class AISprite
 #ifndef TOLUA_DISABLE_tolua_new_Sprite
 static int tolua_new_Sprite(lua_State* L)
@@ -1629,21 +1665,6 @@ static int tolua_moveRight_Sprite(lua_State* L)
 }
 #endif //TOLUA_DISABLE_tolua_moveRight_Sprite
 //==================================================================================================================================
-/*#ifndef TOLUA_DISABLE_tolua_doCreateHardbox_Sprite
-static int tolua_doCreateHardbox_Sprite(lua_State* L)
-{
-	AISprite* self = tolua_Sprite_Safe(L, "doCreateHardbox");
-	
-	if (self != 0)
-	{
-		self->CreateHardBoxSpr(Scripting::GetGameDirectory()->m_required_textures);
-	}
-	
-	return 0;
-}
-#endif //TOLUA_DISABLE_tolua_doCreateHardbox_Sprite
-*/
-//==================================================================================================================================
 #ifndef TOLUA_DISABLE_tolua_addDefaultBehavior_Sprite
 static int tolua_addDefaultBehavior_Sprite(lua_State* L)
 {
@@ -2070,6 +2091,1595 @@ static int tolua_setAlwaysSeenByPlayer_Sprite(lua_State* L)
 }
 #endif //TOLUA_DISABLE_tolua_setInventoryMessage_Sprite
 //==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_createWaypointSystem_Sprite
+static int tolua_createWaypointSystem_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "createWaypointSystem");
+	
+	if (self != 0)
+	{
+		self->CreateWaypointSystem();
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_createWaypointSystem_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_waypointSystemSize_Sprite
+static int tolua_waypointSystemSize_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "waypointSystemSize");
+	
+	if (self != 0)
+	{
+		tolua_push_int(L, self->WaypointSystemSize());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_waypointSystemSize_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_waypointSystemEmpty_Sprite
+static int tolua_waypointSystemEmpty_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "waypointSystemEmpty");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->WaypointSystemEmpty());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_waypointSystemEmpty_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_clearWaypoints_Sprite
+static int tolua_clearWaypoints_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "clearWaypoints");
+	
+	if (self != 0)
+	{
+		self->ClearWaypoints();
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_clearWaypoints_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_removeWaypoint_Sprite
+static int tolua_removeWaypoint_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "removeWaypoint");
+	
+	if (tolua_ArgSafe_number(L, 2, "removeWaypoint")
+	&&	tolua_ArgSafe_number(L, 3, "removeWaypoint")
+	&&	tolua_ArgSafe_number(L, 4, "removeWaypoint"))
+	{
+		if (self != 0)
+		{
+			self->RemoveWaypoint(ZShadeSandboxMath::XMMath3(tolua_get_float(L, 2), tolua_get_float(L, 3), tolua_get_float(L, 4)));
+		}
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_removeWaypoint_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_addWaypoint_Sprite
+static int tolua_addWaypoint_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "addWaypoint");
+	
+	if (tolua_ArgSafe_number(L, 2, "addWaypoint")
+	&&	tolua_ArgSafe_number(L, 3, "addWaypoint")
+	&&	tolua_ArgSafe_number(L, 4, "addWaypoint"))
+	{
+		if (self != 0)
+		{
+			self->AddWaypoint(ZShadeSandboxMath::XMMath3(tolua_get_float(L, 2), tolua_get_float(L, 3), tolua_get_float(L, 4)));
+		}
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_addWaypoint_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_currentWaypointX_Sprite
+static int tolua_currentWaypointX_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "currentWaypointX");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->CurrentWaypointX());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_currentWaypointX_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_currentWaypointY_Sprite
+static int tolua_currentWaypointY_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "currentWaypointY");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->CurrentWaypointY());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_currentWaypointY_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_currentWaypointZ_Sprite
+static int tolua_currentWaypointZ_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "currentWaypointZ");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->CurrentWaypointZ());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_currentWaypointZ_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setNextWaypoint_Sprite
+static int tolua_setNextWaypoint_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "setNextWaypoint");
+	
+	if (self != 0)
+	{
+		self->SetNextWaypoint();
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setNextWaypoint_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_waypointSystemFinished_Sprite
+static int tolua_waypointSystemFinished_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "waypointSystemFinished");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->WaypointSystemFinished());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_waypointSystemFinished_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWaypointSystemCanLoop_Sprite
+static int tolua_setWaypointSystemCanLoop_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setWaypointSystemCanLoop");
+	
+	if (self != 0)
+	{
+		self->SetWaypointSystemCanLoop(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWaypointSystemCanLoop_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_waypointSystemCanLoop_Sprite
+static int tolua_waypointSystemCanLoop_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "waypointSystemCanLoop");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->WaypointSystemCanLoop());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_waypointSystemCanLoop_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_currentWaypointIndex_Sprite
+static int tolua_currentWaypointIndex_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "currentWaypointIndex");
+	
+	if (self != 0)
+	{
+		tolua_push_int(L, self->CurrentWaypointIndex());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_currentWaypointIndex_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWanderingRadius_Sprite
+static int tolua_setWanderingRadius_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWanderingRadius");
+	
+	if (self != 0)
+	{
+		self->SetWanderingRadius(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWanderingRadius_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWanderingDistance_Sprite
+static int tolua_setWanderingDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWanderingDistance");
+	
+	if (self != 0)
+	{
+		self->SetWanderingDistance(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWanderingDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWanderingJitter_Sprite
+static int tolua_setWanderingJitter_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWanderingJitter");
+	
+	if (self != 0)
+	{
+		self->SetWanderingJitter(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWanderingJitter_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setMinDetectionBoxLength_Sprite
+static int tolua_setMinDetectionBoxLength_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setMinDetectionBoxLength");
+	
+	if (self != 0)
+	{
+		self->SetMinDetectionBoxLength(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setMinDetectionBoxLength_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWaypointSeekDist_Sprite
+static int tolua_setWaypointSeekDist_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWaypointSeekDist");
+	
+	if (self != 0)
+	{
+		self->SetWaypointSeekDist(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWaypointSeekDist_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setMaxFleeDistance_Sprite
+static int tolua_setMaxFleeDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setMaxFleeDistance");
+	
+	if (self != 0)
+	{
+		self->SetMaxFleeDistance(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setMaxFleeDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightSeek_Sprite
+static int tolua_setWeightSeek_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightSeek");
+	
+	if (self != 0)
+	{
+		self->SetWeightSeek(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightSeek_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightFlee_Sprite
+static int tolua_setWeightFlee_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightFlee");
+	
+	if (self != 0)
+	{
+		self->SetWeightFlee(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightFlee_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightArrive_Sprite
+static int tolua_setWeightArrive_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightFlee");
+	
+	if (self != 0)
+	{
+		self->SetWeightArrive(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightArrive_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightSpriteAvoidance_Sprite
+static int tolua_setWeightSpriteAvoidance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightSpriteAvoidance");
+	
+	if (self != 0)
+	{
+		self->SetWeightSpriteAvoidance(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightSpriteAvoidance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightSeparation_Sprite
+static int tolua_setWeightSeparation_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightSeparation");
+	
+	if (self != 0)
+	{
+		self->SetWeightSeparation(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightSeparation_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightAlignment_Sprite
+static int tolua_setWeightAlignment_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightAlignment");
+	
+	if (self != 0)
+	{
+		self->SetWeightAlignment(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightAlignment_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightCohesion_Sprite
+static int tolua_setWeightCohesion_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightCohesion");
+	
+	if (self != 0)
+	{
+		self->SetWeightCohesion(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightCohesion_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightWander_Sprite
+static int tolua_setWeightWander_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightWander");
+	
+	if (self != 0)
+	{
+		self->SetWeightWander(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightWander_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightFollowPath_Sprite
+static int tolua_setWeightFollowPath_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightFollowPath");
+	
+	if (self != 0)
+	{
+		self->SetWeightFollowPath(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightFollowPath_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightPursueTarget_Sprite
+static int tolua_setWeightPursueTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightPursueTarget");
+	
+	if (self != 0)
+	{
+		self->SetWeightPursueTarget(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightPursueTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightEvadeTarget_Sprite
+static int tolua_setWeightEvadeTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightEvadeTarget");
+	
+	if (self != 0)
+	{
+		self->SetWeightEvadeTarget(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightEvadeTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightInterpose_Sprite
+static int tolua_setWeightInterpose_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightInterpose");
+	
+	if (self != 0)
+	{
+		self->SetWeightInterpose(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightInterpose_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightHide_Sprite
+static int tolua_setWeightHide_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightHide");
+	
+	if (self != 0)
+	{
+		self->SetWeightHide(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightHide_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setWeightOffsetPursuit_Sprite
+static int tolua_setWeightOffsetPursuit_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setWeightOffsetPursuit");
+	
+	if (self != 0)
+	{
+		self->SetWeightOffsetPursuit(tolua_get_float(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setWeightOffsetPursuit_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanSeek_Sprite
+static int tolua_setCanSeek_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanSeek");
+	
+	if (self != 0)
+	{
+		self->SetCanSeek(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanSeek_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanFlee_Sprite
+static int tolua_setCanFlee_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanFlee");
+	
+	if (self != 0)
+	{
+		self->SetCanFlee(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanFlee_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanArrive_Sprite
+static int tolua_setCanArrive_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanArrive");
+	
+	if (self != 0)
+	{
+		self->SetCanArrive(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanArrive_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanAvoidSprites_Sprite
+static int tolua_setCanAvoidSprites_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanAvoidSprites");
+	
+	if (self != 0)
+	{
+		self->SetCanAvoidSprites(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanAvoidSprites_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanFlockSeparation_Sprite
+static int tolua_setCanFlockSeparation_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanFlockSeparation");
+	
+	if (self != 0)
+	{
+		self->SetCanFlockSeparation(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanFlockSeparation_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanFlockAlignment_Sprite
+static int tolua_setCanFlockAlignment_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanFlockAlignment");
+	
+	if (self != 0)
+	{
+		self->SetCanFlockAlignment(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanFlockAlignment_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanFlockCohesion_Sprite
+static int tolua_setCanFlockCohesion_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanFlockCohesion");
+	
+	if (self != 0)
+	{
+		self->SetCanFlockCohesion(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanFlockCohesion_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanWander_Sprite
+static int tolua_setCanWander_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanWander");
+	
+	if (self != 0)
+	{
+		self->SetCanWander(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanWander_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanFollowPath_Sprite
+static int tolua_setCanFollowPath_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanFollowPath");
+	
+	if (self != 0)
+	{
+		self->SetCanFollowPath(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanFollowPath_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanPursueTarget_Sprite
+static int tolua_setCanPursueTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanPursueTarget");
+	
+	if (self != 0)
+	{
+		self->SetCanPursueTarget(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanPursueTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanEvadeTarget_Sprite
+static int tolua_setCanEvadeTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanEvadeTarget");
+	
+	if (self != 0)
+	{
+		self->SetCanEvadeTarget(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanEvadeTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanInterpose_Sprite
+static int tolua_setCanInterpose_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanInterpose");
+	
+	if (self != 0)
+	{
+		self->SetCanInterpose(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanInterpose_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanHide_Sprite
+static int tolua_setCanHide_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanHide");
+	
+	if (self != 0)
+	{
+		self->SetCanHide(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanHide_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setCanOffsetPursuit_Sprite
+static int tolua_setCanOffsetPursuit_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_bool(L, "setCanOffsetPursuit");
+	
+	if (self != 0)
+	{
+		self->SetCanOffsetPursuit(tolua_get_bool(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setCanOffsetPursuit_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setEvader_Sprite
+static int tolua_setEvader_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setEvader");
+	
+	if (self != 0)
+	{
+		self->SetEvader(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setEvader_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setPursuer_Sprite
+static int tolua_setPursuer_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setPursuer");
+	
+	if (self != 0)
+	{
+		self->SetPursuer(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setPursuer_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setHideTarget_Sprite
+static int tolua_setHideTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setHideTarget");
+	
+	if (self != 0)
+	{
+		self->SetHideTarget(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setHideTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setSpriteA_Sprite
+static int tolua_setSpriteA_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setSpriteA");
+	
+	if (self != 0)
+	{
+		self->SetSpriteA(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setSpriteA_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setSpriteB_Sprite
+static int tolua_setSpriteB_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setSpriteB");
+	
+	if (self != 0)
+	{
+		self->SetSpriteB(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setSpriteB_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setLeader_Sprite
+static int tolua_setLeader_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "setLeader");
+	
+	if (self != 0)
+	{
+		self->SetLeader(tolua_get_sprite(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setLeader_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setLeaderOffset_Sprite
+static int tolua_setLeaderOffset_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "setLeaderOffset");
+	
+	if (tolua_ArgSafe_number(L, 2, "setLeaderOffset")
+	&&	tolua_ArgSafe_number(L, 3, "setLeaderOffset")
+	&&	tolua_ArgSafe_number(L, 4, "setLeaderOffset"))
+	{
+		if (self != 0)
+		{
+			self->SetLeaderOffset(ZShadeSandboxMath::XMMath3(tolua_get_float(L, 2), tolua_get_float(L, 3), tolua_get_float(L, 4)));
+		}
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setLeaderOffset_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setTargetPoint_Sprite
+static int tolua_setTargetPoint_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "setTargetPoint");
+	
+	if (tolua_ArgSafe_number(L, 2, "setTargetPoint")
+	&&	tolua_ArgSafe_number(L, 3, "setTargetPoint")
+	&&	tolua_ArgSafe_number(L, 4, "setTargetPoint"))
+	{
+		if (self != 0)
+		{
+			self->SetTargetPoint(ZShadeSandboxMath::XMMath3(tolua_get_float(L, 2), tolua_get_float(L, 3), tolua_get_float(L, 4)));
+		}
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setTargetPoint_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setTargetDecelerationType_Sprite
+static int tolua_setTargetDecelerationType_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setTargetDecelerationType");
+	
+	if (self != 0)
+	{
+		self->SetTargetDecelerationType(tolua_get_int(L, 2));
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setTargetDecelerationType_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_wanderingRadius_Sprite
+static int tolua_wanderingRadius_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "wanderingRadius");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WanderingRadius());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_wanderingRadius_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_wanderingDistance_Sprite
+static int tolua_wanderingDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "wanderingDistance");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WanderingDistance());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_wanderingDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_wanderingJitter_Sprite
+static int tolua_wanderingJitter_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "wanderingJitter");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WanderingJitter());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_wanderingJitter_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_minDetectionBoxLength_Sprite
+static int tolua_minDetectionBoxLength_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "minDetectionBoxLength");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->MinDetectionBoxLength());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_minDetectionBoxLength_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_waypointSeekDist_Sprite
+static int tolua_waypointSeekDist_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "waypointSeekDist");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WaypointSeekDist());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_waypointSeekDist_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_maxFleeDistance_Sprite
+static int tolua_maxFleeDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "maxFleeDistance");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->MaxFleeDistance());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_maxFleeDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightSeek_Sprite
+static int tolua_weightSeek_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightSeek");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightSeek());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightSeek_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightFlee_Sprite
+static int tolua_weightFlee_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightFlee");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightFlee());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightFlee_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightArrive_Sprite
+static int tolua_weightArrive_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightArrive");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightArrive());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightArrive_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightSpriteAvoidance_Sprite
+static int tolua_weightSpriteAvoidance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightSpriteAvoidance");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightSpriteAvoidance());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightSpriteAvoidance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightSeparation_Sprite
+static int tolua_weightSeparation_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightSeparation");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightSeparation());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightSeparation_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightAlignment_Sprite
+static int tolua_weightAlignment_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightAlignment");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightAlignment());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightAlignment_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightCohesion_Sprite
+static int tolua_weightCohesion_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightCohesion");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightCohesion());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightCohesion_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightWander_Sprite
+static int tolua_weightWander_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightWander");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightWander());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightWander_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightFollowPath_Sprite
+static int tolua_weightFollowPath_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightFollowPath");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightFollowPath());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightFollowPath_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightPursueTarget_Sprite
+static int tolua_weightPursueTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightPursueTarget");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightPursueTarget());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightPursueTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightEvadeTarget_Sprite
+static int tolua_weightEvadeTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightEvadeTarget");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightEvadeTarget());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightEvadeTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightInterpose_Sprite
+static int tolua_weightInterpose_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightInterpose");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightInterpose());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightInterpose_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightHide_Sprite
+static int tolua_weightHide_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightHide");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightHide());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightHide_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_weightOffsetPursuit_Sprite
+static int tolua_weightOffsetPursuit_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "weightOffsetPursuit");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->WeightOffsetPursuit());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_weightOffsetPursuit_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canSeek_Sprite
+static int tolua_canSeek_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canSeek");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanSeek());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canSeek_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canFlee_Sprite
+static int tolua_canFlee_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canFlee");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanFlee());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canFlee_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canArrive_Sprite
+static int tolua_canArrive_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canArrive");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanArrive());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canArrive_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canAvoidSprites_Sprite
+static int tolua_canAvoidSprites_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canAvoidSprites");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanAvoidSprites());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canAvoidSprites_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canFlockSeparation_Sprite
+static int tolua_canFlockSeparation_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canFlockSeparation");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanFlockSeparation());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canFlockSeparation_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canFlockAlignment_Sprite
+static int tolua_canFlockAlignment_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canFlockAlignment");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanFlockAlignment());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canFlockAlignment_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canFlockCohesion_Sprite
+static int tolua_canFlockCohesion_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canFlockCohesion");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanFlockCohesion());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canFlockCohesion_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canWander_Sprite
+static int tolua_canWander_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canWander");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanWander());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canWander_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canFollowPath_Sprite
+static int tolua_canFollowPath_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canFollowPath");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanFollowPath());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canFollowPath_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canPursueTarget_Sprite
+static int tolua_canPursueTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canPursueTarget");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanPursueTarget());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canPursueTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canEvadeTarget_Sprite
+static int tolua_canEvadeTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canEvadeTarget");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanEvadeTarget());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canEvadeTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canInterpose_Sprite
+static int tolua_canInterpose_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canInterpose");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanInterpose());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canInterpose_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canHide_Sprite
+static int tolua_canHide_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canHide");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanHide());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canHide_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_canOffsetPursuit_Sprite
+static int tolua_canOffsetPursuit_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "canOffsetPursuit");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->CanOffsetPursuit());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_canOffsetPursuit_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_evader_Sprite
+static int tolua_evader_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "evader");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->Evader());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_evader_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_pursuer_Sprite
+static int tolua_pursuer_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "pursuer");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->Pursuer());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_pursuer_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_hideTarget_Sprite
+static int tolua_hideTarget_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "hideTarget");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->HideTarget());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_hideTarget_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_spriteA_Sprite
+static int tolua_spriteA_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "spriteA");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->SpriteA());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_spriteA_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_spriteB_Sprite
+static int tolua_spriteB_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "spriteB");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->SpriteB());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_spriteB_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_leader_Sprite
+static int tolua_leader_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "leader");
+	
+	if (self != 0)
+	{
+		tolua_push_sprite(L, self->Leader());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_leader_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_leaderOffsetX_Sprite
+static int tolua_leaderOffsetX_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "leaderOffsetX");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->LeaderOffsetX());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_leaderOffsetX_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_leaderOffsetY_Sprite
+static int tolua_leaderOffsetY_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "leaderOffsetY");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->LeaderOffsetY());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_leaderOffsetY_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_leaderOffsetZ_Sprite
+static int tolua_leaderOffsetZ_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "leaderOffsetZ");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->LeaderOffsetZ());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_leaderOffsetZ_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_targetPointX_Sprite
+static int tolua_targetPointX_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "targetPointX");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->TargetPointX());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_targetPointX_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_targetPointY_Sprite
+static int tolua_targetPointY_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "targetPointY");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->TargetPointY());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_targetPointY_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_targetPointZ_Sprite
+static int tolua_targetPointZ_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "targetPointZ");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->TargetPointZ());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_targetPointZ_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_targetDecelerationType_Sprite
+static int tolua_targetDecelerationType_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "targetDecelerationType");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->TargetDecelerationType());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_targetDecelerationType_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_findNearestSpriteIDInMap_Sprite
+static int tolua_findNearestSpriteIDInMap_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "findNearestSpriteIDInMap");
+	
+	if (self != 0)
+	{
+		tolua_push_int(L, self->FindNearestSpriteIDInMap());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_findNearestSpriteIDInMap_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_addAllNearestSpriteIDsToCollection_Sprite
+static int tolua_addAllNearestSpriteIDsToCollection_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "addAllNearestSpriteIDsToCollection");
+	
+	if (self != 0)
+	{
+		self->AddAllNearestSpriteIDsToCollection();
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_addAllNearestSpriteIDsToCollection_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_amountOfSpritesInRange_Sprite
+static int tolua_amountOfSpritesInRange_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "amountOfSpritesInRange");
+	
+	if (self != 0)
+	{
+		tolua_push_int(L, self->AmountOfSpritesInRange());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_amountOfSpritesInRange_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_findNearestSpriteIDInCollection_Sprite
+static int tolua_findNearestSpriteIDInCollection_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "findNearestSpriteIDInCollection");
+	
+	if (self != 0)
+	{
+		tolua_push_int(L, self->FindNearestSpriteIDInCollection(tolua_get_int(L, 2)));
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_findNearestSpriteIDInCollection_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_setMinimumAttackDistance_Sprite
+static int tolua_setMinimumAttackDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "setMinimumAttackDistance");
+	
+	if (self != 0)
+	{
+		self->MinimumAttackDistance() = tolua_get_float(L, 2);
+	}
+	
+	return 0;
+}
+#endif //TOLUA_DISABLE_tolua_setMinimumAttackDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_minimumAttackDistance_Sprite
+static int tolua_minimumAttackDistance_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe(L, "minimumAttackDistance");
+	
+	if (self != 0)
+	{
+		tolua_push_float(L, self->MinimumAttackDistance());
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_minimumAttackDistance_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_withinAttackDistanceByID_Sprite
+static int tolua_withinAttackDistanceByID_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_number(L, "withinAttackDistanceByID");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->WithinAttackDistance(tolua_get_float(L, 2)));
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_withinAttackDistanceByID_Sprite
+//==================================================================================================================================
+#ifndef TOLUA_DISABLE_tolua_withinAttackDistanceBySprite_Sprite
+static int tolua_withinAttackDistanceBySprite_Sprite(lua_State* L)
+{
+	AISprite* self = tolua_Sprite_Safe_sprite(L, "withinAttackDistanceBySprite");
+	
+	if (self != 0)
+	{
+		tolua_push_bool(L, self->WithinAttackDistance(tolua_get_sprite(L, 2)));
+	}
+	
+	return 1;
+}
+#endif //TOLUA_DISABLE_tolua_withinAttackDistanceBySprite_Sprite
+//==================================================================================================================================
+//==================================================================================================================================
 TOLUA_API int tolua_Sprite_open()
 {
 	lua_State* L = Scripting::LuaState();
@@ -2157,7 +3767,6 @@ TOLUA_API int tolua_Sprite_open()
 		tolua_function(L, "get_default_sequence_id", tolua_getDefaultSequenceID_Sprite);
 		tolua_function(L, "set_animation_speed", tolua_setAnimationSpeed_Sprite);
 		tolua_function(L, "get_animation_speed", tolua_getAnimationSpeed_Sprite);
-		//tolua_function(L, "do_create_hardbox", tolua_doCreateHardbox_Sprite);
 		tolua_function(L, "collide_msg", tolua_collideMsg_Sprite);
 		tolua_function(L, "collided_sprite_info", tolua_collidedSpriteInfo_Sprite);
 		tolua_function(L, "say1", tolua_say1_Sprite);
@@ -2221,21 +3830,118 @@ TOLUA_API int tolua_Sprite_open()
 		tolua_function(L, "set_run_behavior_name", tolua_setRunBehaviorName_Sprite);
 		tolua_function(L, "set_run_default_behavior", tolua_canRunDefaultBehavior_Sprite);
 		// Sprite AI steering commands
-		/*
 		tolua_function(L, "create_waypoint_system", tolua_createWaypointSystem_Sprite);
 		tolua_function(L, "waypoint_system_size", tolua_waypointSystemSize_Sprite);
 		tolua_function(L, "waypoint_system_empty", tolua_waypointSystemEmpty_Sprite);
 		tolua_function(L, "clear_waypoint_system", tolua_clearWaypoints_Sprite);
 		tolua_function(L, "remove_waypoint", tolua_removeWaypoint_Sprite);
 		tolua_function(L, "add_waypoint", tolua_addWaypoint_Sprite);
-		tolua_function(L, "current_waypoint", tolua_currentWaypoint_Sprite);
+		tolua_function(L, "current_waypoint_x", tolua_currentWaypointX_Sprite);
+		tolua_function(L, "current_waypoint_y", tolua_currentWaypointY_Sprite);
+		tolua_function(L, "current_waypoint_z", tolua_currentWaypointZ_Sprite);
 		tolua_function(L, "set_next_waypoint", tolua_setNextWaypoint_Sprite);
 		tolua_function(L, "waypoint_system_finished", tolua_waypointSystemFinished_Sprite);
 		tolua_function(L, "set_waypoint_system_can_loop", tolua_setWaypointSystemCanLoop_Sprite);
 		tolua_function(L, "waypoint_system_can_loop", tolua_waypointSystemCanLoop_Sprite);
 		tolua_function(L, "current_waypoint_index", tolua_currentWaypointIndex_Sprite);
-		
-		*/
+		tolua_function(L, "set_wandering_radius", tolua_setWanderingRadius_Sprite);
+		tolua_function(L, "set_wandering_distance", tolua_setWanderingDistance_Sprite);
+		tolua_function(L, "set_wandering_jitter", tolua_setWanderingJitter_Sprite);
+		tolua_function(L, "set_min_detection_box_length", tolua_setMinDetectionBoxLength_Sprite);
+		tolua_function(L, "set_waypoint_seek_dist", tolua_setWaypointSeekDist_Sprite);
+		tolua_function(L, "set_max_flee_dist", tolua_setMaxFleeDistance_Sprite);
+		tolua_function(L, "set_weight_seek", tolua_setWeightSeek_Sprite);
+		tolua_function(L, "set_weight_flee", tolua_setWeightFlee_Sprite);
+		tolua_function(L, "set_weight_arrive", tolua_setWeightArrive_Sprite);
+		tolua_function(L, "set_weight_sprite_avoidance", tolua_setWeightSpriteAvoidance_Sprite);
+		tolua_function(L, "set_weight_separation", tolua_setWeightSeparation_Sprite);
+		tolua_function(L, "set_weight_alignment", tolua_setWeightAlignment_Sprite);
+		tolua_function(L, "set_weight_cohesion", tolua_setWeightCohesion_Sprite);
+		tolua_function(L, "set_weight_wander", tolua_setWeightWander_Sprite);
+		tolua_function(L, "set_weight_follow_path", tolua_setWeightFollowPath_Sprite);
+		tolua_function(L, "set_weight_pursue_target", tolua_setWeightPursueTarget_Sprite);
+		tolua_function(L, "set_weight_evade_target", tolua_setWeightEvadeTarget_Sprite);
+		tolua_function(L, "set_weight_interpose", tolua_setWeightInterpose_Sprite);
+		tolua_function(L, "set_weight_hide", tolua_setWeightHide_Sprite);
+		tolua_function(L, "set_weight_offset_pursuit", tolua_setWeightOffsetPursuit_Sprite);
+		tolua_function(L, "set_can_seek", tolua_setCanSeek_Sprite);
+		tolua_function(L, "set_can_flee", tolua_setCanFlee_Sprite);
+		tolua_function(L, "set_can_arrive", tolua_setCanArrive_Sprite);
+		tolua_function(L, "set_can_avoid_sprites", tolua_setCanAvoidSprites_Sprite);
+		tolua_function(L, "set_can_flock_separation", tolua_setCanFlockSeparation_Sprite);
+		tolua_function(L, "set_can_flock_alignment", tolua_setCanFlockAlignment_Sprite);
+		tolua_function(L, "set_can_flock_cohesion", tolua_setCanFlockCohesion_Sprite);
+		tolua_function(L, "set_can_wander", tolua_setCanWander_Sprite);
+		tolua_function(L, "set_can_follow_path", tolua_setCanFollowPath_Sprite);
+		tolua_function(L, "set_can_pursue_target", tolua_setCanPursueTarget_Sprite);
+		tolua_function(L, "set_can_evade_target", tolua_setCanEvadeTarget_Sprite);
+		tolua_function(L, "set_can_interpose", tolua_setCanInterpose_Sprite);
+		tolua_function(L, "set_can_hide", tolua_setCanHide_Sprite);
+		tolua_function(L, "set_can_offset_pursuit", tolua_setCanOffsetPursuit_Sprite);
+		tolua_function(L, "set_evader", tolua_setEvader_Sprite);
+		tolua_function(L, "set_pursuer", tolua_setPursuer_Sprite);
+		tolua_function(L, "set_hide_target", tolua_setHideTarget_Sprite);
+		tolua_function(L, "set_interpose_target_a", tolua_setSpriteA_Sprite);
+		tolua_function(L, "set_interpose_target_b", tolua_setSpriteB_Sprite);
+		tolua_function(L, "set_leader", tolua_setLeader_Sprite);
+		tolua_function(L, "set_leader_offset", tolua_setLeaderOffset_Sprite);
+		tolua_function(L, "set_target_point", tolua_setTargetPoint_Sprite);
+		tolua_function(L, "set_target_deceleration_type", tolua_setTargetDecelerationType_Sprite);
+		tolua_function(L, "wandering_radius", tolua_wanderingRadius_Sprite);
+		tolua_function(L, "wandering_distance", tolua_wanderingDistance_Sprite);
+		tolua_function(L, "wandering_jitter", tolua_wanderingJitter_Sprite);
+		tolua_function(L, "min_detection_box_length", tolua_minDetectionBoxLength_Sprite);
+		tolua_function(L, "waypoint_seek_dist", tolua_waypointSeekDist_Sprite);
+		tolua_function(L, "max_flee_dist", tolua_maxFleeDistance_Sprite);
+		tolua_function(L, "weight_seek", tolua_weightSeek_Sprite);
+		tolua_function(L, "weight_flee", tolua_weightFlee_Sprite);
+		tolua_function(L, "weight_arrive", tolua_weightArrive_Sprite);
+		tolua_function(L, "weight_sprite_avoidance", tolua_weightSpriteAvoidance_Sprite);
+		tolua_function(L, "weight_separation", tolua_weightSeparation_Sprite);
+		tolua_function(L, "weight_alignment", tolua_weightAlignment_Sprite);
+		tolua_function(L, "weight_cohesion", tolua_weightCohesion_Sprite);
+		tolua_function(L, "weight_wander", tolua_weightWander_Sprite);
+		tolua_function(L, "weight_follow_path", tolua_weightFollowPath_Sprite);
+		tolua_function(L, "weight_pursue_target", tolua_weightPursueTarget_Sprite);
+		tolua_function(L, "weight_evade_target", tolua_weightEvadeTarget_Sprite);
+		tolua_function(L, "weight_interpose", tolua_weightInterpose_Sprite);
+		tolua_function(L, "weight_hide", tolua_weightHide_Sprite);
+		tolua_function(L, "weight_offset_pursuit", tolua_weightOffsetPursuit_Sprite);
+		tolua_function(L, "can_seek", tolua_canSeek_Sprite);
+		tolua_function(L, "can_flee", tolua_canFlee_Sprite);
+		tolua_function(L, "can_arrive", tolua_canArrive_Sprite);
+		tolua_function(L, "can_avoid_sprites", tolua_canAvoidSprites_Sprite);
+		tolua_function(L, "can_flock_separation", tolua_canFlockSeparation_Sprite);
+		tolua_function(L, "can_flock_alignment", tolua_canFlockAlignment_Sprite);
+		tolua_function(L, "can_flock_cohesion", tolua_canFlockCohesion_Sprite);
+		tolua_function(L, "can_wander", tolua_canWander_Sprite);
+		tolua_function(L, "can_follow_path", tolua_canFollowPath_Sprite);
+		tolua_function(L, "can_pursue_target", tolua_canPursueTarget_Sprite);
+		tolua_function(L, "can_evade_target", tolua_canEvadeTarget_Sprite);
+		tolua_function(L, "can_interpose", tolua_canInterpose_Sprite);
+		tolua_function(L, "can_hide", tolua_canHide_Sprite);
+		tolua_function(L, "can_offset_pursuit", tolua_canOffsetPursuit_Sprite);
+		tolua_function(L, "evader", tolua_evader_Sprite);
+		tolua_function(L, "pursuer", tolua_pursuer_Sprite);
+		tolua_function(L, "hide_target", tolua_hideTarget_Sprite);
+		tolua_function(L, "interpose_target_a", tolua_spriteA_Sprite);
+		tolua_function(L, "interpose_target_b", tolua_spriteB_Sprite);
+		tolua_function(L, "leader", tolua_leader_Sprite);
+		tolua_function(L, "leader_offset_x", tolua_leaderOffsetX_Sprite);
+		tolua_function(L, "leader_offset_y", tolua_leaderOffsetY_Sprite);
+		tolua_function(L, "leader_offset_z", tolua_leaderOffsetZ_Sprite);
+		tolua_function(L, "target_point_x", tolua_targetPointX_Sprite);
+		tolua_function(L, "target_point_y", tolua_targetPointY_Sprite);
+		tolua_function(L, "target_point_z", tolua_targetPointZ_Sprite);
+		tolua_function(L, "target_deceleration_type", tolua_targetDecelerationType_Sprite);
+		tolua_function(L, "find_nearest_sprite_id_in_map", tolua_findNearestSpriteIDInMap_Sprite);
+		tolua_function(L, "add_all_nearest_sprite_ids_to_collection", tolua_addAllNearestSpriteIDsToCollection_Sprite);
+		tolua_function(L, "amount_of_sprites_in_range", tolua_amountOfSpritesInRange_Sprite);
+		tolua_function(L, "find_nearest_sprite_id_in_collection", tolua_findNearestSpriteIDInCollection_Sprite);
+		tolua_function(L, "set_minimum_attack_dist", tolua_setMinimumAttackDistance_Sprite);
+		tolua_function(L, "minimum_attack_dist", tolua_minimumAttackDistance_Sprite);
+		tolua_function(L, "within_attack_dist_by_id", tolua_withinAttackDistanceByID_Sprite);
+		tolua_function(L, "within_attack_dist_by_sprite", tolua_withinAttackDistanceBySprite_Sprite);
 		tolua_endmodule(L);
 		tolua_endmodule(L);
 	}

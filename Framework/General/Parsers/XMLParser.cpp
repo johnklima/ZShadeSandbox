@@ -215,9 +215,19 @@ bool ArrayElementXMLParser::ArrayElementNotNull(const char* siblingElementName)
 //================================================================================================================
 //================================================================================================================
 //================================================================================================================
+ArrayElementXMLSaver::ArrayElementXMLSaver(tinyxml2::XMLDocument* document, XMLNode* rootNode)
+:	mDocument(document)
+,	mRootNode(rootNode)
+,	bUseRootNode(true)
+,	bHasArrayElement(false)
+{
+}
+//================================================================================================================
 ArrayElementXMLSaver::ArrayElementXMLSaver(tinyxml2::XMLDocument* document, XMLElement* rootElement)
 :	mDocument(document)
 ,	mRootElement(rootElement)
+,	bUseRootNode(false)
+,	bHasArrayElement(false)
 {
 }
 //================================================================================================================
@@ -228,19 +238,8 @@ ArrayElementXMLSaver::~ArrayElementXMLSaver()
 void ArrayElementXMLSaver::BeginNewArrayElement(const char* elementName)
 {
 	mArrayElement = mDocument->NewElement(elementName);
+	bHasArrayElement = true;
 }
-//================================================================================================================
-/*void ArrayElementXMLSaver::CreateElement(const char* attributeName, const char* elementName, const char* value)
-{
-	mValueElement = mDocument->NewElement(elementName);
-	mValueElement->SetAttribute(attributeName, value);
-}
-//================================================================================================================
-void ArrayElementXMLSaver::CreateElement(const char* attributeName, const char* elementName, int i)
-{
-	mValueElement = mDocument->NewElement(elementName);
-	mValueElement->SetAttribute(attributeName, i);
-}*/
 //================================================================================================================
 void ArrayElementXMLSaver::CreateElement(const char* elementName)
 {
@@ -251,9 +250,9 @@ void ArrayElementXMLSaver::InsertElement(const char* elementName, int elementDat
 {
 	stringstream ss;
 	ss << elementData;
-	const char* element_str = ss.str().c_str();
+	string element_str = ZShadeSandboxGlobal::Convert::ConvertIntToString(elementData);// ss.str().c_str();
 	XMLElement* element = mDocument->NewElement(elementName);
-	element->InsertFirstChild(mDocument->NewText(element_str));
+	element->InsertFirstChild(mDocument->NewText(element_str.c_str()));
 	mValueElement->InsertEndChild(element);
 }
 //================================================================================================================
@@ -373,11 +372,17 @@ void ArrayElementXMLSaver::SetAttribute(const char* attributeName, const char* v
 //================================================================================================================
 void ArrayElementXMLSaver::EndCurrentElement()
 {
-	mArrayElement->InsertEndChild(mValueElement);
+	if (!bHasArrayElement)
+		mRootNode->InsertEndChild(mValueElement);
+	else
+		mArrayElement->InsertEndChild(mValueElement);
 }
 //================================================================================================================
 void ArrayElementXMLSaver::EndArrayElement()
 {
-	mRootElement->InsertEndChild(mArrayElement);
+	if (bUseRootNode)
+		mRootNode->InsertEndChild(mArrayElement);
+	else
+		mRootElement->InsertEndChild(mArrayElement);
 }
 //================================================================================================================

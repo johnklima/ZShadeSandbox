@@ -53,6 +53,11 @@ MapEditorSystem2D::MapEditorSystem2D(Environment2D* env2D)
 	
 	bWasClicked = false;
 
+	m_StampHighlight32x32 = 0;
+	m_StampNormal32x32 = 0;
+	m_StampHighlight = 0;
+	m_StampNormal = 0;
+
 	// Grid size
 	gridSizeX = m_EngineOptions->TILE_SIZE;
 	gridSizeY = m_EngineOptions->TILE_SIZE;
@@ -1519,9 +1524,13 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 			m_D3DSystem->TurnOnAlphaBlending();
 			{
 				if (stampPressed)
-					m_StampHighlight32x32->Render(camera, 0);
+				{
+					if (m_StampHighlight32x32 != 0) m_StampHighlight32x32->Render(camera, 0);
+				}
 				else
-					m_StampNormal32x32->Render(camera, 0);
+				{
+					if (m_StampNormal32x32 != 0) m_StampNormal32x32->Render(camera, 0);
+				}
 			}
 			m_D3DSystem->TurnOffAlphaBlending();
 		}
@@ -1538,9 +1547,13 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 					m_D3DSystem->TurnOnAlphaBlending();
 					{
 						if (stampPressed)
-							m_StampHighlight->Render(camera, 0);
+						{
+							if (m_StampHighlight != 0) m_StampHighlight->Render(camera, 0);
+						}
 						else
-							m_StampNormal->Render(camera, 0);
+						{
+							if (m_StampNormal != 0) m_StampNormal->Render(camera, 0);
+						}
 					}
 					m_D3DSystem->TurnOffAlphaBlending();
 				}
@@ -1551,9 +1564,13 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 				m_D3DSystem->TurnOnAlphaBlending();
 				{
 					if (stampPressed)
-						m_StampHighlight->Render(camera, 0);
+					{
+						if (m_StampHighlight != 0) m_StampHighlight->Render(camera, 0);
+					}
 					else
-						m_StampNormal->Render(camera, 0);
+					{
+						if (m_StampNormal != 0) m_StampNormal->Render(camera, 0);
+					}
 				}
 				m_D3DSystem->TurnOffAlphaBlending();
 			}
@@ -1572,9 +1589,13 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 				m_D3DSystem->TurnOnAlphaBlending();
 				{
 					if (stampPressed)
-						m_StampHighlight->Render(camera, 0);
+					{
+						if (m_StampHighlight != 0) m_StampHighlight->Render(camera, 0);
+					}
 					else
-						m_StampNormal->Render(camera, 0);
+					{
+						if (m_StampNormal != 0) m_StampNormal->Render(camera, 0);
+					}
 				}
 				m_D3DSystem->TurnOffAlphaBlending();
 			}
@@ -1586,7 +1607,7 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 	{
 		m_D3DSystem->TurnOnAlphaBlending();
 		{
-			m_select_sprite_box->Render(camera, 0, ScrollOffset);
+			if (m_select_sprite_box != 0) m_select_sprite_box->Render(camera, 0, ScrollOffset);
 		}
 		m_D3DSystem->TurnOffAlphaBlending();
 	}
@@ -1595,7 +1616,7 @@ void MapEditorSystem2D::RenderStampSprites(Camera* camera)
 	{
 		m_D3DSystem->TurnOnAlphaBlending();
 		{
-			m_sprite_box->Render(camera, 0, ScrollOffset);
+			if (m_sprite_box != 0) m_sprite_box->Render(camera, 0, ScrollOffset);
 		}
 		m_D3DSystem->TurnOffAlphaBlending();
 	}
@@ -1609,32 +1630,32 @@ void MapEditorSystem2D::RenderMultiStampSprites(Camera* camera)
 		{
 			switch (multiStampSize)
 			{
-				case MSS_1X1: { m_TileEdit1x1Sprite2->Render(camera, 0); } break;
-				case MSS_2X2: { m_TileEdit2x2Sprite2->Render(camera, 0); } break;
-				case MSS_3X3: { m_TileEdit3x3Sprite2->Render(camera, 0); } break;
-				case MSS_4X4: { m_TileEdit4x4Sprite2->Render(camera, 0); } break;
-				case MSS_5X5: { m_TileEdit5x5Sprite2->Render(camera, 0); } break;
-				case MSS_6X6: { m_TileEdit6x6Sprite2->Render(camera, 0); } break;
-				case MSS_7X7: { m_TileEdit7x7Sprite2->Render(camera, 0); } break;
-				case MSS_8X8: { m_TileEdit8x8Sprite2->Render(camera, 0); } break;
-				case MSS_9X9: { m_TileEdit9x9Sprite2->Render(camera, 0); } break;
-				case MSS_10X10: { m_TileEdit10x10Sprite2->Render(camera, 0); } break;
+				case MSS_1X1: { if (m_TileEdit1x1Sprite2 != 0) m_TileEdit1x1Sprite2->Render(camera, 0); } break;
+				case MSS_2X2: { if (m_TileEdit2x2Sprite2 != 0) m_TileEdit2x2Sprite2->Render(camera, 0); } break;
+				case MSS_3X3: { if (m_TileEdit3x3Sprite2 != 0) m_TileEdit3x3Sprite2->Render(camera, 0); } break;
+				case MSS_4X4: { if (m_TileEdit4x4Sprite2 != 0) m_TileEdit4x4Sprite2->Render(camera, 0); } break;
+				case MSS_5X5: { if (m_TileEdit5x5Sprite2 != 0) m_TileEdit5x5Sprite2->Render(camera, 0); } break;
+				case MSS_6X6: { if (m_TileEdit6x6Sprite2 != 0) m_TileEdit6x6Sprite2->Render(camera, 0); } break;
+				case MSS_7X7: { if (m_TileEdit7x7Sprite2 != 0) m_TileEdit7x7Sprite2->Render(camera, 0); } break;
+				case MSS_8X8: { if (m_TileEdit8x8Sprite2 != 0) m_TileEdit8x8Sprite2->Render(camera, 0); } break;
+				case MSS_9X9: { if (m_TileEdit9x9Sprite2 != 0) m_TileEdit9x9Sprite2->Render(camera, 0); } break;
+				case MSS_10X10: { if (m_TileEdit10x10Sprite2 != 0) m_TileEdit10x10Sprite2->Render(camera, 0); } break;
 			}
 		}
 		else
 		{
 			switch (multiStampSize)
 			{
-				case MSS_1X1: { m_TileEdit1x1Sprite->Render(camera, 0); } break;
-				case MSS_2X2: { m_TileEdit2x2Sprite->Render(camera, 0); } break;
-				case MSS_3X3: { m_TileEdit3x3Sprite->Render(camera, 0); } break;
-				case MSS_4X4: { m_TileEdit4x4Sprite->Render(camera, 0); } break;
-				case MSS_5X5: { m_TileEdit5x5Sprite->Render(camera, 0); } break;
-				case MSS_6X6: { m_TileEdit6x6Sprite->Render(camera, 0); } break;
-				case MSS_7X7: { m_TileEdit7x7Sprite->Render(camera, 0); } break;
-				case MSS_8X8: { m_TileEdit8x8Sprite->Render(camera, 0); } break;
-				case MSS_9X9: { m_TileEdit9x9Sprite->Render(camera, 0); } break;
-				case MSS_10X10: { m_TileEdit10x10Sprite->Render(camera, 0); } break;
+				case MSS_1X1: { if (m_TileEdit1x1Sprite != 0) m_TileEdit1x1Sprite->Render(camera, 0); } break;
+				case MSS_2X2: { if (m_TileEdit2x2Sprite != 0) m_TileEdit2x2Sprite->Render(camera, 0); } break;
+				case MSS_3X3: { if (m_TileEdit3x3Sprite != 0) m_TileEdit3x3Sprite->Render(camera, 0); } break;
+				case MSS_4X4: { if (m_TileEdit4x4Sprite != 0) m_TileEdit4x4Sprite->Render(camera, 0); } break;
+				case MSS_5X5: { if (m_TileEdit5x5Sprite != 0) m_TileEdit5x5Sprite->Render(camera, 0); } break;
+				case MSS_6X6: { if (m_TileEdit6x6Sprite != 0) m_TileEdit6x6Sprite->Render(camera, 0); } break;
+				case MSS_7X7: { if (m_TileEdit7x7Sprite != 0) m_TileEdit7x7Sprite->Render(camera, 0); } break;
+				case MSS_8X8: { if (m_TileEdit8x8Sprite != 0) m_TileEdit8x8Sprite->Render(camera, 0); } break;
+				case MSS_9X9: { if (m_TileEdit9x9Sprite != 0) m_TileEdit9x9Sprite->Render(camera, 0); } break;
+				case MSS_10X10: { if (m_TileEdit10x10Sprite != 0) m_TileEdit10x10Sprite->Render(camera, 0); } break;
 			}
 		}
 	}

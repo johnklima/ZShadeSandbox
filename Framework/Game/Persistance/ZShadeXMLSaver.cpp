@@ -18,7 +18,7 @@ bool ZShadeXMLSaver::SaveTemplatePolyXML(string filename, ZShadeSandboxMath::Pol
 	xmlParser.InsertElement("Name", poly->Name());
 	xmlParser.InsertElement("VertexCount", poly->GetVertexCount());
 
-	ArrayElementXMLSaver vertexSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver vertexSaver(xmlParser.Document(), xmlParser.ElementNode());
 	vertexSaver.BeginNewArrayElement("Vertices");
 	for (int i = 0; i < poly->GetVertexCount(); i++)
 	{
@@ -33,7 +33,7 @@ bool ZShadeXMLSaver::SaveTemplatePolyXML(string filename, ZShadeSandboxMath::Pol
 
 	xmlParser.InsertElement("IndexCount", poly->GetIndexCount());
 
-	ArrayElementXMLSaver indexSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver indexSaver(xmlParser.Document(), xmlParser.ElementNode());
 	indexSaver.BeginNewArrayElement("Indices");
 	for (int i = 0; i < poly->GetIndexCount(); i++)
 	{
@@ -87,7 +87,7 @@ bool ZShadeXMLSaver::SaveMaterialXML(string filename, ZShadeSandboxLighting::Sha
 	xmlParser.InsertElement("EnableDistTess", material->bEnableDistTess);
 	xmlParser.InsertElement("IlluminationModel", material->iIlluminationModel);
 	
-	ArrayElementXMLSaver diffuseArraySaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver diffuseArraySaver(xmlParser.Document(), xmlParser.ElementNode());
 	diffuseArraySaver.BeginNewArrayElement("DiffuseArray");
 	for (int i = 0; i < material->GetDiffuseArrayTextureNames().size(); i++)
 	{
@@ -174,7 +174,7 @@ bool ZShadeXMLSaver::SaveInventoryXML(string filename, PlayerInventory2D* invent
 	xmlParser.InsertElement("StartLocationRegular", inventory->GridStartLocationRegular());
 	xmlParser.InsertElement("StartLocationMagic", inventory->GridStartLocationMagic());
 	
-	ArrayElementXMLSaver itemRegularSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver itemRegularSaver(xmlParser.Document(), xmlParser.ElementNode());
 	itemRegularSaver.BeginNewArrayElement("RegularItems");
 	for (int i = 0; i < inventory->MaxAllowedItemsRegular(); i++)
 	{
@@ -189,7 +189,7 @@ bool ZShadeXMLSaver::SaveInventoryXML(string filename, PlayerInventory2D* invent
 	}
 	itemRegularSaver.EndArrayElement();
 	
-	ArrayElementXMLSaver itemMagicSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver itemMagicSaver(xmlParser.Document(), xmlParser.ElementNode());
 	itemMagicSaver.BeginNewArrayElement("MagicItems");
 	for (int i = 0; i < inventory->MaxAllowedItemsMagic(); i++)
 	{
@@ -228,7 +228,7 @@ bool ZShadeXMLSaver::SaveHUDXML(string filename, HUD* hs)
 	hud_size.append(ssy.str());
 	xmlParser.InsertElement("hud_size", hud_size);
 	
-	ArrayElementXMLSaver imagesSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver imagesSaver(xmlParser.Document(), xmlParser.ElementNode());
 	imagesSaver.BeginNewArrayElement("Images");
 	for (int i = 0; i < hud->GetImages().size(); i++)
 	{
@@ -247,7 +247,7 @@ bool ZShadeXMLSaver::SaveHUDXML(string filename, HUD* hs)
 	}
 	imagesSaver.EndArrayElement();
 	
-	ArrayElementXMLSaver textsSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver textsSaver(xmlParser.Document(), xmlParser.ElementNode());
 	textsSaver.BeginNewArrayElement("Texts");
 	for (int i = 0; i < hud->GetTexts().size(); i++)
 	{
@@ -283,7 +283,7 @@ bool ZShadeXMLSaver::SaveWorldXML(STopdownWorld* sworld, string filename)
 	
 	xmlParser.InsertElement("name", sworld->sWorldName);
 	
-	ArrayElementXMLSaver mapsSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver mapsSaver(xmlParser.Document(), xmlParser.ElementNode());
 	mapsSaver.BeginNewArrayElement("Maps");
 	for (int i = 0; i < sworld->m_mapNames.size(); i++)
 	{
@@ -311,7 +311,7 @@ bool ZShadeXMLSaver::SaveWorldXML(SPlatformerWorld* sworld, string filename)
 	
 	xmlParser.InsertElement("name", sworld->sWorldName);
 	
-	ArrayElementXMLSaver mapsSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver mapsSaver(xmlParser.Document(), xmlParser.ElementNode());
 	mapsSaver.BeginNewArrayElement("Maps");
 	for (int i = 0; i < sworld->m_mapNames.size(); i++)
 	{
@@ -338,13 +338,16 @@ bool ZShadeXMLSaver::SaveSpritesXML(TopdownMap* map, string spriteMapPath, strin
 	xmlParser.CreateRootNode("Sprites");
 	
 	AISprite* spr;
-	ArrayElementXMLSaver spriteSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver spriteSaver(xmlParser.Document(), xmlParser.ElementNode());
 	for (int i = 0; i < map->NumSprites(); i++)
 	{
 		spr = map->GetSprite(i);
 		
 		if (spr == 0) continue;
 		
+		if (spr->IsDisplaySprite()) continue;
+		if (spr->IsCloneDisplaySprite()) continue;
+
 		spriteSaver.CreateElement("Sprite");
 		spriteSaver.SetAttribute("id", i);
 
@@ -396,7 +399,6 @@ bool ZShadeXMLSaver::SaveSpritesXML(TopdownMap* map, string spriteMapPath, strin
 		
 		spriteSaver.EndCurrentElement();
 	}
-	spriteSaver.EndArrayElement();
 	
 	xmlParser.Save(spriteMapfilename);
 	
@@ -410,12 +412,15 @@ bool ZShadeXMLSaver::SaveSpritesXML(PlatformerMap* map, string spriteMapPath, st
 	xmlParser.CreateRootNode("Sprites");
 	
 	AISprite* spr;
-	ArrayElementXMLSaver spriteSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver spriteSaver(xmlParser.Document(), xmlParser.ElementNode());
 	for (int i = 0; i < map->NumSprites(); i++)
 	{
 		spr = map->GetSprite(i);
 		
 		if (spr == 0) continue;
+
+		if (spr->IsDisplaySprite()) continue;
+		if (spr->IsCloneDisplaySprite()) continue;
 		
 		spriteSaver.CreateElement("Sprite");
 		spriteSaver.SetAttribute("id", i);
@@ -466,7 +471,6 @@ bool ZShadeXMLSaver::SaveSpritesXML(PlatformerMap* map, string spriteMapPath, st
 		
 		spriteSaver.EndCurrentElement();
 	}
-	spriteSaver.EndArrayElement();
 	
 	BetterString str(spriteMapPath);
 	str += "\\";
@@ -504,18 +508,28 @@ bool ZShadeXMLSaver::SaveMapXML(TopdownMap* map, string filename, GameDirectory2
 		if (str[i] == '.') break;
 		map_name.insert_char(str[i], j++);
 	}
-
-	string xml_sprite_str = map_name.toString();
+	
+	// Use this to save the full Sprite XML file
+	//string username = CGlobal::GrabUserName();
+	//string path = "C:\\Users\\";
+	//path.append(username);
+	//path.append("\\AppData\\Roaming\\");
+	//path.append(game_folder);
+	//game_folder = path;
+	
+	string xml_sprite_str = path.toString();// map_name.toString();
+	xml_sprite_str += "\\";
+	xml_sprite_str += map_name.toString();
 	xml_sprite_str += "Sprites.xml";
 
 	xmlParser.InsertElement("map_name", map->MapName());
 	xmlParser.InsertElement("xml_sprite", xml_sprite_str);
 
 	string mapType;
-	if (map->MapType() == Map2DType::REGULAR)
+	//if (map->MapType() == Map2DType::REGULAR)
 		mapType = "regular";
-	else if (map->MapType() == Map2DType::ISOMETRIC)
-		mapType = "isometric";
+	//else if (map->MapType() == Map2DType::ISOMETRIC)
+	//	mapType = "isometric";
 
 	xmlParser.InsertElement("map_type", mapType);
 	xmlParser.InsertElement("row_size", map->NumSectionsPerRow());
@@ -527,7 +541,7 @@ bool ZShadeXMLSaver::SaveMapXML(TopdownMap* map, string filename, GameDirectory2
 	xmlParser.SetAttribute("Fow", "radius", map->FOWRadius());
 	xmlParser.SetAttribute("Fow", "flashlight", map->FOWFlashlight());
 	
-	ArrayElementXMLSaver tilesSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver tilesSaver(xmlParser.Document(), xmlParser.ElementNode());
 	tilesSaver.BeginNewArrayElement("Tiles");
 	SmartArray2D<TopdownTile*> tiles = map->Tiles();
 	int tile_id = 0;
@@ -540,7 +554,7 @@ bool ZShadeXMLSaver::SaveMapXML(TopdownMap* map, string filename, GameDirectory2
 			if (tile == NULL) continue;
 			if (tile->Mesh() == NULL) continue;
 
-			tilesSaver.CreateElement("TopdownTile");
+			tilesSaver.CreateElement("Tile");
 			tilesSaver.SetAttribute("id", tile_id);
 			
 			tilesSaver.InsertElement("x", tile->TopLeftPosition().x);
@@ -597,8 +611,18 @@ bool ZShadeXMLSaver::SaveMapXML(PlatformerMap* map, string filename, GameDirecto
 		if (str[i] == '.') break;
 		map_name.insert_char(str[i], j++);
 	}
-
-	string xml_sprite_str = map_name.toString();
+	
+	// Use this to save the full Sprite XML file
+	//string username = CGlobal::GrabUserName();
+	//string path = "C:\\Users\\";
+	//path.append(username);
+	//path.append("\\AppData\\Roaming\\");
+	//path.append(game_folder);
+	//game_folder = path;
+	
+	string xml_sprite_str = path.toString();// map_name.toString();
+	xml_sprite_str += "\\";
+	xml_sprite_str += map_name.toString();
 	xml_sprite_str += "Sprites.xml";
 
 	xmlParser.InsertElement("map_name", map->MapName());
@@ -607,7 +631,7 @@ bool ZShadeXMLSaver::SaveMapXML(PlatformerMap* map, string filename, GameDirecto
 	xmlParser.InsertElement("width", map->Width());
 	xmlParser.InsertElement("height", map->Height());
 
-	ArrayElementXMLSaver tilesSaver(xmlParser.Document(), xmlParser.Element());
+	ArrayElementXMLSaver tilesSaver(xmlParser.Document(), xmlParser.ElementNode());
 	tilesSaver.BeginNewArrayElement("Tiles");
 	SmartArray2D<PlatformerTile*> tiles = map->Tiles();
 	int tile_id = 0;
@@ -620,7 +644,7 @@ bool ZShadeXMLSaver::SaveMapXML(PlatformerMap* map, string filename, GameDirecto
 			if (tile == NULL) continue;
 			if (tile->GetMesh() == NULL) continue;
 
-			tilesSaver.CreateElement("TopdownTile");
+			tilesSaver.CreateElement("Tile");
 			tilesSaver.SetAttribute("id", tile_id);
 
 			tilesSaver.SetAttribute("image", tile->GetTileTextureName().c_str());
@@ -738,7 +762,7 @@ bool ZShadeXMLSaver::SaveMenuXML(string menufilename, MenuSystem* ms)
 		xmlParser.InsertElement("menu_type", menu_type);
 		xmlParser.InsertElement("menu_background", m->GetBackgroundName());
 
-		ArrayElementXMLSaver buttonsSaver(xmlParser.Document(), xmlParser.Element());
+		ArrayElementXMLSaver buttonsSaver(xmlParser.Document(), xmlParser.ElementNode());
 		buttonsSaver.BeginNewArrayElement("Buttons");
 		for (int i = 0; i < m->GetButtons().size(); i++)
 		{
@@ -771,12 +795,13 @@ bool ZShadeXMLSaver::SaveMenuXML(string menufilename, MenuSystem* ms)
 			}
 
 			buttonsSaver.InsertElement("script_type", st_name);
+			buttonsSaver.InsertElement("tag", b->Tag());
 
 			buttonsSaver.EndCurrentElement();
 		}
 		buttonsSaver.EndArrayElement();
 
-		ArrayElementXMLSaver textsSaver(xmlParser.Document(), xmlParser.Element());
+		ArrayElementXMLSaver textsSaver(xmlParser.Document(), xmlParser.ElementNode());
 		textsSaver.BeginNewArrayElement("Texts");
 		for (int i = 0; i < m->GetTexts().size(); i++)
 		{

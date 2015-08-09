@@ -683,8 +683,14 @@ void PlatformerMap::ClipSprites()
 
 		AISprite* spr = m_Sprites[j];
 		
-		float x = spr->X() + m_Offset.x;
-		float y = spr->Y() + m_Offset.y;
+		float x = spr->X();
+		float y = spr->Y();
+
+		if (!spr->IsPlayer())
+		{
+			x += m_Offset.x;
+			y += m_Offset.y;
+		}
 
 		// Clip the sprite if it is not in the screen
 		if (!InScreen(x, y, spr->Width(), spr->Height()) && !spr->IsDisplaySprite()) continue;

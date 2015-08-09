@@ -14,6 +14,44 @@ EnvironmentMenuHelper::~EnvironmentMenuHelper()
 {
 }
 //================================================================================================================
+bool EnvironmentMenuHelper::GetButtonID(int& buttonID, int x, int y)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return false;
+	
+	if (env2D->GetMenuSystem() == 0) return false;
+	
+	ZShadeSandboxGraphics::Button* p_clicked_button;
+	bool clicked = env2D->GetMenuSystem()->ButtonClicked(p_clicked_button, x, y);
+	if (clicked)
+	{
+		buttonID = p_clicked_button->ID();
+	}
+
+	return clicked;
+}
+//================================================================================================================
+bool EnvironmentMenuHelper::GetTextID(int& textID, int x, int y)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return false;
+	
+	if (env2D->GetMenuSystem() == 0) return false;
+	
+	ZShadeSandboxGraphics::Text* p_clicked_text;
+	bool clicked = env2D->GetMenuSystem()->TextClicked(p_clicked_text, x, y);
+	if (clicked)
+	{
+		textID = p_clicked_text->ID();
+	}
+
+	return clicked;
+}
+//================================================================================================================
 void EnvironmentMenuHelper::AddBackground(ZShadeSandboxGraphics::Image* image)
 {
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
@@ -312,6 +350,18 @@ void EnvironmentMenuHelper::HighlightButton(ZShadeSandboxGraphics::Button*& butt
 		highlightBox = 0;
 		boxCreated = false;
 	}
+}
+//================================================================================================================
+void EnvironmentMenuHelper::AddMenuNameToButton(string menu_name, int buttonID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return;
+	
+	if (env2D->GetMenuSystem() == 0) return;
+	
+	env2D->GetMenuSystem()->AddMenuNameToButton(menu_name, buttonID);
 }
 //================================================================================================================
 bool EnvironmentMenuHelper::TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y)

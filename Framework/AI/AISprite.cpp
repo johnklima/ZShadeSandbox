@@ -1,5 +1,8 @@
 #include "AISprite.h"
 #include "Scripting.h"
+#include "TopdownMap.h"
+#include "PlatformerMap.h"
+#include "Environment2DMapHelper.h"
 //==================================================================================================================================
 //==================================================================================================================================
 AISprite::AISprite(D3D* d3d)
@@ -10,6 +13,7 @@ AISprite::AISprite(D3D* d3d)
 ,	m_behavior_name("")
 ,	tree(0)
 ,	m_TargetSprite(0)
+,	m_ran_main(false)
 {
 	mSteeringForce = new AISteeringForce(this);
 }
@@ -46,6 +50,35 @@ void AISprite::CalculateSteeringForce()
 		
 		// Update the velocity of the sprite with the new force
 		UpdateVelocity(force.x, force.y);
+
+		// Need to calculate the direction of movement
+		if (Velocity().x < 0)
+		{
+			bMovingLeft = true;
+		}
+		else if (Velocity().x > 0)
+		{
+			bMovingRight = true;
+		}
+		else
+		{
+			bMovingLeft = false;
+			bMovingRight = false;
+		}
+
+		if (Velocity().y < 0)
+		{
+			bMovingDown = true;
+		}
+		else if (Velocity().y > 0)
+		{
+			bMovingUp = true;
+		}
+		else
+		{
+			bMovingDown = false;
+			bMovingUp = false;
+		}
 	}
 }
 //==================================================================================================================================
@@ -94,9 +127,9 @@ void AISprite::SetWeightArrive(float value)
 	mSteeringForce->WeightArrive() = value;
 }
 //==================================================================================================================================
-void AISprite::SetWeightObstacleAvoidance(float value)
+void AISprite::SetWeightSpriteAvoidance(float value)
 {
-	mSteeringForce->WeightObstacleAvoidance() = value;
+	mSteeringForce->WeightSpriteAvoidance() = value;
 }
 //==================================================================================================================================
 void AISprite::SetWeightSeparation(float value)
@@ -234,7 +267,7 @@ void AISprite::SetPursuer(AISprite* sprite)
 	mSteeringForce->Pursuer() = sprite;
 }
 //==================================================================================================================================
-void AISprite::SetTarget(AISprite* sprite)
+void AISprite::SetHideTarget(AISprite* sprite)
 {
 	mSteeringForce->Target() = sprite;
 }
@@ -264,9 +297,31 @@ void AISprite::SetTargetPoint(ZShadeSandboxMath::XMMath3 point)
 	mSteeringForce->TargetPoint() = point;
 }
 //==================================================================================================================================
-void AISprite::SetTargetDecelerationType(EDeceleration::Type type)
+void AISprite::SetTargetDecelerationType(int type)
 {
-	mSteeringForce->TargetDecelerationType() = type;
+	if (type == 3)
+	{
+		mSteeringForce->TargetDecelerationType() = EDeceleration::Type::eSlow;
+	}
+	else if (type == 2)
+	{
+		mSteeringForce->TargetDecelerationType() = EDeceleration::Type::eNormal;
+	}
+	else if (type == 1)
+	{
+		mSteeringForce->TargetDecelerationType() = EDeceleration::Type::eFast;
+	}
+}
+//==================================================================================================================================
+int AISprite::TargetDecelerationType() const
+{
+	switch (mSteeringForce->TargetDecelerationType())
+	{
+		case EDeceleration::Type::eSlow: return 3;
+		case EDeceleration::Type::eNormal: return 2;
+		case EDeceleration::Type::eFast: return 1;
+		default: return 1;
+	}
 }
 //==================================================================================================================================
 void AISprite::CreateWaypointSystem()
@@ -308,12 +363,28 @@ void AISprite::AddWaypoint(ZShadeSandboxMath::XMMath3 waypoint)
 		mSteeringForce->WaypointSystem()->AddWaypoint(waypoint);
 }
 //==================================================================================================================================
-bool AISprite::CurrentWaypoint(ZShadeSandboxMath::XMMath3& waypoint)
+float AISprite::CurrentWaypointX()
 {
+	ZShadeSandboxMath::XMMath3 waypoint(-99999999, -99999999, -99999999);
 	if (mSteeringForce->WaypointSystem())
-		return mSteeringForce->WaypointSystem()->CurrentWaypoint(waypoint);
-	else
-		return false;
+		mSteeringForce->WaypointSystem()->CurrentWaypoint(waypoint);
+	return waypoint.x;
+}
+//==================================================================================================================================
+float AISprite::CurrentWaypointY()
+{
+	ZShadeSandboxMath::XMMath3 waypoint(-99999999, -99999999, -99999999);
+	if (mSteeringForce->WaypointSystem())
+		mSteeringForce->WaypointSystem()->CurrentWaypoint(waypoint);
+	return waypoint.y;
+}
+//==================================================================================================================================
+float AISprite::CurrentWaypointZ()
+{
+	ZShadeSandboxMath::XMMath3 waypoint(-99999999, -99999999, -99999999);
+	if (mSteeringForce->WaypointSystem())
+		mSteeringForce->WaypointSystem()->CurrentWaypoint(waypoint);
+	return waypoint.z;
 }
 //==================================================================================================================================
 void AISprite::SetNextWaypoint()
@@ -350,6 +421,804 @@ int AISprite::CurrentWaypointIndex() const
 		return mSteeringForce->WaypointSystem()->CurrentWaypointIndex();
 	else
 		return -99999999;
+}
+//==================================================================================================================================
+void AISprite::TagNearestSpritesInMap()
+{
+	std::vector<AISprite*> sprites;
+	
+	TopdownMap* topdownMap = Environment2DMapHelper::ActiveTopdownMap();
+	if (topdownMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = topdownMap->Sprites();
+	}
+	
+	PlatformerMap* platformerMap = Environment2DMapHelper::ActivePlatformerMap();
+	if (platformerMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = platformerMap->Sprites();
+	}
+	
+	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
+	
+	// The detection box length is proportional to the agent's velocity
+	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
+	
+	auto iter = sprites.begin();
+	
+	for (; iter != sprites.end(); ++iter)
+	{
+		(*iter)->UnTag();
+		
+		ZShadeSandboxMath::XMMath3 sprPosition((*iter)->TopLeftPosition().x, (*iter)->TopLeftPosition().y, (*iter)->TopLeftPosition().z);
+		
+		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
+		
+		// The bounding radius of the other sprite is taken into account by adding it to the range
+		float range = boxLength + (*iter)->BoundingRadius();
+		
+		if (((*iter) != this) && (to.LengthSquared() < range * range))
+		{
+			(*iter)->Tag();
+		}
+	}
+}
+//==================================================================================================================================
+int AISprite::FindNearestSpriteIDInMap()
+{
+	std::vector<AISprite*> sprites;
+	
+	TopdownMap* topdownMap = Environment2DMapHelper::ActiveTopdownMap();
+	if (topdownMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = topdownMap->Sprites();
+	}
+	
+	PlatformerMap* platformerMap = Environment2DMapHelper::ActivePlatformerMap();
+	if (platformerMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = platformerMap->Sprites();
+	}
+	
+	int nearestID = -1;
+	
+	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
+	
+	// The detection box length is proportional to the agent's velocity
+	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
+	
+	auto iter = sprites.begin();
+	
+	for (; iter != sprites.end(); ++iter)
+	{
+		ZShadeSandboxMath::XMMath3 sprPosition((*iter)->TopLeftPosition().x, (*iter)->TopLeftPosition().y, (*iter)->TopLeftPosition().z);
+		
+		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
+		
+		// The bounding radius of the other sprite is taken into account by adding it to the range
+		float range = boxLength + (*iter)->BoundingRadius();
+		
+		if (((*iter) != this) && (to.LengthSquared() < range * range))
+		{
+			nearestID = (*iter)->ID();
+			break;
+		}
+	}
+	
+	return nearestID;
+}
+//==================================================================================================================================
+void AISprite::AddAllNearestSpriteIDsToCollection()
+{
+	if (mNearestSpritesID.size() > 0)
+	{
+		mNearestSpritesID.clear();
+	}
+	
+	std::vector<AISprite*> sprites;
+	
+	TopdownMap* topdownMap = Environment2DMapHelper::ActiveTopdownMap();
+	if (topdownMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = topdownMap->Sprites();
+	}
+	
+	PlatformerMap* platformerMap = Environment2DMapHelper::ActivePlatformerMap();
+	if (platformerMap != 0)
+	{
+		// Get the list of sprites in the map
+		sprites = platformerMap->Sprites();
+	}
+	
+	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
+	
+	// The detection box length is proportional to the agent's velocity
+	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
+	
+	auto iter = sprites.begin();
+	
+	for (; iter != sprites.end(); ++iter)
+	{
+		ZShadeSandboxMath::XMMath3 sprPosition((*iter)->TopLeftPosition().x, (*iter)->TopLeftPosition().y, (*iter)->TopLeftPosition().z);
+		
+		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
+		
+		// The bounding radius of the other sprite is taken into account by adding it to the range
+		float range = boxLength + (*iter)->BoundingRadius();
+		
+		if (((*iter) != this) && (to.LengthSquared() < range * range))
+		{
+			mNearestSpritesID.push_back((*iter)->ID());
+		}
+	}
+}
+//==================================================================================================================================
+int AISprite::AmountOfSpritesInRange()
+{
+	return mNearestSpritesID.size();
+}
+//==================================================================================================================================
+int AISprite::FindNearestSpriteIDInCollection(int i)
+{
+	if (i > 0 && i < mNearestSpritesID.size() - 1)
+		return mNearestSpritesID[i];
+	else
+		return -1;
+}
+//==================================================================================================================================
+bool AISprite::WithinAttackDistance(int spriteID)
+{
+	AISprite* spr = 0;
+	
+	TopdownMap* topdownMap = Environment2DMapHelper::ActiveTopdownMap();
+	if (topdownMap != 0)
+	{
+		spr = topdownMap->GetSpriteByID(spriteID);
+	}
+	
+	PlatformerMap* platformerMap = Environment2DMapHelper::ActivePlatformerMap();
+	if (platformerMap != 0)
+	{
+		spr = topdownMap->GetSpriteByID(spriteID);
+	}
+	
+	// No sprite to attack
+	if (spr == 0) return false;
+	
+	return WithinAttackDistance(spr);
+}
+//==================================================================================================================================
+bool AISprite::WithinAttackDistance(AISprite* sprite)
+{
+	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
+	ZShadeSandboxMath::XMMath3 sprPosition(sprite->TopLeftPosition().x, sprite->TopLeftPosition().y, sprite->TopLeftPosition().z);
+	
+	float distSqr = fMinimumAttackDistance * fMinimumAttackDistance;
+	if (myPosition.DistanceSquared(sprPosition) < distSqr)
+	{
+		return true;
+	}
+	
+	return false;
+}
+//==================================================================================================================================
+AISprite* AISprite::Clone(GameDirectory2D* gd)
+{
+	string filename = BaseTextureFilename();
+	int w = Width();
+	int h = Height();
+	bool is_player = IsPlayer();
+	bool is_platformer_sprite = m_platformerSprite;
+	int vision = Vision();
+	int depth = Depth();
+	int hard = IsHard();
+	int nohit = IsNoHit();
+	int hp = HP();
+	int mana = Mana();
+	int gold = Gold();
+	int strength = Strength();
+	float speed = Speed();
+	int defense = Defense();
+	int exp = Experience();
+	int level = Level();
+	int touch = IsTouch();
+	int background = IsBackgroundSprite();
+	int entity = IsEntitySprite();
+	int invisible = IsInvisibleSprite();
+	int teleport = CanTeleport();
+	int teleport_map_x = TeleportX();
+	int teleport_map_y = TeleportY();
+	int default_seq = DefaultSequence();
+	int anim_speed = AnimationSpeed();
+	int id = ID();
+	int max_hp = HPMax();
+	string name_str = Name();
+	string animation_str = AnimationProfileName();
+	string script_str = ScriptName();
+	string teleportMap_str = TeleportMapName();
+	string inventoryMsg_str = InventoryMessage();
+	bool alwaysSeenByPlayer = AlwaysSeenByPlayer();
+	bool seenByPlayer = SeenByPlayer();
+	bool inFowCircle = InFowCircle();
+	
+	// Clone the AI stuff
+	float minimumAttackDistance = fMinimumAttackDistance;
+	float wanderingRadius = mSteeringForce->WanderingRadius();
+	float wanderingDistance = mSteeringForce->WanderingDistance();
+	float wanderingJitter = mSteeringForce->WanderingJitter();
+	float minDetectionBoxLength = mSteeringForce->MinDetectionBoxLength();
+	float waypointSeekDist = mSteeringForce->WaypointSeekDist();
+	float maxFleeDistance = mSteeringForce->MaxFleeDistance();
+	float weightSeek = mSteeringForce->WeightSeek();
+	float weightFlee = mSteeringForce->WeightFlee();
+	float weightArrive = mSteeringForce->WeightArrive();
+	float weightSpriteAvoidance = mSteeringForce->WeightSpriteAvoidance();
+	float weightSeparation = mSteeringForce->WeightSeparation();
+	float weightAlignment = mSteeringForce->WeightAlignment();
+	float weightCohesion = mSteeringForce->WeightCohesion();
+	float weightWander = mSteeringForce->WeightWander();
+	float weightFollowPath = mSteeringForce->WeightFollowPath();
+	float weightPursueTarget = mSteeringForce->WeightPursueTarget();
+	float weightEvadeTarget = mSteeringForce->WeightEvadeTarget();
+	float weightInterpose = mSteeringForce->WeightInterpose();
+	float weightHide = mSteeringForce->WeightHide();
+	float weightOffsetPursuit = mSteeringForce->WeightOffsetPursuit();
+	bool canSeek = mSteeringForce->CanSeek();
+	bool canFlee = mSteeringForce->CanFlee();
+	bool canArrive = mSteeringForce->CanArrive();
+	bool canAvoidSprites = mSteeringForce->CanAvoidSprites();
+	bool canFlockSeparation = mSteeringForce->CanFlockSeparation();
+	bool canFlockAlignment = mSteeringForce->CanFlockAlignment();
+	bool canFlockCohesion = mSteeringForce->CanFlockCohesion();
+	bool canWander = mSteeringForce->CanWander();
+	bool canFollowPath = mSteeringForce->CanFollowPath();
+	bool canPursueTarget = mSteeringForce->CanPursueTarget();
+	bool canEvadeTarget = mSteeringForce->CanEvadeTarget();
+	bool canInterpose = mSteeringForce->CanInterpose();
+	bool canHide = mSteeringForce->CanHide();
+	bool canOffsetPursuit = mSteeringForce->CanOffsetPursuit();
+	
+	ZShadeSandboxAI::WaypointSystem* waypointSystem = 0;
+	if (mSteeringForce->WaypointSystem())
+	{
+		waypointSystem = mSteeringForce->WaypointSystem()->Clone();
+	}
+	
+	AISprite* evader = 0;
+	AISprite* pursuer = 0;
+	AISprite* target = 0;
+	AISprite* spriteA = 0;
+	AISprite* spriteB = 0;
+	AISprite* leader = 0;
+	
+	// Make sure a stack overflow error does not happen
+	if (mSteeringForce->Evader()) evader = mSteeringForce->Evader()->Clone(gd);
+	if (mSteeringForce->Pursuer()) pursuer = mSteeringForce->Pursuer()->Clone(gd);
+	if (mSteeringForce->Target()) target = mSteeringForce->Target()->Clone(gd);
+	if (mSteeringForce->SpriteA()) spriteA = mSteeringForce->SpriteA()->Clone(gd);
+	if (mSteeringForce->SpriteB()) spriteB = mSteeringForce->SpriteB()->Clone(gd);
+	if (mSteeringForce->Leader()) leader = mSteeringForce->Leader()->Clone(gd);
+	
+	ZShadeSandboxMath::XMMath3 leaderOffset = mSteeringForce->LeaderOffset();
+	ZShadeSandboxMath::XMMath3 targetPoint = mSteeringForce->TargetPoint();
+	EDeceleration::Type targetDecelerationType = mSteeringForce->TargetDecelerationType();
+	ZShadeSandboxMath::XMMath3 wanderTarget = mSteeringForce->WanderTarget();
+	
+	string path;
+	if (filename == "player_cover.png")
+	{
+		path = gd->m_required_textures;
+	}
+	else
+	{
+		path = gd->m_sprites_path;
+	}
+	
+	//Add the sprite back in
+	AISprite* spr = new AISprite(m_D3DSystem);
+	spr->Initialize(path, filename, XMFLOAT3(TopLeftPosition().x, TopLeftPosition().y, 0), w, h, EPhysicsType());
+	spr->IsDisplaySprite() = false;
+	
+	//Need to update all attributes of the sprite
+	spr->PlatformerSprite() = is_platformer_sprite;
+	spr->IsPlayer() = is_player;
+	spr->ID() = id;
+	spr->Vision() = vision;
+	spr->Depth() = depth;
+	spr->IsHard() = hard;
+	spr->IsNoHit() = nohit;
+	spr->AnimationProfileName() = animation_str;
+	spr->DefaultSequence() = default_seq;
+	spr->AnimationSpeed() = anim_speed;
+	spr->HP() = hp;
+	spr->Mana() = mana;
+	spr->Gold() = gold;
+	spr->Strength() = strength;
+	spr->Speed() = speed;
+	spr->Defense() = defense;
+	spr->Experience() = exp;
+	spr->Level() = level;
+	spr->ScriptName() = script_str;
+	spr->IsTouch() = touch;
+	spr->IsBackgroundSprite() = background;
+	spr->IsEntitySprite() = entity;
+	spr->IsInvisibleSprite() = invisible;
+	spr->CanTeleport() = teleport;
+	spr->TeleportMapName() = teleportMap_str;
+	spr->TeleportX() = teleport_map_x;
+	spr->TeleportY() = teleport_map_y;
+	spr->Name() = name_str;
+	spr->HPMax() = max_hp;
+	spr->InventoryMessage() = inventoryMsg_str;
+	spr->AlwaysSeenByPlayer() = alwaysSeenByPlayer;
+	spr->SeenByPlayer() = seenByPlayer;
+	spr->InFowCircle() = inFowCircle;
+
+	// Clone the AI stuff
+	spr->MinimumAttackDistance() = minimumAttackDistance;
+	spr->SetWanderingRadius(wanderingRadius);
+	spr->SetWanderingDistance(wanderingDistance);
+	spr->SetWanderingJitter(wanderingJitter);
+	spr->SetMinDetectionBoxLength(minDetectionBoxLength);
+	spr->SetWaypointSeekDist(waypointSeekDist);
+	spr->SetMaxFleeDistance(maxFleeDistance);
+	spr->SetWeightSeek(weightSeek);
+	spr->SetWeightFlee(weightFlee);
+	spr->SetWeightArrive(weightArrive);
+	spr->SetWeightSpriteAvoidance(weightSpriteAvoidance);
+	spr->SetWeightSeparation(weightSeparation);
+	spr->SetWeightAlignment(weightAlignment);
+	spr->SetWeightCohesion(weightCohesion);
+	spr->SetWeightWander(weightWander);
+	spr->SetWeightFollowPath(weightFollowPath);
+	spr->SetWeightPursueTarget(weightPursueTarget);
+	spr->SetWeightEvadeTarget(weightEvadeTarget);
+	spr->SetWeightInterpose(weightInterpose);
+	spr->SetWeightHide(weightHide);
+	spr->SetWeightOffsetPursuit(weightOffsetPursuit);
+	spr->SetCanSeek(canSeek);
+	spr->SetCanFlee(canFlee);
+	spr->SetCanArrive(canArrive);
+	spr->SetCanAvoidSprites(canAvoidSprites);
+	spr->SetCanFlockSeparation(canFlockSeparation);
+	spr->SetCanFlockAlignment(canFlockAlignment);
+	spr->SetCanFlockCohesion(canFlockCohesion);
+	spr->SetCanWander(canWander);
+	spr->SetCanFollowPath(canFollowPath);
+	spr->SetCanPursueTarget(canPursueTarget);
+	spr->SetCanEvadeTarget(canEvadeTarget);
+	spr->SetCanInterpose(canInterpose);
+	spr->SetCanHide(canHide);
+	spr->SetCanOffsetPursuit(canOffsetPursuit);
+	spr->SetWaypointSystem(waypointSystem);
+	spr->SetEvader(evader);
+	spr->SetPursuer(pursuer);
+	spr->SetHideTarget(target);
+	spr->SetSpriteA(spriteA);
+	spr->SetSpriteB(spriteB);
+	spr->SetLeader(leader);
+	spr->SetLeaderOffset(leaderOffset);
+	spr->SetTargetPoint(targetPoint);
+	spr->SetTargetDecelerationType(targetDecelerationType);
+	spr->SetWanderTarget(wanderTarget);
+	
+	return spr;
+}
+//==================================================================================================================================
+AISprite* AISprite::Clone(GameDirectory2D* gd, float x, float y)
+{
+	string filename = BaseTextureFilename();
+	int w = Width();
+	int h = Height();
+	bool is_player = IsPlayer();
+	bool is_platformer_sprite = m_platformerSprite;
+	int vision = Vision();
+	int depth = Depth();
+	int hard = IsHard();
+	int nohit = IsNoHit();
+	int hp = HP();
+	int mana = Mana();
+	int gold = Gold();
+	int strength = Strength();
+	float speed = Speed();
+	int defense = Defense();
+	int exp = Experience();
+	int level = Level();
+	int touch = IsTouch();
+	int background = IsBackgroundSprite();
+	int entity = IsEntitySprite();
+	int invisible = IsInvisibleSprite();
+	int teleport = CanTeleport();
+	int teleport_map_x = TeleportX();
+	int teleport_map_y = TeleportY();
+	int default_seq = DefaultSequence();
+	int anim_speed = AnimationSpeed();
+	int id = ID();
+	int max_hp = HPMax();
+	//int is_static = IsStatic();
+	string name_str = Name();
+	string animation_str = AnimationProfileName();
+	string script_str = ScriptName();
+	string teleportMap_str = TeleportMapName();
+	string inventoryMsg_str = InventoryMessage();
+	bool alwaysSeenByPlayer = AlwaysSeenByPlayer();
+	bool seenByPlayer = SeenByPlayer();
+	bool inFowCircle = InFowCircle();
+	
+	// Clone the AI stuff
+	float minimumAttackDistance = fMinimumAttackDistance;
+	float wanderingRadius = mSteeringForce->WanderingRadius();
+	float wanderingDistance = mSteeringForce->WanderingDistance();
+	float wanderingJitter = mSteeringForce->WanderingJitter();
+	float minDetectionBoxLength = mSteeringForce->MinDetectionBoxLength();
+	float waypointSeekDist = mSteeringForce->WaypointSeekDist();
+	float maxFleeDistance = mSteeringForce->MaxFleeDistance();
+	float weightSeek = mSteeringForce->WeightSeek();
+	float weightFlee = mSteeringForce->WeightFlee();
+	float weightArrive = mSteeringForce->WeightArrive();
+	float weightSpriteAvoidance = mSteeringForce->WeightSpriteAvoidance();
+	float weightSeparation = mSteeringForce->WeightSeparation();
+	float weightAlignment = mSteeringForce->WeightAlignment();
+	float weightCohesion = mSteeringForce->WeightCohesion();
+	float weightWander = mSteeringForce->WeightWander();
+	float weightFollowPath = mSteeringForce->WeightFollowPath();
+	float weightPursueTarget = mSteeringForce->WeightPursueTarget();
+	float weightEvadeTarget = mSteeringForce->WeightEvadeTarget();
+	float weightInterpose = mSteeringForce->WeightInterpose();
+	float weightHide = mSteeringForce->WeightHide();
+	float weightOffsetPursuit = mSteeringForce->WeightOffsetPursuit();
+	bool canSeek = mSteeringForce->CanSeek();
+	bool canFlee = mSteeringForce->CanFlee();
+	bool canArrive = mSteeringForce->CanArrive();
+	bool canAvoidSprites = mSteeringForce->CanAvoidSprites();
+	bool canFlockSeparation = mSteeringForce->CanFlockSeparation();
+	bool canFlockAlignment = mSteeringForce->CanFlockAlignment();
+	bool canFlockCohesion = mSteeringForce->CanFlockCohesion();
+	bool canWander = mSteeringForce->CanWander();
+	bool canFollowPath = mSteeringForce->CanFollowPath();
+	bool canPursueTarget = mSteeringForce->CanPursueTarget();
+	bool canEvadeTarget = mSteeringForce->CanEvadeTarget();
+	bool canInterpose = mSteeringForce->CanInterpose();
+	bool canHide = mSteeringForce->CanHide();
+	bool canOffsetPursuit = mSteeringForce->CanOffsetPursuit();
+	
+	ZShadeSandboxAI::WaypointSystem* waypointSystem = 0;
+	if (mSteeringForce->WaypointSystem())
+	{
+		waypointSystem = mSteeringForce->WaypointSystem()->Clone();
+	}
+	
+	AISprite* evader = 0;
+	AISprite* pursuer = 0;
+	AISprite* target = 0;
+	AISprite* spriteA = 0;
+	AISprite* spriteB = 0;
+	AISprite* leader = 0;
+	
+	// Make sure a stack overflow error does not happen
+	if (mSteeringForce->Evader()) evader = mSteeringForce->Evader()->Clone(gd);
+	if (mSteeringForce->Pursuer()) pursuer = mSteeringForce->Pursuer()->Clone(gd);
+	if (mSteeringForce->Target()) target = mSteeringForce->Target()->Clone(gd);
+	if (mSteeringForce->SpriteA()) spriteA = mSteeringForce->SpriteA()->Clone(gd);
+	if (mSteeringForce->SpriteB()) spriteB = mSteeringForce->SpriteB()->Clone(gd);
+	if (mSteeringForce->Leader()) leader = mSteeringForce->Leader()->Clone(gd);
+	
+	ZShadeSandboxMath::XMMath3 leaderOffset = mSteeringForce->LeaderOffset();
+	ZShadeSandboxMath::XMMath3 targetPoint = mSteeringForce->TargetPoint();
+	EDeceleration::Type targetDecelerationType = mSteeringForce->TargetDecelerationType();
+	ZShadeSandboxMath::XMMath3 wanderTarget = mSteeringForce->WanderTarget();
+	
+	string path;
+	if (filename == "player_cover.png")
+	{
+		path = gd->m_required_textures;
+	}
+	else
+	{
+		path = gd->m_sprites_path;
+	}
+	
+	//Add the sprite back in
+	AISprite* spr = new AISprite(m_D3DSystem);
+	spr->Initialize(path, filename, XMFLOAT3(x, y, 0), w, h, EPhysicsType());
+	spr->IsDisplaySprite() = false;
+	
+	//Need to update all attributes of the sprite
+	spr->PlatformerSprite() = is_platformer_sprite;
+	spr->IsPlayer() = is_player;
+	spr->ID() = id;
+	spr->Vision() = vision;
+	spr->Depth() = depth;
+	spr->IsHard() = hard;
+	spr->IsNoHit() = nohit;
+	spr->AnimationProfileName() = animation_str;
+	spr->DefaultSequence() = default_seq;
+	spr->AnimationSpeed() = anim_speed;
+	spr->HP() = hp;
+	spr->Mana() = mana;
+	spr->Gold() = gold;
+	spr->Strength() = strength;
+	spr->Speed() = speed;
+	spr->Defense() = defense;
+	spr->Experience() = exp;
+	spr->Level() = level;
+	spr->ScriptName() = script_str;
+	spr->IsTouch() = touch;
+	spr->IsBackgroundSprite() = background;
+	spr->IsEntitySprite() = entity;
+	spr->IsInvisibleSprite() = invisible;
+	spr->CanTeleport() = teleport;
+	spr->TeleportMapName() = teleportMap_str;
+	spr->TeleportX() = teleport_map_x;
+	spr->TeleportY() = teleport_map_y;
+	spr->Name() = name_str;
+	spr->HPMax() = max_hp;
+	spr->InventoryMessage() = inventoryMsg_str;
+	spr->AlwaysSeenByPlayer() = alwaysSeenByPlayer;
+	spr->SeenByPlayer() = seenByPlayer;
+	spr->InFowCircle() = inFowCircle;
+
+	// Clone the AI stuff
+	spr->MinimumAttackDistance() = minimumAttackDistance;
+	spr->SetWanderingRadius(wanderingRadius);
+	spr->SetWanderingDistance(wanderingDistance);
+	spr->SetWanderingJitter(wanderingJitter);
+	spr->SetMinDetectionBoxLength(minDetectionBoxLength);
+	spr->SetWaypointSeekDist(waypointSeekDist);
+	spr->SetMaxFleeDistance(maxFleeDistance);
+	spr->SetWeightSeek(weightSeek);
+	spr->SetWeightFlee(weightFlee);
+	spr->SetWeightArrive(weightArrive);
+	spr->SetWeightSpriteAvoidance(weightSpriteAvoidance);
+	spr->SetWeightSeparation(weightSeparation);
+	spr->SetWeightAlignment(weightAlignment);
+	spr->SetWeightCohesion(weightCohesion);
+	spr->SetWeightWander(weightWander);
+	spr->SetWeightFollowPath(weightFollowPath);
+	spr->SetWeightPursueTarget(weightPursueTarget);
+	spr->SetWeightEvadeTarget(weightEvadeTarget);
+	spr->SetWeightInterpose(weightInterpose);
+	spr->SetWeightHide(weightHide);
+	spr->SetWeightOffsetPursuit(weightOffsetPursuit);
+	spr->SetCanSeek(canSeek);
+	spr->SetCanFlee(canFlee);
+	spr->SetCanArrive(canArrive);
+	spr->SetCanAvoidSprites(canAvoidSprites);
+	spr->SetCanFlockSeparation(canFlockSeparation);
+	spr->SetCanFlockAlignment(canFlockAlignment);
+	spr->SetCanFlockCohesion(canFlockCohesion);
+	spr->SetCanWander(canWander);
+	spr->SetCanFollowPath(canFollowPath);
+	spr->SetCanPursueTarget(canPursueTarget);
+	spr->SetCanEvadeTarget(canEvadeTarget);
+	spr->SetCanInterpose(canInterpose);
+	spr->SetCanHide(canHide);
+	spr->SetCanOffsetPursuit(canOffsetPursuit);
+	spr->SetWaypointSystem(waypointSystem);
+	spr->SetEvader(evader);
+	spr->SetPursuer(pursuer);
+	spr->SetHideTarget(target);
+	spr->SetSpriteA(spriteA);
+	spr->SetSpriteB(spriteB);
+	spr->SetLeader(leader);
+	spr->SetLeaderOffset(leaderOffset);
+	spr->SetTargetPoint(targetPoint);
+	spr->SetTargetDecelerationType(targetDecelerationType);
+	spr->SetWanderTarget(wanderTarget);
+	
+	return spr;
+}
+//==================================================================================================================================
+void AISprite::CloneMe(GameDirectory2D* gd, float x, float y, int w, int h)
+{
+	string filename = BaseTextureFilename();
+	
+	//float hbox_x;
+	//float hbox_y;
+	//int hbox_w;
+	//int hbox_h;
+	//GetHardbox(hbox_x, hbox_y, hbox_w, hbox_h);
+	
+	bool is_player = IsPlayer();
+	bool is_platformer_sprite = m_platformerSprite;
+	int vision = Vision();
+	int depth = Depth();
+	int hard = IsHard();
+	int nohit = IsNoHit();
+	int hp = HP();
+	int mana = Mana();
+	int gold = Gold();
+	int strength = Strength();
+	float speed = Speed();
+	int defense = Defense();
+	int exp = Experience();
+	int level = Level();
+	int touch = IsTouch();
+	int background = IsBackgroundSprite();
+	int entity = IsEntitySprite();
+	int invisible = IsInvisibleSprite();
+	int teleport = CanTeleport();
+	int teleport_map_x = TeleportX();
+	int teleport_map_y = TeleportY();
+	int default_seq = DefaultSequence();
+	int anim_speed = AnimationSpeed();
+	int id = ID();
+	int max_hp = HPMax();
+	//int is_static = IsStatic();
+	string name_str = Name();
+	string animation_str = AnimationProfileName();
+	string script_str = ScriptName();
+	string teleportMap_str = TeleportMapName();
+	string inventoryMsg_str = InventoryMessage();
+	bool alwaysSeenByPlayer = AlwaysSeenByPlayer();
+	bool seenByPlayer = SeenByPlayer();
+	bool inFowCircle = InFowCircle();
+	
+	// Clone the AI stuff
+	float minimumAttackDistance = fMinimumAttackDistance;
+	float wanderingRadius = mSteeringForce->WanderingRadius();
+	float wanderingDistance = mSteeringForce->WanderingDistance();
+	float wanderingJitter = mSteeringForce->WanderingJitter();
+	float minDetectionBoxLength = mSteeringForce->MinDetectionBoxLength();
+	float waypointSeekDist = mSteeringForce->WaypointSeekDist();
+	float maxFleeDistance = mSteeringForce->MaxFleeDistance();
+	float weightSeek = mSteeringForce->WeightSeek();
+	float weightFlee = mSteeringForce->WeightFlee();
+	float weightArrive = mSteeringForce->WeightArrive();
+	float weightSpriteAvoidance = mSteeringForce->WeightSpriteAvoidance();
+	float weightSeparation = mSteeringForce->WeightSeparation();
+	float weightAlignment = mSteeringForce->WeightAlignment();
+	float weightCohesion = mSteeringForce->WeightCohesion();
+	float weightWander = mSteeringForce->WeightWander();
+	float weightFollowPath = mSteeringForce->WeightFollowPath();
+	float weightPursueTarget = mSteeringForce->WeightPursueTarget();
+	float weightEvadeTarget = mSteeringForce->WeightEvadeTarget();
+	float weightInterpose = mSteeringForce->WeightInterpose();
+	float weightHide = mSteeringForce->WeightHide();
+	float weightOffsetPursuit = mSteeringForce->WeightOffsetPursuit();
+	bool canSeek = mSteeringForce->CanSeek();
+	bool canFlee = mSteeringForce->CanFlee();
+	bool canArrive = mSteeringForce->CanArrive();
+	bool canAvoidSprites = mSteeringForce->CanAvoidSprites();
+	bool canFlockSeparation = mSteeringForce->CanFlockSeparation();
+	bool canFlockAlignment = mSteeringForce->CanFlockAlignment();
+	bool canFlockCohesion = mSteeringForce->CanFlockCohesion();
+	bool canWander = mSteeringForce->CanWander();
+	bool canFollowPath = mSteeringForce->CanFollowPath();
+	bool canPursueTarget = mSteeringForce->CanPursueTarget();
+	bool canEvadeTarget = mSteeringForce->CanEvadeTarget();
+	bool canInterpose = mSteeringForce->CanInterpose();
+	bool canHide = mSteeringForce->CanHide();
+	bool canOffsetPursuit = mSteeringForce->CanOffsetPursuit();
+	
+	ZShadeSandboxAI::WaypointSystem* waypointSystem = 0;
+	if (mSteeringForce->WaypointSystem())
+	{
+		waypointSystem = mSteeringForce->WaypointSystem()->Clone();
+	}
+	
+	AISprite* evader = 0;
+	AISprite* pursuer = 0;
+	AISprite* target = 0;
+	AISprite* spriteA = 0;
+	AISprite* spriteB = 0;
+	AISprite* leader = 0;
+	
+	// Make sure a stack overflow error does not happen
+	if (mSteeringForce->Evader()) evader = mSteeringForce->Evader()->Clone(gd);
+	if (mSteeringForce->Pursuer()) pursuer = mSteeringForce->Pursuer()->Clone(gd);
+	if (mSteeringForce->Target()) target = mSteeringForce->Target()->Clone(gd);
+	if (mSteeringForce->SpriteA()) spriteA = mSteeringForce->SpriteA()->Clone(gd);
+	if (mSteeringForce->SpriteB()) spriteB = mSteeringForce->SpriteB()->Clone(gd);
+	if (mSteeringForce->Leader()) leader = mSteeringForce->Leader()->Clone(gd);
+	
+	ZShadeSandboxMath::XMMath3 leaderOffset = mSteeringForce->LeaderOffset();
+	ZShadeSandboxMath::XMMath3 targetPoint = mSteeringForce->TargetPoint();
+	EDeceleration::Type targetDecelerationType = mSteeringForce->TargetDecelerationType();
+	ZShadeSandboxMath::XMMath3 wanderTarget = mSteeringForce->WanderTarget();
+	
+	string path;
+	if (filename == "player_cover.png")
+	{
+		path = gd->m_required_textures;
+	}
+	else
+	{
+		path = gd->m_sprites_path;
+	}
+	
+	//Add the sprite back in
+	Initialize(path, filename, XMFLOAT3(x, y, 0), w, h, EPhysicsType());
+
+	IsDisplaySprite() = false;
+	
+	//Need to update all attributes of the sprite
+	PlatformerSprite() = is_platformer_sprite;
+	IsPlayer() = is_player;
+	ID() = id;
+	Vision() = vision;
+	Depth() = depth;
+	IsHard() = hard;
+	IsNoHit() = nohit;
+	AnimationProfileName() = animation_str;
+	DefaultSequence() = default_seq;
+	AnimationSpeed() = anim_speed;
+	HP() = hp;
+	Mana() = mana;
+	Gold() = gold;
+	Strength() = strength;
+	Speed() = speed;
+	Defense() = defense;
+	Experience() = exp;
+	Level() = level;
+	ScriptName() = script_str;
+	IsTouch() = touch;
+	IsBackgroundSprite() = background;
+	IsEntitySprite() = entity;
+	IsInvisibleSprite() = invisible;
+	CanTeleport() = teleport;
+	TeleportMapName() = teleportMap_str;
+	TeleportX() = teleport_map_x;
+	TeleportY() = teleport_map_y;
+	Name() = name_str;
+	HPMax() = max_hp;
+	InventoryMessage() = inventoryMsg_str;
+	AlwaysSeenByPlayer() = alwaysSeenByPlayer;
+	SeenByPlayer() = seenByPlayer;
+	InFowCircle() = inFowCircle;
+
+	// Clone the AI stuff
+	MinimumAttackDistance() = minimumAttackDistance;
+	SetWanderingRadius(wanderingRadius);
+	SetWanderingDistance(wanderingDistance);
+	SetWanderingJitter(wanderingJitter);
+	SetMinDetectionBoxLength(minDetectionBoxLength);
+	SetWaypointSeekDist(waypointSeekDist);
+	SetMaxFleeDistance(maxFleeDistance);
+	SetWeightSeek(weightSeek);
+	SetWeightFlee(weightFlee);
+	SetWeightArrive(weightArrive);
+	SetWeightSpriteAvoidance(weightSpriteAvoidance);
+	SetWeightSeparation(weightSeparation);
+	SetWeightAlignment(weightAlignment);
+	SetWeightCohesion(weightCohesion);
+	SetWeightWander(weightWander);
+	SetWeightFollowPath(weightFollowPath);
+	SetWeightPursueTarget(weightPursueTarget);
+	SetWeightEvadeTarget(weightEvadeTarget);
+	SetWeightInterpose(weightInterpose);
+	SetWeightHide(weightHide);
+	SetWeightOffsetPursuit(weightOffsetPursuit);
+	SetCanSeek(canSeek);
+	SetCanFlee(canFlee);
+	SetCanArrive(canArrive);
+	SetCanAvoidSprites(canAvoidSprites);
+	SetCanFlockSeparation(canFlockSeparation);
+	SetCanFlockAlignment(canFlockAlignment);
+	SetCanFlockCohesion(canFlockCohesion);
+	SetCanWander(canWander);
+	SetCanFollowPath(canFollowPath);
+	SetCanPursueTarget(canPursueTarget);
+	SetCanEvadeTarget(canEvadeTarget);
+	SetCanInterpose(canInterpose);
+	SetCanHide(canHide);
+	SetCanOffsetPursuit(canOffsetPursuit);
+	SetWaypointSystem(waypointSystem);
+	SetEvader(evader);
+	SetPursuer(pursuer);
+	SetHideTarget(target);
+	SetSpriteA(spriteA);
+	SetSpriteB(spriteB);
+	SetLeader(leader);
+	SetLeaderOffset(leaderOffset);
+	SetTargetPoint(targetPoint);
+	SetTargetDecelerationType(targetDecelerationType);
+	SetWanderTarget(wanderTarget);
 }
 //==================================================================================================================================
 void AISprite::updateBehavior()
@@ -451,7 +1320,12 @@ void AISprite::CreateTree()
 //==================================================================================================================================
 void AISprite::Main()
 {
-	m_script->Main(1, this);
+	if (!m_ran_main)
+	{
+		m_script->Main(1, this);
+
+		m_ran_main = true;
+	}
 }
 //==================================================================================================================================
 void AISprite::MoveScript()

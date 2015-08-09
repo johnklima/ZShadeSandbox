@@ -209,19 +209,19 @@ void PhysicsWorld2D::Update(float dt, Keyboard* keyboard)
 		{
 			if (m_TopdownMap->ClippedSprite(i) == NULL) continue;
 			
-			// In a topdown map the sprite only collides with a tile like running against a wall.
-			m_TopdownMap->ClippedSprite(i)->CollideBodiesTopdown(m_Bodies, m_BoundBodies, m_ContactStatsPlayerToTile, dt);
-			
-			// Check for collision of Sprite -> Sprite
-			for (int j = 0; j < m_TopdownMap->TotalClippedSprites(); j++)
-			{
-				if (i == j) continue;
-				if (m_TopdownMap->ClippedSprite(j) == NULL) continue;
-				
-				// Is current sprite colliding with another sprite
-				if (m_TopdownMap->ClippedSprite(i)->CollidesBodyTopdown(m_TopdownMap->ClippedSprite(j), dt))
-					break;// A collision occured and has been handled with the colliding sprite
-			}
+			//// In a topdown map the sprite only collides with a tile like running against a wall.
+			//m_TopdownMap->ClippedSprite(i)->CollideBodiesTopdown(m_Bodies, m_BoundBodies, m_ContactStatsPlayerToTile, dt);
+			//
+			//// Check for collision of Sprite -> Sprite
+			//for (int j = 0; j < m_TopdownMap->TotalClippedSprites(); j++)
+			//{
+			//	if (i == j) continue;
+			//	if (m_TopdownMap->ClippedSprite(j) == NULL) continue;
+			//	
+			//	// Is current sprite colliding with another sprite
+			//	if (m_TopdownMap->ClippedSprite(i)->CollidesBodyTopdown(m_TopdownMap->ClippedSprite(j), dt))
+			//		break;// A collision occured and has been handled with the colliding sprite
+			//}
 			
 			// If the AI decided to do something then get the force of what it has done
 			// This must be done before update so that movement can be taken into account

@@ -4,13 +4,16 @@
 #include "stdlib.h"
 #endif
 #include "string.h"
-//#include "Environment2D.h"  // For static world object
 #include "LuaKeyMapper.h"
 #include "GameState.h"
 #include "Scripting.h"
 #include "AudioSystem.h"
 #include "tolua_Common.h"
-//#include "Environment2DMapHelper.h"
+#include "Environment2DMapHelper.h"
+#include "EnvironmentMenuHelper.h"
+#include "ZShadeMessageCenter.h"
+#include "Environment.h"
+#include "Environment2D.h"
 //==================================================================================================================================
 //==================================================================================================================================
 /* Exported function */
@@ -93,7 +96,8 @@ static int tolua_win_print(lua_State* L)
 {
 	string str = tolua_get_string(L, 1);
 	
-	MessageBox(NULL, str.c_str(), "Win Print", MB_OK);
+	//MessageBox(NULL, str.c_str(), "Win Print", MB_OK);
+	ZShadeMessageCenter::MsgBoxOK(NULL, str.c_str(), "Win Print");
 	
 	//return the number of return values; which is 0
 	return 0;
@@ -138,7 +142,14 @@ static int tolua_load_main_menu(lua_State* L)
 {
 	string str = tolua_get_string(L, 1);
 	
-	
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return 0;
+
+	string path = env2D->GetGD2D()->m_xml_main_menu_path;
+
+	EnvironmentMenuHelper::LoadAMenu(path, str);
 	
 	//return the number of return values; which is 0
 	return 0;
@@ -148,7 +159,24 @@ static int tolua_load_in_game_menu(lua_State* L)
 {
 	string str = tolua_get_string(L, 1);
 	
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return 0;
+
+	string path = env2D->GetGD2D()->m_xml_ingame_menu_path;
+
+	EnvironmentMenuHelper::LoadAMenu(path, str);
 	
+	//return the number of return values; which is 0
+	return 0;
+}
+//==================================================================================================================================
+static int tolua_set_active_render_menu(lua_State* L)
+{
+	string str = tolua_get_string(L, 1);
+	
+	EnvironmentMenuHelper::SetActiveRenderedMenu(str);
 	
 	//return the number of return values; which is 0
 	return 0;
@@ -159,7 +187,7 @@ static int tolua_load_world(lua_State* L)
 	string str = tolua_get_string(L, 1);
 	string filename = tolua_get_string(L, 2);
 
-	//Environment2DMapHelper::LoadWorld(str, filename, Scripting::GetEngineOptions()->m_inEditor, 0);
+	Environment2DMapHelper::LoadWorld(str, filename, Scripting::GetEngineOptions()->m_inEditor);
 	
 	//return the number of return values; which is 0
 	return 0;
@@ -170,7 +198,7 @@ static int tolua_load_map(lua_State* L)
 	string world_name = tolua_get_string(L, 1);
 	string map_name = tolua_get_string(L, 2);
 
-	//Environment2DMapHelper::LoadMapInWorld(world_name, map_name, Map2DType::REGULAR, Scripting::GetEngineOptions()->m_inEditor, 0);
+	Environment2DMapHelper::LoadMapInWorld(world_name, map_name, Scripting::GetEngineOptions()->m_inEditor);
 	
 	//return the number of return values; which is 0
 	return 0;
@@ -181,7 +209,7 @@ static int tolua_set_render_map(lua_State* L)
 	string world_name = tolua_get_string(L, 1);
 	string map_name = tolua_get_string(L, 2);
 
-	//Environment2DMapHelper::SetActiveRenderedMap(world_name, map_name);
+	Environment2DMapHelper::SetActiveRenderedMap(world_name, map_name);
 
 	//return the number of return values; which is 0
 	return 0;
@@ -206,7 +234,7 @@ static int tolua_key_pressed(lua_State* L)
 //==================================================================================================================================
 static int tolua_num_sprites_in_map(lua_State* L)
 {
-	//tolua_push_int(L, Environment2DMapHelper::GetNumSpritesInMap());
+	tolua_push_int(L, Environment2DMapHelper::GetNumSpritesInMap());
 	//return the number of return values; which is 1
 	return 1;
 }
@@ -216,7 +244,7 @@ static int tolua_get_sprite(lua_State* L)
 	if (tolua_ArgSafe_number(L, 1, "get_sprite_in_map"))
 	{
 		int SpriteID = tolua_get_int(L, 1);
-		//tolua_push_sprite(L, Environment2DMapHelper::GetSpriteInMap(SpriteID));
+		tolua_push_sprite(L, Environment2DMapHelper::GetSpriteInMap(SpriteID));
 	}
 
 	//return the number of return values; which is 0
@@ -228,7 +256,7 @@ static int tolua_add_sprite(lua_State* L)
 	AISprite* spr;
 	if (spr = tolua_Sprite_Safe(L, "add_sprite_in_map"))
 	{
-		//Environment2DMapHelper::AddSpriteInMap(spr);
+		Environment2DMapHelper::AddSpriteInMap(spr);
 	}
 
 	//return the number of return values; which is 0
@@ -240,7 +268,7 @@ static int tolua_remove_sprite(lua_State* L)
 	AISprite* spr;
 	if (spr = tolua_Sprite_Safe(L, "remove_sprite_in_map"))
 	{
-		//Environment2DMapHelper::RemoveSpriteInMap(spr);
+		Environment2DMapHelper::RemoveSpriteInMap(spr);
 	}
 
 	//return the number of return values; which is 0
@@ -274,6 +302,7 @@ TOLUA_API int tolua_Funcs_open()
 		tolua_function(L, "set_state", tolua_set_state);
 		tolua_function(L, "load_main_menu", tolua_load_main_menu);
 		tolua_function(L, "load_in_game_menu", tolua_load_in_game_menu);
+		tolua_function(L, "set_active_render_menu", tolua_set_active_render_menu);
 		tolua_function(L, "load_world", tolua_load_world);
 		tolua_function(L, "load_map", tolua_load_map);
 		tolua_function(L, "set_render_map", tolua_set_render_map);

@@ -1186,8 +1186,14 @@ void TopdownMap::SortAndClipSprites()
 
 		if (s == 0) continue;
 		
-		float x = s->X() + m_Offset.x;
-		float y = s->Y() + m_Offset.y;
+		float x = s->X();
+		float y = s->Y();
+
+		if (!s->IsPlayer())
+		{
+			x += m_Offset.x;
+			y += m_Offset.y;
+		}
 
 		// Clip the sprite if it is not in the screen
 		if (!InScreen(x, y, s->Width(), s->Height()) && !s->IsDisplaySprite()) continue;
@@ -1529,10 +1535,10 @@ void TopdownMap::Render(Camera* camera)
 				m_Offset.x = -(m_EngineOptions->m_screenWidth);
 			
 			// Limit vertical scrolling
-			if (player->TopLeftPosition().y >= m_EngineOptions->m_screenHeight / 2 - player->Height() / 2)
+			if (player->TopLeftPosition().y < m_EngineOptions->m_screenHeight / 2 - player->Height() / 2)
 				m_Offset.y = 0.0f;
 			
-			if (player->TopLeftPosition().y < m_EngineOptions->m_screenHeight / 2 - player->Height() / 2)
+			if (player->TopLeftPosition().y > m_EngineOptions->m_screenHeight / 2 - player->Height() / 2)
 				m_Offset.y = m_EngineOptions->m_screenHeight;
 		}
 	}
@@ -1617,7 +1623,7 @@ void TopdownMap::Render(Camera* camera)
 		UpdateFog(s);
 		
 		//Update the sprites behaviour if their are any
-		s->updateBehavior();
+		//s->updateBehavior();
 
 		//Update the animation if it exists
 		s->UpdateAnimation();

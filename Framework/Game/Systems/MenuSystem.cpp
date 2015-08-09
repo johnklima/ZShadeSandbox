@@ -7,30 +7,33 @@ MenuSystem::MenuSystem(D3D* d3d)
 {
 }
 //================================================================================================================
-MenuSystem::MenuSystem(const MenuSystem& o)
-{
-}
-//================================================================================================================
 MenuSystem::~MenuSystem()
 {
 }
 //================================================================================================================
 void MenuSystem::RemoveMenu(string menu_name)
 {
-	bool found = false;
-	map<string, ZShadeSandboxEnvironment::Menu*>::iterator kill_iter;
-	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.begin();
-	for (; iter != m_menus.end(); iter++)
+	ZShadeSandboxEnvironment::Menu* menu = 0;
+	auto current = m_menus.begin();
+	
+	while (current != m_menus.end())
 	{
-		if ((*iter).first == menu_name)
+		menu = (*current).second;
+		if (menu != 0 && menu->MenuName() == menu_name)
 		{
-			kill_iter = iter;
-			found = true;
-			break;
+			current = m_menus.erase(current);
+		}
+		else
+		{
+			++current;
 		}
 	}
-
-	if (found) m_menus.erase(kill_iter);
+	
+	if (m_menu_to_render == menu_name)
+	{
+		// Just deleted the menu so there is nothing to render
+		m_menu_to_render = "";
+	}
 }
 //================================================================================================================
 void MenuSystem::GetMenuNames(vector<string>& names)
@@ -59,6 +62,16 @@ vector<ZShadeSandboxGraphics::Text*> MenuSystem::GetTexts(string menu_name)
 	{
 		ZShadeSandboxEnvironment::Menu* menu = (*iter).second;
 		return menu->GetTexts();
+	}
+}
+//================================================================================================================
+void MenuSystem::AddMenuNameToButton(string menu_name, int buttonID)
+{
+	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.find(m_menu_to_render);
+	if (iter != m_menus.end())
+	{
+		ZShadeSandboxEnvironment::Menu* menu = (*iter).second;
+		menu->AddMenuNameToButton(menu_name, buttonID);
 	}
 }
 //================================================================================================================
@@ -110,8 +123,8 @@ bool MenuSystem::ButtonClicked(ZShadeSandboxGraphics::Button*& button, int x, in
 		ZShadeSandboxEnvironment::Menu* menu = (*iter).second;
 		return menu->ButtonClicked(button, x, y);
 	}
-
-	//Not current redering menu
+	
+	//Not current rendering menu
 	return false;
 }
 //================================================================================================================
@@ -123,8 +136,8 @@ bool MenuSystem::TextClicked(ZShadeSandboxGraphics::Text*& text, int x, int y)
 		ZShadeSandboxEnvironment::Menu* menu = (*iter).second;
 		return menu->TextClicked(text, x, y);
 	}
-
-	//Not current redering menu
+	
+	//Not current rendering menu
 	return false;
 }
 //================================================================================================================
@@ -138,7 +151,7 @@ void MenuSystem::SetMenuToRender(string menu)
 	m_menu_to_render = menu;
 }
 //================================================================================================================
-void MenuSystem::AddMenuLinkName(string menu, string link_name)
+/*void MenuSystem::AddMenuLinkName(string menu_name, string link_name)
 {
 	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.find(m_menu_to_render);
 	if (iter != m_menus.end())
@@ -146,11 +159,11 @@ void MenuSystem::AddMenuLinkName(string menu, string link_name)
 		//The menu does exist
 		ZShadeSandboxEnvironment::Menu* m = (*iter).second;
 		m->LinkMenuName() = link_name;
-		m_menus[menu] = m;
+		m_menus[menu_name] = m;
 	}
-}
+}*/
 //================================================================================================================
-void MenuSystem::AddBackground(string menu, ZShadeSandboxGraphics::Image* image)
+void MenuSystem::AddBackground(string menu_name, ZShadeSandboxGraphics::Image* image)
 {
 	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.find(m_menu_to_render);
 	if (iter != m_menus.end())
@@ -158,7 +171,7 @@ void MenuSystem::AddBackground(string menu, ZShadeSandboxGraphics::Image* image)
 		//The menu does exist
 		ZShadeSandboxEnvironment::Menu* m = (*iter).second;
 		m->AddBackground(image);
-		m_menus[menu] = m;
+		m_menus[menu_name] = m;
 	}
 }
 //================================================================================================================
@@ -192,7 +205,7 @@ void MenuSystem::AddText(string text, int x, int y)
 	}
 }
 //================================================================================================================
-void MenuSystem::AddButton(string menu, ZShadeSandboxGraphics::Button* button)
+void MenuSystem::AddButton(string menu_name, ZShadeSandboxGraphics::Button* button)
 {
 	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.find(m_menu_to_render);
 	if (iter != m_menus.end())
@@ -200,11 +213,11 @@ void MenuSystem::AddButton(string menu, ZShadeSandboxGraphics::Button* button)
 		//The menu does exist
 		ZShadeSandboxEnvironment::Menu* m = (*iter).second;
 		m->AddButton(button);
-		m_menus[menu] = m;
+		m_menus[menu_name] = m;
 	}
 }
 //================================================================================================================
-void MenuSystem::AddText(string menu, ZShadeSandboxGraphics::Text* text)
+void MenuSystem::AddText(string menu_name, ZShadeSandboxGraphics::Text* text)
 {
 	map<string, ZShadeSandboxEnvironment::Menu*>::iterator iter = m_menus.find(m_menu_to_render);
 	if (iter != m_menus.end())
@@ -212,7 +225,7 @@ void MenuSystem::AddText(string menu, ZShadeSandboxGraphics::Text* text)
 		//The menu does exist
 		ZShadeSandboxEnvironment::Menu* m = (*iter).second;
 		m->AddText(text);
-		m_menus[menu] = m;
+		m_menus[menu_name] = m;
 	}
 }
 //================================================================================================================
@@ -282,7 +295,7 @@ bool MenuSystem::Render(Camera* camera, int blendAmount)
 		ZShadeSandboxEnvironment::Menu* menu = (*iter).second;
 		menu->Render(camera, blendAmount);
 	}
-
+	
 	return true;
 }
 //================================================================================================================

@@ -69,8 +69,8 @@ public:
 	float WeightFlee() const { return fWeightFlee; }
 	float& WeightArrive() { return fWeightArrive; }
 	float WeightArrive() const { return fWeightArrive; }
-	float& WeightObstacleAvoidance() { return fWeightObstacleAvoidance; }
-	float WeightObstacleAvoidance() const { return fWeightObstacleAvoidance; }
+	float& WeightSpriteAvoidance() { return fWeightSpriteAvoidance; }
+	float WeightSpriteAvoidance() const { return fWeightSpriteAvoidance; }
 	float& WeightSeparation() { return fWeightSeparation; }
 	float WeightSeparation() const { return fWeightSeparation; }
 	float& WeightAlignment() { return fWeightAlignment; }
@@ -140,6 +140,10 @@ public:
 	EDeceleration::Type& TargetDecelerationType() { return mTargetDecelerationType; }
 	EDeceleration::Type TargetDecelerationType() const { return mTargetDecelerationType; }
 	
+	// Need to clone the wandering target
+	ZShadeSandboxMath::XMMath3& WanderTarget() { return m_wanderTarget; }
+	ZShadeSandboxMath::XMMath3 WanderTarget() const { return m_wanderTarget; }
+	
 private:
 	
 	ZShadeSandboxMath::XMMath3 Seek(ZShadeSandboxMath::XMMath3 targetPoint);
@@ -206,7 +210,7 @@ private:
 	float fWeightSeek;
 	float fWeightFlee;
 	float fWeightArrive;
-	float fWeightObstacleAvoidance;
+	float fWeightSpriteAvoidance;
 	float fWeightSeparation;
 	float fWeightAlignment;
 	float fWeightCohesion;

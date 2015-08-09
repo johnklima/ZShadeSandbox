@@ -14,12 +14,12 @@
 using namespace std;
 //================================================================================================================
 //================================================================================================================
+// http://kotaku.com/5955855/the-ten-commandments-of-video-game-menus
 class MenuSystem
 {
 public:
 	
 	MenuSystem(D3D* d3d);
-	MenuSystem(const MenuSystem& o);
 	~MenuSystem();
 	
 	void GetMenuNames(vector<string>& names);
@@ -39,10 +39,11 @@ public:
 	
 	void AddText(string text, int x, int y);
 	
-	void AddMenuLinkName(string menu, string link_name);
-	void AddBackground(string menu, ZShadeSandboxGraphics::Image* image);
-	void AddButton(string menu, ZShadeSandboxGraphics::Button* button);
-	void AddText(string menu, ZShadeSandboxGraphics::Text* text);
+	//void AddMenuLinkName(string menu_name, string link_name);
+	void AddMenuNameToButton(string menu_name, int buttonID);
+	void AddBackground(string menu_name, ZShadeSandboxGraphics::Image* image);
+	void AddButton(string menu_name, ZShadeSandboxGraphics::Button* button);
+	void AddText(string menu_name, ZShadeSandboxGraphics::Text* text);
 	void RemoveButton(ZShadeSandboxGraphics::Button* b);
 	void RemoveText(ZShadeSandboxGraphics::Text* t);
 	void RemoveButton(int id);
@@ -67,17 +68,20 @@ public:
 	vector<ZShadeSandboxGraphics::Text*> GetTexts(string menu_name);
 	ZShadeSandboxEnvironment::Menu* GetMenu(string name) { return m_menus[name]; }
 	
-	bool& RenderMainMenu() { return bRenderMainMenu; }
-	bool RenderMainMenu() const { return bRenderMainMenu; }
+	//ZShadeSandboxEnvironment::Menu*& MainMenu() { return mMainMenu; }
+	//ZShadeSandboxEnvironment::Menu* MainMenu() const { return mMainMenu; }
+	//ZShadeSandboxEnvironment::Menu*& InGameMenu() { return mInGameMenu; }
+	//ZShadeSandboxEnvironment::Menu* InGameMenu() const { return mInGameMenu; }
+	//bool& RenderMainMenu() { return bRenderMainMenu; }
+	//bool RenderMainMenu() const { return bRenderMainMenu; }
 	
 private:
 	
 	D3D* m_d3d;
 	
-	bool bRenderMainMenu;
-	
-	ZShadeSandboxEnvironment::Menu* mMainMenu;
-	ZShadeSandboxEnvironment::Menu* mInGameMenu;
+	//bool bRenderMainMenu;
+	//ZShadeSandboxEnvironment::Menu* mMainMenu;
+	//ZShadeSandboxEnvironment::Menu* mInGameMenu;
 	
 	string m_menu_to_render;
 	map<string, ZShadeSandboxEnvironment::Menu*> m_menus;

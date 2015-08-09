@@ -48,8 +48,6 @@ public:
 	// Functions needed by LUA scripting engine and map editor as well as creating a menu
 	
 	static void AddBackground(ZShadeSandboxGraphics::Image* image);
-	//static void AddMenuButton(string activeMenuName, ZShadeSandboxGraphics::Button* button);
-	//static void AddMenuText(string activeMenuName, ZShadeSandboxGraphics::Text* text);
 	static void GrabMenuNames(vector<string>& names);
 	static void LoadAMenu(string menu_filename, string& menuName);
 	static void SaveMenu(string menu_filename);
@@ -91,6 +89,8 @@ public:
 		bool pressedDownKey
 	);
 	static void HighlightButton(ZShadeSandboxGraphics::Button*& buttonWithBox, Sprite*& highlightBox, bool& boxCreated, int x, int y);
+	static void AddMenuNameToButton(string menu_name, int buttonID);
+	static bool GetButtonID(int& buttonID, int x, int y);
 	
 	//
 	// Text Updating
@@ -108,6 +108,7 @@ public:
 	static void DeleteText(ZShadeSandboxGraphics::Text* text);
 	static void DeleteText(int id);
 	static void HighlightText(ZShadeSandboxGraphics::Text*& textWithBox, Sprite*& highlightBox, bool& boxCreated, int x, int y);
+	static bool GetTextID(int& textID, int x, int y);
 };
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

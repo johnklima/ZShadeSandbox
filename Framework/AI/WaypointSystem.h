@@ -37,13 +37,15 @@ public:
 	bool Finished();
 	bool& CanLoop() { return bCanLoop; }
 	bool CanLoop() const { return bCanLoop; }
+	std::vector<ZShadeSandboxMath::XMMath3> GetWaypoints() const { return mWaypoints; }
+	int& CurrentWaypointIndex() { return iCurrentWaypointIndex; }
 	int CurrentWaypointIndex() const { return iCurrentWaypointIndex; }
+	WaypointSystem* Clone();
 	
 private:
 	
 	bool bCanLoop;
 	int iCurrentWaypointIndex;
-	ZShadeSandboxMath::XMMath3 mCurrentWaypoint;
 	std::vector<ZShadeSandboxMath::XMMath3> mWaypoints;
 };
 }

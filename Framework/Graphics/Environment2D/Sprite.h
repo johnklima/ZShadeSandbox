@@ -122,10 +122,6 @@ public:
 	void SetMoveSpriteLeft(bool left) { m_move_left = left; bMovingLeft = left; }
 	void SetMoveSpriteRight(bool right) { m_move_right = right; bMovingRight = right; }
 	
-	AISprite* Clone(GameDirectory2D* gd);
-	AISprite* Clone(GameDirectory2D* gd, float x, float y);
-	void CloneMe(GameDirectory2D* gd, float x, float y, int w, int h);
-
 	void AddAnimation();
 	
 	// Special Methods

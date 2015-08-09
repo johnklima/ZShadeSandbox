@@ -35,6 +35,8 @@ HUDEditorSystem::HUDEditorSystem(ZShadeSandboxEnvironment::Environment* env)
 	gridSizeX = 64;
 	gridSizeY = 64;
 	stampPressed = false;
+	m_selectModeImageID = -1;
+	m_selectModeTextID = -1;
 	m_originalImageID = -1;
 	m_originalTextID = -1;
 	m_image_cache_selection_changed = false;
@@ -46,6 +48,9 @@ HUDEditorSystem::HUDEditorSystem(ZShadeSandboxEnvironment::Environment* env)
 	m_selected_image_cover = false;
 	m_selected_text_cover = false;
 	m_display_image_box_created = false;
+	m_display_selected_image_box = false;
+	m_display_selected_text_box = false;
+	m_select_sprite_box = 0;
 	m_image_with_box = 0;
 	m_text_with_box = 0;
 	m_sprite_box = 0;
@@ -348,7 +353,17 @@ void HUDEditorSystem::Render(Camera* camera)
 		}
 		m_D3DSystem->TurnOffAlphaBlending();
 	}
-
+	
+	// Render a box around the selected image or text from Select mode
+	if (m_display_selected_image_box || m_display_selected_text_box)
+	{
+		m_D3DSystem->TurnOnAlphaBlending();
+		{
+			if (m_select_sprite_box != 0) m_select_sprite_box->Render(camera, 0);
+		}
+		m_D3DSystem->TurnOffAlphaBlending();
+	}
+	
 	if (gridMode == GM_Snap)
 	{
 		m_D3DSystem->TurnOnAlphaBlending();
@@ -763,6 +778,58 @@ void HUDEditorSystem::UpdateDisplaySprite(float x, float y)
 	}
 }
 //================================================================================================================
+void HUDEditorSystem::SelectModeImageClicked(float x, float y)
+{
+	if (m_HUDCreated && editType == ET_Image && action == A_Select)
+	{
+		m_display_selected_image_box = false;
+		m_select_sprite_box = 0;
+
+		if (!EnvironmentHUDHelper::GetImageID(m_selectModeImageID, x, y))
+		{
+			m_selectModeImageID = -1;
+		}
+		else
+		{
+			bWasClicked = true;
+		}
+
+		// Create a selected sprite box around the image that was selected
+		EnvironmentHUDHelper::HighlightImage(m_image_with_box, m_select_sprite_box, m_display_image_box_created, x, y);
+	}
+	else
+	{
+		m_selectModeImageID = -1;
+		m_display_selected_image_box = false;
+	}
+}
+//================================================================================================================
+void HUDEditorSystem::SelectModeTextClicked(float x, float y)
+{
+	if (m_HUDCreated && editType == ET_Text && action == A_Select)
+	{
+		m_display_text_box_created = false;
+		m_select_sprite_box = 0;
+		
+		if (!EnvironmentHUDHelper::GetTextID(m_selectModeTextID, x, y))
+		{
+			m_selectModeTextID = -1;
+		}
+		else
+		{
+			bWasClicked = true;
+		}
+		
+		// Create a selected sprite box around the text that was selected
+		EnvironmentHUDHelper::HighlightText(m_text_with_box, m_select_sprite_box, m_display_text_box_created, x, y);
+	}
+	else
+	{
+		m_selectModeTextID = -1;
+		m_display_text_box_created = false;
+	}
+}
+//================================================================================================================
 void HUDEditorSystem::SwitchToEditTypeNone()
 {
 	editType = ET_None;
@@ -778,9 +845,9 @@ void HUDEditorSystem::SwitchToEditTypeText()
 	editType = ET_Text;
 }
 //================================================================================================================
-void HUDEditorSystem::SwitchToActionNone()
+void HUDEditorSystem::SwitchToActionSelect()
 {
-	action = A_None;
+	action = A_Select;
 }
 //================================================================================================================
 void HUDEditorSystem::SwitchToActionMove()

@@ -23,22 +23,16 @@ TopdownMap* Environment2DMapHelper::ActiveTopdownMap()
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 	
 	// Did not find an environment
-	if (env2D == 0)
-		return 0;
+	if (env2D == 0) return 0;
 	
-	if (BetterString(env2D->ActiveWorldName()) == "")
-		return 0;
-	if (BetterString(env2D->ActiveMapName()) == "")
-		return 0;
+	if (BetterString(env2D->ActiveWorldName()) == "") return 0;
+	if (BetterString(env2D->ActiveMapName()) == "") return 0;
 	
 	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
 	{
-		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName()))
-			return 0;
-		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName()))
-			return 0;
-		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName())->GetMap(env2D->ActiveMapName()))
-			return 0;
+		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName())) return 0;
+		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName())) return 0;
+		if (!env2D->GetTopdownWorld(env2D->ActiveWorldName())->GetMap(env2D->ActiveMapName())) return 0;
 		
 		return env2D->GetTopdownWorld(env2D->ActiveWorldName())->GetMap(env2D->ActiveMapName());
 	}
@@ -51,8 +45,7 @@ PlatformerMap* Environment2DMapHelper::ActivePlatformerMap()
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return 0;
+	if (env2D == 0) return 0;
 	
 	if (BetterString(env2D->ActiveWorldName()) == "")
 		return 0;
@@ -79,8 +72,7 @@ void Environment2DMapHelper::GetWorldAndMapName(string& activeMapName, string& a
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return;
+	if (env2D == 0) return;
 
 	activeMapName = env2D->ActiveMapName();
 	activeWorldName = env2D->ActiveWorldName();
@@ -91,8 +83,7 @@ void Environment2DMapHelper::SetActiveMapName(string name)
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return;
+	if (env2D == 0) return;
 
 	if (env2D->WorldLoaded())
 	{
@@ -121,8 +112,7 @@ void Environment2DMapHelper::SetActiveRenderedMap(string world_name, string map_
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return;
+	if (env2D == 0) return;
 
 	env2D->WorldLoaded() = true;
 	env2D->ActiveWorldName() = world_name;
@@ -137,8 +127,7 @@ XMFLOAT3 Environment2DMapHelper::GetPlayerPosition()
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return XMFLOAT3(0, 0, 0);
+	if (env2D == 0) return XMFLOAT3(0, 0, 0);
 
 	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
 	{
@@ -159,8 +148,7 @@ XMFLOAT2 Environment2DMapHelper::GetSectionScrollOffset(int sectionID)
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 
 	// Did not find an environment
-	if (env2D == 0)
-		return XMFLOAT2(0, 0);
+	if (env2D == 0) return XMFLOAT2(0, 0);
 
 	if (BetterString(env2D->ActiveWorldName()) == "")
 		return XMFLOAT2(0, 0);
