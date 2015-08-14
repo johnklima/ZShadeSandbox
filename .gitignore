@@ -43,6 +43,7 @@ Temporary Items
 .apdisk
 
 # Engine Files
+Debug
 *.sdf
 *.suo
 *.user
