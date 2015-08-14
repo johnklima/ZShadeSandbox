@@ -5,7 +5,7 @@
 #endif
 #include "string.h"
 #include "AISprite.h"
-//#include "Environment2D.h"
+#include "Environment2DMapHelper.h"
 #include "tolua_Common.h"
 //==================================================================================================================================
 //==================================================================================================================================
@@ -773,7 +773,15 @@ static int tolua_setSpeed_Sprite(lua_State* L)
 	
 	if (self != 0)
 	{
-		self->Speed() = tolua_get_int(L, 2);
+		if (Environment2DMapHelper::IsTopdown())
+		{
+			self->SpeedX() = tolua_get_int(L, 2);
+			self->SpeedY() = self->SpeedX();
+		}
+		else
+		{
+			self->SpeedX() = tolua_get_int(L, 2);
+		}
 	}
 	
 	return 0;
@@ -787,7 +795,7 @@ static int tolua_getSpeed_Sprite(lua_State* L)
 	
 	if (self != 0)
 	{
-		tolua_push_int(L, self->Speed());
+		tolua_push_int(L, self->SpeedX());
 	}
 	
 	return 1;
@@ -2014,7 +2022,7 @@ static int tolua_getMaxSpeed_Sprite(lua_State* L)
 	
 	if (self != 0)
 	{
-		tolua_push_float(L, self->MaxSpeed());
+		tolua_push_float(L, self->MaxSpeedX());
 	}
 	
 	return 1;
@@ -2028,7 +2036,15 @@ static int tolua_setMaxSpeed_Sprite(lua_State* L)
 	
 	if (self != 0)
 	{
-		self->MaxSpeed() = tolua_get_float(L, 2);
+		if (Environment2DMapHelper::IsTopdown())
+		{
+			self->MaxSpeedX() = tolua_get_float(L, 2);
+			self->MaxSpeedY() = self->MaxSpeedX();
+		}
+		else
+		{
+			self->MaxSpeedX() = tolua_get_float(L, 2);
+		}
 	}
 	
 	return 0;

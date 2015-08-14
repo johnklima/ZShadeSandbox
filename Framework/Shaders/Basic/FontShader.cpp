@@ -199,23 +199,19 @@ bool FontShader::InitializeShader11()
 	m_pD3DSystem->GetDevice11()->CreateBuffer(&desc, NULL, &m_pInstanceData);
 	
 	ClearInputLayout();
+	
 	SetInputLayoutDesc("SpriteVS", ZShadeSandboxMesh::VertexLayout::mesh_layout_sprite_pos_tex, 2);
-	SetInputLayoutDesc("SpriteInstancedVS", ZShadeSandboxMesh::VertexLayout::mesh_layout_sprite_instanced, 8);
-	
-	// Compile the sprite gui shader
-	//Compile( "Basic\\Sprite.hlsl", "SpriteVS", ST_VERTEX );
-	//Compile( "Basic\\Sprite.hlsl", "SpriteInstancedVS", ST_VERTEX );
-	//Compile( "Basic\\Sprite.hlsl", "SpritePS", ST_PIXEL );
-	
 	LoadVertexShader("SpriteVS");
-	LoadVertexShader("SpriteInstancedVS");
-	LoadPixelShader("SpritePS");
-
-	SwitchTo("SpriteVS", ZShadeSandboxShader::EShaderTypes::ST_VERTEX);
+	//SwitchTo("SpriteVS", ZShadeSandboxShader::EShaderTypes::ST_VERTEX);
 	AssignVertexShaderLayout("SpriteVS");
 
-	SwitchTo("SpriteInstancedVS", ZShadeSandboxShader::EShaderTypes::ST_VERTEX);
+	//SwitchTo("SpriteInstancedVS", ZShadeSandboxShader::EShaderTypes::ST_VERTEX);
+
+	SetInputLayoutDesc("SpriteInstancedVS", ZShadeSandboxMesh::VertexLayout::mesh_layout_sprite_instanced, 8);
+	LoadVertexShader("SpriteInstancedVS");
 	AssignVertexShaderLayout("SpriteInstancedVS");
+
+	LoadPixelShader("SpritePS");
 
 	return true;
 }

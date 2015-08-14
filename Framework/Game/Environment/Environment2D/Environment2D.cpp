@@ -73,6 +73,18 @@ bool Environment2D::Init()
 	
 	m_Timer.Initialize();
 	
+	if (!CGlobal::DoesFolderExist(mEngineOptions->m_GameFolderName))
+	{
+		mEngineOptions->m_GameFolderName = "ZShadeSandboxDefaultGame2D";
+		
+		// If the GameFolder does not exist then create a default game folder
+		CGlobal::CreateGD2D(mEngineOptions->m_GameFolderName, mEngineOptions->m_GameType2D);
+		
+		// And update the ini file
+		ZShadeINIParser iniSandboxParser("ZShadeSandbox.ini", true);
+		iniSandboxParser.WriteString("Editor", "GameFolder", mEngineOptions->m_GameFolderName);
+	}
+	
 	// Load the Game Directory since the game is starting from here
 	if (!mEngineOptions->m_inEditor)
 	{

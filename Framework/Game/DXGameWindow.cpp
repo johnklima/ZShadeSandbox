@@ -40,6 +40,8 @@ void DXGameWindow::Init(EngineOptions* eo, HWND hwnd)
 
 	mEngineOptions->hwnd = mWindow->GetHwnd();
 
+	mEnv = new ZShadeSandboxEnvironment::Environment(mEngineOptions);
+
 	mWindow->SetUserMessageFunction(WM_LBUTTONDOWN, bind(mem_fn(&DXGameWindow::OnMouseDown), this, _1, _2, _3, _4));
 	mWindow->SetUserMessageFunction(WM_MBUTTONDOWN, bind(mem_fn(&DXGameWindow::OnMouseDown), this, _1, _2, _3, _4));
 	mWindow->SetUserMessageFunction(WM_RBUTTONDOWN, bind(mem_fn(&DXGameWindow::OnMouseDown), this, _1, _2, _3, _4));
@@ -49,8 +51,6 @@ void DXGameWindow::Init(EngineOptions* eo, HWND hwnd)
 	mWindow->SetUserMessageFunction(WM_MOUSEMOVE, bind(mem_fn(&DXGameWindow::OnMouseMove), this, _1, _2, _3, _4));
 
 	mWindow->Show();
-
-	mEnv = new ZShadeSandboxEnvironment::Environment(mEngineOptions);
 }
 //===============================================================================================================================
 EngineOptions* DXGameWindow::GetEngineOptions()

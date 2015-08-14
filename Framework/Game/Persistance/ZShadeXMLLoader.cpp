@@ -545,7 +545,7 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		int mana = atoi(mana_str);
 		int gold = atoi(gold_str);
 		int strength = atoi(strength_str);
-		int speed = atoi(speed_str);
+		//int speed = atoi(speed_str);
 		int defense = atoi(defense_str);
 		int experience = atoi(experience_str);
 		int level = atoi(level_str);
@@ -559,6 +559,8 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		int teleport_map_y = atoi(teleport_map_y_str);
 		bool seen_by_player = (string(seen_by_player_str) == "true") ? true : false;
 		
+		XMFLOAT3 speed = ZShadeSandboxGlobal::Convert::ConvertToFloat3(speed_str);
+
 		string path;
 		if (strcmp(baseimage_str, "player_cover.png") == 0)
 		{
@@ -593,7 +595,8 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		spr->Mana() = mana;
 		spr->Gold() = gold;
 		spr->Strength() = strength;
-		spr->Speed() = speed;
+		spr->SpeedX() = speed.x;
+		spr->SpeedY() = speed.y;
 		spr->Defense() = defense;
 		spr->Experience() = experience;
 		spr->Level() = level;
@@ -708,7 +711,7 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		int mana = atoi(mana_str);
 		int gold = atoi(gold_str);
 		int strength = atoi(strength_str);
-		int speed = atoi(speed_str);
+		//int speed = atoi(speed_str);
 		int defense = atoi(defense_str);
 		int experience = atoi(experience_str);
 		int level = atoi(level_str);
@@ -722,6 +725,8 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		int teleport_map_y = atoi(teleport_map_y_str);
 		bool seen_by_player = (string(seen_by_player_str) == "true") ? true : false;
 		
+		XMFLOAT3 speed = ZShadeSandboxGlobal::Convert::ConvertToFloat3(speed_str);
+
 		string path;
 		if (strcmp(baseimage_str, "player_cover.png") == 0)
 		{
@@ -754,7 +759,8 @@ bool ZShadeXMLLoader::LoadSpritesXML(string spriteMapfilename, GameDirectory2D* 
 		spr->Mana() = mana;
 		spr->Gold() = gold;
 		spr->Strength() = strength;
-		spr->Speed() = speed;
+		spr->SpeedX() = speed.x;
+		spr->SpeedY() = speed.y;
 		spr->Defense() = defense;
 		spr->Experience() = experience;
 		spr->Level() = level;

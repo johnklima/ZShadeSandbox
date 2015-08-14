@@ -20,17 +20,19 @@ public:
 	
 	struct RenderTarget
 	{
-		UINT Width;
-		UINT Height;
-		DXGI_FORMAT Format;
-		ID3D11Texture2D* DSTexture;
+		//UINT Width;
+		//UINT Height;
+		//DXGI_FORMAT Format;
+		//ID3D11Texture2D* DSTexture;
+		int mipLevels;
+		UINT bindFlags;
 		ID3D11Texture2D* Texture;
 		ID3D11ShaderResourceView* SRView;
-		ID3D11RenderTargetView* RTView;
-		ID3D11DepthStencilView* DSView;
-		ID3D11UnorderedAccessView* UAView;
-		D3D11_VIEWPORT viewport;
-		bool bInUse;
+		ID3D11RenderTargetView** RTView;
+		//ID3D11DepthStencilView* DSView;
+		ID3D11UnorderedAccessView** UAView;
+		//D3D11_VIEWPORT viewport;
+		//bool bInUse;
 		
 		void Set();
 		void Clear(float red, float green, float blue, float alpha);
@@ -44,9 +46,13 @@ public:
 	void AddPostProcess(PostProcess* pp);
 	void ClearCurrentPostProcesses();
 	
-	// Render a post process onto the existing scene
-	void Render(ID3D11ShaderResourceView* sceneSRV, ID3D11RenderTargetView*& outputRTV);
+	// This is called before the scene is rendered
+	void Begin();
 	
+	// Render a post process onto the existing scene
+	void Render(ID3D11ShaderResourceView* sceneSRV);
+	
+	/*
 	static RenderTarget* CreateRenderTarget
 	(	int textureWidth
 	,	int textureHeight
@@ -58,6 +64,14 @@ public:
 	,	int mipLevels = 1
 	,	bool generateMipMaps = false
 	,	bool useAsUAV = false
+	);
+	*/
+	static RenderTarget* CreateRenderTarget
+	(	int width
+	,	int height
+	,	DXGI_FORMAT format
+	,	UINT bindflags
+	,	int mipLevels
 	);
 	
 	static void ClearRenderTargets();
@@ -72,6 +86,11 @@ private:
 	// Need a SceneSRV input, RenderTarget output to the scene and update the scene depth buffer when DOF is used
 	
 	static D3D* mD3DSystem;
+	
+	//static RenderTarget* backbufferTarget;
+	static ID3D11RenderTargetView* mSwapChainRTV;		// render target view retrieved at InitFrameRender
+	static ID3D11DepthStencilView* mDSView;			// depth stencil view retried at InitFrameRender
+	static DXGI_SURFACE_DESC* mBackBufferSurfaceDesc;	// back buffer surface desc of current render target
 	
 	// List of current post processes to render
 	std::vector<PostProcess*> m_CurrentPostProcesses;

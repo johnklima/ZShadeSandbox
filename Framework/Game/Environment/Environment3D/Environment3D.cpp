@@ -13,6 +13,10 @@
 #include "HDR.h"
 #include "PostProcessColor.h"
 #include "Shaders.h"
+#include "CircleMesh.h"
+#include "CylindricalMesh.h"
+#include "GeosphereMesh.h"
+#include "TriangleMesh.h"
 //===============================================================================================================================
 //===============================================================================================================================
 Environment3D::Environment3D(EngineOptions* eo)
@@ -53,7 +57,8 @@ bool Environment3D::Init()
 	bToggleGBufferDebuggingColors = true;
 	bToggleGBufferDebuggingNormals = false;
 	bToggleGBufferDebuggingDepth = false;
-	
+	bInitialized = true;
+
 	m_D3DSystem = new D3D();
 	if (!m_D3DSystem) return false;
 	
@@ -69,7 +74,19 @@ bool Environment3D::Init()
 
 	// This should be false when a 3D game is being loaded
 	bUseEngineTextures = true;
-
+	
+	if (!CGlobal::DoesFolderExist(mEngineOptions->m_GameFolderName))
+	{
+		mEngineOptions->m_GameFolderName = "ZShadeSandboxDefaultGame3D";
+		
+		// If the GameFolder does not exist then create a default game folder
+		CGlobal::CreateGD3D(mEngineOptions->m_GameFolderName);
+		
+		// And update the ini file
+		ZShadeINIParser iniSandboxParser("ZShadeSandbox.ini", true);
+		iniSandboxParser.WriteString("Editor", "GameFolder", mEngineOptions->m_GameFolderName);
+	}
+	
 	// Load the Game Directory since the game is starting from here
 	if (!mEngineOptions->m_inEditor)
 	{
@@ -432,19 +449,61 @@ void Environment3D::UpdateMaster()
 	{
 		// TODO: Randomly spawn a mesh object
 		
+		ZShadeSandboxMath::XMMath3 pos(m_CameraSystem->Position().x, m_CameraSystem->Position().y, m_CameraSystem->Position().z);
+		
+		// Get the camera target position and place a random object at that position
+		pos.x += m_CameraSystem->Forward().x * 150;
+		pos.y += m_CameraSystem->Forward().y * 150;
+		pos.z += m_CameraSystem->Forward().z * 150;
+		
 		ZShadeSandboxMesh::MeshParameters mp;
 		mp.useCustomShader = false;
 		mp.vertexType = ZShadeSandboxMesh::EVertexType::VT_NormalTex;
 		mp.rotationAxisX = false;
 		mp.rotationAxisY = true;
 		mp.rotationAxisZ = false;
-		mp.pos = m_CameraSystem->Position();
-		mp.rot = XMFLOAT3(0, 1, 0);
+		mp.pos = pos;
+		mp.rot = XMFLOAT3(0, 1, 0);// This only defines the start of the rotation
 		mp.scale = XMFLOAT3(30, 30, 30);
 		mp.material = MaterialManager::Instance()->GetMaterial("Wall");
 		mp.in2D = false;
 		mp.shader = 0;
-		m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::CubeMesh(m_D3DSystem, mp));
+		
+		ZShadeSandboxMath::ZMath::RandomSeed();
+		int value = ZShadeSandboxMath::ZMath::RandI(0, 6);
+		
+		if (value == 0)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::CubeMesh(m_D3DSystem, mp, "Models\\cube.txt"));
+		}
+		else if (value == 1)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::CircleMesh(m_D3DSystem, 0.5f, mp));
+		}
+		else if (value == 2)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::CylindricalMesh(0.5f, 0.5f, 3.0f, 10, 10, m_D3DSystem, mp));
+		}
+		else if (value == 3)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::GeosphereMesh(0.5f, 2, m_D3DSystem, mp));
+		}
+		else if (value == 4)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::QuadMesh(m_D3DSystem, mp, 64, 64));
+		}
+		else if (value == 5)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::SphereMesh(m_D3DSystem, mp, "Models\\sphere.txt"));
+		}
+		else if (value == 6)
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::TriangleMesh(m_D3DSystem, mp));
+		}
+		else
+		{
+			m_SpawnedMeshContainer.push_back(new ZShadeSandboxMesh::CubeMesh(m_D3DSystem, mp, "Models\\cube.txt"));
+		}
 	}
 
 	//Fullscreen mode
@@ -745,8 +804,19 @@ void Environment3D::RenderMaster()
 		RenderShadowMapToTexture();
 	}
 	
+	if (bEnablePostProcessing)
+	{
+		mPostProcessManager->Begin();
+	}
+	
 	if (bEnableDeferredShading && !bWireframeMode && !Quickwire())
 	{
+		if (bInitialized)
+		{
+			Render();
+			bInitialized = false;
+		}
+
 		m_D3DSystem->GBufferBegin();
 		{
 			RenderDeferred();
@@ -759,7 +829,7 @@ void Environment3D::RenderMaster()
 
 		if (bEnablePostProcessing)
 		{
-			mPostProcessManager->Render(m_D3DSystem->GBufferColorTarget()->SRView, m_D3DSystem->GetBackbufferRenderTarget()->RTView);
+			mPostProcessManager->Render(m_D3DSystem->GBufferColorTarget()->SRView);// , m_D3DSystem->GetBackbufferRenderTarget()->RTView);
 		}
 	}
 	else
@@ -771,7 +841,7 @@ void Environment3D::RenderMaster()
 
 		if (bEnablePostProcessing)
 		{
-			mPostProcessManager->Render(m_D3DSystem->GetBackbufferRenderTarget()->SRView, m_D3DSystem->GetBackbufferRenderTarget()->RTView);
+			mPostProcessManager->Render(m_D3DSystem->GetBackbufferRenderTarget()->SRView);// , m_D3DSystem->GetBackbufferRenderTarget()->RTView);
 		}
 	}
 	

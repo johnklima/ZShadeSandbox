@@ -63,6 +63,8 @@ class ShaderCompiler
 		ShaderMacros();
 		const UINT32 NumDefines() const { return numDefines; }
 		const D3D10_SHADER_MACRO* Defines() const { return defines; }
+		
+		void AddMacro(const std::string& name, const std::string def);
 		void AddMacro(const std::string& name, UINT32 value);
 	};
 
@@ -74,6 +76,7 @@ class ShaderCompiler
 	
 public:
 	
+	static void AddMacro(BetterString macroName, const std::string& name, const std::string def);
 	static void AddMacro(BetterString macroName, const std::string& name, UINT32 value);
 
 	// Use this to compile all shaders and recompile all shaders in the engine

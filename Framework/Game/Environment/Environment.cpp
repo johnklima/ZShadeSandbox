@@ -67,6 +67,8 @@ Environment::~Environment()
 //===============================================================================================================================
 void Environment::OnMouseDown(WPARAM btnState, int x, int y)
 {
+	if (mEngineOptions == 0) return;
+
 	switch (mEngineOptions->m_DimType)
 	{
 		case ZSHADE_2D:
@@ -84,6 +86,8 @@ void Environment::OnMouseDown(WPARAM btnState, int x, int y)
 //===============================================================================================================================
 void Environment::OnMouseUp(WPARAM btnState, int x, int y)
 {
+	if (mEngineOptions == 0) return;
+
 	switch (mEngineOptions->m_DimType)
 	{
 		case ZSHADE_2D:
@@ -101,6 +105,8 @@ void Environment::OnMouseUp(WPARAM btnState, int x, int y)
 //===============================================================================================================================
 void Environment::OnMouseMove(WPARAM btnState, int x, int y)
 {
+	if (mEngineOptions == 0) return;
+
 	switch (mEngineOptions->m_DimType)
 	{
 		case ZSHADE_2D:
@@ -118,6 +124,8 @@ void Environment::OnMouseMove(WPARAM btnState, int x, int y)
 //================================================================================================================
 void Environment::Run()
 {
+	if (mEngineOptions == 0) return;
+
 	switch (mEngineOptions->m_DimType)
 	{
 		case ZSHADE_2D:

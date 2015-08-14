@@ -95,7 +95,6 @@
     <ClCompile Include="Framework\Animation2D\AnimationFrame2D.cpp" />
     <ClCompile Include="Framework\Animation2D\AnimationProfile2D.cpp" />
     <ClCompile Include="Framework\Animation2D\ReadAnimationProfile2D.cpp" />
-    <ClCompile Include="Framework\Animation3D\AnimationFrame3D.cpp" />
     <ClCompile Include="Framework\Animation3D\TextureAnimation3D.cpp" />
     <ClCompile Include="Framework\Audio\AudioSystem.cpp" />
     <ClCompile Include="Framework\Audio\MusicSystem.cpp" />
@@ -157,8 +156,12 @@
     <ClCompile Include="Framework\Game\Environment\EnvironmentMenuHelper.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
     </ClCompile>
-    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLLoader.cpp" />
-    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLSaver.cpp" />
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLLoader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Game\Persistance\ZShadeXMLSaver.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Framework\Game\Systems\MenuSystem.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
     </ClCompile>
@@ -174,7 +177,9 @@
     <ClCompile Include="Framework\General\Memory\MemoryMgr.cpp" />
     <ClCompile Include="Framework\General\Parsers\FileParser.cpp" />
     <ClCompile Include="Framework\General\Parsers\InputXMLParser.cpp" />
-    <ClCompile Include="Framework\General\Parsers\XMLParser.cpp" />
+    <ClCompile Include="Framework\General\Parsers\XMLParser.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Framework\General\Parsers\ZShadeINIParser.cpp" />
     <ClCompile Include="Framework\General\Parsers\ZShadeINIWriter.cpp" />
     <ClCompile Include="Framework\General\Performance\DefaultInputController3D.cpp" />
@@ -334,10 +339,18 @@
     <ClCompile Include="Framework\Physics\Collision\PointColliderController.cpp" />
     <ClCompile Include="Framework\Physics\Collision\SAT.cpp" />
     <ClCompile Include="Framework\Physics\Collision\ShapeContact.cpp" />
-    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBody2D.cpp" />
-    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.cpp" />
-    <ClCompile Include="Framework\Physics\Physics2D\PhysicsWorld2D.cpp" />
-    <ClCompile Include="Framework\Physics\Physics2D\SurfaceDefinition.cpp" />
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBody2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsBodyBase2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\PhysicsWorld2D.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Physics\Physics2D\SurfaceDefinition.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Framework\Physics\Physics3D\PhysicsBody3D.cpp" />
     <ClCompile Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.cpp" />
     <ClCompile Include="Framework\Physics\QuickHull\FaceList.cpp" />
@@ -345,21 +358,47 @@
     <ClCompile Include="Framework\Physics\QuickHull\HullFace.cpp" />
     <ClCompile Include="Framework\Physics\QuickHull\QuickHull.cpp" />
     <ClCompile Include="Framework\Physics\QuickHull\VertexList.cpp" />
-    <ClCompile Include="Framework\Scripting\Script.cpp" />
-    <ClCompile Include="Framework\Scripting\ScriptBase.cpp" />
-    <ClCompile Include="Framework\Scripting\Scripting.cpp" />
-    <ClCompile Include="Framework\Scripting\tolua_Funcs.cpp" />
-    <ClCompile Include="Framework\Scripting\tolua_Sprite.cpp" />
+    <ClCompile Include="Framework\Scripting\Script.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\ScriptBase.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\Scripting.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\tolua_Funcs.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Scripting\tolua_Sprite.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialLightTessellationShader.cpp" />
     <ClCompile Include="Framework\Shaders\BasicTessellation\MaterialTessellationShader.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\CSDesaturation.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\FontShader.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\MaterialLightShader.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\MaterialShader.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\Shader.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\ShaderCompiler.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\Shaders.cpp" />
-    <ClCompile Include="Framework\Shaders\Basic\TextureShader.cpp" />
+    <ClCompile Include="Framework\Shaders\Basic\CSDesaturation.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\FontShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\MaterialLightShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\MaterialShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\Shader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\ShaderCompiler.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\Shaders.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="Framework\Shaders\Basic\TextureShader.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Framework\Shaders\Environment\BlurShader.cpp" />
     <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\AmbientLightDeferredShader.cpp" />
     <ClCompile Include="Framework\Shaders\Environment\Lighting\DeferredShading\CapsuleLightDeferredShader.cpp" />
@@ -625,7 +664,6 @@
     <ClInclude Include="Framework\Animation2D\AnimationFrame2D.h" />
     <ClInclude Include="Framework\Animation2D\AnimationProfile2D.h" />
     <ClInclude Include="Framework\Animation2D\ReadAnimationProfile2D.h" />
-    <ClInclude Include="Framework\Animation3D\AnimationFrame3D.h" />
     <ClInclude Include="Framework\Animation3D\TextureAnimation3D.h" />
     <ClInclude Include="Framework\Audio\AudioSystem.h" />
     <ClInclude Include="Framework\Audio\MusicSystem.h" />

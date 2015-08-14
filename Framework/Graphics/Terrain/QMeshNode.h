@@ -83,6 +83,10 @@ struct QMeshNode
 	ID3D11Buffer* m_vertex_buffer11;
 	ID3D11Buffer* m_index_buffer11;
 	
+	// Contains all the ids of each entity to be rendered when this node
+	// is rendered.
+	std::vector<int> entityRenderID;
+	
 	QMeshNode()
 	:	vertices(0)
 	,	indices(0)

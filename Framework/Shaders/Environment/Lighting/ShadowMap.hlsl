@@ -187,8 +187,8 @@ float ComputeShadowColor2(float4 lightViewPosition, float3 normal, float3 lightD
 struct SMVertexInput
 {
 	float3 position		: POSITION;
-	float2 uv			: TEXCOORD0;
 	float3 normal		: NORMAL;
+	float2 uv			: TEXCOORD0;
 };
 
 struct SMPixelInput

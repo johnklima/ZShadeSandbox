@@ -167,7 +167,10 @@ public:
 	void SetSelectedSpriteMana(int value);
 	void SetSelectedSpriteGold(int value);
 	void SetSelectedSpriteStrength(int value);
-	void SetSelectedSpriteSpeed(int value);
+	void SetSelectedSpriteSpeedX(int value);
+	void SetSelectedSpriteSpeedY(int value);
+	void SetSelectedSpriteMaxSpeedX(int value);
+	void SetSelectedSpriteMaxSpeedY(int value);
 	void SetSelectedSpriteDefense(int value);
 	void SetSelectedSpriteExperience(int value);
 	void SetSelectedSpriteLevel(int value);
@@ -189,7 +192,10 @@ public:
 	int GetSelectedSpriteMana();
 	int GetSelectedSpriteGold();
 	int GetSelectedSpriteStrength();
-	int GetSelectedSpriteSpeed();
+	int GetSelectedSpriteSpeedX();
+	int GetSelectedSpriteSpeedY();
+	int GetSelectedSpriteMaxSpeedX();
+	int GetSelectedSpriteMaxSpeedY();
 	int GetSelectedSpriteDefense();
 	int GetSelectedSpriteExperience();
 	int GetSelectedSpriteLevel();

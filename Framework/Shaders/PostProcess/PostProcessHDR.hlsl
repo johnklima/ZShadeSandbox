@@ -11,27 +11,20 @@
 // Constants
 //
 
-// g_Res : backbuffer width and height divided by 4
-// g_Domain : backbuffer width times height divided by 16
-// g_GroupSize : backbuffer width times height divided by 16 times 1024
-cbuffer cbDownscaleBuffer : register(b0)
+cbuffer cbConstants : register(b0)
 {
-	// Resolution of the down scaled target
-	uint2 g_Res			: packoffset(c0);
-	
-	// Total pixel in the downscaled image
-	uint g_Domain		: packoffset(c0.z);
-	
-	// Number of groups dispached on the first pass
-	uint g_GroupSize	: packoffset(c0.w);
+	uint width;
+	uint height;
+	uint mipLevel0;
+	uint mipLevel1;
 };
 
-cbuffer cbFinalPassConstants : register(b1)
+cbuffer cbBloomConstants : register(b1)
 {
-	float g_MiddleGrey		: packoffset(c0);
-	
-	// Multiply the white value with the middle grey value and square the result
-	float g_LumWhiteSqr		: packoffset(c0.y);
+	float g_MiddleGrey;
+	float g_BloomThreshold;
+	float g_BloomMultiplier;
+	float padding;
 };
 
 //======================================================================================================
@@ -40,21 +33,38 @@ cbuffer cbFinalPassConstants : register(b1)
 // Textures, samplers and global buffers
 //
 
-Texture2D g_HDRTexture							: register(t0);
-RWStructuredBuffer<float> g_AverageLuminance	: register(u0);
+//LUM_WEIGHTS is used to calculate the intensity of a color value
+// (note green contributes more than red contributes more than blue)
+#define LUM_WEIGHTS float3(0.27f, 0.67f, 0.06f)
+//MIDDLE_GREY is used to scale the color values for tone mapping
+#define MIDDLE_GREY 0.08f
+//BLOOM_THRESHOLD is the lower limit for intensity values that will contribute to bloom
+#define BLOOM_THRESHOLD 0.5f
+//BLOOM_MULTIPLIER scales the bloom value prior to adding the bloom value to the material color
+#define BLOOM_MULTIPLIER	0.6f
+#define GAMMA_POW 2.2
+#define DELTA 0.00000001f
+#define BLURH_THREADS_X 4
+#define BLURH_THREADS_Y 64
+#define BLURV_THREADS_X 64
+#define	BLURV_THREADS_Y 4
+#define ADD_THREADS_X 64
+#define ADD_THREADS_Y 2
+#define LUM_AND_BRIGHT_THREADS 8u
+#define REDUCE_GROUP_SIZE 64
+#define GET_AVG_LUM_THREADS 16u
+#define REDUCE_Y_PER_THREAD 8
 
-Texture2D<float4> g_FinalHDRTexture				: register(t1);
-StructuredBuffer<float> g_FinalAvgLuminance		: register(t2);
+Texture2D<float4> 	g_Input0 : register( t0 );
+Texture2D<float4> 	g_Input1 : register( t1 );
+RWTexture2D<float4> g_Output0 : register( u0 );
+RWTexture2D<float4> g_Output1 : register( u1 );
+RWTexture2D<float4> g_Output2 : register( u2 );
+RWTexture2D<float4> g_Output3 : register( u3 );
+RWTexture2D<float> 	g_LuminanceTemp : register(u4);
 
-SamplerState g_PointSampler						: register(s0);
-
-groupshared float SharedPositions[1024];
-
-#define MAX_GROUPS	64
-
-groupshared float SharedAvgFinal[MAX_GROUPS];
-
-static const float3 LUMINACNE_FACTOR = float3(0.299, 0.587, 0.114);
+SamplerState	sampleLinear			: register( s0 );
+SamplerState	samplePoint				: register( s1 );
 
 //======================================================================================================
 
@@ -62,213 +72,219 @@ static const float3 LUMINACNE_FACTOR = float3(0.299, 0.587, 0.114);
 // Global Functions
 //
 
-float3 HDRToneMapping(float3 hdrColor)
+float4 BrightClampAndLuminance(float2 samplePoint, int2 offset)
 {
-	// Find the luminance scale for the pixel
-	float lScale = dot(hdrColor, LUMINACNE_FACTOR);
-	
-	lScale *= g_MiddleGrey / g_FinalAvgLuminance[0];
-	
-	lScale = (lScale + lScale * lScale / g_LumWhiteSqr) / (1.0 + lScale);
-	
-	return hdrColor * lScale;
+	float4 sample = g_Input0.SampleLevel(sampleLinear, samplePoint, 0, offset);
+	sample.a = log(dot(sample.rgb, LUM_WEIGHTS) + DELTA);
+	sample.rgb = max(sample.rgb - g_BloomThreshold, (float3)0.0f);
+	return sample;
 }
 
 //======================================================================================================
 
 //
-// Structs
+// Compute Shaders
 //
 
-struct PostProcessPixelInput
+groupshared float4 temp0[LUM_AND_BRIGHT_THREADS][LUM_AND_BRIGHT_THREADS];
+groupshared float4 temp1[LUM_AND_BRIGHT_THREADS][LUM_AND_BRIGHT_THREADS];
+
+[numthreads(LUM_AND_BRIGHT_THREADS, LUM_AND_BRIGHT_THREADS, 1)]
+void ComputeLuminanceAndBright(uint3 Gid : SV_GroupID, uint3 DTid : SV_DispatchThreadID, uint3 GTid : SV_GroupThreadID, uint GI : SV_GroupIndex)
 {
-	float4 position		: SV_POSITION;
-	float2 uv			: TEXCOORD0;
-};
+	float2 samplepoint = float2((2 * DTid.xy + 0.5f) / float2(width, height));
+	float4 bright = 0;
+	float4 sampleVlaue = 0;
+	float4 b = 0;
+	int2 outPos = 2 * DTid.xy;
+	int2 offset = int2(0, 0);
+	b = BrightClampAndLuminance(samplepoint, offset * 2);
+	g_Output0[outPos + offset] = b;
+	bright += b;
 
-//======================================================================================================
-
-//
-// Compute Shader
-//
-
-//======================================================================================================
-
-//
-// 1st HDR Pass
-//
-
-float DownScale4x4(uint2 CurPixel, uint groupThreadId)
-{
-	float avgLum = 0.0;
+	offset = int2(0, 1);
+	b = BrightClampAndLuminance(samplepoint, offset * 2);
+	g_Output0[outPos + offset] = b;
+	bright += b;
 	
-	// Skip any pixels that are out of bounds
-	if (CurPixel.y < g_Res.y)
+	offset = int2(1, 0);
+	b = BrightClampAndLuminance(samplepoint, offset * 2);
+	g_Output0[outPos + offset] = b;
+	bright += b;
+	
+	offset = int2(1, 1);
+	b = BrightClampAndLuminance(samplepoint, offset * 2);
+	g_Output0[outPos + offset] = b;
+	bright += b;
+	
+	bright = bright / 4;
+	temp0[GTid.x][GTid.y] = bright;
+	
+	g_Output1[GTid.xy + Gid.xy * LUM_AND_BRIGHT_THREADS] = bright;
+	
+	GroupMemoryBarrierWithGroupSync();
+	
+	if(GTid.x < LUM_AND_BRIGHT_THREADS/2 && GTid.y < LUM_AND_BRIGHT_THREADS / 2)
 	{
-		// Sum a group of 4x4 pixels
-		int3 nFullResPos = int3(CurPixel * 4, 0);
+		float4 nextLevel;
+		nextLevel = temp0[GTid.x * 2][GTid.y * 2];
+		nextLevel += temp0[GTid.x * 2 + 1][GTid.y * 2];
+		nextLevel += temp0[GTid.x * 2][GTid.y * 2 + 1];
+		nextLevel += temp0[GTid.x * 2 + 1][GTid.y * 2 + 1];
+		nextLevel = nextLevel / 4;
+		temp1[GTid.x][GTid.y] = nextLevel;
+		g_Output2[Gid.xy * LUM_AND_BRIGHT_THREADS / 2 + GTid.xy] = nextLevel;
+	}
+	
+	GroupMemoryBarrierWithGroupSync();
+	
+	if(GTid.x < LUM_AND_BRIGHT_THREADS/4 && GTid.y < LUM_AND_BRIGHT_THREADS / 4)
+	{
+		float4 nextLevel;
+		nextLevel =  temp1[GTid.x * 2][GTid.y * 2];
+		nextLevel += temp1[GTid.x * 2 + 1][GTid.y * 2];
+		nextLevel += temp1[GTid.x * 2][GTid.y * 2 + 1];
+		nextLevel += temp1[GTid.x * 2 + 1][GTid.y * 2 + 1];
+		nextLevel = nextLevel / 4;
+		g_Output3[Gid.xy * LUM_AND_BRIGHT_THREADS/4 + GTid.xy] = nextLevel;
+		temp0[GTid.x][GTid.y] = nextLevel;
+	}
+	
+	GroupMemoryBarrierWithGroupSync();
+	
+	if(GTid.x == 0 && GTid.y == 0)
+	{
+		float4 nextLevel;
+		nextLevel =  temp0[0][0];
+		nextLevel += temp0[1][0];
+		nextLevel += temp0[0][1];
+		nextLevel += temp0[1][1];
+		nextLevel = nextLevel / 4;
+		g_LuminanceTemp[Gid.xy] = nextLevel.a;
+	}
+}
+
+
+groupshared float avgTemp[GET_AVG_LUM_THREADS];
+
+[numthreads(GET_AVG_LUM_THREADS, 1, 1)]
+void GetAvgLum(uint3 Gid : SV_GroupID, uint3 DTid : SV_DispatchThreadID, uint3 GTid : SV_GroupThreadID, uint GI : SV_GroupIndex)
+{
+	float totalLuminance = 0.0f;
+	
+	for(uint i = 0; i < width / (LUM_AND_BRIGHT_THREADS * GET_AVG_LUM_THREADS); i++)
+	{
+		for(uint j = 0; j < height / 16u; j++)
+		{
+			totalLuminance += g_LuminanceTemp[int2(DTid.x + GET_AVG_LUM_THREADS * i, j)];
+		}
+	}
+	
+	avgTemp[DTid.x] = totalLuminance;
+	
+	GroupMemoryBarrierWithGroupSync();
+	
+	if (DTid.x == 0)
+	{
+		for(uint i = 1; i < GET_AVG_LUM_THREADS; i++)
+		{
+			totalLuminance += avgTemp[i];
+		}
 		
-		float4 downScaled = float4(0.0, 0.0, 0.0, 0.0);
+		float luminance = totalLuminance / ((width / GET_AVG_LUM_THREADS) * (height / GET_AVG_LUM_THREADS));
+		
+		g_LuminanceTemp[int2(0, 0)] = g_MiddleGrey / (exp(luminance) - DELTA);
+	}
+}
+
+
+[numthreads(ADD_THREADS_X, ADD_THREADS_Y, 1)]
+void Add( uint3 DTid : SV_DispatchThreadID)
+{
+	g_Output0[DTid.xy] = 0.5f * (g_Input0.Load(float3(DTid.xy, mipLevel0)) + g_Input1.SampleLevel(sampleLinear, (DTid.xy + 0.5f) / float2(width, height), mipLevel1));
+}	
+
+#define BLUR_WIDTH 9
+#define HALF_BLUR_WIDTH 4
+
+
+[numthreads(1, BLURH_THREADS_Y, 1)]
+void BlurHorizontal(uint3 Gid : SV_GroupID, uint3 DTid : SV_DispatchThreadID, uint3 GTid : SV_GroupThreadID, uint GI : SV_GroupIndex)
+{
+	static const float g_BlurWeights[] = {
+		0.004815026f,
+		0.028716039f,
+		0.102818575f,
+		0.221024189f,
+		0.28525234f,
+		0.221024189f,
+		0.102818575f,
+		0.028716039f,
+		0.004815026f
+	};
+	
+	int3 base = int3(DTid.x * BLURH_THREADS_X, DTid.y, mipLevel0);
+	float4 input[BLUR_WIDTH + BLURH_THREADS_X];
+	
+	[unroll]
+	for(int i = 0; i < 9 + BLURH_THREADS_X; i++)
+	{
+		input[i] = g_Input0.Load(base, int2(i - HALF_BLUR_WIDTH, 0));
+	}
+	
+	[unroll]
+	for(int x = 0; x < BLURH_THREADS_X; x++)
+	{
+		float4 output = 0.0f;
 		
 		[unroll]
-		for (int i = 0; i < 4; i++)
+		for(int i = 0; i < BLUR_WIDTH; i++)
 		{
-			[unroll]
-			for (int j = 0; j < 4; j++)
-			{
-				downScaled += g_HDRTexture.Load(nFullResPos, int2(j, i));
-			}
+			output += input[(x + i)] * g_BlurWeights[i];
 		}
 		
-		downScaled /= 16.0;
-		
-		// Calculate the luminance value for this pixel
-		avgLum = dot(downScaled, LUMINACNE_FACTOR);
-		
-		// Write the result to the shared memory
-		SharedPositions[groupThreadId] = avgLum;
-	}
-	
-	// Synchronize before next step
-	GroupMemoryBarrierWithGroupSync();
-	
-	return avgLum;
+		g_Output0[base.xy + int2(x, 0)] = output;
+	} 
 }
 
-float DownScale1024to4(uint dispatchThreadId, uint groupThreadId, float avgLum)
+
+[numthreads(BLURV_THREADS_X, 1, 1)]
+void BlurVertical(uint3 Gid : SV_GroupID, uint3 DTid : SV_DispatchThreadID, uint3 GTid : SV_GroupThreadID, uint GI : SV_GroupIndex)
 {
+	static const float g_BlurWeights[] = {
+		0.004815026f,
+		0.028716039f,
+		0.102818575f,
+		0.221024189f,
+		0.28525234f,
+		0.221024189f,
+		0.102818575f,
+		0.028716039f,
+		0.004815026f
+	};
+	
+	float4 input[BLUR_WIDTH + BLURV_THREADS_Y];
+	int3 base = int3(DTid.x, DTid.y * BLURV_THREADS_Y, mipLevel0);
+	
 	[unroll]
-	for (uint groupSize = 4, step1 = 1, step2 = 2, step3 = 3;
-		 groupSize < 1024;
-		 groupSize *= 4, step1 *= 4, step2 *= 4, step3 *= 4)
+	for(int i = 0; i < BLUR_WIDTH + BLURV_THREADS_Y; i++)
 	{
-		// Skip any pixels that are out of bounds
-		if (groupThreadId % groupSize == 0)
+		input[i] = g_Input0.Load(base, int2(0, i - HALF_BLUR_WIDTH));
+	}
+	
+	[unroll]
+	for(int y = 0; y < BLURV_THREADS_Y; y++)
+	{
+		float4 output = 0.0f;
+		
+		[unroll]
+		for(int i = 0; i < BLUR_WIDTH; i++)
 		{
-			// Calculate the luminance sum for this step
-			float stepAvgLum = avgLum;
-			stepAvgLum += (dispatchThreadId + step1) < g_Domain ? SharedPositions[groupThreadId + step1] : avgLum;
-			stepAvgLum += (dispatchThreadId + step2) < g_Domain ? SharedPositions[groupThreadId + step2] : avgLum;
-			stepAvgLum += (dispatchThreadId + step3) < g_Domain ? SharedPositions[groupThreadId + step3] : avgLum;
-			
-			// Store the results
-			avgLum = stepAvgLum;
-			
-			// Write the result to the shared memory
-			SharedPositions[groupThreadId] = avgLum;
+			output += input[y + i] * g_BlurWeights[i];
 		}
 		
-		// Synchronize before next step
-		GroupMemoryBarrierWithGroupSync();
-	}
-	
-	return avgLum;
-}
-
-void DownScale4to1(uint dispatchThreadId, uint groupThreadId, uint groupId, float avgLum)
-{
-	if (groupThreadId == 0)
-	{
-		// Calculate the average luminance for this thread group
-		float fFinalAvgLuminance = avgLum;
-		fFinalAvgLuminance += (dispatchThreadId + 256) < g_Domain ? SharedPositions[groupThreadId + 256] : avgLum;
-		fFinalAvgLuminance += (dispatchThreadId + 512) < g_Domain ? SharedPositions[groupThreadId + 512] : avgLum;
-		fFinalAvgLuminance += (dispatchThreadId + 768) < g_Domain ? SharedPositions[groupThreadId + 768] : avgLum;
-		fFinalAvgLuminance /= 1024.0;
-		
-		// Write the final value into a 1D UAV
-		g_AverageLuminance[groupId] = fFinalAvgLuminance;
-	}
-	
-	
-}
-
-[numthreads(1024, 1, 1)]
-void DownScaleFirstPass(uint3 groupId : SV_GroupID, uint3 dispatchThreadId : SV_DispatchThreadID, uint3 groupThreadId : SV_GroupThreadID)
-{
-	uint2 CurPixel = uint2(dispatchThreadId.x % g_Res.x, dispatchThreadId.x / g_Res.x);
-	
-	// Reduce a group of 16 pixels to a single pixel and store in the shared memory
-	float avgLum = DownScale4x4(CurPixel, groupThreadId.x);
-	
-	// Downscale from 1024 to 4
-	avgLum = DownScale1024to4(dispatchThreadId.x, groupThreadId.x, avgLum);
-	
-	// Downscale from 4 to 1
-	DownScale4to1(dispatchThreadId.x, groupThreadId.x, groupId.x, avgLum);
-}
-
-//======================================================================================================
-
-//
-// 2nd HDR Pass
-//
-
-[numthreads(MAX_GROUPS, 1, 1)]
-void DownScaleSecondPass(uint3 groupId : SV_GroupID, uint3 dispatchThreadId : SV_DispatchThreadID, uint3 groupThreadId : SV_GroupThreadID)
-{
-	float avgLum = 0.0;
-	
-	// Fill the shared memory with the 1D values
-	if (dispatchThreadId.x < g_GroupSize)
-	{
-		avgLum = g_AverageLuminance[dispatchThreadId.x];
-	}
-	
-	SharedAvgFinal[dispatchThreadId.x] = avgLum;
-	
-	// Downscale from 64 to 16
-	if (dispatchThreadId.x % 4 == 0)
-	{
-		// Calculate the luminance sum for this step
-		float stepAvgLum = avgLum;
-		stepAvgLum += (dispatchThreadId.x + 1) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 1] : avgLum;
-		stepAvgLum += (dispatchThreadId.x + 2) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 2] : avgLum;
-		stepAvgLum += (dispatchThreadId.x + 3) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 3] : avgLum;
-		
-		// Store the results
-		avgLum = stepAvgLum;
-		
-		// Write the result to the shared memory
-		SharedAvgFinal[groupThreadId.x] = stepAvgLum;
-	}
-	
-	// Synchronize before next step
-	GroupMemoryBarrierWithGroupSync();
-	
-	// Downscale from 16 to 4
-	if (dispatchThreadId.x % 16 == 0)
-	{
-		// Calculate the luminance sum for this step
-		float stepAvgLum = avgLum;
-		stepAvgLum += (dispatchThreadId.x + 4) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 4] : avgLum;
-		stepAvgLum += (dispatchThreadId.x + 8) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 8] : avgLum;
-		stepAvgLum += (dispatchThreadId.x + 12) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 12] : avgLum;
-		
-		// Store the results
-		avgLum = stepAvgLum;
-		
-		// Write the result to the shared memory
-		SharedAvgFinal[groupThreadId.x] = stepAvgLum;
-	}
-	
-	// Synchronize before next step
-	GroupMemoryBarrierWithGroupSync();
-	
-	// Downscale from 4 to 1
-	if (dispatchThreadId.x == 0)
-	{
-		// Calculate the average luminance
-		float fFinalAvgLuminance = avgLum;
-		fFinalAvgLuminance += (dispatchThreadId.x + 16) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 16] : avgLum;
-		fFinalAvgLuminance += (dispatchThreadId.x + 32) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 32] : avgLum;
-		fFinalAvgLuminance += (dispatchThreadId.x + 48) < g_GroupSize ? SharedAvgFinal[groupThreadId.x + 48] : avgLum;
-		
-		fFinalAvgLuminance /= 64.0;
-		
-		// Write the final value into a 1D UAV
-		g_AverageLuminance[groupId.x] = fFinalAvgLuminance;
-	}
+		g_Output0[base.xy + int2(0, y)] = output;
+	} 
 }
 
 //======================================================================================================
@@ -277,13 +293,26 @@ void DownScaleSecondPass(uint3 groupId : SV_GroupID, uint3 dispatchThreadId : SV
 // Pixel Shader
 //
 
-float4 PostProcessHDR(PostProcessPixelInput input) : SV_Target
+#ifndef BLOOM
+#define BLOOM true
+#endif 
+
+Texture2D g_Input		 : register( t0 );
+Texture2D g_ToneMapScale : register( t1 );
+Texture2D g_Bloom		 : register( t2 );
+
+float4 ToneMapWithBloom(float4 Input : SV_Position, float2 tex : TEXCOORD0) : SV_Target
 {
-	// Get the hdr color sample
-	float3 color = g_FinalHDRTexture.Sample(g_PointSampler, input.uv.xy).xyz;
+	int3 index = int3(Input.xy, 0);
+	float3 Lw = g_Input.Load(index).xyz;
 	
-	// Apply tone mapping and output the LDR value
-	color = HDRToneMapping(color);
+	if (BLOOM)
+	{
+		Lw += g_BloomMultiplier * g_Bloom.SampleLevel(sampleLinear, tex, 0).rgb;		
+	}
 	
-	return float4(color, 1.0);
+	float scale = g_ToneMapScale.Load(int3(0, 0, 0)).r;
+	float3 L = scale * Lw;
+	float3 Ld = (L / (1 + L));
+	return float4(Ld, 1.0f);
 }

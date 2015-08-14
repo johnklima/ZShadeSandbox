@@ -30,6 +30,8 @@
 #include "MeshRenderParameters.h"
 using namespace std;
 
+typedef string shader_string;
+
 //=================================================================================================================
 //=================================================================================================================
 namespace ZShadeSandboxShader {
@@ -62,9 +64,9 @@ public:
 	void SetGeometryShader();
 	void SetComputeShader();
 	void SetDefaultInputLayout();
-	void SetInputLayout(string vertexShaderName);
-	void AssignVertexShaderLayout(string vertexShaderName);
-	void SwitchTo(string shaderFuncName, int type);
+	void SetInputLayout(shader_string vertexShaderName);
+	void AssignVertexShaderLayout(shader_string vertexShaderName);
+	void SwitchTo(shader_string shaderFuncName, int type);
 	
 	void RenderDraw11(int vertexCount);
 	void RenderIndex11(int indexCount);
@@ -86,17 +88,17 @@ public:
 	//std::vector<uint8_t> CompileBinary(const std::string filename);
 
 	// Loads the shader from the shader compiler
-	void LoadVertexShader(string shaderFuncName);
-	void LoadPixelShader(string shaderFuncName);
-	void LoadHullShader(string shaderFuncName);
-	void LoadDomainShader(string shaderFuncName);
-	void LoadGeometryShader(string shaderFuncName);
-	void LoadComputeShader(string shaderFuncName);
+	void LoadVertexShader(shader_string shaderFuncName);
+	void LoadPixelShader(shader_string shaderFuncName);
+	void LoadHullShader(shader_string shaderFuncName);
+	void LoadDomainShader(shader_string shaderFuncName);
+	void LoadGeometryShader(shader_string shaderFuncName);
+	void LoadComputeShader(shader_string shaderFuncName);
 
-	ID3D11VertexShader* GetVertexShader(string shaderFuncName);
-	ID3D11PixelShader* GetPixelShader(string shaderFuncName);
-	ID3D11GeometryShader* GetGeometryShader(string shaderFuncName);
-	ID3D11ComputeShader* GetComputeShader(string shaderFuncName);
+	ID3D11VertexShader* GetVertexShader(shader_string shaderFuncName);
+	ID3D11PixelShader* GetPixelShader(shader_string shaderFuncName);
+	ID3D11GeometryShader* GetGeometryShader(shader_string shaderFuncName);
+	ID3D11ComputeShader* GetComputeShader(shader_string shaderFuncName);
 
 	//void SetWireframe(bool set) { m_Wireframe = set; }
 	//bool IsWireframe() { return m_Wireframe; }
@@ -108,8 +110,8 @@ public:
 	//Locate the current directory the shader is at
 	string LocateDir();
 	
-	ID3D11InputLayout* GetInputLayout(string vertexShaderName);
-	void SetInputLayoutDesc(string vertexShaderName, D3D11_INPUT_ELEMENT_DESC* desc, UINT NumElements);
+	ID3D11InputLayout* GetInputLayout(shader_string vertexShaderName);
+	void SetInputLayoutDesc(shader_string vertexShaderName, D3D11_INPUT_ELEMENT_DESC* desc, UINT NumElements);
 	void SetInputLayoutCreation(bool set) { m_UseInputLayout = set; }
 	void ClearInputLayout();
 	
@@ -133,20 +135,20 @@ protected:
 		ID3D11InputLayout* m_layout11;
 	};
 	
-	string mCurrentLayoutName;
+	shader_string mCurrentLayoutName;
 	ID3D11InputLayout* m_CurrentLayout11;
 
 	// Lookup key is the name of the vertex shader
-	map<string, SLayout*> m_VertexShaderLayout;
+	map<shader_string, SLayout*> m_VertexShaderLayout;
 	
 	//
 	// HLSL Shaders
 	//
 	
-	string mCurrentVSFuncName;
-	string mCurrentPSFuncName;
-	string mCurrentGSFuncName;
-	string mCurrentCSFuncName;
+	shader_string mCurrentVSFuncName;
+	shader_string mCurrentPSFuncName;
+	shader_string mCurrentGSFuncName;
+	shader_string mCurrentCSFuncName;
 
 	VertexShader*   m_pVertexShader;
 	HullShader*     m_pHullShader;
@@ -156,10 +158,10 @@ protected:
 	ComputeShader*  m_pComputeShader;
 	
 	// Ability to have multiple shaders to switch back and forth from
-	map<string, VertexShader*>   m_VertexShaders;
-	map<string, PixelShader*>    m_PixelShaders;
-	map<string, GeometryShader*> m_GeometryShaders;
-	map<string, ComputeShader*>  m_ComputeShaders;
+	map<shader_string, VertexShader*>   m_VertexShaders;
+	map<shader_string, PixelShader*>    m_PixelShaders;
+	map<shader_string, GeometryShader*> m_GeometryShaders;
+	map<shader_string, ComputeShader*>  m_ComputeShaders;
 };
 }
 //=================================================================================================================

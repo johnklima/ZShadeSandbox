@@ -33,7 +33,6 @@ void PhysicsBody2D::InitializeParametersTopdown()
 	
 	// Set jump and gravity forces
 	jumpStartSpeedY = 0;
-	accY = 0;
 	
 	// acceleration of x and y are same since there is no gravity
 	// and we are moving up, down, left or right
@@ -41,8 +40,11 @@ void PhysicsBody2D::InitializeParametersTopdown()
 	accXb = 0.2f * mScale;
 	accY = 0.2f * mScale;
 	decX = 0.3f * mScale;
-	maxSpeed = 5.0f * mScale;
+	maxSpeedX = 5.0f * mScale;
 	maxSpeedY = 10.0f * mScale;
+	
+	acceleration.x = accXf;
+	acceleration.y = accY;
 	
 	bGravityOn = false;
 	
@@ -58,7 +60,7 @@ void PhysicsBody2D::InitializeParametersPlatformer()
 	accXf = 0.2f * mScale;
 	accXb = 0.2f * mScale;
 	decX = 0.3f * mScale;
-	maxSpeed = 5.0f * mScale;
+	maxSpeedX = 5.0f * mScale;
 	maxSpeedY = 10.0f * mScale;
 	
 	// Set jump and gravity forces
@@ -89,7 +91,14 @@ void PhysicsBody2D::InitializeBaseParameters()
 	
 	maxForce = 100;
 	
-	speed = 0.f;
+	force = XMFLOAT2(0, 0);
+	mass = 1.0f;
+	velocity = XMFLOAT2(0, 0);
+	heading = XMFLOAT2(0, 0);
+	acceleration = XMFLOAT2(0, 0);
+	steering = false;
+	
+	speedX = 0.f;
 	speedY = 0.f;
 	
 	iDamageToOther = 0;
@@ -100,8 +109,6 @@ void PhysicsBody2D::InitializeBaseParameters()
 	bVulnerableFromBelow = false;
 	
 	bPlayer = false;
-	
-	vHeading = XMFLOAT3(0, 0, 0);
 	
 	bTileInvisible = false;
 	bPlatform = false;
@@ -178,14 +185,14 @@ void PhysicsBody2D::UpdateSurfaceType()
 	}
 }
 //===============================================================================================================================
-void PhysicsBody2D::UpdateVelocity(float x, float y)
+/*void PhysicsBody2D::UpdateVelocity(float x, float y)
 {
 	accXf += x;
 	accXb += x;
 	accY += y;
-}
+}*/
 //===============================================================================================================================
-XMFLOAT3 PhysicsBody2D::Velocity()
+/*XMFLOAT3 PhysicsBody2D::Velocity()
 {
 	XMFLOAT3 velocity;
 	
@@ -202,12 +209,12 @@ XMFLOAT3 PhysicsBody2D::Velocity()
 	velocity.z = 0;
 	
 	return velocity;
-}
+}*/
 //===============================================================================================================================
-XMFLOAT3 PhysicsBody2D::Heading()
+/*XMFLOAT3 PhysicsBody2D::Heading()
 {
 	return vHeading;
-}
+}*/
 //===============================================================================================================================
 void PhysicsBody2D::MovePlatformer(float dt)
 {
@@ -215,10 +222,10 @@ void PhysicsBody2D::MovePlatformer(float dt)
 	if (eType == STATIC) return;
 	
 	// Add the contact values so that the physics body can move with other objects
-	m_TopLeftPosition.x += speed * dt + fContactXValue;
+	m_TopLeftPosition.x += speedX * dt + fContactXValue;
 	m_TopLeftPosition.y += speedY * dt + fContactYValue;
 	
-	m_HardboxPosition.x += speed * dt + fContactXValue;
+	m_HardboxPosition.x += speedX * dt + fContactXValue;
 	m_HardboxPosition.y += speedY * dt + fContactYValue;
 	
 	// If we are on a platform that can alter the physics bodies movement
@@ -228,7 +235,7 @@ void PhysicsBody2D::MovePlatformer(float dt)
 		accXf = mCurrentPlatform->BodySurface()->fSurfaceAccXf;
 		accXb = mCurrentPlatform->BodySurface()->fSurfaceAccXb;
 		decX = mCurrentPlatform->BodySurface()->fSurfaceDecX;
-		maxSpeed = mCurrentPlatform->BodySurface()->fSurfaceMaxSpeedX;
+		maxSpeedX = mCurrentPlatform->BodySurface()->fSurfaceMaxSpeedX;
 		maxSpeedY = mCurrentPlatform->BodySurface()->fSurfaceMaxSpeedY;
 		accY = mCurrentPlatform->BodySurface()->fSurfaceAccY;
 		decY = mCurrentPlatform->BodySurface()->fSurfaceDecY;
@@ -254,7 +261,7 @@ void PhysicsBody2D::MovePlatformer(float dt)
 			accXf = SSurfaceDefinition::NormalSurface->fSurfaceAccXf;
 			accXb = SSurfaceDefinition::NormalSurface->fSurfaceAccXb;
 			decX = SSurfaceDefinition::NormalSurface->fSurfaceDecX;
-			maxSpeed = SSurfaceDefinition::NormalSurface->fSurfaceMaxSpeedX;
+			maxSpeedX = SSurfaceDefinition::NormalSurface->fSurfaceMaxSpeedX;
 			maxSpeedY = SSurfaceDefinition::NormalSurface->fSurfaceMaxSpeedY;
 			accY = SSurfaceDefinition::NormalSurface->fSurfaceAccY;
 			decY = SSurfaceDefinition::NormalSurface->fSurfaceDecY;
@@ -270,10 +277,10 @@ void PhysicsBody2D::MovePlatformer(float dt)
 		// How much acceleration to apply depends on whether we are trying to move
 		// in the same direction as now, or the opposite way
 		// if we try moving in the current direction of travel, accXf is applied
-		if (speed <= 0)
-			speed -= accXf;
+		if (speedX <= 0)
+			speedX -= accXf;
 		else
-			speed -= accXb;
+			speedX -= accXb;
 		
 		moveRequestX = true;
 	}
@@ -281,10 +288,10 @@ void PhysicsBody2D::MovePlatformer(float dt)
 	// Accelerate Rightwards
 	if (bMovingRight)
 	{
-		if (speed >= 0)
-			speed += accXf;
+		if (speedX >= 0)
+			speedX += accXf;
 		else
-			speed += accXb;
+			speedX += accXb;
 		
 		moveRequestX = true;
 	}
@@ -351,7 +358,7 @@ void PhysicsBody2D::MovePlatformer(float dt)
 			// platform is prevented. Note this condition can only be true for platforms without
 			// collision detection, since if we are standing in both the top and bottom of a normal
 			// platform, we have been crushed and are dead
-			if ((bPlatformBottom && !bPlatformTop) || (bPlatformBottom && bPlatformTop && speed != 0))
+			if ((bPlatformBottom && !bPlatformTop) || (bPlatformBottom && bPlatformTop && speedX != 0))
 			{
 				jumping = true;
 				jumpKeyDown = true;
@@ -376,11 +383,11 @@ void PhysicsBody2D::MovePlatformer(float dt)
 	{
 		// Limit the sideways acceleration of the body
 		
-		if (speed > maxSpeed)
-			speed = maxSpeed;
+		if (speedX > maxSpeedX)
+			speedX = maxSpeedX;
 
-		if (speed < -maxSpeed)
-			speed = -maxSpeed;
+		if (speedX < -maxSpeedX)
+			speedX = -maxSpeedX;
 	}
 	
 	// Apply the force of gravity if it is turned on
@@ -402,11 +409,11 @@ void PhysicsBody2D::MovePlatformer(float dt)
 		// Decelerate the body's sideways movement if left or right was not pressed
 		if (!moveRequestX)
 		{
-			if (speed < 0)
-				speed += decX;
+			if (speedX < 0)
+				speedX += decX;
 
-			if (speed > 0)
-				speed -= decX;
+			if (speedX > 0)
+				speedX -= decX;
 
 			// Deceleration may produce a speed that is greater than zero but
 			// smaller than the smallest unit of deceleration. These lines ensure
@@ -415,10 +422,10 @@ void PhysicsBody2D::MovePlatformer(float dt)
 
 			//if (speedX > 0 && speedX < decX || speedX < 0 && speedX > -decX)
 			//	speedX = 0;
-			if (speed > 0 && speed < speed + decX)
-				speed = 0;
-			if (speed < 0 && speed > speed - decX)
-				speed = 0;
+			if (speedX > 0 && speedX < speedX + decX)
+				speedX = 0;
+			if (speedX < 0 && speedX > speedX - decX)
+				speedX = 0;
 		}
 		
 		// Decelerate the player's vertical movement if up or down wasn't pressed
@@ -446,12 +453,12 @@ void PhysicsBody2D::MovePlatformer(float dt)
 		}
 	}
 	
-	if (ZShadeSandboxMath::XMMath3(Velocity().x, Velocity().y, 0).LengthSquared() > 0.00000001)
-	{
-		ZShadeSandboxMath::XMMath3 heading(Velocity().x, Velocity().y, 0);
-		heading.Normalize();
-		vHeading = heading;
-	}
+	//if (ZShadeSandboxMath::XMMath3(Velocity().x, Velocity().y, 0).LengthSquared() > 0.00000001)
+	//{
+	//	ZShadeSandboxMath::XMMath3 heading(Velocity().x, Velocity().y, 0);
+	//	heading.Normalize();
+	//	vHeading = heading;
+	//}
 	
 	/*
 	// If we just started moving in X, start the X animation at the first frame
@@ -503,63 +510,71 @@ void PhysicsBody2D::MoveTopdown(float dt)
 	if (eType == STATIC) return;
 	
 	// Add the contact values so that the physics body can move with other objects
-	m_TopLeftPosition.x += speed * dt + fContactXValue;
-	m_TopLeftPosition.y += speed * dt + fContactYValue;
+	m_TopLeftPosition.x += speedX * dt + fContactXValue;
+	m_TopLeftPosition.y += speedY * dt + fContactYValue;
 	
-	m_HardboxPosition.x += speed * dt + fContactXValue;
-	m_HardboxPosition.y += speed * dt + fContactYValue;
+	m_HardboxPosition.x += speedX * dt + fContactXValue;
+	m_HardboxPosition.y += speedY * dt + fContactYValue;
 	
 	bool moveRequestX = false;
 	bool moveRequestY = false;
 	
-	// Accelerate Leftwards
-	if (bMovingLeft)
+	if (steering)
 	{
-		// How much acceleration to apply depends on whether we are trying to move
-		// in the same direction as now, or the opposite way
-		// if we try moving in the current direction of travel, accXf is applied
-		if (speed <= 0)
-			speed -= accXf;
-		else
-			speed -= accXb;
+		acceleration.x = force.x / mass;
+		acceleration.y = force.y / mass;
 		
-		moveRequestX = true;
+		velocity.x = acceleration.x * dt;
+		velocity.y = acceleration.y * dt;
 	}
+	else
+	{
+		// Accelerate Leftwards
+		if (bMovingLeft)
+		{
+			velocity.x -= acceleration.x;
+			
+			moveRequestX = true;
+		}
 
-	// Accelerate Rightwards
-	if (bMovingRight)
-	{
-		if (speed >= 0)
-			speed += accXf;
-		else
-			speed += accXb;
+		// Accelerate Rightwards
+		if (bMovingRight)
+		{
+			velocity.x += acceleration.x;
+			
+			moveRequestX = true;
+		}
 		
-		moveRequestX = true;
-	}
-	
-	if (bMovingUp)
-	{
-		speed -= accY;
+		if (bMovingUp)
+		{
+			velocity.y -= acceleration.y;
+			
+			moveRequestY = true;
+		}
 		
-		moveRequestY = true;
-	}
-	
-	if (bMovingDown)
-	{
-		speed += accY;
-		
-		moveRequestY = true;
+		if (bMovingDown)
+		{
+			velocity.y += acceleration.y;
+			
+			moveRequestY = true;
+		}
 	}
 	
 	if (FrictionEnabled())
 	{
 		// Limit the acceleration of the body
 		
-		if (speed > maxSpeed)
-			speed = maxSpeed;
+		if (velocity.x > maxSpeedX)
+			velocity.x = maxSpeedX;
 
-		if (speed < -maxSpeed)
-			speed = -maxSpeed;
+		if (velocity.x < -maxSpeedX)
+			velocity.x = -maxSpeedX;
+		
+		if (velocity.y > maxSpeedX)
+			velocity.y = maxSpeedX;
+
+		if (velocity.y < -maxSpeedX)
+			velocity.y = -maxSpeedX;
 	}
 	
 	// This will allow for having the body not slide on ice
@@ -568,50 +583,54 @@ void PhysicsBody2D::MoveTopdown(float dt)
 		// Decelerate the body's movement if left or right was not pressed
 		if (!moveRequestX)
 		{
-			if (speed < 0)
-				speed += decX;
+			if (velocity.x < 0)
+				velocity.x += decX;
 
-			if (speed > 0)
-				speed -= decX;
+			if (velocity.x > 0)
+				velocity.x -= decX;
 
 			// Deceleration may produce a speed that is greater than zero but
 			// smaller than the smallest unit of deceleration. These lines ensure
 			// that the body does not keep travelling at slow speed forever after
 			// decelerating.
 
-			if (speed > 0 && speed < speed + decX)
-				speed = 0;
-			if (speed < 0 && speed > speed - decX)
-				speed = 0;
+			if (velocity.x > 0 && velocity.x < velocity.x + decX)
+				velocity.x = 0;
+			if (velocity.x < 0 && velocity.x > velocity.x - decX)
+				velocity.x = 0;
 		}
 		
 		// Decelerate the body's movement if up or down was not pressed
 		if (!moveRequestY)
 		{
-			if (speed < 0)
-				speed += decY;
+			if (velocity.y < 0)
+				velocity.y += decY;
 
-			if (speed > 0)
-				speed -= decY;
+			if (velocity.y > 0)
+				velocity.y -= decY;
 
 			// Deceleration may produce a speed that is greater than zero but
 			// smaller than the smallest unit of deceleration. These lines ensure
 			// that the body does not keep travelling at slow speed forever after
 			// decelerating.
 
-			if (speed > 0 && speed < speed + decY)
-				speed = 0;
-			if (speed < 0 && speed > speed - decY)
-				speed = 0;
+			if (velocity.y > 0 && velocity.y < velocity.y + decY)
+				velocity.y = 0;
+			if (velocity.y < 0 && velocity.y > velocity.y - decY)
+				velocity.y = 0;
 		}
 	}
 	
-	if (ZShadeSandboxMath::XMMath3(Velocity().x, Velocity().y, 0).LengthSquared() > 0.00000001)
+	if (ZShadeSandboxMath::XMMath2(velocity.x, velocity.y).LengthSquared() > 0.00000001)
 	{
-		ZShadeSandboxMath::XMMath3 heading(Velocity().x, Velocity().y, 0);
-		heading.Normalize();
-		vHeading = heading;
+		ZShadeSandboxMath::XMMath2 h(velocity.x, velocity.y);
+		h.Normalize();
+		heading = h;
 	}
+	
+	// Get the final velocity
+	speedX = velocity.x;
+	speedY = velocity.y;
 	
 	// Generate a new body based on movement
 	GenerateBody();
@@ -667,7 +686,7 @@ void PhysicsBody2D::CollideBodiesPlatformer(vector<PhysicsBody2D*> bodies, vecto
 		if (boundBodies.size() > 0) boundBodies.clear();
 		
 		// Calculate the amount of X and Y movement expected by the physics body
-		float nextMoveX = m_HardboxPosition.x + speed * dt + nextMoveXExtra;
+		float nextMoveX = m_HardboxPosition.x + speedX * dt + nextMoveXExtra;
 		float nextMoveY = m_HardboxPosition.y + speedY * dt + nextMoveYExtra;
 
 		// Store the candidate move (for information only - not used in calculations)
@@ -1087,7 +1106,7 @@ void PhysicsBody2D::CollideBodiesPlatformer(vector<PhysicsBody2D*> bodies, vecto
 			m_TopLeftPosition.x += nextMoveX;
 			m_HardboxPosition.x += nextMoveX;
 			nextMoveXExtra = 0;
-			speed = 0;
+			speedX = 0;
 		}
 		
 		// Check if the physics body is dead from being crushed
@@ -1133,8 +1152,8 @@ void PhysicsBody2D::CollideBodiesTopdown(vector<PhysicsBody2D*> bodies, vector<i
 		if (boundBodies.size() > 0) boundBodies.clear();
 		
 		// Calculate the amount of X and Y movement expected by the physics body
-		float nextMoveX = m_HardboxPosition.x + speed * dt;
-		float nextMoveY = m_HardboxPosition.y + speed * dt;
+		float nextMoveX = m_HardboxPosition.x + speedX * dt;
+		float nextMoveY = m_HardboxPosition.y + speedY * dt;
 
 		// Store the candidate move (for information only - not used in calculations)
 		nextMoveCandidate[iteration].push_back(std::pair<float, float>(nextMoveX, nextMoveY));
@@ -1347,7 +1366,7 @@ void PhysicsBody2D::CollideBodiesTopdown(vector<PhysicsBody2D*> bodies, vector<i
 			m_TopLeftPosition.y += nextMoveY;
 			m_HardboxPosition.y += nextMoveY;
 
-			speed = 0;
+			speedY = 0;
 			
 			// The body is not jumping if it is touching the ground
 			// Body has made contact on bottom of other body
@@ -1369,12 +1388,12 @@ void PhysicsBody2D::CollideBodiesTopdown(vector<PhysicsBody2D*> bodies, vector<i
 			m_HardboxPosition.x += nextMoveX;
 
 			// Which direction is the body facing
-			if (speed < 0)
+			if (speedX < 0)
 				bLeft = true;
 			else
 				bRight = true;
 			
-			speed = 0;
+			speedX = 0;
 		}
 	}
 }
@@ -1399,7 +1418,7 @@ bool PhysicsBody2D::CollidesBodyPlatformer(PhysicsBody2D* body, float dt)
 	for (int iteration = 0; iteration < iterations && (contactX || contactYBottom || contactYTop); iteration++)
 	{
 		// Calculate the amount of X and Y movement expected by the physics body
-		float nextMoveX = m_HardboxPosition.x + speed * dt;
+		float nextMoveX = m_HardboxPosition.x + speedX * dt;
 		float nextMoveY = m_HardboxPosition.y + speedY * dt;
 
 		// Create to bounding body for this physics body's next move
@@ -1608,12 +1627,12 @@ bool PhysicsBody2D::CollidesBodyPlatformer(PhysicsBody2D* body, float dt)
 			m_HardboxPosition.x += nextMoveX;
 
 			// Which direction is the body facing
-			if (speed < 0)
+			if (speedX < 0)
 				bLeft = true;
 			else
 				bRight = true;
 			
-			speed = 0;
+			speedX = 0;
 		}
 	}
 	
@@ -1655,8 +1674,8 @@ bool PhysicsBody2D::CollidesBodyTopdown(PhysicsBody2D* body, float dt)
 	for (int iteration = 0; iteration < iterations && (contactX || contactYBottom || contactYTop); iteration++)
 	{
 		// Calculate the amount of X and Y movement expected by the physics body
-		float nextMoveX = m_HardboxPosition.x + speed * dt;
-		float nextMoveY = m_HardboxPosition.y + speed * dt;
+		float nextMoveX = m_HardboxPosition.x + speedX * dt;
+		float nextMoveY = m_HardboxPosition.y + speedY * dt;
 
 		// Create to bounding body for this physics body's next move
 		ZShadeSandboxMath::BoundingBox body_box = BodyBoundsPredict(XMFLOAT3(nextMoveX, nextMoveY, 0));
@@ -1828,7 +1847,7 @@ bool PhysicsBody2D::CollidesBodyTopdown(PhysicsBody2D* body, float dt)
 			m_TopLeftPosition.y += nextMoveY;
 			m_HardboxPosition.y += nextMoveY;
 
-			speed = 0;
+			speedY = 0;
 
 			// The body is not jumping if it is touching the ground
 			// Body has made contact on bottom of other body
@@ -1849,12 +1868,12 @@ bool PhysicsBody2D::CollidesBodyTopdown(PhysicsBody2D* body, float dt)
 			m_HardboxPosition.x += nextMoveX;
 
 			// Which direction is the body facing
-			if (speed < 0)
+			if (speedX < 0)
 				bLeft = true;
 			else
 				bRight = true;
 			
-			speed = 0;
+			speedX = 0;
 		}
 	}
 	

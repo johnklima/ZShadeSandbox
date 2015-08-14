@@ -46,39 +46,11 @@ void AISprite::CalculateSteeringForce()
 	// Only AI will need to have this since a human can do all of these things.
 	if (!m_player)
 	{
-		ZShadeSandboxMath::XMMath3 force = mSteeringForce->CalculateForce();
+		Steering() = true;
 		
-		// Update the velocity of the sprite with the new force
-		UpdateVelocity(force.x, force.y);
-
-		// Need to calculate the direction of movement
-		if (Velocity().x < 0)
-		{
-			bMovingLeft = true;
-		}
-		else if (Velocity().x > 0)
-		{
-			bMovingRight = true;
-		}
-		else
-		{
-			bMovingLeft = false;
-			bMovingRight = false;
-		}
-
-		if (Velocity().y < 0)
-		{
-			bMovingDown = true;
-		}
-		else if (Velocity().y > 0)
-		{
-			bMovingUp = true;
-		}
-		else
-		{
-			bMovingDown = false;
-			bMovingUp = false;
-		}
+		ZShadeSandboxMath::XMMath3 force = mSteeringForce->CalculateForce();
+		Force().x = force.x;
+		Force().y = force.y;
 	}
 }
 //==================================================================================================================================
@@ -444,8 +416,9 @@ void AISprite::TagNearestSpritesInMap()
 	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
 	
 	// The detection box length is proportional to the agent's velocity
-	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
-	
+	float boxLengthX = MinDetectionBoxLength() + (Speed().x / MaxSpeed().x) * MinDetectionBoxLength();
+	float boxLengthY = MinDetectionBoxLength() + (Speed().y / MaxSpeed().y) * MinDetectionBoxLength();
+
 	auto iter = sprites.begin();
 	
 	for (; iter != sprites.end(); ++iter)
@@ -457,7 +430,7 @@ void AISprite::TagNearestSpritesInMap()
 		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
 		
 		// The bounding radius of the other sprite is taken into account by adding it to the range
-		float range = boxLength + (*iter)->BoundingRadius();
+		float range = boxLengthX + (*iter)->BoundingRadius();
 		
 		if (((*iter) != this) && (to.LengthSquared() < range * range))
 		{
@@ -489,8 +462,9 @@ int AISprite::FindNearestSpriteIDInMap()
 	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
 	
 	// The detection box length is proportional to the agent's velocity
-	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
-	
+	float boxLengthX = MinDetectionBoxLength() + (Speed().x / MaxSpeed().x) * MinDetectionBoxLength();
+	float boxLengthY = MinDetectionBoxLength() + (Speed().y / MaxSpeed().y) * MinDetectionBoxLength();
+
 	auto iter = sprites.begin();
 	
 	for (; iter != sprites.end(); ++iter)
@@ -500,7 +474,7 @@ int AISprite::FindNearestSpriteIDInMap()
 		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
 		
 		// The bounding radius of the other sprite is taken into account by adding it to the range
-		float range = boxLength + (*iter)->BoundingRadius();
+		float range = boxLengthX + (*iter)->BoundingRadius();
 		
 		if (((*iter) != this) && (to.LengthSquared() < range * range))
 		{
@@ -538,7 +512,8 @@ void AISprite::AddAllNearestSpriteIDsToCollection()
 	ZShadeSandboxMath::XMMath3 myPosition(TopLeftPosition().x, TopLeftPosition().y, TopLeftPosition().z);
 	
 	// The detection box length is proportional to the agent's velocity
-	float boxLength = MinDetectionBoxLength() + (Speed() / MaxSpeed()) * MinDetectionBoxLength();
+	float boxLengthX = MinDetectionBoxLength() + (Speed().x / MaxSpeed().x) * MinDetectionBoxLength();
+	float boxLengthY = MinDetectionBoxLength() + (Speed().y / MaxSpeed().y) * MinDetectionBoxLength();
 	
 	auto iter = sprites.begin();
 	
@@ -549,7 +524,7 @@ void AISprite::AddAllNearestSpriteIDsToCollection()
 		ZShadeSandboxMath::XMMath3 to = sprPosition - myPosition;
 		
 		// The bounding radius of the other sprite is taken into account by adding it to the range
-		float range = boxLength + (*iter)->BoundingRadius();
+		float range = boxLengthX + (*iter)->BoundingRadius();
 		
 		if (((*iter) != this) && (to.LengthSquared() < range * range))
 		{
@@ -622,7 +597,8 @@ AISprite* AISprite::Clone(GameDirectory2D* gd)
 	int mana = Mana();
 	int gold = Gold();
 	int strength = Strength();
-	float speed = Speed();
+	float speedX = SpeedX();
+	float speedY = SpeedY();
 	int defense = Defense();
 	int exp = Experience();
 	int level = Level();
@@ -739,7 +715,8 @@ AISprite* AISprite::Clone(GameDirectory2D* gd)
 	spr->Mana() = mana;
 	spr->Gold() = gold;
 	spr->Strength() = strength;
-	spr->Speed() = speed;
+	spr->SpeedX() = speedX;
+	spr->SpeedY() = speedY;
 	spr->Defense() = defense;
 	spr->Experience() = exp;
 	spr->Level() = level;
@@ -825,7 +802,8 @@ AISprite* AISprite::Clone(GameDirectory2D* gd, float x, float y)
 	int mana = Mana();
 	int gold = Gold();
 	int strength = Strength();
-	float speed = Speed();
+	float speedX = SpeedX();
+	float speedY = SpeedY();
 	int defense = Defense();
 	int exp = Experience();
 	int level = Level();
@@ -943,7 +921,8 @@ AISprite* AISprite::Clone(GameDirectory2D* gd, float x, float y)
 	spr->Mana() = mana;
 	spr->Gold() = gold;
 	spr->Strength() = strength;
-	spr->Speed() = speed;
+	spr->SpeedX() = speedX;
+	spr->SpeedY() = speedY;
 	spr->Defense() = defense;
 	spr->Experience() = exp;
 	spr->Level() = level;
@@ -1034,7 +1013,8 @@ void AISprite::CloneMe(GameDirectory2D* gd, float x, float y, int w, int h)
 	int mana = Mana();
 	int gold = Gold();
 	int strength = Strength();
-	float speed = Speed();
+	float speedX = SpeedX();
+	float speedY = SpeedY();
 	int defense = Defense();
 	int exp = Experience();
 	int level = Level();
@@ -1152,7 +1132,8 @@ void AISprite::CloneMe(GameDirectory2D* gd, float x, float y, int w, int h)
 	Mana() = mana;
 	Gold() = gold;
 	Strength() = strength;
-	Speed() = speed;
+	SpeedX() = speedX;
+	SpeedY() = speedY;
 	Defense() = defense;
 	Experience() = exp;
 	Level() = level;

@@ -118,7 +118,7 @@ void ModelEnvironment::RenderShadowMap()
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
@@ -126,7 +126,7 @@ void ModelEnvironment::RenderShadowMap()
 
 		(*it)->Render(mrp);
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -153,13 +153,14 @@ void ModelEnvironment::RenderDeferred()
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
 		}
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
+		//if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
+		if ((*it)->GetInstanceCount() > 0)
 		{
 			mrp.useInstancing = true;
 		}
@@ -170,7 +171,7 @@ void ModelEnvironment::RenderDeferred()
 
 		(*it)->Render(mrp);
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -316,13 +317,14 @@ bool ModelEnvironment::RenderScene()
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
 		}
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
+		//if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
+		if ((*it)->GetInstanceCount() > 0)
 		{
 			mrp.useInstancing = true;
 		}
@@ -331,12 +333,12 @@ bool ModelEnvironment::RenderScene()
 			mrp.useInstancing = false;
 		}
 
-		(*it)->EnableShadowMap(bEnableShadows);
-		(*it)->SetShadowMapSRV(mShadowTexture->SRView);
-		(*it)->SetSSAOMapSRV(0);
+		//(*it)->EnableShadowMap(bEnableShadows);
+		//(*it)->SetShadowMapSRV(mShadowTexture->SRView);
+		//(*it)->SetSSAOMapSRV(0);
 		(*it)->Render(mrp);
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -359,9 +361,9 @@ bool ModelEnvironment::RenderScene()
 	// Uncomment if using the picking sphere
 	//mrp.bTessellate = false;
 	//mrp.rt = RenderType::eTriangleList;
-	mPickingSphere->EnableShadowMap(bEnableShadows);
-	mPickingSphere->SetShadowMapSRV(mShadowTexture->SRView);
-	mPickingSphere->SetSSAOMapSRV(0);
+	//mPickingSphere->EnableShadowMap(bEnableShadows);
+	//mPickingSphere->SetShadowMapSRV(mShadowTexture->SRView);
+	//mPickingSphere->SetSSAOMapSRV(0);
 	mPickingSphere->Render(mrp);
 	
 	//ZShadeSandboxMesh::OBJMeshRenderParameters omrp;

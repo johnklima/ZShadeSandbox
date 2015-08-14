@@ -673,7 +673,9 @@ namespace ZShadeSandbox {
 								SpriteTabTopdownManaTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Mana())).c_str());
 								SpriteTabTopdownGoldTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Gold())).c_str());
 								SpriteTabTopdownStrengthTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Strength())).c_str());
-								SpriteTabTopdownSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Speed())).c_str());
+								// x and y are the same speed so just grab one of them
+								SpriteTabTopdownSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->SpeedX())).c_str());
+								//SpriteTabTopdownMaxSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->MaxSpeedX())).c_str());
 								SpriteTabTopdownDefenseTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Defense())).c_str());
 								SpriteTabTopdownExperienceTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Experience())).c_str());
 								SpriteTabTopdownLevelTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Level())).c_str());
@@ -686,17 +688,11 @@ namespace ZShadeSandbox {
 								SpriteTabTopdownBackgroundRadioButton->Checked = selectedSprite->IsBackgroundSprite();
 								SpriteTabTopdownEntityRadioButton->Checked = selectedSprite->IsEntitySprite();
 								SpriteTabTopdownInvisibleRadioButton->Checked = selectedSprite->IsInvisibleSprite();
-								//SpriteTabTopdownHardYesRadioButton->Checked = selectedSprite->IsHard();
-								//SpriteTabTopdownHardNoRadioButton->Checked = !selectedSprite->IsHard();
-								//SpriteTabTopdownNoHitYesRadioButton->Checked = selectedSprite->IsNoHit();
-								//SpriteTabTopdownNoHitNoRadioButton->Checked = !selectedSprite->IsNoHit();
 								SpriteTabTopdownHardCheckbox->Checked = selectedSprite->IsHard();
 								SpriteTabTopdownNoHitCheckbox->Checked = selectedSprite->IsNoHit();
 								bool isstatic = (selectedSprite->EPhysicsType() == STATIC) ? true : false;
 								SpriteTabTopdownStaticRadioButton->Checked = isstatic;
 								SpriteTabTopdownDynamicRadioButton->Checked = !isstatic;
-								//SpriteTabTopdownTouchYesRadioButton->Checked = selectedSprite->IsTouch();
-								//SpriteTabTopdownTouchNoRadioButton->Checked = !selectedSprite->IsTouch();
 								SpriteTabTopdownTouchCheckbox->Checked = selectedSprite->IsTouch();
 								SpriteTabTopdownAlwaysSeenByPlayerCheckbox->Checked = selectedSprite->AlwaysSeenByPlayer();
 							}
@@ -715,7 +711,9 @@ namespace ZShadeSandbox {
 								SpriteTabPlatformerManaTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Mana())).c_str());
 								SpriteTabPlatformerGoldTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Gold())).c_str());
 								SpriteTabPlatformerStrengthTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Strength())).c_str());
-								SpriteTabPlatformerSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Speed())).c_str());
+								// In a platformer map we don't need to update speed Y because it is for gravity
+								SpriteTabPlatformerSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->SpeedX())).c_str());
+								//SpriteTabPlatformerMaxSpeedTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->MaxSpeedX())).c_str());
 								SpriteTabPlatformerDefenseTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Defense())).c_str());
 								SpriteTabPlatformerExperienceTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Experience())).c_str());
 								SpriteTabPlatformerLevelTextbox->Text = gcnew String((ZShadeSandboxGlobal::Convert::ConvertIntToString(selectedSprite->Level())).c_str());
@@ -728,17 +726,11 @@ namespace ZShadeSandbox {
 								SpriteTabPlatformerBackgroundRadioButton->Checked = selectedSprite->IsBackgroundSprite();
 								SpriteTabPlatformerEntityRadioButton->Checked = selectedSprite->IsEntitySprite();
 								SpriteTabPlatformerInvisibleRadioButton->Checked = selectedSprite->IsInvisibleSprite();
-								//SpriteTabPlatformerHardYesRadioButton->Checked = selectedSprite->IsHard();
-								//SpriteTabPlatformerHardNoRadioButton->Checked = !selectedSprite->IsHard();
-								//SpriteTabPlatformerNoHitYesRadioButton->Checked = selectedSprite->IsNoHit();
-								//SpriteTabPlatformerHoHitNoRadioButton->Checked = !selectedSprite->IsNoHit();
 								SpriteTabPlatformerHardCheckbox->Checked = selectedSprite->IsHard();
 								SpriteTabPlatformerNoHitCheckbox->Checked = selectedSprite->IsNoHit();
 								bool isstatic = (selectedSprite->EPhysicsType() == STATIC) ? true : false;
 								SpriteTabPlatformerStaticRadioButton->Checked = isstatic;
 								SpriteTabPlatformerDynamicRadioButton->Checked = !isstatic;
-								//SpriteTabPlatformerTouchYesRadioButton->Checked = selectedSprite->IsTouch();
-								//SpriteTabPlatformerTouchNoRadioButton->Checked = !selectedSprite->IsTouch();
 								SpriteTabPlatformerTouchCheckbox->Checked = selectedSprite->IsTouch();
 								SpriteTabPlatformerAlwaysSeenByPlayerCheckbox->Checked = selectedSprite->AlwaysSeenByPlayer();
 							}
@@ -5538,7 +5530,8 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	//
 	// Editor Tab Functionality
 	//
-
+	
+	#pragma region "Editor Tab Functionality"
 	private: System::Void OpenGameDirectoryButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		string username = CGlobal::GrabUserName();
@@ -5744,11 +5737,13 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	{
 		mEditorHelper2D->GetMapEditorSystem2D()->ReturnToTopdownSectionPicker();
 	}
+	#pragma endregion
 	
 	//
 	// World Tab New Map Functionality
 	//
 	
+	#pragma region "World Tab New Map Functionality"
 	private: System::Void WorldTabTopdownMapCreateMapButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		if (bWorldCreated)
@@ -5831,11 +5826,13 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 			}
 		}
 	}
+	#pragma endregion
 	
 	//
 	// World Tab Functionality
 	//
 	
+	#pragma region "World Tab Functionality"
 	private: System::Void WorldTabCreateWorldButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		if (WorldTabWorldNameTextbox->Text == "")
@@ -6056,11 +6053,13 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	{
 		mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWUncoveredAttribute(WorldTabFOWUncoveredCheckBox->Checked);
 	}
+	#pragma endregion
 	
 	//
 	// Map Tab Functionality
 	//
 	
+	#pragma region "Map Tab Functionality"
 	private: System::Void MapTabTopdownUpdateMapNameButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		// Update the name of the map and update contents in world tab that use the map name
@@ -6143,17 +6142,8 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 		if (mEditorHelper2D && bWorldCreated && bMapCreated)
 		{
 			bool fow = TopdownMapEnableFOWMapTabCheckBox->Checked;
-			//bool mapFow;
-			//mEditorHelper2D->GetMapEditorSystem2D()->GetMapFOWAttribute(mapFow);
-			//if (fow == true && mapFow == true)
-			//{
-				mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWAttribute(fow);
-			//}
+			mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWAttribute(fow);
 		}
-	}
-	private: System::Void TopdownMapFOWUncoveredMapTabCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWUncoveredAttribute(TopdownMapFOWUncoveredMapTabCheckBox->Checked);
 	}
 	private: System::Void TopdownMapHardnessCheckbox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -6191,10 +6181,14 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	}
 	private: System::Void TopdownMapFOWFlashlightMapTabCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
-		// If FOW is enabled it will use a flashlight style and the map will not be uncovered but the sprite will only be able to see
-		// the entent of the FOW radius from the sprite at all times.
+		// If FOW is enabled it will use a flash light style and the map will not be uncovered but the sprite will only be able to see
+		// the extent of the FOW radius from the sprite at all times.
 		bool fowFlashlight = TopdownMapFOWFlashlightMapTabCheckBox->Checked;
 		mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWFlashlightAttribute(fowFlashlight);
+	}
+	private: System::Void TopdownMapFOWUncoveredMapTabCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		mEditorHelper2D->GetMapEditorSystem2D()->SetMapFOWUncoveredAttribute(TopdownMapFOWUncoveredMapTabCheckBox->Checked);
 	}
 	private: System::Void PlatformerMapEditMusicTextbox_TextChanged(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -6202,17 +6196,22 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 		string musicName = ZShadeSandbox::ConvertToStandardString(PlatformerMapEditMusicTextbox->Text);
 		mEditorHelper2D->GetMapEditorSystem2D()->SetMapMusicAttribute(musicName);
 	}
+	#pragma endregion
 
 	//
 	// Tile Tab Functionality
 	//
 	
+	#pragma region "Tile Tab Functionality"
+	
+	#pragma endregion
 	
 	
 	//
 	// Sprite Tab Functionality
 	//
 	
+	#pragma region "Sprite Tab Functionality"
 	private: System::Void SpriteTabRepositionRadioButton_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 	}
@@ -6431,8 +6430,22 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	{
 		System::String^ str = SpriteTabTopdownSpeedTextbox->Text;
 		string str_str = ZShadeSandbox::ConvertToStandardString(str);
-		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteSpeed(ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str));
+		int speed = ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str);
+		// In a topdown map x and y are the same speed
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteSpeedX(speed);
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteSpeedY(speed);
 	}
+	/*
+	private: System::Void SpriteTabTopdownMaxSpeedTextbox_TextChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::String^ str = SpriteTabTopdownMaxSpeedTextbox->Text;
+		string str_str = ZShadeSandbox::ConvertToStandardString(str);
+		int speed = ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str);
+		// In a topdown map x and y have the same max speed
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteMaxSpeedX(speed);
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteMaxSpeedY(speed);
+	}
+	*/
 	private: System::Void SpriteTabTopdownDefenseTextbox_TextChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::String^ str = SpriteTabTopdownDefenseTextbox->Text;
@@ -6652,8 +6665,18 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	{
 		System::String^ str = SpriteTabPlatformerSpeedTextbox->Text;
 		string str_str = ZShadeSandbox::ConvertToStandardString(str);
-		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteSpeed(ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str));
+		int speed = ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str);
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteSpeedX(speed);
 	}
+	/*
+	private: System::Void SpriteTabPlatformerMaxSpeedTextbox_TextChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::String^ str = SpriteTabPlatformerMaxSpeedTextbox->Text;
+		string str_str = ZShadeSandbox::ConvertToStandardString(str);
+		int speed = ZShadeSandboxGlobal::Convert::ConvertStringToInteger(str_str);
+		mEditorHelper2D->GetMapEditorSystem2D()->SetSelectedSpriteMaxSpeedX(speed);
+	}
+	*/
 	private: System::Void SpriteTabPlatformerDefenseTextbox_TextChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::String^ str = SpriteTabPlatformerDefenseTextbox->Text;
@@ -6700,11 +6723,12 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	{
 		mEditorHelper2D->GetMapEditorSystem2D()->ToggleSelectedSpriteAlwaysSeenByPlayer(SpriteTabPlatformerAlwaysSeenByPlayerCheckbox->Checked);
 	}
+	#pragma endregion
 	
 	//
 	// Tile Cache Functionality
 	//
-
+	
 	private: System::Void TileCacheTabUpdateCacheButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		FillTileCache();
@@ -6713,7 +6737,7 @@ private: System::Windows::Forms::CheckBox^  SpriteTabTopdownAlwaysSeenByPlayerCh
 	//
 	// Sprite Cache Functionality
 	//
-
+	
 	private: System::Void SpriteCacheTabUpdateCacheButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		FillSpriteCache();

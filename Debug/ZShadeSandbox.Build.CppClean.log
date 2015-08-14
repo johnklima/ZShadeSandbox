@@ -1,103 +1,4 @@
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\vc120.pdb
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fbxloader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fbxhelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fbxvertex.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\polygon.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\polygonmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bsprenderer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bsppolygon.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bspmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bsp.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bspenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\camera.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\menueditorsystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\mapeditorsystem2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\hudeditorsystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\editorhelper2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\projectedcamera.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lightcamera.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\soundsystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sound.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\musicsystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\audiosystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\textureanimation3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\animationframe3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\readanimationprofile2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\animationprofile2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\animationframe2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\animation2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\luatask.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\luadelegate.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\aisprite.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environmentmenuhelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environmenthudhelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\volumeenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\tessellationenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terrainenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\outdoorenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceanenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\modelenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\indoorenvironment.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment2dmaphelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\csdesaturation.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialtessellationshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materiallighttessellationshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\tolua_sprite.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\tolua_funcs.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\scripting.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\scriptbase.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\script.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\vertexlist.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quickhull.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\hullface.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\halfedge.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\facelist.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\physicsworld.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\physicsbodybase.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\physicsbody.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shapecontact.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sat.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\pointcollidercontroller.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gjk.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objmeshtessellationshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objmeshshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shadowmapbuildshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objgbuffershader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialgbuffershader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\debuggbufferdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\spotlightdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\pointlightdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directionallightdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\deferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\capsulelightdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\ambientlightdeferredshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\blurshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\textureshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shaders.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shadercompiler.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materiallightshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fontshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandboxgame.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandboxeditor3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandboxeditor2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\frontend.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\window.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\watershader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lakebedshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\grassfieldshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrishadowshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrishader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationquadshadowshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationquadshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationquadssaoshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sunshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\skyshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\skyplaneshader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfaceshader.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\loadlib.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lmem.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lmathlib.obj
@@ -137,8 +38,6 @@ c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lparse
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\loslib.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lopcodes.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lobject.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexresize.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexpmalpha.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexnormalmaps.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexmisc.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexmipmaps.obj
@@ -156,6 +55,8 @@ c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bc.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\ddstextureloader.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\commonstates.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\binaryreader.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfaceshader.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurface.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\cglobal.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\wictextureloader.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\vertextypes.obj
@@ -167,239 +68,429 @@ c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\pch.ob
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexwic.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexutil.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtextga.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadtreerenderer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadtreemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadtree.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\heightmapeditorhelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\heightmap.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\defaultinputcontroller.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmlparser.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\inputxmlparser.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadexmlsaver.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadexmlloader.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\platformerbackground.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\dxgamewindow.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\world.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexresize.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directxtexpmalpha.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdownworld.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sprite.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\platformerworld.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\platformertile.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\platformermap.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\custommesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialmanager.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\simpleterrain.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\qnode.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\.netframework,version=v4.5.assemblyattributes.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdownmap.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\tilesystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\tile.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\section.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\hdr.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\depthoffield.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bokeh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bloom.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\particletrajectorytest.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\particlesystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\particle.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurface.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceanpatchtree.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceanheightfield.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\trianglemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\spheremesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\skydomemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sun.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\aabb.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\ray.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lakebed.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\menu.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\hud.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\boundingbox.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\button.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadefrontend.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\menusystem.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\cylindricalmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\cubemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\circlemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\spotlight.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\pointlight.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\light.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directionallight.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\capsulelight.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\ambientlight.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\infiniteplane.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\volume.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\grassfieldmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\grassfield.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\grass.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sky.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\planemesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gridmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\geospheremesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\surfacedefinition.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\contactsolver.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\water.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fft_512x512_c2c.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansimulator.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environmentmenuhelper.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environmenthudhelper.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment2dmaphelper.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment2d.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\environment.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\menueditorsystem.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\hudeditorsystem.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\mapeditorsystem2d.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\editorhelper2d.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdowntile.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdownmap.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialmanager.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fogdata.obj
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\defaultmaterials.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdowntile.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\deferredshadermanager.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\entity3dcontroller.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\entity3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\topdownworld.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\image.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lensflare.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\motionblur.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocess.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocesscolor.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocessmanager.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\volumetriclightrays.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\skyplane.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sunrenderer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\inputcontroller.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\defaultinputcontroller3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\text.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\vc120.pdb
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadexmlsaver.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadexmlloader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\volumeenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tessellationenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terrainenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\outdoorenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceanenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\modelenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\indoorenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environment3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bspenvironment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\dxgamewindow.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\menu.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\hud.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gamestate.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\inventoryeditorsystem2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\luatask.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\luadelegate.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\aisteeringforce.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\aisprite.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gdi.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\depthstencilbuffer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\dcrendertexture.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\button.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshademessagecenter.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\timer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sleeptimer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\inputcontroller.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\input.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fpscounter.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\defaultinputcontroller3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadeiniwriter.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadeiniparser.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmlparser.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\inputxmlparser.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fileparser.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\memorymgr.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\luakeymapper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\binarysearch.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\betterstring.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\btt.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bsprenderer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bspportalgenerator.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bspportal.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bsppolygon.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bsppvsgenerator.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bspmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bsparraydata.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bsp.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gbuffer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\d3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\texturemanager.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\texture.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\text.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\structuredbuffer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\stagingbuffer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shadowmaptarget.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\rendertarget2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\image.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gdifont.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\circlemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\spotlight.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shadermaterial.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\pointlight.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lightmanager.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\light.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directionallight.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\deferredshadermanager.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\capsulelight.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ambientlight.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\infiniteplane.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\map3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\entity3dcontroller.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\entity3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\playerinventory2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\platformerworld.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\platformertile.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\platformermap.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\platformerbackground.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\triangle.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fft_512x512_c2c.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\vertex.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\polygonmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\objmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\meshattributes.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fbxvertex.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fbxskinnedmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fbxloader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fbxhelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\trianglemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\spheremesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\skydomemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\planemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\meshutil.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gridmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\geospheremesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\cylindricalmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\custommesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\cubemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sunrenderer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sunquad.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sun.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\skyplane.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sky.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\volumetriclightrays.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocessmanager.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocesscolor.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocess.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\motionblur.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lensflare.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\hdr.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\depthoffield.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bokeh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bloom.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\particletrajectorytest.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\particlesystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\particle.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansimulator.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceanpatchtree.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\boxprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\boundingbox.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\aabb.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\water.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lakebed.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\volume.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\grassfieldmesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\grassfield.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\grass.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\watererosion.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadtreerenderer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadtreemesh.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadtree.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\qnode.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\proceduralgenerator.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\proceduraladditionhelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\heightmapeditorhelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\heightmapcontainer.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\heightmap.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\heighterosion.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shapecontact.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sat.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\pointcollidercontroller.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\contactsolver.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zmath.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmmatrix.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmmath4.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmmath3.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmmath2.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\xmmath.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\scalar.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ray.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\triangleprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sphereprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\polygon.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\planeprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lineprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\coneprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\circleprimitive.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\scriptbase.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\script.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\vertexlist.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\quickhull.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\hullface.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\halfedge.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\facelist.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\surfacedefinition.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\gjk.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ambientlightdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\blurshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\textureshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shaders.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shadercompiler.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materiallightshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fontshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\csdesaturation.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialtessellationshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materiallighttessellationshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_sprite.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_funcs.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\scripting.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbody2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\objmeshtessellationshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\objmeshshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\shadowmapbuildshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\objgbuffershader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialgbuffershader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\debuggbufferdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\spotlightdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\pointlightdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directionallightdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\deferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\capsulelightdeferredshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbodybase3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbody3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsworld2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbodybase2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandboxgame.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandboxeditor3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandboxeditor2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\frontend.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\window.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\watershader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lakebedshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\grassfieldshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrishadowshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrishader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationquadshadowshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationquadshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationquadssaoshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sunshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\skyshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\skyplaneshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\loadlib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lmem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lmathlib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\llex.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\liolib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\linit.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lgc.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lfunc.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ldump.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ldo.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ldebug.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ldblib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lctype.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lcorolib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lcode.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lbitlib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lbaselib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lauxlib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lapi.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\wave.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_to.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_push.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_map.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_is.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tolua_event.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\toluabind.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lzio.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lvm.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lundump.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ltm.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ltablib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ltable.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lstrlib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lstring.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lstate.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lparser.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\loslib.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lopcodes.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lobject.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurface.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\topdownworld.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\topdowntile.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\topdownmap.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialmanager.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\fogdata.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\defaultmaterials.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\cglobal.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadefrontend.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\menusystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environmentmenuhelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environmenthudhelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environment2dmaphelper.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environment2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\environment.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\menueditorsystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\hudeditorsystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\mapeditorsystem2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\editorhelper2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexpmalpha.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexnormalmaps.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexmisc.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexmipmaps.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxteximage.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexfliprotate.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexdds.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexd3d11.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexconvert.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexcompressgpu.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexcompress.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bcdirectcompute.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bc6hbc7.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bc4bc5.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\bc.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\ddstextureloader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\commonstates.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\binaryreader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurfaceshader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sprite.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\tinyxml2.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\pch.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\wictextureloader.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\vertextypes.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\simplemath.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\screengrab.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\primitivebatch.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexwic.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexutil.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtextga.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\directxtexresize.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\.netframework,version=v4.5.assemblyattributes.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\waypointsystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\camera.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\textureanimation3d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\readanimationprofile2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\animationprofile2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\animationframe2d.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\animation2d.obj
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.exe
+c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.pdb
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.res
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.res
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.frontend.resources
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.zshadesandboxeditor2d.resources
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.zshadesandboxeditor3d.resources
 c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.zshadesandboxgame.resources
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadmateriallighttessellation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\quadmaterialtessellation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\trimateriallighttessellation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\trimaterialtessellation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\csdesaturation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materiallightshader.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialshader.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sprite.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\texture.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\atmosphericfog.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\blur.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\ambientlightdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\capsulelightdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\deferredshader.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\directionallightdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\pointlightdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\spotlightdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\cleargbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\debuggbufferdeferred.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lakebedgbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\materialgbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objgbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\unpackgbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\watergbuffer.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lighting.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lightinghelper.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shadowmap.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objmesh.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\objmeshtessellation.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fft_512x512_c2c.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansimulatorcs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansimulatorvsps.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfaceds.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfacehs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfaceps.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\oceansurfacevs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocesscolorps.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocesshdr.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\postprocessvs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sky.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\skyplane.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sun.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationquad.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationquadshadowhs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrids.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrihs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrips.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrishadowhs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\terraintessellationtrivs.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\grassfield.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lakebed.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\refractioncaustics.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\water.cso
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.vcxproj.generateresource.cache
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.vcxprojresolveassemblyreference.cache
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\betterstring.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\binarysearch.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\boxprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bsparraydata.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bspportal.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bspportalgenerator.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\bsppvsgenerator.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\btt.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\circleprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\coneprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\creategamedirectory.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\d3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\dcrendertexture.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\depthstencilbuffer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fbxskinnedmesh.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fileparser.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\fpscounter.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gamestate.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gbuffer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gdi.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\gdifont.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\heighterosion.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\heightmapcontainer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\input.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lightmanager.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\lineprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\luakeymapper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\map3d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\memorymgr.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\meshattributes.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\meshutil.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\planeprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\proceduraladditionhelper.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\proceduralgenerator.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\rendertarget2d.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\scalar.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sectionadjacency.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sectorbuilder.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shadermaterial.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\shadowmaptarget.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sleeptimer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sphereprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\stagingbuffer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\structuredbuffer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sunquad.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\sword.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\texture.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\texturemanager.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\timer.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\triangle.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\triangleprimitive.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\vertex.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\watererosion.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\weapon.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmmath.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmmath2.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmmath3.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmmath4.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\xmmatrix.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zmath.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadefrontend.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadeiniparser.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadeiniwriter.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshademessagecenter.obj
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.pdb
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.exe.metagen
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.exe
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\cl.command.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\cl.read.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\cl.write.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\fxc.command.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\fxc.read.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\fxc.write.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\link.command.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\link.read.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\link.write.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\metagen.read.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\metagen.write.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\rc.command.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\rc.read.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\rc.write.1.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\zshadesandbox.write.1u.tlog
-c:\users\dustin\documents\visual studio 2013\projects\zshadesandbox\debug\zshadesandbox.tlog\tzres.dll.bi
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.frontend.resources
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.zshadesandboxeditor2d.resources
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.zshadesandboxeditor3d.resources
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.zshadesandboxgame.resources
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadmateriallighttessellation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\quadmaterialtessellation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\trimateriallighttessellation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\trimaterialtessellation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\csdesaturation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\materiallightshader.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialshader.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\sprite.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\texture.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\atmosphericfog.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\blur.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\ambientlightdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\capsulelightdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\deferredshader.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\directionallightdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\pointlightdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\spotlightdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\cleargbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\debuggbufferdeferred.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\lakebedgbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\materialgbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\objgbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\unpackgbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\watergbuffer.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\lighting.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\lightinghelper.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\shadowmap.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\objmesh.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\objmeshtessellation.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\fft_512x512_c2c.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansimulatorcs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansimulatorvsps.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurfaceds.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurfacehs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurfaceps.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\oceansurfacevs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocesscolorps.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocesshdr.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\postprocessvs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\sky.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\skyplane.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\sun.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationquad.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationquadshadowhs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrids.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrihs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrips.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrishadowhs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\terraintessellationtrivs.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\grassfield.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\lakebed.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\refractioncaustics.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\water.cso
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.vcxproj.generateresource.cache
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.vcxprojresolveassemblyreference.cache
+i:\data\programming\zshade gaming\zshadesandbox\debug\creategamedirectory.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\projectedcamera.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\lightcamera.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\soundsystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\sound.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\musicsystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\audiosystem.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbody.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsbodybase.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\physicsworld.obj
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.pdb
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.exe.metagen
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.exe
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\cl.command.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\link.command.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\cl.write.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\link.write.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\metagen.read.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\metagen.write.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\rc.command.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\rc.read.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\rc.write.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\zshadesandbox.write.1u.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\cl.read.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\link.read.1.tlog
+i:\data\programming\zshade gaming\zshadesandbox\debug\zshadesandbox.tlog\tzres.dll.bi

@@ -15,6 +15,7 @@
 #include "D3D.h"
 #include "Shader.h"
 #include "PostProcessTypes.h"
+class PostProcessManager;
 //==================================================================================================================================
 //==================================================================================================================================
 class PostProcess
@@ -34,7 +35,11 @@ public:
 	void PopOutputUAVs();
 	void PopOutputViewports();
 	
+	//PostProcessManager::RenderTarget* Target() { return target; }
+	
 	EPostProcessTypes::Type Type();
+	
+	ID3D11DepthStencilView*& DSView() { return mDSView; }
 	
 	virtual void UnloadResources();
 	
@@ -53,6 +58,11 @@ protected:
 	
 	// What type of post process is this
 	EPostProcessTypes::Type mType;
+	
+	// floating point resource used for temporary render target
+	//PostProcessManager::RenderTarget* target;
+	
+	ID3D11DepthStencilView* mDSView;
 	
 	// Textures sent to the shader
 	vector<ID3D11ShaderResourceView*> mInputTextures;

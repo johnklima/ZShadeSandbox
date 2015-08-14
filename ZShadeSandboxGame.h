@@ -4,6 +4,7 @@
 #include "ZShadeResource.h"
 #include "ZShadeFrontEnd.h"
 #include "DXGameWindow.h"
+#include "Scripting.h"
 
 namespace ZShadeSandbox {
 
@@ -105,6 +106,12 @@ namespace ZShadeSandbox {
 
 			mDXGameWindow = new DXGameWindow();
 			mDXGameWindow->Init(mEngineOptions, hwnd);
+			
+			// After the environment has been created load the main script
+			if (Scripting::Instance())
+			{
+				Scripting::Instance()->RunMain();
+			}
 
 			ThreadStart^ threadStart = gcnew ThreadStart(this, &ZShadeSandbox::ZShadeSandboxGame::Run);
 			Thread^ thread = gcnew Thread(threadStart);

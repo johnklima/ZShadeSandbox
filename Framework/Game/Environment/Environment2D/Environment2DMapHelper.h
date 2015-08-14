@@ -138,7 +138,10 @@ public:
 	static void SetSelectedSpriteMana(int value, int spriteID);
 	static void SetSelectedSpriteGold(int value, int spriteID);
 	static void SetSelectedSpriteStrength(int value, int spriteID);
-	static void SetSelectedSpriteSpeed(int value, int spriteID);
+	static void SetSelectedSpriteSpeedX(int value, int spriteID);
+	static void SetSelectedSpriteSpeedY(int value, int spriteID);
+	static void SetSelectedSpriteMaxSpeedX(int value, int spriteID);
+	static void SetSelectedSpriteMaxSpeedY(int value, int spriteID);
 	static void SetSelectedSpriteDefense(int value, int spriteID);
 	static void SetSelectedSpriteExperience(int value, int spriteID);
 	static void SetSelectedSpriteLevel(int value, int spriteID);
@@ -161,7 +164,10 @@ public:
 	static int GetSelectedSpriteMana(int spriteID);
 	static int GetSelectedSpriteGold(int spriteID);
 	static int GetSelectedSpriteStrength(int spriteID);
-	static int GetSelectedSpriteSpeed(int spriteID);
+	static int GetSelectedSpriteSpeedX(int spriteID);
+	static int GetSelectedSpriteSpeedY(int spriteID);
+	static int GetSelectedSpriteMaxSpeedX(int spriteID);
+	static int GetSelectedSpriteMaxSpeedY(int spriteID);
 	static int GetSelectedSpriteDefense(int spriteID);
 	static int GetSelectedSpriteExperience(int spriteID);
 	static int GetSelectedSpriteLevel(int spriteID);
@@ -228,6 +234,8 @@ public:
 	static void SetMapNameAttribute(string mapName);
 	static void UpdateNewMapName(string world_name, string old_map_name, string new_map_name);
 	
+	static bool IsTopdown();
+
 	static TopdownMap* ActiveTopdownMap();
 	static PlatformerMap* ActivePlatformerMap();
 };

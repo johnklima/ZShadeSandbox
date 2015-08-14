@@ -43,7 +43,15 @@ public:
 			vertices.clear();
 		vertices.resize(attributes->mVertexCount);
 	}
-
+	
+	// Adds a single vertex to the end of the existing set of vertices in the polygon while maintaining the indices
+	void AddVertex(ZShadeSandboxMesh::VertexPos vertex);
+	void AddVertex(ZShadeSandboxMesh::VertexColor vertex);
+	void AddVertex(ZShadeSandboxMesh::VertexTex vertex);
+	void AddVertex(ZShadeSandboxMesh::VertexNormalTex vertex);
+	void AddVertex(ZShadeSandboxMesh::VertexNormalTexTan vertex);
+	void AddVertex(ZShadeSandboxMesh::VertexNormalTexTanBiTan vertex);
+	
 	UINT GetIndex(int i);
 	
 	ZShadeSandboxMath::XMMath3 GetVertexPosition(int index, ZShadeSandboxMesh::EVertexType::Type type);

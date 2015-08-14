@@ -36,6 +36,9 @@ public:
 	XMFLOAT3& Scale();
 	XMFLOAT3& Rotate();
 	
+	ZShadeSandboxMath::Polygon*& Poly() { return mPolygon; }
+	ZShadeSandboxMath::Polygon* Poly() const { return mPolygon; }
+	
 	void BuildIndexBuffer();
 	void BuildVertexBuffer(ZShadeSandboxMesh::EVertexType::Type type);
 	void ReBuildVertexBuffer(ZShadeSandboxMesh::EVertexType::Type type);

@@ -234,7 +234,7 @@ void HeightmapEditorHelper::Smooth(XMFLOAT3 point)
 					{
 						if (m >= 0 && m < mHeightmap->HeightmapSize() && n >= 0 && n < mHeightmap->HeightmapSize())
 						{
-							averageHeight += mHeightmap->ReadHeight(n, m);
+							averageHeight += mHeightmap->ReadHeight(m, n);
 							count += 1;
 						}
 					}

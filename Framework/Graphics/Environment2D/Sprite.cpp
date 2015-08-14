@@ -268,7 +268,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteUp(true);
 		SetMoveSpriteDown(false);
 		
-		accY = Speed();
+		accY = SpeedX();
 	}
 	else if (keyboard->IsKeyDown(Keyboard::Key::S))
 	{
@@ -278,7 +278,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteUp(true);
 		SetMoveSpriteDown(false);
 		
-		accY = Speed();
+		accY = SpeedX();
 	}
 	else
 	{
@@ -289,7 +289,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteDown(false);
 		
 		// Reset the speed to 0, so that the sprite does not slide
-		speed = 0;
+		speedX = 0;
 	}
 	
 	if (keyboard->IsKeyDown(Keyboard::Key::A))
@@ -300,7 +300,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteLeft(true);
 		SetMoveSpriteRight(false);
 		
-		accXf = Speed();
+		accXf = SpeedX();
 	}
 	else if (keyboard->IsKeyDown(Keyboard::Key::D))
 	{
@@ -310,7 +310,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteRight(true);
 		SetMoveSpriteLeft(false);
 		
-		accXb = Speed();
+		accXb = SpeedX();
 	}
 	else
 	{
@@ -321,7 +321,7 @@ void Sprite::PlayerTopdownInput(float dt, Keyboard* keyboard)
 		SetMoveSpriteRight(false);
 		
 		// Reset the acceleration speed to 0, so that the sprite does not slide
-		speed = 0;
+		speedX = 0;
 	}
 }
 //==================================================================================================================================
@@ -403,36 +403,41 @@ void Sprite::say(string text, int x, int y, int r, int g, int b, int font_size)
 //==================================================================================================================================
 void Sprite::say_stop(string text)
 {
-	m_old_speed = speed;
-	speed = 0;
+	m_old_speed = speedX;
+	speedX = 0;
+	speedY = 0;
 	say(text);
 }
 //==================================================================================================================================
 void Sprite::say_stop(string text, int font_size)
 {
-	m_old_speed = speed;
-	speed = 0;
+	m_old_speed = speedX;
+	speedX = 0;
+	speedY = 0;
 	say(text, font_size);
 }
 //==================================================================================================================================
 void Sprite::say_stop(string text, int x, int y, int font_size)
 {
-	m_old_speed = speed;
-	speed = 0;
+	m_old_speed = speedX;
+	speedX = 0;
+	speedY = 0;
 	say(text, x, y, font_size);
 }
 //==================================================================================================================================
 void Sprite::say_stop(string text, int r, int g, int b, int font_size)
 {
-	m_old_speed = speed;
-	speed = 0;
+	m_old_speed = speedX;
+	speedX = 0;
+	speedY = 0;
 	say(text, r, g, b, font_size);
 }
 //==================================================================================================================================
 void Sprite::say_stop(string text, int x, int y, int r, int g, int b, int font_size)
 {
-	m_old_speed = speed;
-	speed = 0;
+	m_old_speed = speedX;
+	speedX = 0;
+	speedY = 0;
 	say(text, x, y, r, g, b, font_size);
 }
 //==================================================================================================================================
@@ -653,7 +658,8 @@ void Sprite::RenderDisplayText()
 		if (m_text_timer->IsTimeUp())
 		{
 			m_display_text = false;
-			Speed() = m_old_speed;
+			SpeedX() = m_old_speed;
+			SpeedY() = m_old_speed;
 		}
 		else
 		{

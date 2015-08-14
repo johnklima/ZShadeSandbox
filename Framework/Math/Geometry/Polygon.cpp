@@ -234,3 +234,181 @@ ZShadeSandboxMesh::VertexNormalTexTanBiTan Polygon::GetVertexNormalTexTanBiTan(i
 	return attributes->mVerticesNormalTexTanBi[index];
 }
 //==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexPos vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexPos> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexPos(i);
+		}
+	}
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexColor vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexColor> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexColor(i);
+		}
+	}
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexTex vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexTex> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexTex(i);
+		}
+	}
+	
+	// Calculate the UV (http://forum.devmaster.net/t/uvw-unwrap-algorithms/21409)
+	//ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
+	//vertex.texture = XMFLOAT2(vertex.position.x * (1 / (size - 1)), vertex.position.z * (1 / (size - 1)));
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTex vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexNormalTex> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexNormalTex(i);
+		}
+	}
+	
+	// Calculate the UV
+	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
+	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTan vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexNormalTexTan> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexNormalTexTan(i);
+		}
+	}
+	
+	// Calculate the UV
+	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
+	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================
+void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTanBiTan vertex)
+{
+	int vertexCount = attributes->mVertexCount;
+	
+	// Get the current vertices that the polygon contains
+	vector<ZShadeSandboxMesh::VertexNormalTexTanBiTan> vertices(vertexCount + 1);
+	
+	int i = 0;
+	
+	if (vertexCount > 0)
+	{
+		for (; i < vertexCount; i++)
+		{
+			vertices[i] = GetVertexNormalTexTanBiTan(i);
+		}
+	}
+	
+	// Calculate the UV
+	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
+	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
+	
+	// Finally add the new vertex
+	vertices[i + 1] = vertex;
+	
+	// Create the new vertex set in the polygon
+	Create(vertices);
+	
+	// Maintain the indices in the polygon after the new vertex is added
+	LoadIndices();
+}
+//==================================================================================================================================

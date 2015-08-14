@@ -2662,7 +2662,7 @@ void MapEditorSystem2D::SetSelectedSpriteStrength(int value)
 	}
 }
 //================================================================================================================
-void MapEditorSystem2D::SetSelectedSpriteSpeed(int value)
+void MapEditorSystem2D::SetSelectedSpriteSpeedX(int value)
 {
 	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
 	{
@@ -2670,7 +2670,46 @@ void MapEditorSystem2D::SetSelectedSpriteSpeed(int value)
 		{
 			//The user has selected a sprite and updating if it can be touched
 			m_Updated = true;
-			Environment2DMapHelper::SetSelectedSpriteSpeed(value, m_selectModeSpriteID);
+			Environment2DMapHelper::SetSelectedSpriteSpeedX(value, m_selectModeSpriteID);
+		}
+	}
+}
+//================================================================================================================
+void MapEditorSystem2D::SetSelectedSpriteSpeedY(int value)
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			Environment2DMapHelper::SetSelectedSpriteSpeedY(value, m_selectModeSpriteID);
+		}
+	}
+}
+//================================================================================================================
+void MapEditorSystem2D::SetSelectedSpriteMaxSpeedX(int value)
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			Environment2DMapHelper::SetSelectedSpriteMaxSpeedX(value, m_selectModeSpriteID);
+		}
+	}
+}
+//================================================================================================================
+void MapEditorSystem2D::SetSelectedSpriteMaxSpeedY(int value)
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			Environment2DMapHelper::SetSelectedSpriteMaxSpeedY(value, m_selectModeSpriteID);
 		}
 	}
 }
@@ -2989,7 +3028,7 @@ int MapEditorSystem2D::GetSelectedSpriteStrength()
 	return -1;
 }
 //================================================================================================================
-int MapEditorSystem2D::GetSelectedSpriteSpeed()
+int MapEditorSystem2D::GetSelectedSpriteSpeedX()
 {
 	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
 	{
@@ -2997,7 +3036,52 @@ int MapEditorSystem2D::GetSelectedSpriteSpeed()
 		{
 			//The user has selected a sprite and updating if it can be touched
 			m_Updated = true;
-			return Environment2DMapHelper::GetSelectedSpriteSpeed(m_selectModeSpriteID);
+			return Environment2DMapHelper::GetSelectedSpriteSpeedX(m_selectModeSpriteID);
+		}
+	}
+
+	return -1;
+}
+//================================================================================================================
+int MapEditorSystem2D::GetSelectedSpriteSpeedY()
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			return Environment2DMapHelper::GetSelectedSpriteSpeedY(m_selectModeSpriteID);
+		}
+	}
+
+	return -1;
+}
+//================================================================================================================
+int MapEditorSystem2D::GetSelectedSpriteMaxSpeedX()
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			return Environment2DMapHelper::GetSelectedSpriteMaxSpeedX(m_selectModeSpriteID);
+		}
+	}
+
+	return -1;
+}
+//================================================================================================================
+int MapEditorSystem2D::GetSelectedSpriteMaxSpeedY()
+{
+	if (m_MapCreated && editMode == EM_Sprites && spriteAction == SA_Select)
+	{
+		if (m_selectModeSpriteID != -1)
+		{
+			//The user has selected a sprite and updating if it can be touched
+			m_Updated = true;
+			return Environment2DMapHelper::GetSelectedSpriteMaxSpeedY(m_selectModeSpriteID);
 		}
 	}
 

@@ -18,6 +18,21 @@ Environment2DMapHelper::~Environment2DMapHelper()
 {
 }
 //================================================================================================================
+bool Environment2DMapHelper::IsTopdown()
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+
+	// Did not find an environment
+	if (env2D == 0) return 0;
+
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		return true;
+	}
+
+	return false;
+}
+//================================================================================================================
 TopdownMap* Environment2DMapHelper::ActiveTopdownMap()
 {
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
@@ -2303,7 +2318,7 @@ void Environment2DMapHelper::SetSelectedSpriteStrength(int value, int spriteID)
 	}
 }
 //==================================================================================================================================
-void Environment2DMapHelper::SetSelectedSpriteSpeed(int value, int spriteID)
+void Environment2DMapHelper::SetSelectedSpriteSpeedX(int value, int spriteID)
 {
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 	
@@ -2318,7 +2333,7 @@ void Environment2DMapHelper::SetSelectedSpriteSpeed(int value, int spriteID)
 			AISprite* spr = map->GetSpriteByID(spriteID);
 			if (spr != 0)
 			{
-				spr->Speed() = value;
+				spr->SpeedX() = value;
 			}
 		}
 	}
@@ -2330,7 +2345,106 @@ void Environment2DMapHelper::SetSelectedSpriteSpeed(int value, int spriteID)
 			AISprite* spr = map->GetSpriteByID(spriteID);
 			if (spr != 0)
 			{
-				spr->Speed() = value;
+				spr->SpeedX() = value;
+			}
+		}
+	}
+}
+//==================================================================================================================================
+void Environment2DMapHelper::SetSelectedSpriteSpeedY(int value, int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->SpeedY() = value;
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->SpeedY() = value;
+			}
+		}
+	}
+}
+//==================================================================================================================================
+void Environment2DMapHelper::SetSelectedSpriteMaxSpeedX(int value, int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->MaxSpeedX() = value;
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->MaxSpeedX() = value;
+			}
+		}
+	}
+}
+//==================================================================================================================================
+void Environment2DMapHelper::SetSelectedSpriteMaxSpeedY(int value, int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->MaxSpeedY() = value;
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				spr->MaxSpeedY() = value;
 			}
 		}
 	}
@@ -3090,7 +3204,7 @@ int Environment2DMapHelper::GetSelectedSpriteStrength(int spriteID)
 	return -1;
 }
 //==================================================================================================================================
-int Environment2DMapHelper::GetSelectedSpriteSpeed(int spriteID)
+int Environment2DMapHelper::GetSelectedSpriteSpeedX(int spriteID)
 {
 	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
 	
@@ -3105,7 +3219,7 @@ int Environment2DMapHelper::GetSelectedSpriteSpeed(int spriteID)
 			AISprite* spr = map->GetSpriteByID(spriteID);
 			if (spr != 0)
 			{
-				return spr->Speed();
+				return spr->SpeedX();
 			}
 		}
 	}
@@ -3117,7 +3231,112 @@ int Environment2DMapHelper::GetSelectedSpriteSpeed(int spriteID)
 			AISprite* spr = map->GetSpriteByID(spriteID);
 			if (spr != 0)
 			{
-				return spr->Speed();
+				return spr->SpeedX();
+			}
+		}
+	}
+	
+	return -1;
+}
+//==================================================================================================================================
+int Environment2DMapHelper::GetSelectedSpriteSpeedY(int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return -1;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->SpeedY();
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->SpeedY();
+			}
+		}
+	}
+	
+	return -1;
+}
+//==================================================================================================================================
+int Environment2DMapHelper::GetSelectedSpriteMaxSpeedX(int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return -1;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->MaxSpeedX();
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->MaxSpeedX();
+			}
+		}
+	}
+	
+	return -1;
+}
+//==================================================================================================================================
+int Environment2DMapHelper::GetSelectedSpriteMaxSpeedY(int spriteID)
+{
+	Environment2D* env2D = ZShadeSandboxEnvironment::Environment::Env2D();
+	
+	// Did not find an environment
+	if (env2D == 0) return -1;
+	
+	if (env2D->GetEngineOptions()->m_GameType2D == TOPDOWN)
+	{
+		TopdownMap* map = Environment2DMapHelper::ActiveTopdownMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->MaxSpeedY();
+			}
+		}
+	}
+	else if (env2D->GetEngineOptions()->m_GameType2D == PLATFORMER)
+	{
+		PlatformerMap* map = Environment2DMapHelper::ActivePlatformerMap();
+		if (map != 0)
+		{
+			AISprite* spr = map->GetSpriteByID(spriteID);
+			if (spr != 0)
+			{
+				return spr->MaxSpeedY();
 			}
 		}
 	}

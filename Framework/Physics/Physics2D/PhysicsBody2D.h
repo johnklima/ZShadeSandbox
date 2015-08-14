@@ -33,16 +33,31 @@ protected:
 	// (rockets and thrust)
 	float maxForce;
 	
+	// Represents a force calculated for accelerating this body
+	XMFLOAT2 force;
+	
+	// Represents the total mass of this body
+	float mass;
+	
+	XMFLOAT2 velocity;
+	XMFLOAT2 heading;
+	XMFLOAT2 acceleration;
+	
+	// Is this an AI doing its own movement
+	bool steering;
+	
+	bool platformer;
+	
 	// The amount of X acceleration to apply when the player moves left or right
 	// The amount of X deceleration to apply when the player does not move left or right
 	float accXf, accXb;
 	float decX;
 	
 	// The amount of X and Y movement to occur on the next frame, if a topdown map is used then speedY is not needed
-	float speed, speedY;
+	float speedX, speedY;
 	
 	// The maximum movement speed allowed for the player
-	float maxSpeed, maxSpeedY;
+	float maxSpeedX, maxSpeedY;
 	
 	// The amount of upward force to apply when the player first presses jump
 	float jumpStartSpeedY;
@@ -112,8 +127,6 @@ protected:
 	float fContactXValue;
 	float fContactYValue;
 	
-	XMFLOAT3 vHeading;
-	
 public:
 	
 	PhysicsBody2D();
@@ -151,10 +164,28 @@ public:
 	// Accessor methods
 public:
 	
-	void UpdateVelocity(float x, float y);
+	//void UpdateVelocity(float x, float y);
 	
-	XMFLOAT3 Velocity();
-	XMFLOAT3 Heading();
+	XMFLOAT3 Speed() { return XMFLOAT3(speedX, speedY, 0); }
+	XMFLOAT3 MaxSpeed() { return XMFLOAT3(maxSpeedX, maxSpeedY, 0); }
+
+	bool& Platformer() { return platformer; }
+	bool Platformer() const { return platformer; }
+	
+	bool& Steering() { return steering; }
+	bool Steering() const { return steering; }
+	
+	XMFLOAT2& Force() { return force; }
+	XMFLOAT2 Force() const { return force; }
+	
+	float& Mass() { return mass; }
+	float Mass() const { return mass; }
+	
+	XMFLOAT2& Velocity() { return velocity; }
+	XMFLOAT2 Velocity() const { return velocity; }
+	
+	XMFLOAT2& Heading() { return heading; }
+	XMFLOAT2 Heading() const { return heading; }
 	
 	float& BoundingRadius() { return boundingRadius; }
 	float BoundingRadius() const { return boundingRadius; }
@@ -207,14 +238,14 @@ public:
 	float& DecY() { return decY; }
 	float DecY() const { return decY; }
 
-	float& Speed() { return speed; }
-	float Speed() const { return speed; }
+	float& SpeedX() { return speedX; }
+	float SpeedX() const { return speedX; }
 	
 	float& SpeedY() { return speedY; }
 	float SpeedY() const { return speedY; }
 	
-	float& MaxSpeed() { return maxSpeed; }
-	float MaxSpeed() const { return maxSpeed; }
+	float& MaxSpeedX() { return maxSpeedX; }
+	float MaxSpeedX() const { return maxSpeedX; }
 	
 	float& MaxSpeedY() { return maxSpeedY; }
 	float MaxSpeedY() const { return maxSpeedY; }

@@ -245,6 +245,11 @@ public:
 		return a + ((rand()) / (T)RAND_MAX) * (b - a);
 	}
 
+	static int RandI(int a, int b)
+	{
+		return (rand() % (b - a)) + a;
+	}
+
 	template<typename T>
 	static T Min(const T& a, const T& b)
 	{

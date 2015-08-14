@@ -57,7 +57,7 @@ AISteeringForce::AISteeringForce(AISprite* sprite)
 ZShadeSandboxMath::XMMath3 AISteeringForce::Seek(ZShadeSandboxMath::XMMath3 targetPoint)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	
 	ZShadeSandboxMath::XMMath3 desiredVelocity = targetPoint - sprPosition;
 	desiredVelocity.Normalize();
@@ -69,7 +69,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Seek(ZShadeSandboxMath::XMMath3 targ
 ZShadeSandboxMath::XMMath3 AISteeringForce::Flee(ZShadeSandboxMath::XMMath3 targetPoint)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	
 	float distSqr = fMaxFleeDistance * fMaxFleeDistance;
 	if (sprPosition.DistanceSquared(targetPoint) > distSqr)
@@ -87,7 +87,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Flee(ZShadeSandboxMath::XMMath3 targ
 ZShadeSandboxMath::XMMath3 AISteeringForce::Arrive(ZShadeSandboxMath::XMMath3 targetPoint, EDeceleration::Type deceleration)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	ZShadeSandboxMath::XMMath3 toTarget = targetPoint - sprPosition;
 	
 	float dist = toTarget.Length();
@@ -97,14 +97,16 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Arrive(ZShadeSandboxMath::XMMath3 ta
 		// Deceleration is enumerated as an integer, so this value is required to provide fine tweaking
 		const float decelerationTweaker = 0.3f;
 		
-		float speed = dist / ((float)deceleration * decelerationTweaker);
+		float speedX = dist / ((float)deceleration * decelerationTweaker);
+		float speedY = dist / ((float)deceleration * decelerationTweaker);
 		
 		// Clamp the speed so that it does not exceed maximum speed
-		speed = min(speed, mSprite->MaxSpeed());
-		
+		speedX = min(speedX, mSprite->MaxSpeed().x);
+		speedY = min(speedY, mSprite->MaxSpeed().y);
+
 		// Do not need to normalize the toTarget vector because we have already gone to the trouble
 		// of calculating its length
-		ZShadeSandboxMath::XMMath3 desiredVelocity = (toTarget * speed) / dist;
+		ZShadeSandboxMath::XMMath3 desiredVelocity = (toTarget * ZShadeSandboxMath::XMMath3(speedX, speedY, 0)) / dist;
 		
 		return desiredVelocity - velocity;
 	}
@@ -115,11 +117,11 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Arrive(ZShadeSandboxMath::XMMath3 ta
 ZShadeSandboxMath::XMMath3 AISteeringForce::Pursuit(AISprite* evader)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
-	ZShadeSandboxMath::XMMath3 sprHeading(mSprite->Heading().x, mSprite->Heading().y, mSprite->Heading().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
+	ZShadeSandboxMath::XMMath3 sprHeading(mSprite->Heading().x, mSprite->Heading().y, 0);
 	ZShadeSandboxMath::XMMath3 evaderPosition(evader->TopLeftPosition().x, evader->TopLeftPosition().y, evader->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 evaderVelocity(evader->Velocity().x, evader->Velocity().y, evader->Velocity().z);
-	ZShadeSandboxMath::XMMath3 evaderHeading(evader->Heading().x, evader->Heading().y, evader->Heading().z);
+	ZShadeSandboxMath::XMMath3 evaderVelocity(evader->Velocity().x, evader->Velocity().y, 0);
+	ZShadeSandboxMath::XMMath3 evaderHeading(evader->Heading().x, evader->Heading().y, 0);
 	
 	ZShadeSandboxMath::XMMath3 toEvader = evaderPosition - sprPosition;
 	
@@ -131,27 +133,29 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Pursuit(AISprite* evader)
 	}
 	
 	// Predict where the evader will be
-	float lookAheadTime = toEvader.Length() / (mSprite->MaxSpeed() + evader->MaxSpeed());
+	float lookAheadTimeX = toEvader.Length() / (mSprite->MaxSpeed().x + evader->MaxSpeed().x);
+	float lookAheadTimeY = toEvader.Length() / (mSprite->MaxSpeed().y + evader->MaxSpeed().y);
 	
 	// Seek to the predicted future position
-	return Seek(evaderPosition + evaderVelocity * lookAheadTime);
+	return Seek(evaderPosition + evaderVelocity * ZShadeSandboxMath::XMMath3(lookAheadTimeX, lookAheadTimeY, 0));
 }
 //==================================================================================================================================
 ZShadeSandboxMath::XMMath3 AISteeringForce::Evade(AISprite* pursuer)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	ZShadeSandboxMath::XMMath3 pursuerPosition(pursuer->TopLeftPosition().x, pursuer->TopLeftPosition().y, pursuer->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 pursuerVelocity(pursuer->Velocity().x, pursuer->Velocity().y, pursuer->Velocity().z);
+	ZShadeSandboxMath::XMMath3 pursuerVelocity(pursuer->Velocity().x, pursuer->Velocity().y, 0);
 	
 	ZShadeSandboxMath::XMMath3 toPursuer = pursuerPosition - sprPosition;
 	
 	// The look-ahead time is proportional to the distance between the pursuer and the evader
 	// and is inversely proportional to the sum of the agents' velocities
-	float lookAheadTime = toPursuer.Length() / (mSprite->MaxSpeed() + pursuer->MaxSpeed());
-	
+	float lookAheadTimeX = toPursuer.Length() / (mSprite->MaxSpeed().x + pursuer->MaxSpeed().x);
+	float lookAheadTimeY = toPursuer.Length() / (mSprite->MaxSpeed().y + pursuer->MaxSpeed().y);
+
 	// Now flee away from the predicted future position
-	return Flee(pursuerPosition + pursuerVelocity * lookAheadTime);
+	return Flee(pursuerPosition + pursuerVelocity * ZShadeSandboxMath::XMMath3(lookAheadTimeX, lookAheadTimeY, 0));
 }
 //==================================================================================================================================
 ZShadeSandboxMath::XMMath3 AISteeringForce::Wander()
@@ -183,7 +187,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Wander()
 ZShadeSandboxMath::XMMath3 AISteeringForce::AvoidSprite(std::vector<AISprite*> &spriteObstacles)
 {
 	// The detection box length is proportional to the agent's velocity
-	fDbBoxLength = fMinDetectionBoxLength + (mSprite->Speed() / mSprite->MaxSpeed()) * fMinDetectionBoxLength;
+	fDbBoxLength = fMinDetectionBoxLength + (mSprite->Speed().x / mSprite->MaxSpeed().y) * fMinDetectionBoxLength;
 	
 	// Tag all obstacles within range of the box for processing
 	// mSprite->World()->TagObstaclesWithinViewRange(mSprite, fDbBoxLength);
@@ -276,22 +280,23 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Interpose(AISprite* agentA, AISprite
 	// This will move the sprite in-between agentA and agentB
 	
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	ZShadeSandboxMath::XMMath3 agentAPosition(agentA->TopLeftPosition().x, agentA->TopLeftPosition().y, agentA->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 agentAVelocity(agentA->Velocity().x, agentA->Velocity().y, agentA->Velocity().z);
+	ZShadeSandboxMath::XMMath3 agentAVelocity(agentA->Velocity().x, agentA->Velocity().y, 0);
 	ZShadeSandboxMath::XMMath3 agentBPosition(agentB->TopLeftPosition().x, agentB->TopLeftPosition().y, agentB->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 agentBVelocity(agentB->Velocity().x, agentB->Velocity().y, agentB->Velocity().z);
+	ZShadeSandboxMath::XMMath3 agentBVelocity(agentB->Velocity().x, agentB->Velocity().y, 0);
 	
 	// 1st we need to figure out where the two sprites are going to be at time T in the future.
 	// This is approximated by determining the time taken to reach the midway point at the
 	// current time at max speed.
 	ZShadeSandboxMath::XMMath3 midPoint = (agentAPosition + agentBPosition) / 2;
 	
-	float timeToReachMidPoint = sprPosition.Distance(midPoint) / mSprite->MaxSpeed();
-	
+	float timeToReachMidPointX = sprPosition.Distance(midPoint) / mSprite->MaxSpeed().x;
+	float timeToReachMidPointY = sprPosition.Distance(midPoint) / mSprite->MaxSpeed().y;
+
 	// Now we have T, assume that both sprites will continue on a straight line
-	ZShadeSandboxMath::XMMath3 aPos = agentAPosition + agentAVelocity * timeToReachMidPoint;
-	ZShadeSandboxMath::XMMath3 bPos = agentBPosition + agentBVelocity * timeToReachMidPoint;
+	ZShadeSandboxMath::XMMath3 aPos = agentAPosition + agentAVelocity * timeToReachMidPointX;
+	ZShadeSandboxMath::XMMath3 bPos = agentBPosition + agentBVelocity * timeToReachMidPointY;
 	
 	// Calculate the midpoint of these predicted positions
 	midPoint = (agentAPosition + agentBPosition) / 2;
@@ -308,7 +313,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Hide(AISprite* target, std::vector<A
 	
 	ZShadeSandboxMath::XMMath3 targetPosition(target->TopLeftPosition().x, target->TopLeftPosition().y, target->TopLeftPosition().z);
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, mSprite->Velocity().z);
+	ZShadeSandboxMath::XMMath3 velocity(mSprite->Velocity().x, mSprite->Velocity().y, 0);
 	
 	auto curOb = spriteObstacles.begin();
 	
@@ -375,16 +380,17 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::FollowPath()
 ZShadeSandboxMath::XMMath3 AISteeringForce::OffsetPursuit(AISprite* leader, ZShadeSandboxMath::XMMath3 offset)
 {
 	ZShadeSandboxMath::XMMath3 sprPosition(mSprite->TopLeftPosition().x, mSprite->TopLeftPosition().y, mSprite->TopLeftPosition().z);
-	ZShadeSandboxMath::XMMath3 leaderVelocity(leader->Velocity().x, leader->Velocity().y, leader->Velocity().z);
+	ZShadeSandboxMath::XMMath3 leaderVelocity(leader->Velocity().x, leader->Velocity().y, 0);
 	
 	ZShadeSandboxMath::XMMath3 toOffset = offset - sprPosition;
 	
 	// The look-ahead time is proportional to the distance between the leader and the pursuer;
 	// and is inversely proportional to the sum of both sprites' velocities
-	float lookAheadTime = toOffset.Length() / (mSprite->MaxSpeed() + leader->MaxSpeed());
-	
+	float lookAheadTimeX = toOffset.Length() / (mSprite->MaxSpeed().x + leader->MaxSpeed().x);
+	float lookAheadTimeY = toOffset.Length() / (mSprite->MaxSpeed().y + leader->MaxSpeed().y);
+
 	// Now arrive at the predicted future position of the offset
-	return Arrive(offset + leaderVelocity * lookAheadTime, EDeceleration::Type::eFast);
+	return Arrive(offset + leaderVelocity * ZShadeSandboxMath::XMMath3(lookAheadTimeX, lookAheadTimeY, 0), EDeceleration::Type::eFast);
 }
 //==================================================================================================================================
 ZShadeSandboxMath::XMMath3 AISteeringForce::Separation(std::vector<AISprite*>& neighbours)
@@ -418,7 +424,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Separation(std::vector<AISprite*>& n
 //==================================================================================================================================
 ZShadeSandboxMath::XMMath3 AISteeringForce::Alignment(std::vector<AISprite*>& neighbours)
 {
-	ZShadeSandboxMath::XMMath3 sprHeading(mSprite->Heading().x, mSprite->Heading().y, mSprite->Heading().z);
+	ZShadeSandboxMath::XMMath3 sprHeading(mSprite->Heading().x, mSprite->Heading().y, 0);
 	
 	ZShadeSandboxMath::XMMath3 averageHeading;
 	
@@ -431,7 +437,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Alignment(std::vector<AISprite*>& ne
 		if ((neighbours[a] != mSprite) && (neighbours[a]->IsTagged()))
 		{
 			ZShadeSandboxMath::XMMath3 neighbourHeading(
-				neighbours[a]->Heading().x, neighbours[a]->Heading().y, neighbours[a]->Heading().z
+				neighbours[a]->Heading().x, neighbours[a]->Heading().y, 0
 			);
 			
 			averageHeading += neighbourHeading;
@@ -464,7 +470,7 @@ ZShadeSandboxMath::XMMath3 AISteeringForce::Cohesion(std::vector<AISprite*>& nei
 		if ((neighbours[a] != mSprite) && (neighbours[a]->IsTagged()))
 		{
 			ZShadeSandboxMath::XMMath3 neighbourPosition(
-				neighbours[a]->Heading().x, neighbours[a]->Heading().y, neighbours[a]->Heading().z
+				neighbours[a]->Heading().x, neighbours[a]->Heading().y, 0
 			);
 			
 			centerOfMass += neighbourPosition;

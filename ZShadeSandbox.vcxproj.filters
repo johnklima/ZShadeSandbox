@@ -297,9 +297,6 @@
     <ClCompile Include="Framework\Animation2D\ReadAnimationProfile2D.cpp">
       <Filter>Framework\Animation2D</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Animation3D\AnimationFrame3D.cpp">
-      <Filter>Framework\Animation3D</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Animation3D\TextureAnimation3D.cpp">
       <Filter>Framework\Animation3D</Filter>
     </ClCompile>
@@ -1315,9 +1312,6 @@
     </ClInclude>
     <ClInclude Include="Framework\Animation2D\ReadAnimationProfile2D.h">
       <Filter>Framework\Animation2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Animation3D\AnimationFrame3D.h">
-      <Filter>Framework\Animation3D</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Animation3D\TextureAnimation3D.h">
       <Filter>Framework\Animation3D</Filter>
@@ -2484,9 +2478,6 @@
     <FxCompile Include="Framework\Shaders\PostProcess\PostProcessColorPS.hlsl">
       <Filter>Framework\Shaders\PostProcess</Filter>
     </FxCompile>
-    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessHDR.hlsl">
-      <Filter>Framework\Shaders\PostProcess</Filter>
-    </FxCompile>
     <FxCompile Include="Framework\Shaders\PostProcess\PostProcessVS.hlsl">
       <Filter>Framework\Shaders\PostProcess</Filter>
     </FxCompile>
@@ -2552,6 +2543,9 @@
     </FxCompile>
     <FxCompile Include="Framework\Shaders\Ocean\OceanSurfacePS.hlsl">
       <Filter>Framework\Shaders\Ocean</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Shaders\PostProcess\PostProcessHDR.hlsl">
+      <Filter>Framework\Shaders\PostProcess</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

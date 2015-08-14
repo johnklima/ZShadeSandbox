@@ -37,6 +37,23 @@ void ShaderCompiler::ShaderMacros::ClearMacroDefines()
 	ZeroMemory(buffer, BufferSize);
 }
 //=================================================================================================================
+void ShaderCompiler::ShaderMacros::AddMacro(const std::string& name, const std::string def)
+{
+	assert(numDefines < MaxDefines);
+
+	defines[numDefines].Name = buffer + bufferIdx;
+	for (UINT32 i = 0; i < name.length(); ++i)
+		buffer[bufferIdx++] = name[i];
+	++bufferIdx;
+	
+	defines[numDefines].Definition = buffer + bufferIdx;
+	for (UINT32 i = 0; i < def.length(); ++i)
+		buffer[bufferIdx++] = def[i];
+	++bufferIdx;
+
+	++numDefines;
+}
+//=================================================================================================================
 void ShaderCompiler::ShaderMacros::AddMacro(const std::string& name, UINT32 value)
 {
 	assert(numDefines < MaxDefines);
@@ -260,9 +277,16 @@ void ShaderCompiler::CompileAll(D3D* d3d)
 	// ==================================== Compile the Post Processing Shaders
 	Compile(d3d, "PostProcess\\PostProcessVS.hlsl", "PostProcessQuadVS", EShaderTypes::ST_VERTEX);
 	Compile(d3d, "PostProcess\\PostProcessColorPS.hlsl", "PostProcessColorPS", EShaderTypes::ST_PIXEL);
-	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "DownScaleFirstPass", EShaderTypes::ST_COMPUTE);
-	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "DownScaleSecondPass", EShaderTypes::ST_COMPUTE);
-	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "PostProcessHDR", EShaderTypes::ST_PIXEL);
+	//Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "DownScaleFirstPass", EShaderTypes::ST_COMPUTE);
+	//Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "DownScaleSecondPass", EShaderTypes::ST_COMPUTE);
+	//Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "PostProcessHDR", EShaderTypes::ST_PIXEL);
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "GetAvgLum", EShaderTypes::ST_COMPUTE);
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "BlurHorizontal", EShaderTypes::ST_COMPUTE);
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "BlurVertical", EShaderTypes::ST_COMPUTE);
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "Add", EShaderTypes::ST_COMPUTE);
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "ComputeLuminanceAndBright", EShaderTypes::ST_COMPUTE);
+	AddMacro("PostProcessHDR", "BLOOM", "true");
+	Compile(d3d, "PostProcess\\PostProcessHDR.hlsl", "ToneMapWithBloom", EShaderTypes::ST_PIXEL, "PostProcessHDR");
 	
 	/*Compile(d3d, "PostProcess\\PostProcessLens.hlsl", "PostProcessLensVS", EShaderTypes::ST_VERTEX);
 	Compile(d3d, "PostProcess\\PostProcessing.hlsl", "Threshold", EShaderTypes::ST_PIXEL);
@@ -309,6 +333,20 @@ void ShaderCompiler::AddMacro(BetterString macroName, const std::string& name, U
 		sm = m_ShaderMacros[macroName];
 
 	sm->AddMacro(name, value);
+
+	m_ShaderMacros[macroName] = sm;
+}
+//=================================================================================================================
+void ShaderCompiler::AddMacro(BetterString macroName, const std::string& name, const std::string def)
+{
+	ShaderCompiler::ShaderMacros* sm;
+	
+	if (m_ShaderMacros[macroName] == NULL)
+		sm = new ShaderCompiler::ShaderMacros();
+	else
+		sm = m_ShaderMacros[macroName];
+
+	sm->AddMacro(name, def);
 
 	m_ShaderMacros[macroName] = sm;
 }

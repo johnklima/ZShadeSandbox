@@ -876,7 +876,7 @@ void OutdoorEnvironment::Render()
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
@@ -884,7 +884,7 @@ void OutdoorEnvironment::Render()
 		
 		(*it)->Render(mrp);
 		
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -998,7 +998,7 @@ void OutdoorEnvironment::RenderDeferred()
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
@@ -1015,7 +1015,7 @@ void OutdoorEnvironment::RenderDeferred()
 
 		(*it)->Render(mrp);
 
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -1053,7 +1053,7 @@ void OutdoorEnvironment::RenderReflection(XMFLOAT4 clipplane)
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
@@ -1061,7 +1061,7 @@ void OutdoorEnvironment::RenderReflection(XMFLOAT4 clipplane)
 		
 		(*it)->Render(mrp);
 		
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();
@@ -1109,7 +1109,7 @@ void OutdoorEnvironment::RenderRefraction(XMFLOAT4 clipplane)
 	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOffCulling();
@@ -1117,7 +1117,7 @@ void OutdoorEnvironment::RenderRefraction(XMFLOAT4 clipplane)
 		
 		(*it)->Render(mrp);
 		
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
 		{
 			if (!bWireframeMode && !Quickwire())
 				m_D3DSystem->TurnOnCulling();

@@ -120,6 +120,7 @@ protected:
 	//HUDSystem* m_HUDSystem;
 	//MenuSystem* m_MenuSystem;
 	bool m_GameInitialized;
+	bool bInitialized;
 
 	POINT mLastMousePos;
 	
