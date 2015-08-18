@@ -6,7 +6,7 @@
 OceanSurfaceShader::OceanSurfaceShader(D3D* d3d)
 :	ZShadeSandboxShader::Shader(d3d)
 {
-	Initialize();
+	Initialize(d3d);
 }
 //==============================================================================================================================
 OceanSurfaceShader::OceanSurfaceShader(const OceanSurfaceShader& other)
@@ -18,7 +18,7 @@ OceanSurfaceShader::~OceanSurfaceShader()
 {
 }
 //==============================================================================================================================
-bool OceanSurfaceShader::Initialize()
+bool OceanSurfaceShader::Initialize(D3D* d3d)
 {
 	float g_SkyBlending = 16.0f;
 	DWORD* buffer = new DWORD[FRESNEL_TEX_SIZE];
@@ -86,6 +86,47 @@ bool OceanSurfaceShader::Initialize()
 	// This should read the texture filename elsewhere so that it can be updated by an editor
 	m_pSRV_ReflectCube = TextureManager::Instance()->GetTexture("Textures\\reflect_cube.dds");
 	assert(m_pSRV_ReflectCube);
+
+   
+   // Samplers
+   D3D11_SAMPLER_DESC sam_desc;
+   sam_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+   sam_desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+   sam_desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+   sam_desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+   sam_desc.MipLODBias = 0;
+   sam_desc.MaxAnisotropy = 1;
+   sam_desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+   sam_desc.BorderColor[0] = 1.0f;
+   sam_desc.BorderColor[1] = 1.0f;
+   sam_desc.BorderColor[2] = 1.0f;
+   sam_desc.BorderColor[3] = 1.0f;
+   sam_desc.MinLOD = 0;
+   sam_desc.MaxLOD = FLT_MAX;
+
+
+
+   sam_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+   d3d->GetDevice11()->CreateSamplerState(&sam_desc, &g_pCubeSampler);
+   assert(g_pCubeSampler);
+
+   sam_desc.Filter = D3D11_FILTER_ANISOTROPIC;
+   sam_desc.MaxAnisotropy = 8;
+   d3d->GetDevice11()->CreateSamplerState(&sam_desc, &g_pGradientSampler);
+   assert(g_pGradientSampler);
+
+   sam_desc.MaxLOD = FLT_MAX;
+   sam_desc.MaxAnisotropy = 4;
+   d3d->GetDevice11()->CreateSamplerState(&sam_desc, &g_pPerlinSampler);
+   assert(g_pPerlinSampler);
+
+   sam_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+   sam_desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+   sam_desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+   sam_desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+   d3d->GetDevice11()->CreateSamplerState(&sam_desc, &g_pFresnelSampler);
+   assert(g_pFresnelSampler);
+
 	
 	return true;
 }
@@ -120,9 +161,9 @@ bool OceanSurfaceShader::Render11( int indexCount, Camera* camera, int frustumCu
 	
 	cFB.g_padding = XMFLOAT2(0, 0);
 	cFB.g_SeaLevel = ocean_params.g_SeaLevel;
-	cFB.g_WaveHeight = 1.0f;// ocean_params.g_WaveHeight;
-	cFB.g_LightDirection = XMFLOAT3(0.936016f, -0.343206f, 0.0780013f);
-	cFB.g_SpecularShininess = ocean_params.g_SpecularShininess;
+   cFB.g_WaveHeight = ocean_params.g_WaveHeight;
+   cFB.g_LightDirection = ocean_params.g_LightDirection; 
+   cFB.g_SpecularShininess = ocean_params.g_SpecularShininess;
 	cFB.g_CamPos = camera->Position();
 	cFB.g_Time = ocean_params.g_Time;
 	cFB.g_RefractionTint = ocean_params.g_RefractionTint;
@@ -133,7 +174,7 @@ bool OceanSurfaceShader::Render11( int indexCount, Camera* camera, int frustumCu
 	XMFLOAT2 perlin_move = ZShadeSandboxMath::XMMath2(ocean_params.g_WindDir) * -1.0f * ocean_params.g_Time * ocean_params.g_PerlinSpeed;
 	cFB.g_PerlinMovement = perlin_move;
 
-	// Texcoord for perlin noise
+	// Texcoord for perlin noise (not using this at the moment)
 	XMFLOAT2 uv_base = ZShadeSandboxMath::XMMath2(bottom_left) / ocean_params.g_PatchLength * ocean_params.g_PerlinSize;
 	cFB.g_UVBase = uv_base;
 
@@ -189,9 +230,9 @@ bool OceanSurfaceShader::Render11( int indexCount, Camera* camera, int frustumCu
 	ID3D11SamplerState* ds_samp[2] = { m_pD3DSystem->Point(), m_pD3DSystem->Anisotropic() };
 	
 	ID3D11ShaderResourceView* ps_srvs[9] = { mTexDisplacement, mTexPerlin, mTexGradient, mWaveMap0, mWaveMap1, mReflectionMap, mRefractionMap, g_pSRV_Fresnel, m_pSRV_ReflectCube };
-	ID3D11SamplerState* ps_samp[4] = { m_pD3DSystem->Mirror(), m_pD3DSystem->Linear(), m_pD3DSystem->Point(), m_pD3DSystem->Anisotropic() };
+   ID3D11SamplerState* ps_samp[4] = { g_pCubeSampler, g_pPerlinSampler, g_pGradientSampler, g_pFresnelSampler };
 	
-	if (!m_Wireframe)
+   if (!m_Wireframe)
 	{
 		// Assign Texture
 		m_pD3DSystem->GetDeviceContext()->DSSetShaderResources(0, 2, ds_srvs);

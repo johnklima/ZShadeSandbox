@@ -76,7 +76,7 @@ public:
 	OceanSurfaceShader(const OceanSurfaceShader& other);
 	~OceanSurfaceShader();
 	
-	bool Initialize();
+   bool Initialize(D3D* d3d);
 	void Shutdown();
 	
 	void SetTexDisplacement(ID3D11ShaderResourceView* srv)	{ mTexDisplacement = srv; }
@@ -110,6 +110,13 @@ private:
 	
 	// Reflection cube of the sky
 	ID3D11ShaderResourceView* m_pSRV_ReflectCube = NULL;
+
+   //lets build exact samplers 
+   ID3D11SamplerState* g_pGradientSampler = NULL;
+   ID3D11SamplerState* g_pFresnelSampler = NULL;
+   ID3D11SamplerState* g_pPerlinSampler = NULL;
+   ID3D11SamplerState* g_pCubeSampler = NULL;
+
 };
 //===============================================================================================================================
 //===============================================================================================================================

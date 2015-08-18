@@ -9,8 +9,8 @@
 //==============================================================================
 
 //<JPK> not sure how best to use these
-#define PATCH_BLEND_BEGIN		10000  //800 //way too low, shader does not cover surface
-#define PATCH_BLEND_END			20000
+#define PATCH_BLEND_BEGIN		800
+#define PATCH_BLEND_END			800000
 
 //
 // Constants
@@ -19,19 +19,19 @@
 cbuffer cbPerFrame : register(b0)
 {
 	float2	g_padding;
-	float	g_SeaLevel;
+	float	   g_SeaLevel;
 	float 	g_WaveHeight;
 	float3 	g_LightDirection;
 	float 	g_SpecularShininess;
 	float3 	g_CamPos;
 	float 	g_Time;
 	float4 	g_RefractionTint;
-	float4  g_DullColor;
+	float4   g_DullColor;
 	
 	//<JPK>  perlin
 	float2	g_PerlinMovement;
 	float2	g_UVBase;
-	float	g_PerlinSize;
+	float	  g_PerlinSize;
 	float3	g_PerlinAmplitude;
 	float3	g_PerlinOctave;
 	float3	g_PerlinGradient;
@@ -127,13 +127,13 @@ PixelInput OceanSurfaceDS(PatchConstOutput input, float2 uv : SV_DomainLocation,
 
 	// Blend displacement to avoid tiling artifact
 	float3 eye_vec = g_CamPos.xyz - vPos.xyz;
-	float dist_2d = length(eye_vec.xy);
+	float dist_2d = length(eye_vec.xz);
 	float blend_factor = (PATCH_BLEND_END - dist_2d) / (PATCH_BLEND_END - PATCH_BLEND_BEGIN);
 	blend_factor = clamp(blend_factor, 0, 1);
 
 	// Add perlin noise to distant patches
 	float perlin = 0;
-	if (blend_factor < 1 && 1 > 2)
+	if (blend_factor < 1 )
 	{
 		float2 perlin_tc = vTex * g_PerlinSize + g_UVBase;
 		float perlin_0 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.x + g_PerlinMovement, 0).w;
@@ -146,10 +146,10 @@ PixelInput OceanSurfaceDS(PatchConstOutput input, float2 uv : SV_DomainLocation,
 	// Displacement map
 	float3 displacement = 0;
 
-	if (blend_factor > 0)
-		displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xyz;
+	//if (blend_factor > 0)
+		displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
 
-	displacement = lerp(float3(0, 0, perlin), displacement, blend_factor);
+	//displacement = lerp(float3(0, perlin, 0), displacement, blend_factor);
 
 	vPos.x += displacement.x;
 	vPos.y += displacement.y;
