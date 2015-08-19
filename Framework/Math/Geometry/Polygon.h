@@ -45,6 +45,7 @@ public:
 	}
 	
 	// Adds a single vertex to the end of the existing set of vertices in the polygon while maintaining the indices
+	// Only need to calculate the UV coordinate for VertexTex, VertexNormalTex, VertexNormalTexTan and VertexNormalTexTanBiTan
 	void AddVertex(ZShadeSandboxMesh::VertexPos vertex);
 	void AddVertex(ZShadeSandboxMesh::VertexColor vertex);
 	void AddVertex(ZShadeSandboxMesh::VertexTex vertex);
@@ -82,6 +83,7 @@ public:
 	void InitIndexList();
 	
 	ZShadeSandboxMesh::MeshAttributes*& Attributes() { return attributes; }
+	ZShadeSandboxMesh::MeshAttributes* Attributes() const { return attributes; }
 	
 	string& Name() { return sName; }
 	string Name() const { return sName; }
@@ -120,6 +122,13 @@ protected:
 		//
 		// Generate the polygon normal
 		//
+
+		if (vertices.size() == 1)
+		{
+			normal = ZShadeSandboxMath::XMMath3(1, 1, 1);
+
+			return;
+		}
 
 		ZShadeSandboxMath::XMMath3 vec0(vertices[0].position);
 		ZShadeSandboxMath::XMMath3 vec1(vertices[1].position);

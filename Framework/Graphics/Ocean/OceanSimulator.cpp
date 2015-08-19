@@ -523,6 +523,16 @@ void OceanSimulator::updateDisplacementMap(float time)
 	ID3D11SamplerState* samplers[1] = {m_pPointSamplerState};
 	m_pd3dImmediateContext->PSSetSamplers(0, 1, &samplers[0]);
 
+   //<JPK> put perlin someplace
+   // Texcoord for perlin noise
+   //XMFLOAT2 uv_base = ZShadeSandboxMath::XMMath2(node.bottom_left) / m_PatchLength * m_PerlinSize;
+   //call_consts.m_UVBase = uv_base;
+
+   // Constant m_PerlinSpeed need to be adjusted mannually
+   //XMFLOAT2 perlin_move = ZShadeSandboxMath::XMMath2(m_WindDir) * -1.0f * time * m_PerlinSpeed;
+   //call_consts.m_PerlinMovement = perlin_move;
+
+
 	// Perform draw call
 	m_pd3dImmediateContext->Draw(4, 0);
 

@@ -75,7 +75,14 @@ bool Environment3D::Init()
 	// This should be false when a 3D game is being loaded
 	bUseEngineTextures = true;
 	
-	if (!CGlobal::DoesFolderExist(mEngineOptions->m_GameFolderName))
+	//Full path of game directory
+	string username = CGlobal::GrabUserName();
+	string path = "C:\\Users\\";
+	path.append(username);
+	path.append("\\AppData\\Roaming\\");
+	path.append(mEngineOptions->m_GameFolderName);
+
+	if (!CGlobal::DoesFolderExist(path))
 	{
 		mEngineOptions->m_GameFolderName = "ZShadeSandboxDefaultGame3D";
 		
@@ -604,7 +611,18 @@ void Environment3D::UpdateMaster()
 		while (1) { Sleep(300); break; }
 		bToggleSkyPlane = !bToggleSkyPlane;
 	}
-
+	
+	if (keyboard->IsKeyDown(Keyboard::Key::P))
+	{
+		while(1) { Sleep(50); break; }
+		fSeaLevel += fCamSpeedSlow + 1.0f;
+	}
+	if (keyboard->IsKeyDown(Keyboard::Key::O))
+	{
+		while(1) { Sleep(50); break; }
+		fSeaLevel -= fCamSpeedSlow + 1.0f;
+	}
+	
 	if (bToggleSky)
 	{
 		mSky->SetWireframe(bWireframeMode);
@@ -825,7 +843,7 @@ void Environment3D::RenderMaster()
 
 		ZShadeSandboxLighting::DeferredShaderManager::Instance()->Render(m_CameraSystem, bWireframeMode);
 		
-		RenderSky(false, false);
+		RenderSky(false);
 
 		if (bEnablePostProcessing)
 		{
@@ -837,7 +855,7 @@ void Environment3D::RenderMaster()
 		// Normal 3D Rendering for the scene Happens Here
 		Render();
 
-		RenderSky(false, false);
+		RenderSky(false);
 
 		if (bEnablePostProcessing)
 		{
@@ -864,7 +882,7 @@ void Environment3D::RenderMaster()
 	m_D3DSystem->TurnOnZBuffer();
 }
 //===============================================================================================================================
-void Environment3D::RenderSky(bool reflections, bool deferred)
+void Environment3D::RenderSky(bool reflections)
 {
 	if (!bToggleSky)
 		return;
@@ -895,7 +913,7 @@ void Environment3D::RenderSky(bool reflections, bool deferred)
 
 	if (reflections)
 	{
-		mSky->RenderWithReflection(m_D3DSystem, m_CameraSystem, fSeaLevel, deferred);
+		mSky->RenderWithReflection(m_D3DSystem, m_CameraSystem, fSeaLevel);
 		
 		if (bToggleSkyPlane)
 		{
@@ -904,7 +922,7 @@ void Environment3D::RenderSky(bool reflections, bool deferred)
 	}
 	else// Normal Sky
 	{
-		mSky->Render(m_D3DSystem, m_CameraSystem, deferred);
+		mSky->Render(m_D3DSystem, m_CameraSystem);
 		
 		if (bToggleSkyPlane)
 		{
@@ -915,6 +933,81 @@ void Environment3D::RenderSky(bool reflections, bool deferred)
 	m_D3DSystem->TurnOffAdditiveBlending();
 	m_D3DSystem->TurnOnCulling();
 	//m_D3DSystem->TurnOnZBuffer();
+}
+//===============================================================================================================================
+void Environment3D::RenderSpawnedMeshItems(ZShadeSandboxMesh::MeshRenderParameters mrp)
+{
+	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
+	for (; it != m_SpawnedMeshContainer.end(); it++)
+	{
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		|| ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
+		{
+			if (!bWireframeMode && !Quickwire())
+				m_D3DSystem->TurnOffCulling();
+		}
+		
+		if ((*it)->GetInstanceCount() > 0)
+		{
+			mrp.useInstancing = true;
+		}
+		else
+		{
+			mrp.useInstancing = false;
+		}
+
+		(*it)->Render(mrp);
+
+		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER)
+		|| ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
+		{
+			if (!bWireframeMode && !Quickwire())
+				m_D3DSystem->TurnOnCulling();
+		}
+	}
+}
+//===============================================================================================================================
+void Environment3D::UpdateSpawnedMeshItems(float dt)
+{
+	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
+	for (; it != m_SpawnedMeshContainer.end(); it++)
+	{
+		(*it)->Update(dt);
+		(*it)->SetWireframe(bWireframeMode);
+	}
+}
+//===============================================================================================================================
+void Environment3D::ToggleSpawnedMeshItemsWireframe(bool wireframe)
+{
+	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
+	for (; it != m_SpawnedMeshContainer.end(); it++)
+	{
+		(*it)->SetWireframe(wireframe);
+	}
+}
+//===============================================================================================================================
+void Environment3D::RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp)
+{
+	if (mrp.renderDeferred)
+	{
+		ZShadeSandboxLighting::DeferredShaderManager::Instance()->RenderLightMesh(mrp);
+	}
+	else
+	{
+		ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(mrp);
+	}
+}
+//===============================================================================================================================
+void Environment3D::ToggleLightMeshWireframe(bool wireframe)
+{
+	if (bEnableDeferredShading)
+	{
+		ZShadeSandboxLighting::DeferredShaderManager::Instance()->SetWireframe(wireframe);
+	}
+	else
+	{
+		ZShadeSandboxLighting::LightManager::Instance()->SetWireframe(wireframe);
+	}
 }
 //===============================================================================================================================
 void Environment3D::OnMouseDown(WPARAM btnState, int x, int y)
@@ -1038,7 +1131,7 @@ void Environment3D::RenderReflectionToTexture()
 	{
 		RenderReflection(reflectionClipPlane);
 
-		RenderSky(true, false);
+		RenderSky(true);
 	}
 
 	//Reset the render target to the original back buffer and not the render to texture anymore

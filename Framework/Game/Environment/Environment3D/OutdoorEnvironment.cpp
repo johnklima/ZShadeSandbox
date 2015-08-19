@@ -427,33 +427,15 @@ void OutdoorEnvironment::Update()
 	//	while(1) { Sleep(300); break; }
 	//	bWaterFog = !bWaterFog;
 	//}
-
-	if (keyboard->IsKeyDown(Keyboard::Key::P))
-	{
-		while(1) { Sleep(50); break; }
-		fSeaLevel += fCamSpeedSlow + 1.0f;
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::O))
-	{
-		while(1) { Sleep(50); break; }
-		fSeaLevel -= fCamSpeedSlow + 1.0f;
-	}
 	
 	if (keyboard->IsKeyDown(Keyboard::Key::V))
 	{
-		//while (1) { Sleep(30); break; }
-		//fHeightScale += 1.0f;
-		while (1) { Sleep(30); break; }
 		fHeightScale *= 1.1f;
 		m_pQuadTreeMesh->HeightScale() = fHeightScale;
 		m_pQuadTreeMesh->ComputeBounds();
 	}
 	if (keyboard->IsKeyDown(Keyboard::Key::B))
 	{
-		//fHeightScale -= 1.0f;
-		//if (fHeightScale <= 0.0f)
-		//	fHeightScale += 1.0f;
-		while (1) { Sleep(30); break; }
 		fHeightScale *= 0.9f;
 		m_pQuadTreeMesh->HeightScale() = fHeightScale;
 		m_pQuadTreeMesh->ComputeBounds();
@@ -555,12 +537,8 @@ void OutdoorEnvironment::Update()
 
 	//m_pInfinitePlane->SetWireframe(m_wire);
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		(*it)->Update(dt);
-		(*it)->SetWireframe(bWireframeMode);
-	}
+	UpdateSpawnedMeshItems(dt);
+	ToggleLightMeshWireframe(bWireframeMode);
 	
 	mMesh->SetWireframe(bWireframeMode);
 
@@ -570,87 +548,6 @@ void OutdoorEnvironment::Update()
 	{
 		m_pQuadTreeRenderer->SetWireframe(bWireframeMode);
 	}
-	
-	/*if (mVolume->IntersectsAABB(m_CameraSystem->Position()))
-	{
-		m_ToggleSky = true;
-	}
-	else
-	{
-		m_ToggleSky = false;
-	}*/
-
-	/*XMFLOAT3 SpotLightPos = mSpotLight1->Position();
-	XMFLOAT3 PointLightPos = mPointLight->Position();
-	XMFLOAT3 CapsuleLightPos = mCapsuleLight->Position();
-	XMFLOAT3 eye = m_CameraSystem->Position();
-	XMFLOAT3 DirLightPos = mDirLight1->Position();
-	//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(eye.x, eye.y + 20.0f, eye.z));
-
-	if (keyboard->IsKeyDown(Keyboard::Key::Up))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x + 1.0f, PointLightPos.y, PointLightPos.z));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x + 1.0f, SpotLightPos.y, SpotLightPos.z));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x + 1.0f, CapsuleLightPos.y, CapsuleLightPos.z));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().x += 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x + 0.01f, DirLightPos.y, DirLightPos.z));
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::Down))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x - 1.0f, PointLightPos.y, PointLightPos.z));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x - 1.0f, SpotLightPos.y, SpotLightPos.z));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x - 1.0f, CapsuleLightPos.y, CapsuleLightPos.z));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().x -= 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x - 0.01f, DirLightPos.y, DirLightPos.z));
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::Left))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x, PointLightPos.y, PointLightPos.z + 1.0f));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x, SpotLightPos.y, SpotLightPos.z + 1.0f));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x, CapsuleLightPos.y, CapsuleLightPos.z + 1.0f));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().z += 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x, DirLightPos.y, DirLightPos.z + 0.01f));
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::Right))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x, PointLightPos.y, PointLightPos.z - 1.0f));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x, SpotLightPos.y, SpotLightPos.z - 1.0f));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x, CapsuleLightPos.y, CapsuleLightPos.z - 1.0f));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().x -= 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x, DirLightPos.y, DirLightPos.z - 0.01f));
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::E))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x, PointLightPos.y + 1.0f, PointLightPos.z));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x, SpotLightPos.y + 1.0f, SpotLightPos.z));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x, CapsuleLightPos.y + 1.0f, CapsuleLightPos.z));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().y += 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x, DirLightPos.y + 0.01f, DirLightPos.z));
-	}
-	if (keyboard->IsKeyDown(Keyboard::Key::R))
-	{
-		//mPointLight->UpdateMeshPosition(XMFLOAT3(PointLightPos.x, PointLightPos.y - 1.0f, PointLightPos.z));
-		//mSpotLight1->UpdateMeshPosition(XMFLOAT3(SpotLightPos.x, SpotLightPos.y - 1.0f, SpotLightPos.z));
-		//mCapsuleLight->UpdateMeshPosition(XMFLOAT3(CapsuleLightPos.x, CapsuleLightPos.y - 1.0f, CapsuleLightPos.z));
-		//while (1) { Sleep(200); break; }
-		mDirLight1->Direction().y -= 0.01f;
-		mDirLight1->UpdateMeshPosition(XMFLOAT3(DirLightPos.x, DirLightPos.y - 0.01f, DirLightPos.z));
-	}*/
-	
-	// Move the light with mouse point in 3D
-	/*if (mPickingRay != NULL)
-	{
-		XMMath3 pos(mPickingRay->position.x, mPickingRay->position.y, mPickingRay->position.z);
-		XMMath3 dir(mPickingRay->direction.x, mPickingRay->direction.y, mPickingRay->direction.z);
-		pos.x += 5.0f;
-		pos.z += 5.0f;
-		mCapsuleLight->UpdateMeshPosition(XMFLOAT3(pos.x, pos.y, pos.z));
-	}*/
 
 	// Updates the world matrix for the sun
 	//mSun->Update(m_CameraSystem);
@@ -676,7 +573,7 @@ void OutdoorEnvironment::Update()
 	// Count the amount of triangles in the scene
 	iTriangleCount = 0;
 	
-	it = m_SpawnedMeshContainer.begin();
+	auto it = m_SpawnedMeshContainer.begin();
 	for (; it != m_SpawnedMeshContainer.end(); it++)
 	{
 		iTriangleCount += (*it)->TriangleCount();
@@ -760,26 +657,6 @@ void OutdoorEnvironment::Update()
 //===============================================================================================================================
 void OutdoorEnvironment::Render()
 {
-	/*vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		(*it)->SetLightBuffer(ZShadeSandboxLighting::LightManager::Instance()->GetLightBuffer());
-		(*it)->SetLightBuffer(ZShadeSandboxLighting::LightManager::Instance()->GetSunLightBuffer());
-	}
-
-	if (mPickingSphere != NULL)
-	{
-		mPickingSphere->SetLightBuffer(ZShadeSandboxLighting::LightManager::Instance()->GetLightBuffer());
-		mPickingSphere->SetLightBuffer(ZShadeSandboxLighting::LightManager::Instance()->GetSunLightBuffer());
-	}*/
-
-	//if (m_ToggleWater)
-	//{
-	//	//Update the reflection and refraction textures for the scene, If there are any
-	//	RenderRefractionToTexture();
-	//	RenderReflectionToTexture();
-	//}
-	
 	//RenderTerrainShadowSSAO();
 
 	//We now get the position of the camera and then get the height of the triangle that would
@@ -811,9 +688,9 @@ void OutdoorEnvironment::Render()
 	
 	if (mPickingRay != NULL)
 	{
-		if (bLeftMouseDown)
+		//if (bLeftMouseDown)
 		{
-			bLeftMouseDown = false;
+			//bLeftMouseDown = false;
 			bool hit = false;
 			XMFLOAT3 hitPoint;
 			ZShadeSandboxMath::Ray ray = *mPickingRay;
@@ -846,11 +723,8 @@ void OutdoorEnvironment::Render()
 			m_pQuadTreeRenderer->SetWireframe(true);
 		}
 
-		vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-		for (; it != m_SpawnedMeshContainer.end(); it++)
-		{
-			(*it)->SetWireframe(true);
-		}
+		ToggleSpawnedMeshItemsWireframe(true);
+		ToggleLightMeshWireframe(true);
 
 		mMesh->SetWireframe(true);
 		
@@ -873,23 +747,7 @@ void OutdoorEnvironment::Render()
 	mrp.camera = m_CameraSystem;
 	mrp.light = mDirLight1;
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-		
-		(*it)->Render(mrp);
-		
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
+	RenderSpawnedMeshItems(mrp);
 	
 	//
 	//Render the terrain
@@ -945,14 +803,7 @@ void OutdoorEnvironment::Render()
 	// Render the sphere mesh for the lights in the scene
 	//
 	
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-	lrp.reflect = false;
-	lrp.renderDeferred = false;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(lrp);
+	RenderLightMesh(mrp);
 }
 //===============================================================================================================================
 void OutdoorEnvironment::RenderDeferred()
@@ -963,6 +814,9 @@ void OutdoorEnvironment::RenderDeferred()
 		mWater->SetWireframe(true);
 		//mOceanSurface->SetWireframe(true);
 		mSky->SetWireframe(true);
+		ToggleSpawnedMeshItemsWireframe(true);
+		ToggleLightMeshWireframe(true);
+		
 		m_D3DSystem->TurnOnWireframe();
 	}
 
@@ -995,46 +849,14 @@ void OutdoorEnvironment::RenderDeferred()
 	mrp.renderDeferred = true;
 	mrp.light = mDirLight1;
 
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-
-		if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
-		{
-			mrp.useInstancing = true;
-		}
-		else
-		{
-			mrp.useInstancing = false;
-		}
-
-		(*it)->Render(mrp);
-
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
+	RenderSpawnedMeshItems(mrp);
 
 	mMesh->SetFarPlane(mEngineOptions->fFarPlane);
 	mMesh->Render(mrp);
 
 	mPickingSphere->Render(mrp);
 
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-	lrp.reflect = false;
-	lrp.renderDeferred = true;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::DeferredShaderManager::Instance()->RenderLightMesh(lrp);
+	RenderLightMesh(mrp);
 }
 //===============================================================================================================================
 void OutdoorEnvironment::RenderShadowMap()
@@ -1050,23 +872,7 @@ void OutdoorEnvironment::RenderReflection(XMFLOAT4 clipplane)
 	mrp.reflection = true;
 	mrp.clipplane = clipplane;
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-		
-		(*it)->Render(mrp);
-		
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
+	RenderSpawnedMeshItems(mrp);
 	
 	//
 	// Render the terrain using the reflection view matrix and reflection clip plane
@@ -1078,22 +884,8 @@ void OutdoorEnvironment::RenderReflection(XMFLOAT4 clipplane)
 	if (mPickingSphere != NULL)
 		mPickingSphere->Render(mrp);
 	
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = clipplane;
-	lrp.reflect = true;
-	lrp.renderDeferred = false;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(lrp);
+	RenderLightMesh(mrp);
 	
-	//ZShadeSandboxMesh::OBJMeshRenderParameters omrp;
-	//omrp.camera = m_CameraSystem;
-	//omrp.reflection = true;
-	//omrp.clipplane = clipplane;
-	//omrp.tessellate = true;
-	//omrp.tessFactor = 64.0f;
-	//omrp.renderType = ZShadeSandboxMesh::ERenderType::e3ControlPointPatchList;
 	mMesh->SetFarPlane(mEngineOptions->fFarPlane);
 	mMesh->Render(mrp);
 }
@@ -1106,23 +898,7 @@ void OutdoorEnvironment::RenderRefraction(XMFLOAT4 clipplane)
 	mrp.reflection = false;
 	mrp.clipplane = clipplane;
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-		
-		(*it)->Render(mrp);
-		
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
+	RenderSpawnedMeshItems(mrp);
 
 	//
 	// Render the terrain using the refraction clip plane to produce the refraction effect
@@ -1134,22 +910,8 @@ void OutdoorEnvironment::RenderRefraction(XMFLOAT4 clipplane)
 	if (mPickingSphere != NULL)
 		mPickingSphere->Render(mrp);
 	
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = clipplane;
-	lrp.reflect = false;
-	lrp.renderDeferred = false;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(lrp);
+	RenderLightMesh(mrp);
 	
-	//ZShadeSandboxMesh::OBJMeshRenderParameters omrp;
-	//omrp.camera = m_CameraSystem;
-	//omrp.reflection = false;
-	//omrp.clipplane = clipplane;
-	//omrp.tessellate = true;
-	//omrp.tessFactor = 64.0f;
-	//omrp.renderType = ZShadeSandboxMesh::ERenderType::e3ControlPointPatchList;
 	mMesh->SetFarPlane(mEngineOptions->fFarPlane);
 	mMesh->Render(mrp);
 }

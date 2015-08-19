@@ -72,8 +72,15 @@ bool Environment2D::Init()
 	GDI::Init();
 	
 	m_Timer.Initialize();
+
+	//Full path of game directory
+	string username = CGlobal::GrabUserName();
+	string path = "C:\\Users\\";
+	path.append(username);
+	path.append("\\AppData\\Roaming\\");
+	path.append(mEngineOptions->m_GameFolderName);
 	
-	if (!CGlobal::DoesFolderExist(mEngineOptions->m_GameFolderName))
+	if (!CGlobal::DoesFolderExist(path))
 	{
 		mEngineOptions->m_GameFolderName = "ZShadeSandboxDefaultGame2D";
 		
@@ -319,6 +326,19 @@ bool Environment2D::Update()
 
 	bool update = true;
 	
+	if (mEngineOptions->m_inEditor)
+	{
+		if (bInEditorMap || bInEditorHUD)
+		{
+			GameState::GetInstance()->SetState(GS_INGAME);
+		}
+
+		if (bInEditorMenu)
+		{
+			GameState::GetInstance()->SetState(GS_MAINMENU);
+		}
+	}
+
 	if (GameState::GetInstance()->GetState() == GS_QUIT)
 	{
 		ExitProcess(0);

@@ -1,13 +1,13 @@
 //===============================================================================================================================
-// ModelEnvironment
+// PolygonEnvironment
 //
 //===============================================================================================================================
 // History
 //
-// -Created on 5/12/2015 by Dustin Watson
+//	-Created on 5/4/2015 by Dustin Watson
 //===============================================================================================================================
-#ifndef __MODELENVIRONMENT_H
-#define __MODELENVIRONMENT_H
+#ifndef __POLYGONENVIRONMENT_H
+#define __POLYGONENVIRONMENT_H
 //===============================================================================================================================
 //===============================================================================================================================
 
@@ -16,47 +16,39 @@
 //
 
 #include "Environment3D.h"
-#include "SphereMesh.h"
-#include "CylindricalMesh.h"
-#include "GeosphereMesh.h"
-#include "CircleMesh.h"
-#include "PlaneMesh.h"
-#include "OBJMesh.h"
+#include "Polygon.h"
+#include "PolygonMesh.h"
+#include "Water.h"
 
 //===============================================================================================================================
 //===============================================================================================================================
 
 //
-// Model Environment for the rendering of models
+// Polygon Environment
 //
-class ModelEnvironment : public Environment3D
+class PolygonEnvironment : public Environment3D
 {
 public:
 	
-	ModelEnvironment(EngineOptions* eo);
-	~ModelEnvironment();
-	
+	PolygonEnvironment(EngineOptions* eo);
+	~PolygonEnvironment();
+
 	bool Initialize();
+	void Shutdown();
+
 	void Update();
 	void Render();
 	void RenderDeferred();
-	void RenderShadowMap();
+	void RenderReflection(XMFLOAT4 clipplane);
+	void RenderRefraction(XMFLOAT4 clipplane);
 	
-	void Shutdown();
+private:
 	
-protected:
-	
-	// Create a textured plane with lighting in the center of the environment
-	ZShadeSandboxMesh::PlaneMesh* mPlane;
-	
-	ZShadeSandboxMesh::SphereMesh* mSphere;
-	ZShadeSandboxMesh::CylindricalMesh* mCylindricalMesh;
-	ZShadeSandboxMesh::GeosphereMesh* mGeosphereMesh;
-	ZShadeSandboxMesh::CircleMesh* mCircleMesh;
-	ZShadeSandboxMesh::OBJMesh* mSpaceCompound;
-	ZShadeSandboxMesh::OBJMesh* mHuman;
+	ZShadeSandboxMath::Polygon* mPolygon;
+	ZShadeSandboxMesh::PolygonMesh* mPolygonMesh;
+	Water* mWater;
 };
 
 //===============================================================================================================================
 //===============================================================================================================================
-#endif//__MODELENVIRONMENT_H
+#endif//__POLYGONENVIRONMENT_H

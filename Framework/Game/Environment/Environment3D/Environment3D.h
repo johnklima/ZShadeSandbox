@@ -78,8 +78,14 @@ public:
 	virtual void RenderDeferred() = 0;
 	virtual void Shutdown();
 	
-	void RenderSky(bool reflections, bool deferred);
-
+	void RenderSky(bool reflections);
+	
+	void RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp);
+	void RenderSpawnedMeshItems(ZShadeSandboxMesh::MeshRenderParameters mrp);
+	void UpdateSpawnedMeshItems(float dt);
+	void ToggleSpawnedMeshItemsWireframe(bool wireframe);
+	void ToggleLightMeshWireframe(bool wireframe);
+	
 	// Override this for any 2D rendering in the scene
 	virtual void Render2D() {}
 	

@@ -10,6 +10,8 @@
 #define __MESHRENDERPARAMETERS_H
 //===============================================================================================================================
 //===============================================================================================================================
+#include "MeshRenderType.h"
+//===============================================================================================================================
 namespace ZShadeSandboxMesh {
 struct MeshRenderParameters
 {
@@ -19,7 +21,7 @@ struct MeshRenderParameters
 	ZShadeSandboxLighting::Light* light;
 	XMMATRIX world; // This will be added by the mesh, unless bSpecifyWorld=true
 	XMFLOAT4X4 view;  // This will be added by the mesh
-	ERenderType::Type renderType;
+	ZShadeSandboxMesh::ERenderType::Type renderType;
 	bool renderLight; // Uses light passed into here for material light shader
 	bool reflection;
 	bool centerCam;
@@ -29,6 +31,8 @@ struct MeshRenderParameters
 	bool renderDeferred;
 	bool useInstancing;
 	bool translateBillboard;
+	bool toggleMesh;
+	bool toggleWireframe;
 	float blendAmount;
 	float minTessDist;
 	float maxTessDist;
@@ -53,6 +57,8 @@ struct MeshRenderParameters
 		useInstancing = false;
 		translateBillboard = false;
 		enableDistTess = false;
+		toggleMesh = true;
+		toggleWireframe = false;
 		blendAmount = 0.0f;
 		minTessDist = 20.0f;
 		maxTessDist = 500.0f;

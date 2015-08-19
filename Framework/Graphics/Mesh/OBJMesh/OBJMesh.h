@@ -77,23 +77,15 @@ class OBJMesh
 		ZShadeSandboxMath::SpherePrimitive* GetSphere();
 		bool IntersectsSphere(XMFLOAT3 point);
 		float DistanceSphereToPoint(XMFLOAT3 point);
+		
+		void AddInstancePositions(vector<XMFLOAT3> v);
+	
+		ID3D11Buffer* InstanceBuffer() { return mAttributes->mInstanceBuffer; }
 
 	private:
 
-		//void CalculateWorldMatrix();
-
 		MeshAttributes* mAttributes;
 
-		//int						mVertexCount;
-		//int						mIndexCount;
-		//int						mTriangleCount;
-		//ID3D11Buffer*				mVB;
-		//ID3D11Buffer*				mIB;
-		//XMMATRIX					mWorld;
-		//XMFLOAT3					mPosition;
-		//XMFLOAT3					mScale;
-		//XMFLOAT3					mRotation;
-		
 		OBJMeshShader*      	   	mShader;
 		OBJMeshTessellationShader*  mTessellationShader;
 		OBJGBufferShader*			mOBJGBufferShader;
@@ -126,6 +118,10 @@ public:
 	ZShadeSandboxMath::SpherePrimitive* GetSphere();
 	bool IntersectsSphere(XMFLOAT3 point);
 	float DistanceSphereToPoint(XMFLOAT3 point);
+	
+	void AddInstancePositions(vector<XMFLOAT3> v);
+	
+	ID3D11Buffer* InstanceBuffer();
 	
 private:
 	

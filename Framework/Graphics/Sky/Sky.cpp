@@ -44,23 +44,21 @@ ID3D11ShaderResourceView* Sky::CubeMapSRV()
 	return mCubeMapSRV;
 }
 //==============================================================================================================================
-void Sky::Render(D3D* d3d, Camera* camera, bool renderDeferred)
+void Sky::Render(D3D* d3d, Camera* camera)
 {
 	ZShadeSandboxMesh::MeshRenderParameters mrp;
 	mrp.camera = camera;
 	mrp.centerCam = true;
-	mrp.renderDeferred = renderDeferred;
 	mesh->Render(mrp);
 }
 //==============================================================================================================================
-void Sky::RenderWithReflection(D3D* d3d, Camera* camera, float planeHeight, bool renderDeferred)
+void Sky::RenderWithReflection(D3D* d3d, Camera* camera, float planeHeight)
 {
 	ZShadeSandboxMesh::MeshRenderParameters mrp;
 	mrp.camera = camera;
 	mrp.reflection = true;
 	mrp.centerCam = false;
 	mrp.seaLevel = planeHeight;
-	mrp.renderDeferred = renderDeferred;
 	mesh->Render(mrp);
 }
 //==============================================================================================================================

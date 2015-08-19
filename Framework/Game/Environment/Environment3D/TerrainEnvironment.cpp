@@ -556,14 +556,7 @@ void TerrainEnvironment::Render()
 	// Render the sphere mesh for the lights in the scene
 	//
 
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-	lrp.reflect = false;
-	lrp.renderDeferred = false;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(lrp);
+	RenderLightMesh(mrp);
 }
 //===============================================================================================================================
 void TerrainEnvironment::RenderDeferred()

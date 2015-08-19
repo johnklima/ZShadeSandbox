@@ -26,6 +26,10 @@
 #include "SpotLightDeferredShader.h"
 #include "DebugGBufferDeferredShader.h"
 
+namespace ZShadeSandboxMesh {
+	class MeshRenderParameters;
+}
+
 namespace ZShadeSandboxLighting {
 	class AmbientLight;
 	class CapsuleLight;
@@ -127,8 +131,10 @@ public:
 	void Render(Camera* camera, bool wire);
 
 	// Renders a mesh at the position of the light for debugging
-	void RenderLightMesh(ZShadeSandboxLighting::LightRenderParameters lrp);
-
+	void RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp);
+	
+	void SetWireframe(bool wireframe);
+	
 private:
 	
 	// Debugging flags

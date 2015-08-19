@@ -22,6 +22,7 @@
 
 namespace ZShadeSandboxMesh {
 	class CustomMesh;
+	class MeshRenderParameters;
 }
 
 namespace ZShadeSandboxLighting {
@@ -80,7 +81,9 @@ public:
 	
 	// When a light is created from the light manager it will build the mesh and render it
 	void BuildSphereMesh(D3D* d3d);
-	void RenderSphereMesh(ZShadeSandboxLighting::LightRenderParameters lrp);
+	void RenderSphereMesh(ZShadeSandboxMesh::MeshRenderParameters mrp);
+	
+	void SetWireframe(bool wireframe);
 	
 	void UpdateMeshPosition(XMFLOAT3 pos);
 	void ScaleMesh(XMFLOAT3 scale);

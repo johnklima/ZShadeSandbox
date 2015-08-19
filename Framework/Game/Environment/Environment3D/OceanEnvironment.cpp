@@ -11,7 +11,7 @@ OceanEnvironment::OceanEnvironment(EngineOptions* eo)
 	//The Near Clipping Plane is influenced by the size of the map
 	
 	Init();
-} 
+}
 //===============================================================================================================================
 OceanEnvironment::~OceanEnvironment()
 {
@@ -83,21 +83,21 @@ bool OceanEnvironment::Init()
 	ocean_params.g_DullColor = XMFLOAT4(0.3f, 0.3f, 0.5f, 1.0f);
 	ocean_params.g_SpecularShininess = 400;
 	ocean_params.g_WaveHeight = 1.3f;
-	ocean_params.g_OceanSize = 8192 * 2;         //<JPK> the relative values of these are
-	ocean_params.g_PatchSize = 512 ;            //critical to "scale" of the FFT effect  
-	ocean_params.g_MinDist = 10.0f ;            //use this to get more mesh detail
-	ocean_params.g_MaxDist = 2000.0f ;          //and this
-	ocean_params.g_MinTess = 2.0f ;             //and this      
-	ocean_params.g_MaxTess = 128.0f ;          //and this 
+	ocean_params.g_OceanSize = 8192 * 2; //<JPK> the relative values of these are critical to "scale" of the FFT effect
+	ocean_params.g_PatchSize = 512;
+	ocean_params.g_MinDist = 10.0f;
+	ocean_params.g_MaxDist = 2000.0f;
+	ocean_params.g_MinTess = 2.0f;
+	ocean_params.g_MaxTess = 128.0f;
 	ocean_params.g_SeaLevel = fSeaLevel;
-
+	
 	// Perlin wave parameters
 	ocean_params.g_PerlinSize = 1.0f;
 	ocean_params.g_PerlinSpeed = 0.06f;
 	ocean_params.g_PerlinAmplitude = XMFLOAT3(35, 42, 57);
 	ocean_params.g_PerlinGradient = XMFLOAT3(1.4f, 1.6f, 2.2f);
 	ocean_params.g_PerlinOctave = XMFLOAT3(1.12f, 0.59f, 0.23f);
-
+	
 	//FFT PARAMS :
 	// Adjust this parameter to control the simulation speed
 	ocean_params.g_TimeScale = 0.8f;
@@ -133,6 +133,8 @@ bool OceanEnvironment::Init()
 	ZShadeSandboxLighting::LightManager::Instance()->ToggleDirectionalLights(true);
 	
 	//<JPK> place camera in a useful position to see more of the surface
+	//m_CameraSystem->SetPosition(-50.0f, 300.0f, -50.0f);
+	
 	XMFLOAT3 campos(mOceanSurface->mPatchTree->GetPatches()->center);
 	campos.y += 300;
 	m_CameraSystem->SetPosition(campos);

@@ -2,6 +2,7 @@
 #include "SphereMesh.h"
 #include "MaterialManager.h"
 #include "LightShadingBuffers.h"
+#include "MeshRenderParameters.h"
 using ZShadeSandboxLighting::Light;
 //==============================================================================================================================
 //==============================================================================================================================
@@ -67,21 +68,17 @@ void Light::ScaleMesh(XMFLOAT3 scale)
 //==============================================================================================================================
 int Light::TriangleCount() const { return mMesh->TriangleCount(); }
 //==============================================================================================================================
-void Light::RenderSphereMesh(ZShadeSandboxLighting::LightRenderParameters lrp)
+void Light::RenderSphereMesh(ZShadeSandboxMesh::MeshRenderParameters mrp)
 {
 	if (mMesh == NULL) return;
-
-	if (lrp.toggleMesh)
-	{
-		ZShadeSandboxMesh::MeshRenderParameters mrp;
-		mrp.camera = lrp.camera;
-		mrp.light = this;
-		mrp.reflection = lrp.reflect;
-		mrp.clipplane = lrp.clipplane;
-		mrp.renderDeferred = lrp.renderDeferred;
-		mMesh->SetWireframe(lrp.toggleWireframe);
-		mMesh->Render(mrp);
-	}
+	mrp.light = this;
+	mMesh->Render(mrp);
+}
+//==============================================================================================================================
+void Light::SetWireframe(bool wireframe)
+{
+	if (mMesh == NULL) return;
+	mMesh->SetWireframe(wireframe);
 }
 //==============================================================================================================================
 void Light::SetMesh(ZShadeSandboxMesh::CustomMesh* mesh)

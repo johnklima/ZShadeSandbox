@@ -19,19 +19,19 @@
 cbuffer cbPerFrame : register(b0)
 {
 	float2	g_padding;
-	float	   g_SeaLevel;
+	float	g_SeaLevel;
 	float 	g_WaveHeight;
 	float3 	g_LightDirection;
 	float 	g_SpecularShininess;
 	float3 	g_CamPos;
 	float 	g_Time;
 	float4 	g_RefractionTint;
-	float4   g_DullColor;
+	float4  g_DullColor;
 	
 	//<JPK>  perlin
 	float2	g_PerlinMovement;
 	float2	g_UVBase;
-	float	  g_PerlinSize;
+	float	g_PerlinSize;
 	float3	g_PerlinAmplitude;
 	float3	g_PerlinOctave;
 	float3	g_PerlinGradient;
@@ -124,33 +124,36 @@ PixelInput OceanSurfaceDS(PatchConstOutput input, float2 uv : SV_DomainLocation,
 	// Find the texture coordinate of the new vertex
 	float2 vTex = lerp(lerp(inputPatch[0].uv, inputPatch[1].uv, uv.x), lerp(inputPatch[2].uv, inputPatch[3].uv, uv.x), uv.y);
 	float2 vTex1 = lerp(lerp(inputPatch[0].uv1, inputPatch[1].uv1, uv.x), lerp(inputPatch[2].uv1, inputPatch[3].uv1, uv.x), uv.y);
-
+	
 	// Blend displacement to avoid tiling artifact
-	float3 eye_vec = g_CamPos.xyz - vPos.xyz;
-	float dist_2d = length(eye_vec.xz);
-	float blend_factor = (PATCH_BLEND_END - dist_2d) / (PATCH_BLEND_END - PATCH_BLEND_BEGIN);
-	blend_factor = clamp(blend_factor, 0, 1);
-
+	//float3 eye_vec = g_CamPos.xyz - vPos.xyz;
+	//float dist_2d = length(eye_vec.xz);
+	//float blend_factor = (PATCH_BLEND_END - dist_2d) / (PATCH_BLEND_END - PATCH_BLEND_BEGIN);
+	//blend_factor = clamp(blend_factor, 0, 1);
+	
 	// Add perlin noise to distant patches
-	float perlin = 0;
-	if (blend_factor < 1 )
-	{
-		float2 perlin_tc = vTex * g_PerlinSize + g_UVBase;
-		float perlin_0 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.x + g_PerlinMovement, 0).w;
-		float perlin_1 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.y + g_PerlinMovement, 0).w;
-		float perlin_2 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.z + g_PerlinMovement, 0).w;
-
-		perlin = perlin_0 * g_PerlinAmplitude.x + perlin_1 * g_PerlinAmplitude.y + perlin_2 * g_PerlinAmplitude.z;
-	}
-
+	//float perlin = 0;
+	//if (blend_factor < 1)
+	//{
+	//	float2 perlin_tc = vTex * g_PerlinSize + g_UVBase;
+	//	float perlin_0 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.x + g_PerlinMovement, 0).w;
+	//	float perlin_1 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.y + g_PerlinMovement, 0).w;
+	//	float perlin_2 = g_texPerlin.SampleLevel(anisoSampler, perlin_tc * g_PerlinOctave.z + g_PerlinMovement, 0).w;
+	//	perlin = perlin_0 * g_PerlinAmplitude.x + perlin_1 * g_PerlinAmplitude.y + perlin_2 * g_PerlinAmplitude.z;
+	//}
+	
 	// Displacement map
-	float3 displacement = 0;
-
+	float3 displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
+	
+	//float3 displacement = 0;
+	//
 	//if (blend_factor > 0)
-		displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
-
+	//{
+	//	displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
+	//}
+	//
 	//displacement = lerp(float3(0, perlin, 0), displacement, blend_factor);
-
+	
 	vPos.x += displacement.x;
 	vPos.y += displacement.y;
 	vPos.z += displacement.z;

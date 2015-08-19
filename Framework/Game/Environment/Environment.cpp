@@ -9,6 +9,7 @@
 #include "TessellationEnvironment.h"
 #include "ModelEnvironment.h"
 #include "BSPEnvironment.h"
+#include "PolygonEnvironment.h"
 //#include "MapEditorSystem2D.h"
 //#include "MenuEditorSystem.h"
 //#include "HUDEditorSystem.h"
@@ -52,6 +53,8 @@ bool Environment::Init()
 				env3D = new TerrainEnvironment(mEngineOptions);
 			else if (mEngineOptions->m_Env3DType == "BSP")
 				env3D = new BSPEnvironment(mEngineOptions);
+			else if (mEngineOptions->m_Env3DType == "Poly")
+				env3D = new PolygonEnvironment(mEngineOptions);
 			//else if (env3DType == "Editor")
 			//	env3D = new Editor3DEnvironment(base_window_name, render_window_name, m_EngineOptions, init_lua);
 		}

@@ -89,6 +89,21 @@ void OBJMesh::SetWireframe(bool wire)
 	m_pMesh->SetWireframe(wire);
 }
 //===============================================================================================================================
+void OBJMesh::AddInstancePositions(vector<XMFLOAT3> v)
+{
+	m_pMesh->AddInstancePositions(v);
+}
+//===============================================================================================================================
+ID3D11Buffer* OBJMesh::InstanceBuffer()
+{
+	return m_pMesh->InstanceBuffer();
+}
+//===============================================================================================================================
+void OBJMesh::Mesh::AddInstancePositions(vector<XMFLOAT3> v)
+{
+	mAttributes->AddInstancePositions(v);
+}
+//===============================================================================================================================
 void OBJMesh::Mesh::Scale(XMFLOAT3 v)
 {
 	mAttributes->mScale = v;
@@ -702,7 +717,7 @@ bool OBJMesh::Mesh::Load(string filename, bool bRebuildNormals, bool isRHCoordSy
 //===============================================================================================================================
 void OBJMesh::Mesh::Render(MeshRenderParameters render_param)
 {
-	if (render_param.camera == NULL) return;
+	if (render_param.camera == NULL || !render_param.toggleMesh) return;
 
 	render_param.world = mAttributes->WorldXM();
 

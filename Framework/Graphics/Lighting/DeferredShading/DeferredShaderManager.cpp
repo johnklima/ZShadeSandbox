@@ -4,6 +4,7 @@
 #include "SpotLight.h"
 #include "PointLight.h"
 #include "CapsuleLight.h"
+#include "MeshRenderParameters.h"
 #include "LightShadingBuffers.h"
 using ZShadeSandboxLighting::DeferredShaderManager;
 //==============================================================================================================================
@@ -219,7 +220,7 @@ void DeferredShaderManager::AddCapsuleLight
 	DeferredShaderManager::mCapsuleLightCount++;
 }
 //==============================================================================================================================
-void DeferredShaderManager::RenderLightMesh(ZShadeSandboxLighting::LightRenderParameters lrp)
+void DeferredShaderManager::RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp)
 {
 	// No lights to render
 	if (!bToggleAmbientLights && !bToggleDirectionalLights && !bToggleSpotLights && !bTogglePointLights && !bToggleCapsuleLights)
@@ -227,6 +228,10 @@ void DeferredShaderManager::RenderLightMesh(ZShadeSandboxLighting::LightRenderPa
 
 	for (int i = 0; i < DeferredShaderManager::mCount; i++)
 	{
+		// Can this light be seen
+		if (!mLights[i]->ToggleLight())
+			continue;
+		
 		int lightType = mLights[i]->LightType();
 
 		if (!bToggleAmbientLights && lightType == ZShadeSandboxLighting::ELightType::eAmbient) continue;
@@ -235,7 +240,23 @@ void DeferredShaderManager::RenderLightMesh(ZShadeSandboxLighting::LightRenderPa
 		if (!bTogglePointLights && lightType == ZShadeSandboxLighting::ELightType::ePoint) continue;
 		if (!bToggleCapsuleLights && lightType == ZShadeSandboxLighting::ELightType::eCapsule) continue;
 
-		mLights[i]->RenderSphereMesh(lrp);
+		mLights[i]->RenderSphereMesh(mrp);
+	}
+}
+//==============================================================================================================================
+void DeferredShaderManager::SetWireframe(bool wireframe)
+{
+	// Check to see if any lights are available to render
+	if (!bToggleAmbientLights && !bToggleDirectionalLights && !bToggleSpotLights && !bTogglePointLights && !bToggleCapsuleLights)
+		return;
+	
+	for (int i = 0; i < DeferredShaderManager::mCount; i++)
+	{
+		// Can this light be seen
+		if (!mLights[i]->ToggleLight())
+			continue;
+		
+		mLights[i]->SetWireframe(wireframe);
 	}
 }
 //==============================================================================================================================

@@ -23,8 +23,8 @@ public:
 
 	ID3D11ShaderResourceView* CubeMapSRV();
 
-	void Render(D3D* d3d, Camera* camera, bool renderDeferred = false);
-	void RenderWithReflection(D3D* d3d, Camera* camera, float planeHeight, bool renderDeferred = false);
+	void Render(D3D* d3d, Camera* camera);
+	void RenderWithReflection(D3D* d3d, Camera* camera, float planeHeight);
 
 	void SetWireframe(bool wire);
 	

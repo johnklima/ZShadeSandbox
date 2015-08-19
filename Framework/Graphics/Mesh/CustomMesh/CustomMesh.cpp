@@ -185,7 +185,7 @@ void CustomMesh::Update(float dt)
 void CustomMesh::Render(ZShadeSandboxMesh::MeshRenderParameters rp)
 {
 	// Cannot do anything if there is no camera
-	if (rp.camera == 0) return;
+	if (rp.camera == 0 || !rp.toggleMesh) return;
 	
 	//
 	// Render the mesh buffers

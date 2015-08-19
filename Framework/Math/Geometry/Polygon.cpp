@@ -16,6 +16,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexPos> vertices)
 	LoadPolygonNormal(attributes->mVerticesPos);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexPos);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 void Polygon::Create(vector<ZShadeSandboxMesh::VertexColor> vertices)
@@ -27,6 +28,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexColor> vertices)
 	LoadPolygonNormal(attributes->mVerticesColor);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexColor);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 void Polygon::Create(vector<ZShadeSandboxMesh::VertexTex> vertices)
@@ -38,6 +40,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexTex> vertices)
 	LoadPolygonNormal(attributes->mVerticesTex);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexTex);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTex> vertices)
@@ -49,6 +52,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTex> vertices)
 	LoadPolygonNormal(attributes->mVerticesNormalTex);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexNormalTex);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTexTan> vertices)
@@ -60,6 +64,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTexTan> vertices)
 	LoadPolygonNormal(attributes->mVerticesNormalTexTan);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexNormalTexTan);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTexTanBiTan> vertices)
@@ -71,6 +76,7 @@ void Polygon::Create(vector<ZShadeSandboxMesh::VertexNormalTexTanBiTan> vertices
 	LoadPolygonNormal(attributes->mVerticesNormalTexTanBi);
 	attributes->mVertexByteWidth = sizeof(ZShadeSandboxMesh::VertexNormalTexTanBiTan);
 	attributes->mTriangleCount = attributes->mVertexCount / 3;
+	if (attributes->mVertexCount < 3) attributes->mTriangleCount = 0;
 }
 //==================================================================================================================================
 UINT Polygon::GetIndex(int i)
@@ -166,6 +172,29 @@ void Polygon::CreateIndices(vector<UINT> indices)
 //==================================================================================================================================
 void Polygon::LoadIndices()
 {
+	if (attributes->mVertexCount == 1)
+	{
+		attributes->mIndexCount = 1;
+
+		InitIndexList();
+
+		attributes->mIndices[(0 * 3) + 0] = 0;
+
+		return;
+	}
+
+	if (attributes->mVertexCount == 2)
+	{
+		attributes->mIndexCount = 2;
+
+		InitIndexList();
+
+		attributes->mIndices[(0 * 3) + 0] = 0;
+		attributes->mIndices[(0 * 3) + 1] = 1;
+
+		return;
+	}
+	
 	attributes->mIndexCount = (attributes->mVertexCount - 2) * 3;
 
 	InitIndexList();
@@ -252,13 +281,17 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexPos vertex)
 	}
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================
 void Polygon::AddVertex(ZShadeSandboxMesh::VertexColor vertex)
@@ -279,13 +312,17 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexColor vertex)
 	}
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================
 void Polygon::AddVertex(ZShadeSandboxMesh::VertexTex vertex)
@@ -310,13 +347,17 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexTex vertex)
 	//vertex.texture = XMFLOAT2(vertex.position.x * (1 / (size - 1)), vertex.position.z * (1 / (size - 1)));
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================
 void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTex vertex)
@@ -337,17 +378,19 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTex vertex)
 	}
 	
 	// Calculate the UV
-	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
-	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================
 void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTan vertex)
@@ -368,17 +411,19 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTan vertex)
 	}
 	
 	// Calculate the UV
-	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
-	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================
 void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTanBiTan vertex)
@@ -399,16 +444,18 @@ void Polygon::AddVertex(ZShadeSandboxMesh::VertexNormalTexTanBiTan vertex)
 	}
 	
 	// Calculate the UV
-	ZShadeSandboxMath::XMMath3 translatedPos(-1 * vertex.position.x, -1 * vertex.position.y, -1 * vertex.position.z);
-	vertex.texture = XMFLOAT2(translatedPos.x / vertex.position.x, translatedPos.y / vertex.position.y);
 	
 	// Finally add the new vertex
-	vertices[i + 1] = vertex;
+	if (vertexCount > 0)
+	{
+		vertices[(i + 1) - 1] = vertex;
+	}
+	else
+	{
+		vertices[i] = vertex;
+	}
 	
 	// Create the new vertex set in the polygon
 	Create(vertices);
-	
-	// Maintain the indices in the polygon after the new vertex is added
-	LoadIndices();
 }
 //==================================================================================================================================

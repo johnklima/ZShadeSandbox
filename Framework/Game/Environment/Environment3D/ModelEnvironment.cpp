@@ -104,95 +104,6 @@ ModelEnvironment::~ModelEnvironment()
 	Shutdown();
 }
 //===============================================================================================================================
-void ModelEnvironment::RenderShadowMap()
-{
-	mDirLight1->Update();
-	
-	ZShadeSandboxMesh::MeshRenderParameters mrp;
-	mrp.camera = m_CameraSystem;
-	mrp.light = mDirLight1;
-	mrp.shadowMap = true;
-
-	mPlane->Render(mrp);
-
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-
-		(*it)->Render(mrp);
-
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
-
-	mPickingSphere->Render(mrp);
-}
-//===============================================================================================================================
-void ModelEnvironment::RenderDeferred()
-{
-	if (!bWireframeMode)
-	{
-		m_D3DSystem->TurnOnCulling();
-	}
-
-	ZShadeSandboxMesh::MeshRenderParameters mrp;
-	mrp.camera = m_CameraSystem;
-	mrp.renderDeferred = true;
-	mrp.light = mDirLight1;
-	
-	mPlane->Render(mrp);
-
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-
-		//if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
-		if ((*it)->GetInstanceCount() > 0)
-		{
-			mrp.useInstancing = true;
-		}
-		else
-		{
-			mrp.useInstancing = false;
-		}
-
-		(*it)->Render(mrp);
-
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
-
-	mPickingSphere->Render(mrp);
-	
-	mSpaceCompound->Render(mrp);
-	mHuman->Render(mrp);
-
-	ZShadeSandboxLighting::LightRenderParameters lrp;
-	lrp.camera = m_CameraSystem;
-	lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-	lrp.reflect = false;
-	lrp.renderDeferred = true;
-	lrp.toggleMesh = true;
-	lrp.toggleWireframe = bWireframeMode;
-	ZShadeSandboxLighting::DeferredShaderManager::Instance()->RenderLightMesh(lrp);
-}
-//===============================================================================================================================
 bool ModelEnvironment::Initialize()
 {
 	return true;
@@ -213,18 +124,15 @@ void ModelEnvironment::Update()
 	// Uncomment if using the picking sphere
 	mPickingSphere->SetWireframe(bWireframeMode);
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		(*it)->Update(dt);
-		(*it)->SetWireframe(bWireframeMode);
-	}
+	UpdateSpawnedMeshItems(dt);
 	
 	mSpaceCompound->SetWireframe(bWireframeMode);
 	mHuman->SetWireframe(bWireframeMode);
 
 	mSpaceCompound->SetFarPlane(mEngineOptions->fFarPlane);
 	mHuman->SetFarPlane(mEngineOptions->fFarPlane);
+	
+	ToggleLightMeshWireframe(bWireframeMode);
 	
 	//// OBJ Mesh Collision test with camera
 	//bool touchedAABB = false;
@@ -288,62 +196,23 @@ void ModelEnvironment::Render()
 	{
 		mPlane->SetWireframe(true);
 		
-		vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-		for (; it != m_SpawnedMeshContainer.end(); it++)
-		{
-			(*it)->SetWireframe(true);
-		}
+		ToggleSpawnedMeshItemsWireframe(true);
 		
-		// Uncomment if using the picking sphere
 		mPickingSphere->SetWireframe(true);
 		
 		mSpaceCompound->SetWireframe(true);
 		mHuman->SetWireframe(true);
 		
+		ToggleLightMeshWireframe(true);
+		
 		m_D3DSystem->TurnOnWireframe();
 	}
 	
-	RenderScene();
-	
-	m_D3DSystem->TurnOffCulling();
-}
-//===============================================================================================================================
-bool ModelEnvironment::RenderScene()
-{
 	ZShadeSandboxMesh::MeshRenderParameters mrp;
 	mrp.camera = m_CameraSystem;
 	mrp.light = mDirLight1;
 	
-	vector<ZShadeSandboxMesh::CustomMesh*>::iterator it = m_SpawnedMeshContainer.begin();
-	for (; it != m_SpawnedMeshContainer.end(); it++)
-	{
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOffCulling();
-		}
-
-		//if ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CUBE)
-		if ((*it)->GetInstanceCount() > 0)
-		{
-			mrp.useInstancing = true;
-		}
-		else
-		{
-			mrp.useInstancing = false;
-		}
-
-		//(*it)->EnableShadowMap(bEnableShadows);
-		//(*it)->SetShadowMapSRV(mShadowTexture->SRView);
-		//(*it)->SetSSAOMapSRV(0);
-		(*it)->Render(mrp);
-
-		if (((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::CYLINDER) || ((*it)->MeshType() == ZShadeSandboxMesh::EMeshType::QUAD))
-		{
-			if (!bWireframeMode && !Quickwire())
-				m_D3DSystem->TurnOnCulling();
-		}
-	}
+	RenderSpawnedMeshItems(mrp);
 
 	mrp.useInstancing = false;
 	
@@ -378,29 +247,61 @@ bool ModelEnvironment::RenderScene()
 	mSpaceCompound->Render(mrp);
 	mHuman->Render(mrp);
 	
-	if (bEnableDeferredShading)
+	RenderLightMesh(mrp);
+	
+	m_D3DSystem->TurnOffCulling();
+}
+//===============================================================================================================================
+void ModelEnvironment::RenderDeferred()
+{
+	if (!bWireframeMode)
 	{
-		ZShadeSandboxLighting::LightRenderParameters lrp;
-		lrp.camera = m_CameraSystem;
-		lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-		lrp.reflect = false;
-		lrp.renderDeferred = false;
-		lrp.toggleMesh = true;
-		lrp.toggleWireframe = bWireframeMode;
-		ZShadeSandboxLighting::DeferredShaderManager::Instance()->RenderLightMesh(lrp);
-	}
-	else
-	{
-		ZShadeSandboxLighting::LightRenderParameters lrp;
-		lrp.camera = m_CameraSystem;
-		lrp.clipplane = XMFLOAT4(0, 0, 0, 0);
-		lrp.reflect = false;
-		lrp.renderDeferred = false;
-		lrp.toggleMesh = true;
-		lrp.toggleWireframe = bWireframeMode;
-		ZShadeSandboxLighting::LightManager::Instance()->RenderLightMesh(lrp);
+		mPlane->SetWireframe(true);
+		
+		ToggleSpawnedMeshItemsWireframe(true);
+		
+		mPickingSphere->SetWireframe(true);
+		
+		mSpaceCompound->SetWireframe(true);
+		mHuman->SetWireframe(true);
+		
+		ToggleLightMeshWireframe(true);
+		
+		m_D3DSystem->TurnOnCulling();
 	}
 
-	return true;
+	ZShadeSandboxMesh::MeshRenderParameters mrp;
+	mrp.camera = m_CameraSystem;
+	mrp.renderDeferred = true;
+	mrp.light = mDirLight1;
+	
+	mPlane->Render(mrp);
+
+	RenderSpawnedMeshItems(mrp);
+
+	mPickingSphere->Render(mrp);
+	
+	mSpaceCompound->Render(mrp);
+	mHuman->Render(mrp);
+
+	RenderLightMesh(mrp);
+}
+//===============================================================================================================================
+void ModelEnvironment::RenderShadowMap()
+{
+	mDirLight1->Update();
+	
+	ZShadeSandboxMesh::MeshRenderParameters mrp;
+	mrp.camera = m_CameraSystem;
+	mrp.light = mDirLight1;
+	mrp.shadowMap = true;
+	
+	mPlane->Render(mrp);
+	
+	RenderSpawnedMeshItems(mrp);
+	
+	mPickingSphere->Render(mrp);
+	
+	RenderLightMesh(mrp);
 }
 //===============================================================================================================================

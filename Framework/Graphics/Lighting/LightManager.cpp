@@ -4,6 +4,7 @@
 #include "SpotLight.h"
 #include "PointLight.h"
 #include "CapsuleLight.h"
+#include "MeshRenderParameters.h"
 #include "LightShadingBuffers.h"
 using ZShadeSandboxLighting::LightManager;
 //==============================================================================================================================
@@ -626,7 +627,7 @@ void LightManager::AddCapsuleLight
 	LightManager::mCapsuleLightCount++;
 }
 //==============================================================================================================================
-void LightManager::RenderLightMesh(ZShadeSandboxLighting::LightRenderParameters lrp)
+void LightManager::RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp)
 {
 	// Check to see if any lights are available to render
 	if (!bToggleAmbientLights && !bToggleDirectionalLights && !bToggleSpotLights && !bTogglePointLights && !bToggleCapsuleLights)
@@ -646,7 +647,23 @@ void LightManager::RenderLightMesh(ZShadeSandboxLighting::LightRenderParameters 
 		if (!bTogglePointLights && lightType == ZShadeSandboxLighting::ELightType::ePoint) continue;
 		if (!bToggleCapsuleLights && lightType == ZShadeSandboxLighting::ELightType::eCapsule) continue;
 		
-		mLights[i]->RenderSphereMesh(lrp);
+		mLights[i]->RenderSphereMesh(mrp);
+	}
+}
+//==============================================================================================================================
+void LightManager::SetWireframe(bool wireframe)
+{
+	// Check to see if any lights are available to render
+	if (!bToggleAmbientLights && !bToggleDirectionalLights && !bToggleSpotLights && !bTogglePointLights && !bToggleCapsuleLights)
+		return;
+	
+	for (int i = 0; i < LightManager::mCount; i++)
+	{
+		// Can this light be seen
+		if (!mLights[i]->ToggleLight())
+			continue;
+		
+		mLights[i]->SetWireframe(wireframe);
 	}
 }
 //==============================================================================================================================

@@ -30,15 +30,13 @@ OceanSurface::OceanSurface(D3D* d3d, OceanParameters ocean_params)
 	mOceanParams->g_WindDependency = ocean_params.g_WindDependency;
 	mOceanParams->g_TimeScale = ocean_params.g_TimeScale;
 	mOceanParams->g_ChoppyScale = ocean_params.g_ChoppyScale;
-
-   mOceanParams->g_PerlinSize = ocean_params.g_PerlinSize;
-   mOceanParams->g_PerlinSpeed = ocean_params.g_PerlinSpeed;
-   mOceanParams->g_PerlinAmplitude = ocean_params.g_PerlinAmplitude;
-   mOceanParams->g_PerlinGradient = ocean_params.g_PerlinGradient;
-   mOceanParams->g_PerlinOctave = ocean_params.g_PerlinOctave;
-   mOceanParams->g_MapDimension = ocean_params.g_MapDimension;
-   mOceanParams->g_PatchLength = ocean_params.g_PatchLength;
-
+	mOceanParams->g_PerlinSize = ocean_params.g_PerlinSize;
+	mOceanParams->g_PerlinSpeed = ocean_params.g_PerlinSpeed;
+	mOceanParams->g_PerlinAmplitude = ocean_params.g_PerlinAmplitude;
+	mOceanParams->g_PerlinGradient = ocean_params.g_PerlinGradient;
+	mOceanParams->g_PerlinOctave = ocean_params.g_PerlinOctave;
+	mOceanParams->g_MapDimension = ocean_params.g_MapDimension;
+	mOceanParams->g_PatchLength = ocean_params.g_PatchLength;
 
 	Initialize();
 }

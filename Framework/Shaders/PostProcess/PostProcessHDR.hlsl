@@ -301,14 +301,20 @@ Texture2D g_Input		 : register( t0 );
 Texture2D g_ToneMapScale : register( t1 );
 Texture2D g_Bloom		 : register( t2 );
 
-float4 ToneMapWithBloom(float4 Input : SV_Position, float2 tex : TEXCOORD0) : SV_Target
+struct PostProcessPixelInput
 {
-	int3 index = int3(Input.xy, 0);
+	float4 position		: SV_POSITION;
+	float2 uv			: TEXCOORD0;
+};
+
+float4 ToneMapWithBloom(PostProcessPixelInput input) : SV_Target
+{
+	int3 index = int3(input.position.xy, 0);
 	float3 Lw = g_Input.Load(index).xyz;
 	
-	if (BLOOM)
+	//if (BLOOM)
 	{
-		Lw += g_BloomMultiplier * g_Bloom.SampleLevel(sampleLinear, tex, 0).rgb;		
+		Lw += g_BloomMultiplier * g_Bloom.SampleLevel(sampleLinear, input.uv, 0).rgb;
 	}
 	
 	float scale = g_ToneMapScale.Load(int3(0, 0, 0)).r;

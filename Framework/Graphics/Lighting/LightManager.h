@@ -35,6 +35,10 @@
 // Forward Declarations
 //
 
+namespace ZShadeSandboxMesh {
+	class MeshRenderParameters;
+}
+
 namespace ZShadeSandboxLighting {
 	class AmbientLight;
 	class CapsuleLight;
@@ -160,7 +164,9 @@ public:
 public:
 	
 	// Renders a mesh at the position of the light for debugging
-	void RenderLightMesh(ZShadeSandboxLighting::LightRenderParameters lrp);
+	void RenderLightMesh(ZShadeSandboxMesh::MeshRenderParameters mrp);
+	
+	void SetWireframe(bool wireframe);
 	
 private:
 	

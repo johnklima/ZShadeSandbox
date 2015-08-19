@@ -58,9 +58,9 @@ HDR::HDR(D3D* d3d)
 	blurredHV = PostProcessManager::CreateRenderTarget(backbufferWidth / 2, backbufferHeight / 2, FLOAT_FORMAT, bindflags, BLUR_LEVELS);
 	bright = PostProcessManager::CreateRenderTarget(backbufferWidth / 2, backbufferHeight / 2, FLOAT_FORMAT, bindflags, BLUR_LEVELS);
 	
-	fMiddleGreyValue = 1.0f;
-	fBloomThreshold = 1.0f;
-	fBloomMultiplier = 1.0f;
+	fMiddleGreyValue = 5.0f;
+	fBloomThreshold = 1.8f;
+	fBloomMultiplier = 2.0f;
 	
 	PostProcessManager::mShader->LoadComputeShader("GetAvgLum");
 	PostProcessManager::mShader->LoadComputeShader("BlurHorizontal");
@@ -86,7 +86,7 @@ void HDR::ProcessInternal()
 	mD3DSystem->GetDeviceContext()->CSSetSamplers(0, 2, pSamplerState);
 	mD3DSystem->GetDeviceContext()->PSSetSamplers(0, 2, pSamplerState);
 	
-	mD3DSystem->GetDeviceContext()->OMSetRenderTargets(1, &mOutputTargets[0], NULL);
+	//mD3DSystem->GetDeviceContext()->OMSetRenderTargets(1, &mOutputTargets[0], NULL);
 	
 	int width = mD3DSystem->GetEngineOptions()->m_screenWidth / 2;
 	int height = mD3DSystem->GetEngineOptions()->m_screenHeight / 2;
@@ -148,7 +148,7 @@ void HDR::ProcessInternal()
 	//ToneMapWithBloom(target->SRView, blurredHV->SRView, NULL);
 	ToneMapWithBloom(mInputTextures[0], blurredHV->SRView, NULL);
 	
-	mD3DSystem->GetDeviceContext()->OMSetRenderTargets(1, &mOutputTargets[0], mDSView);
+	//mD3DSystem->GetDeviceContext()->OMSetRenderTargets(1, &mOutputTargets[0], mDSView);
 	
 	SAFE_RELEASE(mOutputTargets[0]);
 	SAFE_RELEASE(mDSView);
@@ -306,8 +306,9 @@ void HDR::ToneMapWithBloom(ID3D11ShaderResourceView* pInput, ID3D11ShaderResourc
 	context->PSSetShaderResources(0, 3, ppSRV);
 	
 	PostProcessManager::mShader->SwitchTo("ToneMapWithBloom", ZShadeSandboxShader::EShaderTypes::ST_PIXEL);
-	
-	mD3DSystem->TurnOnAdditiveBlending();
+
+	//mD3DSystem->TurnOnAdditiveBlending();
+	mD3DSystem->TurnOnAlphaBlending();
 	{
 		// Set all IA stage inputs to NULL, since we're not using it at all.
 		ID3D11Buffer* vertexBuffers[1] = { NULL };
@@ -326,45 +327,52 @@ void HDR::ToneMapWithBloom(ID3D11ShaderResourceView* pInput, ID3D11ShaderResourc
 		// Bind a NULL Input Layout for the fullscreen quad and draw with 4 points
 		PostProcessManager::mShader->RenderDraw11(4);
 		
-		// Need to unload resources
-		//UnloadResources();
-		
 		ppSRV[0] = NULL; ppSRV[1] = NULL;
 		context->PSSetShaderResources(0, 2, ppSRV);
 	}
-	mD3DSystem->TurnOffAdditiveBlending();
+	mD3DSystem->TurnOffAlphaBlending();
+	//mD3DSystem->TurnOffAdditiveBlending();
 }
 //==================================================================================================================================
 void HDR::UpdateContantBuffer(int mipLevel0, int mipLevel1, unsigned int width, unsigned int height)
 {
+	ID3D11DeviceContext* context = mD3DSystem->GetDeviceContext();
+	
 	cbConstants cConst;
 	cConst.width = width;
 	cConst.height = height;
 	cConst.mipLevel0 = mipLevel0;
 	cConst.mipLevel1 = mipLevel1;
 	D3D11_MAPPED_SUBRESOURCE mapped_res;
-	mD3DSystem->GetDeviceContext()->Map(m_pCSConstants, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_res);
+	context->Map(m_pCSConstants, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_res);
 	{
 		assert(mapped_res.pData);
 		*(cbConstants*)mapped_res.pData = cConst;
 	}
-	mD3DSystem->GetDeviceContext()->Unmap(m_pCSConstants, 0);
+	context->Unmap(m_pCSConstants, 0);
+	
+	context->CSSetConstantBuffers(1, 1, &m_pCSConstants);
 }
 //==================================================================================================================================
 void HDR::UpdateBloomConstants(float middleGrey, float bloomThreshold, float bloomMultiplier)
 {
+	ID3D11DeviceContext* context = mD3DSystem->GetDeviceContext();
+	
 	cbBloomConstants cBC;
 	cBC.g_MiddleGrey = middleGrey;
 	cBC.g_BloomThreshold = bloomThreshold;
 	cBC.g_BloomMultiplier = bloomMultiplier;
 	cBC.padding = 0;
 	D3D11_MAPPED_SUBRESOURCE mapped_res;
-	mD3DSystem->GetDeviceContext()->Map(m_pBloomConstants, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_res);
+	context->Map(m_pBloomConstants, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_res);
 	{
 		assert(mapped_res.pData);
 		*(cbBloomConstants*)mapped_res.pData = cBC;
 	}
-	mD3DSystem->GetDeviceContext()->Unmap(m_pBloomConstants, 0);
+	context->Unmap(m_pBloomConstants, 0);
+	
+	context->CSSetConstantBuffers(2, 1, &m_pBloomConstants);
+	context->PSSetConstantBuffers(2, 1, &m_pBloomConstants);
 }
 //==================================================================================================================================
 /*void HDR::RenderInit(ZShadeSandboxShader::Shader*& shader)
