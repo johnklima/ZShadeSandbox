@@ -1227,6 +1227,9 @@
     <ClCompile Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.cpp">
       <Filter>Framework\Physics\Physics3D</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Game\Environment\Environment3D\PolygonEnvironment.cpp">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrontEnd.h">
@@ -2374,6 +2377,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Physics\Physics3D\PhysicsBodyBase3D.h">
       <Filter>Framework\Physics\Physics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game\Environment\Environment3D\PolygonEnvironment.h">
+      <Filter>Framework\Game\Environment\Environment3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
