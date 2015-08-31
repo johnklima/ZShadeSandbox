@@ -20,25 +20,25 @@
 cbuffer cbPerFrame : register(b0)
 {
 	float2	g_padding;
-	float	g_SeaLevel;
+	float	   g_SeaLevel;
 	float 	g_WaveHeight;
 	float3 	g_LightDirection;
 	float 	g_SpecularShininess;
 	float3 	g_CamPos;
 	float 	g_Time;
 	float4 	g_RefractionTint;
-	float4  g_DullColor;
+	float4   g_DullColor;
 	
 	//<JPK>  perlin
 	float2	g_PerlinMovement;
 	float2	g_UVBase;
-	float	g_PerlinSize;
+	float	   g_PerlinSize;
 	float3	g_PerlinAmplitude;
 	float3	g_PerlinOctave;
 	float3	g_PerlinGradient;
-	float   g_TexelLength_x2;
-	float   g_UVScale;
-	float   g_UVOffset;
+	float    g_TexelLength_x2;
+	float    g_UVScale;
+	float    g_UVOffset;
 };
 
 //======================================================================================================
@@ -47,7 +47,7 @@ cbuffer cbPerFrame : register(b0)
 // Globals
 //
 
-Texture2D g_texDisplacement		: register(t0); // FFT wave displacement map in VS (wave displacement from ocean heightfield)
+Texture2D g_texDisplacement	: register(t0); // FFT wave displacement map in VS (wave displacement from ocean heightfield)
 Texture2D g_texPerlin			: register(t1); // FFT wave gradient map in PS
 Texture2D g_texGradient			: register(t2); // Perlin wave displacement & gradient map in both VS & PS
 Texture2D g_WaveMap0 	  		: register(t3); // First Normal map
@@ -60,7 +60,7 @@ TextureCube g_texReflectCube 	: register(t8);// A small skybox cube texture for 
 SamplerState cubeSampler		: register(s0);
 SamplerState perlinSampler		: register(s1);
 SamplerState gradientSampler	: register(s2);
-SamplerState fresnelSampler		: register(s3);
+SamplerState fresnelSampler	: register(s3);
 SamplerState mirrorSampler		: register(s4);
 
 //======================================================================================================
@@ -97,26 +97,28 @@ float4 OceanSurfacePS(PixelInput input) : SV_TARGET
 	float blend_factor = (PATCH_BLEND_END - dist_2d) / (PATCH_BLEND_END - PATCH_BLEND_BEGIN);
 	blend_factor = clamp(blend_factor * blend_factor * blend_factor, 0, 1);
 	
-	float2 perlin_uv = input.bumpMapSamplingPos1 / 10.0f;
-	
-	// Compose perlin waves from three octaves
-	float2 perlin_tc = perlin_uv;
-	float2 perlin_tc0 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.x + g_PerlinMovement : 0;
-	float2 perlin_tc1 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.y + g_PerlinMovement : 0;
-	float2 perlin_tc2 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.z + g_PerlinMovement : 0;
-	
-	float2 perlin_0 = g_texPerlin.Sample(perlinSampler, perlin_tc0).xy;
-	float2 perlin_1 = g_texPerlin.Sample(perlinSampler, perlin_tc1).xy;
-	float2 perlin_2 = g_texPerlin.Sample(perlinSampler, perlin_tc2).xy;
-	
-	float2 perlin = (perlin_0 * g_PerlinGradient.x + perlin_1 * g_PerlinGradient.y + perlin_2 * g_PerlinGradient.z);
-	
-	// Texcoord mash optimization: Texcoord of FFT wave is not required when blend_factor > 1
-	float2 fft_tc = perlin_uv;
+   float2 perlin_uv = input.uv ; // input.bumpMapSamplingPos1 / 20.0f;
+
+   // Compose perlin waves from three octaves
+   float2 perlin_tc = perlin_uv;
+   float2 perlin_tc0 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.x + g_PerlinMovement : 0;
+   float2 perlin_tc1 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.y + g_PerlinMovement : 0;
+   float2 perlin_tc2 = (blend_factor < 1) ? perlin_tc * g_PerlinOctave.z + g_PerlinMovement : 0;
+
+   float2 perlin_0 = g_texPerlin.Sample(perlinSampler, perlin_tc0).xy;
+   float2 perlin_1 = g_texPerlin.Sample(perlinSampler, perlin_tc1).xy;
+   float2 perlin_2 = g_texPerlin.Sample(perlinSampler, perlin_tc2).xy;
+
+   float2 perlin = (perlin_0 * g_PerlinGradient.x + perlin_1 * g_PerlinGradient.y + perlin_2 * g_PerlinGradient.z);
+
+   // Texcoord mash optimization: Texcoord of FFT wave is not required when blend_factor > 1
+   float2 fft_tc = (blend_factor > 0) ? perlin_uv : 0; // perlin_uv;
 	
 	float2 grad = g_texGradient.Sample(gradientSampler, fft_tc).xy;
 	grad = lerp(perlin, grad, blend_factor);
 	float3 normalPerlin = normalize(float3(grad.x, g_TexelLength_x2, grad.y));
+
+
 	// Reflected ray
 	float3 reflect_vec = reflect(-eye_dir, normalPerlin);
 	
@@ -124,28 +126,30 @@ float4 OceanSurfacePS(PixelInput input) : SV_TARGET
 	
 	// A coarse way to handle transmitted light (WaterBodyColor)
 	//<JPK> quick hack
-	float3 body_color = float3(0.07f, 0.15f, 0.2f);
-	float3 sky_color = float3(0.38f, 0.45f, 0.56f);
-	float3 bend_param = float3(0.1f, -0.4f, 0.2f);
-	float3 sun_color = float3(1.0f, 1.0f, 0.6f);
-	
-	// --------------- Reflected color
-	
-	// ramp.x for fresnel term. ramp.y for sky blending
-	float4 ramp = g_FresnelMap.Sample(fresnelSampler, cos_angle).xyzw;
-	
-	// A workaround to deal with "indirect reflection vectors" (which are rays requiring multiple
-	// reflections to reach the sky).
-	//  <JPK> THIS IS NOT CORRECT TO AXIS CHANGE!!! not sure yet what to do about it
-	//if (reflect_vec.z < bend_param.x)
-	//{
-	//	ramp = lerp(ramp, bend_param.y, (bend_param.x - reflect_vec.z) / (bend_param.x - bend_param.y));
-	//}
-	//reflect_vec.z = max(0, reflect_vec.z);
-	
-	float3 reflectionP = g_texReflectCube.Sample(cubeSampler, reflect_vec).xyz;
-	
-	// Hack bit: making higher contrast
+   float3 body_color = float3(0.07f, 0.10f, 0.15f);
+      float3 sky_color = float3(0.38f, 0.45f, 0.56f);
+      float3 bend_param = float3(0.1f, -0.4f, 0.2f);
+      float3 sun_color = float3(1.0f, 1.0f, 0.6f);
+
+      // --------------- Reflected color
+
+      // ramp.x for fresnel term. ramp.y for sky blending
+      float4 ramp = g_FresnelMap.Sample(fresnelSampler, cos_angle).xyzw;
+
+      // A workaround to deal with "indirect reflection vectors" (which are rays requiring multiple
+      // reflections to reach the sky).
+      
+      if (reflect_vec.y < bend_param.x)
+         ramp = lerp(ramp, bend_param.z, (bend_param.x - reflect_vec.y) / (bend_param.x - bend_param.y));
+   
+   reflect_vec.y = max(0, reflect_vec.y);
+      
+   reflect_vec.y = -reflect_vec.y;
+
+   float3 reflectionP = g_texReflectCube.Sample(cubeSampler, reflect_vec).xyz;
+   
+   
+   // Hack bit: making higher contrast
 	reflectionP = reflectionP * reflectionP * 2.5f;
 	
 	// Blend with predefined sky color
@@ -268,8 +272,8 @@ float4 OceanSurfacePS(PixelInput input) : SV_TARGET
 	}
 	
 	color = lerp(color, final_color, 0.7f);
-	
-	return color;
+   
+   return  final_color;  //just this for now
 }
 
 float4 OceanSurfaceWireframePS(PixelInput input) : SV_Target

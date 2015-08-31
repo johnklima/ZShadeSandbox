@@ -142,8 +142,8 @@ PixelInput OceanSurfaceDS(PatchConstOutput input, float2 uv : SV_DomainLocation,
 	//	perlin = perlin_0 * g_PerlinAmplitude.x + perlin_1 * g_PerlinAmplitude.y + perlin_2 * g_PerlinAmplitude.z;
 	//}
 	
-	// Displacement map
-	float3 displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
+	// Displacement map  <JPK> swap yz axis
+	float3 displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex , 0).xzy;
 	
 	//float3 displacement = 0;
 	//
@@ -152,7 +152,8 @@ PixelInput OceanSurfaceDS(PatchConstOutput input, float2 uv : SV_DomainLocation,
 	//	displacement = g_texDisplacement.SampleLevel(samHeightmap, vTex, 0).xzy;
 	//}
 	//
-	//displacement = lerp(float3(0, perlin, 0), displacement, blend_factor);
+
+	//displacement = lerp(float3(0,perlin, 0), displacement, blend_factor);
 	
 	vPos.x += displacement.x;
 	vPos.y += displacement.y;

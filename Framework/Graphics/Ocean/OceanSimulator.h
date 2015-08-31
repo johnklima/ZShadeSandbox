@@ -62,9 +62,15 @@ public:
 	// Samplers
 	ID3D11SamplerState* m_pPointSamplerState;
 
+   ID3D11Buffer* m_pDebugBuffer;
+   ID3D11Buffer* m_pDebugBuffer2;
+
+
+
 	// Initialize the vector field.
 	void initHeightMap(OceanParameters& params, XMFLOAT2* out_h0, float* out_omega);
 
+   XMFLOAT3 ReadWave(int x, int z);
 
 	// ----------------------------------- CS simulation data ---------------------------------
 
@@ -104,6 +110,10 @@ public:
 
 	// FFT wrap-up
 	CSFFT512x512_Plan m_fft_plan;
+
+   //buffer to hold displacement map
+   XMFLOAT2* v;
+   float* h;
 
 #ifdef CS_DEBUG_BUFFER
 	ID3D11Buffer* m_pDebugBuffer;

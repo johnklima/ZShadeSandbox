@@ -355,7 +355,7 @@ bool OutdoorEnvironment::InitializeOcean()
 	ocean_params.g_SeaLevel = fSeaLevel;
 
 	// Perlin wave parameters
-	ocean_params.g_PerlinSize = 16.0f;
+	ocean_params.g_PerlinSize = 1.0f;
 	ocean_params.g_PerlinSpeed = 0.06f;
 	ocean_params.g_PerlinAmplitude = XMFLOAT3(35, 42, 57);
 	ocean_params.g_PerlinGradient = XMFLOAT3(1.4f, 1.6f, 2.2f);

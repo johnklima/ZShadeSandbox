@@ -59,6 +59,11 @@ private:
 	// Object in the water
 	ZShadeSandboxMesh::CubeMesh* mCubeAboveWater;
 	ZShadeSandboxMesh::CubeMesh* mCubeBelowWater;
+
+   ZShadeSandboxMesh::SphereMesh* mSphere;
+
+   OceanParameters ocean_params;
+
 };
 
 //===============================================================================================================================

@@ -98,12 +98,13 @@ void createTextureAndViews(ID3D11Device* pd3dDevice, UINT width, UINT height, DX
 	tex_desc.SampleDesc.Quality = 0;
 	tex_desc.Usage = D3D11_USAGE_DEFAULT;
 	tex_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
-	tex_desc.CPUAccessFlags = 0;
+   tex_desc.CPUAccessFlags = 0;
 	tex_desc.MiscFlags = D3D11_RESOURCE_MISC_GENERATE_MIPS;
 
 	pd3dDevice->CreateTexture2D(&tex_desc, NULL, ppTex);
 	assert(*ppTex);
 
+   
 	// Create shader resource view
 	(*ppTex)->GetDesc(&tex_desc);
 	if (ppSRV)
@@ -116,6 +117,8 @@ void createTextureAndViews(ID3D11Device* pd3dDevice, UINT width, UINT height, DX
 
 		pd3dDevice->CreateShaderResourceView(*ppTex, &srv_desc, ppSRV);
 		assert(*ppSRV);
+
+      
 	}
 
 	// Create render target view
@@ -145,7 +148,7 @@ OceanSimulator::OceanSimulator(OceanParameters& params, ID3D11Device* pd3dDevice
 
    // Height map H(0)
    int height_map_size = (params.g_MapDimension + 4) * (params.g_MapDimension + 1);
-	XMFLOAT2* h0_data = new XMFLOAT2[height_map_size * sizeof(XMFLOAT2)];
+   XMFLOAT2* h0_data = new XMFLOAT2[height_map_size * sizeof(XMFLOAT2)];
 	float* omega_data = new float[height_map_size * sizeof(float)];
 	initHeightMap(params, h0_data, omega_data);
 
@@ -307,7 +310,7 @@ OceanSimulator::OceanSimulator(OceanParameters& params, ID3D11Device* pd3dDevice
 	// FFT
 	fft512x512_create_plan(&m_fft_plan, m_pd3dDevice, 3);
 
-#ifdef CS_DEBUG_BUFFER
+//#ifdef CS_DEBUG_BUFFER
 	D3D11_BUFFER_DESC buf_desc;
 	buf_desc.ByteWidth = 3 * input_half_size * float2_stride;
     buf_desc.Usage = D3D11_USAGE_STAGING;
@@ -318,7 +321,14 @@ OceanSimulator::OceanSimulator(OceanParameters& params, ID3D11Device* pd3dDevice
 
 	m_pd3dDevice->CreateBuffer(&buf_desc, NULL, &m_pDebugBuffer);
 	assert(m_pDebugBuffer);
-#endif
+
+   m_pd3dDevice->CreateBuffer(&buf_desc, NULL, &m_pDebugBuffer2);
+   assert(m_pDebugBuffer2);
+
+
+//#endif
+
+   
 }
 
 OceanSimulator::~OceanSimulator()
@@ -416,7 +426,28 @@ void OceanSimulator::initHeightMap(OceanParameters& params, XMFLOAT2* out_h0, fl
 		}
 	}
 }
+XMFLOAT3 OceanSimulator::ReadWave(int x, int z)
+{
+ 
+   //map this to appropriate postion in displacement map space
+   //hardcode map dims for now
+   
+   int addr = 512 * z + x;
 
+   UINT dtx_offset = 512 * 512;
+   UINT dty_offset = dtx_offset * 2;
+
+   float dx = v[addr + dtx_offset].x;
+   float dy = v[addr + dty_offset].x;
+   float dz = v[addr].x;
+
+   dz += h[addr];
+
+   
+   return XMFLOAT3(dx, dz, dy) ;
+
+
+}
 void OceanSimulator::updateDisplacementMap(float time)
 {
 	// ---------------------------- H(0) -> H(t), D(x, t), D(y, t) --------------------------------
@@ -523,16 +554,6 @@ void OceanSimulator::updateDisplacementMap(float time)
 	ID3D11SamplerState* samplers[1] = {m_pPointSamplerState};
 	m_pd3dImmediateContext->PSSetSamplers(0, 1, &samplers[0]);
 
-   //<JPK> put perlin someplace
-   // Texcoord for perlin noise
-   //XMFLOAT2 uv_base = ZShadeSandboxMath::XMMath2(node.bottom_left) / m_PatchLength * m_PerlinSize;
-   //call_consts.m_UVBase = uv_base;
-
-   // Constant m_PerlinSpeed need to be adjusted mannually
-   //XMFLOAT2 perlin_move = ZShadeSandboxMath::XMMath2(m_WindDir) * -1.0f * time * m_PerlinSpeed;
-   //call_consts.m_PerlinMovement = perlin_move;
-
-
 	// Perform draw call
 	m_pd3dImmediateContext->Draw(4, 0);
 
@@ -547,27 +568,48 @@ void OceanSimulator::updateDisplacementMap(float time)
 	SAFE_RELEASE(old_depth);
 
 	m_pd3dImmediateContext->GenerateMips(m_pGradientSRV);
+   
 
-	// Define CS_DEBUG_BUFFER to enable writing a buffer into a file.
-#ifdef CS_DEBUG_BUFFER
+   //only need to grab the initial height once 
+   static bool once = true;
+
+   //this drops framerate by 10fps
+	 if(true)
     {
-		m_pd3dImmediateContext->CopyResource(m_pDebugBuffer, m_pBuffer_Float_Dxyz);
-        D3D11_MAPPED_SUBRESOURCE mapped_res;
-        m_pd3dImmediateContext->Map(m_pDebugBuffer, 0, D3D11_MAP_READ, 0, &mapped_res);
-        
+      
+      D3D11_MAPPED_SUBRESOURCE mapped_res;
+      D3D11_MAPPED_SUBRESOURCE mapped_res2;
+            
+
+      m_pd3dImmediateContext->CopyResource(m_pDebugBuffer, m_pBuffer_Float_Dxyz);
+      m_pd3dImmediateContext->Map(m_pDebugBuffer, 0, D3D11_MAP_READ, 0, &mapped_res);
+      
+      if (once)
+      {
+       
+         m_pd3dImmediateContext->CopyResource(m_pDebugBuffer2, m_pBuffer_Float2_H0);
+         m_pd3dImmediateContext->Map(m_pDebugBuffer2, 0, D3D11_MAP_READ, 0, &mapped_res2);
+
+      }
+      
+
 		// set a break point below, and drag MappedResource.pData into in your Watch window
 		// and cast it as (float*)
 
-		// Write to disk
-		XMFLOAT2* v = (XMFLOAT2*)mapped_res.pData;
+	
+		v = (XMFLOAT2*)mapped_res.pData;
 
-		FILE* fp = fopen(".\\tmp\\Ht_raw.dat", "wb");
-		fwrite(v, 512*512*sizeof(float)*2*3, 1, fp);
-		fclose(fp);
+      if(once)
+         h = (float*)mapped_res2.pData;
 
 		m_pd3dImmediateContext->Unmap(m_pDebugBuffer, 0);
+      if (once)
+      {
+         once = false;
+         m_pd3dImmediateContext->Unmap(m_pDebugBuffer2, 0);
+      }
     }
-#endif
+
 }
 
 ID3D11ShaderResourceView* OceanSimulator::getD3D11DisplacementMap()
